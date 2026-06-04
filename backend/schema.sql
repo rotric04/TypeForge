@@ -84,10 +84,10 @@ CREATE TABLE IF NOT EXISTS public.typing_dna (
 
 -- RLS (Row Level Security) Setup
 ALTER TABLE public.users ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.sessions ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.keystrokes ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.achievements ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.typing_dna ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.sessions DISABLE ROW LEVEL SECURITY;
+ALTER TABLE public.keystrokes DISABLE ROW LEVEL SECURITY;
+ALTER TABLE public.achievements DISABLE ROW LEVEL SECURITY;
+ALTER TABLE public.typing_dna DISABLE ROW LEVEL SECURITY;
 
 -- Create policies for Users (Users can read/update their own data)
 DROP POLICY IF EXISTS "Users can view own profile" ON public.users;
