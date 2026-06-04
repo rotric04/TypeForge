@@ -1,6 +1,11 @@
 User-agent: *
+
 Allow: /
+
 Disallow: /app/
 Disallow: /api/
+Disallow: /login
+Disallow: /signup
+Disallow: /dashboard
 
 Sitemap: https://www.typeforge.fun/sitemap.xml
