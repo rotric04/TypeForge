@@ -86,16 +86,20 @@ apiClient.interceptors.response.use((response) => {
 
   // Global Error Handling
   if (error.response) {
+    const status = error.response.status;
+    const detail = error.response.data?.detail || error.response.data || `HTTP ${status}`;
+    // Log detailed error info to console for easier debugging
+    console.error(`[TF API] ${config?.method?.toUpperCase()} ${config?.url} → ${status}:`, detail);
     // 401 Unauthorized globally handled
-    if (error.response.status === 401 && window.location.pathname !== '/login.html') {
+    if (status === 401 && window.location.pathname !== '/login.html') {
       console.warn("API 401: Unauthorized. Redirecting to login...");
       Auth.signOut(); // This will redirect
     }
-    const msg = error.response.data?.detail || `API Error: ${error.response.status}`;
-    return Promise.reject(new Error(msg));
+    return Promise.reject(new Error(typeof detail === 'string' ? detail : JSON.stringify(detail)));
   }
   
-  // Network Error / Timeout (Backend is likely cold starting)
+  // Network Error / Timeout (Backend is likely cold starting or DATABASE_URL misconfigured)
+  console.error(`[TF API] Network/Timeout error for ${config?.method?.toUpperCase()} ${config?.url}. Backend may be starting up or DATABASE_URL is wrong.`);
   return Promise.reject(new Error("Network Error. The servers might be starting up."));
 });
 
