@@ -5,7 +5,7 @@ Main application entry point
 from fastapi import FastAPI, HTTPException, Depends, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, PlainTextResponse
 from contextlib import asynccontextmanager
 import logging
 import time
@@ -55,14 +55,37 @@ if not settings.DEBUG:
         allowed_hosts=settings.ALLOWED_HOSTS,
     )
 
-# ── Request Timing Middleware ─────────────────────────────────────
+# ── Request Timing & Security Middleware ───────────────────────────
 @app.middleware("http")
-async def add_timing_header(request, call_next):
+async def add_timing_and_security_headers(request, call_next):
     start = time.perf_counter()
     response = await call_next(request)
     duration = time.perf_counter() - start
+    
+    # Timing & custom branding headers
     response.headers["X-Response-Time"] = f"{duration * 1000:.2f}ms"
     response.headers["X-Powered-By"] = "TypeForge AI"
+    
+    # Robust Security Headers
+    response.headers["Content-Security-Policy"] = (
+        "default-src 'self'; "
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://cdnjs.cloudflare.com https://*.clerk.accounts.dev https://*.clerk.com; "
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
+        "font-src 'self' https://fonts.gstatic.com; "
+        "img-src 'self' data: https://images.clerk.dev https://*.clerk.com; "
+        "connect-src 'self' https://typeforge-tkw8.onrender.com https://*.clerk.accounts.dev https://*.clerk.com; "
+        "frame-src 'self' https://challenges.cloudflare.com;"
+    )
+    response.headers["Cross-Origin-Opener-Policy"] = "same-origin-allow-popups"
+    response.headers["Cross-Origin-Resource-Policy"] = "same-origin"
+    response.headers["Cross-Origin-Embedder-Policy"] = "credentialless"
+    response.headers["Strict-Transport-Security"] = "max-age=63072000; includeSubDomains; preload"
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
+    response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
+    
     return response
 
 # ── Routers ───────────────────────────────────────────────────────
@@ -89,6 +112,19 @@ async def root():
         "docs": "/docs",
         "version": "1.0.0",
     }
+
+@app.get("/.well-known/security.txt", response_class=PlainTextResponse, tags=["System"])
+@app.get("/security.txt", response_class=PlainTextResponse, tags=["System"])
+async def security_txt():
+    content = (
+        "Contact: mailto:security@typeforge.fun\n"
+        "Expires: 2027-06-04T17:00:00.000Z\n"
+        "Preferred-Languages: en\n"
+        "Canonical: https://typeforge.fun/.well-known/security.txt\n"
+        "Acknowledgement: https://typeforge.fun/security\n"
+        "Policy: https://typeforge.fun/security\n"
+    )
+    return PlainTextResponse(content=content)
 
 # ── Global Exception Handler ──────────────────────────────────────
 @app.exception_handler(Exception)
