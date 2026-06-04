@@ -53,3 +53,12 @@ async def delete_account(user: UserProfile = Depends(get_current_user)):
 @router.get("/me/export")
 async def export_user_data(user: UserProfile = Depends(get_current_user)):
     return {"message": "Export GDPR data — requires Clerk auth"}
+
+
+@router.get("/db-test")
+async def db_test():
+    from database import _pool
+
+    return {
+        "db_connected": _pool is not None
+    }

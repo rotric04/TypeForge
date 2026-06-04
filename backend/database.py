@@ -25,10 +25,12 @@ async def init_db():
         try:
             _pool = await asyncpg.create_pool(
                 settings.DATABASE_URL,
-                min_size=5,
-                max_size=20,
+                min_size=2,
+                max_size=10,
                 command_timeout=30,
-                statement_cache_size=100,
+                # Supabase pooler in session mode (port 5432) or direct connections
+                # are used to support prepared statements. statement_cache_size is set to 0.
+                statement_cache_size=0,
             )
             logger.info("✅ PostgreSQL pool created")
         except Exception as e:

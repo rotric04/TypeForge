@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Community & Feedback — TypeForge AI</title>
   <meta name="description" content="Help build TypeForge. Report bugs, suggest features, or say hi." />
-  <link rel="canonical" href="https://typeforge.fun/feedback" />
+  <link rel="canonical" href="https://typeforge.fun/feedback.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="css/global.css" />
@@ -169,18 +169,18 @@
         <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
       </a>
       <ul class="navbar-links" role="list">
-        <li><a href="/features">Features</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="/feedback" class="active">Community</a></li>
+        <li><a href="/features.html">Features</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/blog.html">Blog</a></li>
+        <li><a href="/feedback.html" class="active">Community</a></li>
       </ul>
       <div class="navbar-actions">
         <div class="nav-auth-signed-out">
-          <a href="/login" class="btn btn-outline btn-sm">Sign In</a>
-          <a href="/login" class="btn btn-primary btn-sm">Start Free</a>
+          <a href="/login.html" class="btn btn-outline btn-sm">Sign In</a>
+          <a href="/login.html" class="btn btn-primary btn-sm">Start Free</a>
         </div>
         <div class="nav-auth-signed-in">
-          <a href="/app/dashboard" class="btn btn-ghost btn-sm">Dashboard</a>
+          <a href="/app/dashboard.html" class="btn btn-ghost btn-sm">Dashboard</a>
           <div class="nav-user-avatar" title="Profile">U</div>
           <button class="btn btn-ghost btn-sm" data-auth-signout style="font-size:12px;">Sign Out</button>
         </div>
@@ -192,12 +192,12 @@
   </nav>
   <div class="nav-backdrop" id="nav-backdrop"></div>
   <nav class="nav-drawer" id="nav-drawer" role="dialog" aria-label="Mobile navigation">
-    <a href="/features">✦ Features</a>
-    <a href="/about">✦ About</a>
-    <a href="/blog">✦ Blog</a>
-    <a href="/feedback">✦ Community</a>
+    <a href="/features.html">✦ Features</a>
+    <a href="/about.html">✦ About</a>
+    <a href="/blog.html">✦ Blog</a>
+    <a href="/feedback.html">✦ Community</a>
     <div class="nav-drawer-divider"></div>
-    <a href="/app/typing">⌨️ Open App</a>
+    <a href="/app/typing.html">⌨️ Open App</a>
   </nav>
 
   <main class="page-content">
@@ -221,10 +221,10 @@
           </div>
 
           <!-- Uses FormSubmit.co for real backendless submission -->
-          <form action="https://formsubmit.co/hello@typeforge.fun" method="POST" id="feedback-form">
+          <form action="https://formsubmit.co/mohitassudani.3@gmail.com" method="POST" id="feedback-form">
             <input type="hidden" name="_subject" value="TypeForge General Feedback" id="form-subject">
             <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_next" value="https://typeforge.fun/feedback?success=true">
+            <input type="hidden" name="_next" value="https://typeforge.fun/feedback.html?success=true">
 
             <div class="form-group">
               <label for="name">Name / GitHub Handle</label>
@@ -263,8 +263,8 @@
             <h4 style="font-size:14px;font-weight:700;margin-bottom:8px;">Direct Contact</h4>
             <p style="font-size:13px;color:var(--text-3);line-height:1.6;margin-bottom:12px;">Need to reach the founder
               directly for partnerships or press?</p>
-            <a href="mailto:hello@typeforge.ai"
-              style="font-size:13px;color:var(--brand);font-weight:600;">hello@typeforge.ai</a>
+            <a href="mailto:mohitassudani.3@gmail.com"
+              style="font-size:13px;color:var(--brand);font-weight:600;">mohitassudani.3@gmail.com</a>
           </div>
         </div>
       </div>
@@ -278,12 +278,12 @@
             <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
           </a>
           <nav style="display:flex;gap:20px;flex-wrap:wrap;" aria-label="Footer">
-            <a href="/features" style="font-size:13px;color:var(--text-4);">Features</a>
-            <a href="/blog" style="font-size:13px;color:var(--text-4);">Blog</a>
-            <a href="/feedback" style="font-size:13px;color:var(--text-4);">Community</a>
-            <a href="/privacy" style="font-size:13px;color:var(--text-4);">Privacy Policy</a>
-            <a href="/terms" style="font-size:13px;color:var(--text-4);">Terms of Service</a>
-            <a href="/security" style="font-size:13px;color:var(--text-4);">Security</a>
+            <a href="/features.html" style="font-size:13px;color:var(--text-4);">Features</a>
+            <a href="/blog.html" style="font-size:13px;color:var(--text-4);">Blog</a>
+            <a href="/feedback.html" style="font-size:13px;color:var(--text-4);">Community</a>
+            <a href="/privacy.html" style="font-size:13px;color:var(--text-4);">Privacy Policy</a>
+            <a href="/terms.html" style="font-size:13px;color:var(--text-4);">Terms of Service</a>
+            <a href="/security.html" style="font-size:13px;color:var(--text-4);">Security</a>
           </nav>
           <p style="font-size:12px;color:var(--text-4);">© 2026 TypeForge AI · Designed & Developed by <a
               href="https://github.com/rotric04" target="_blank" class="creator-link">rotric04</a></p>
@@ -385,7 +385,7 @@
 
       if (backendVerified) {
         // Backend verified: show success screen directly
-        window.location.href = '/feedback?success=true';
+        window.location.href = '/feedback.html?success=true';
       } else {
         // Fallback: let the HTML form submit natively to formsubmit.co
         formEl.removeEventListener('submit', handleFormSubmit);
@@ -403,7 +403,7 @@
       <div style="font-size:48px;margin-bottom:16px;">✨</div>
       <h3 style="font-size:24px;font-weight:700;margin-bottom:12px;">Message Sent!</h3>
       <p style="color:var(--text-3);margin-bottom:24px;">Thanks for reaching out. We'll get back to you soon.</p>
-      <a href="/feedback" class="btn btn-ghost">Send another</a>
+      <a href="/feedback.html" class="btn btn-ghost">Send another</a>
     </div>
   `;
     }

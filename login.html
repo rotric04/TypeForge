@@ -162,7 +162,7 @@
     async function initLogin() {
       const user = await Auth.init();
       if (user) {
-        window.location.href = '/app/dashboard';
+        window.location.href = 'app/dashboard.html';
         return;
       }
       
@@ -171,9 +171,9 @@
       
       if (clerk && signInDiv) {
         clerk.mountSignIn(signInDiv, {
-          redirectUrl: window.location.origin + '/app/dashboard',
-          afterSignInUrl: window.location.origin + '/app/dashboard',
-          afterSignUpUrl: window.location.origin + '/app/dashboard',
+          redirectUrl: window.location.origin + '/app/dashboard.html',
+          afterSignInUrl: window.location.origin + '/app/dashboard.html',
+          afterSignUpUrl: window.location.origin + '/app/dashboard.html',
           appearance: {
             variables: {
               colorPrimary: '#e8734a',
