@@ -1,148 +1,321 @@
-# TypeForge AI ⌨️
+# ⌨️ TypeForge AI
 
-[![Frontend Host](https://img.shields.io/badge/Frontend-Vercel-black?logo=vercel&logoColor=white)](https://vercel.com)
-[![Backend Host](https://img.shields.io/badge/Backend-Render-darkviolet?logo=render&logoColor=white)](https://render.com)
-[![Database](https://img.shields.io/badge/Database-Supabase-emerald?logo=supabase&logoColor=white)](https://supabase.com)
-[![Auth](https://img.shields.io/badge/Auth-Clerk-blue?logo=clerk&logoColor=white)](https://clerk.com)
-[![Security](https://img.shields.io/badge/Security-Cloudflare-orange?logo=cloudflare&logoColor=white)](https://cloudflare.com)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+<div align="center">
 
-TypeForge AI is a premium, adaptive typing training platform. Instead of just measuring your words-per-minute (WPM), TypeForge operates as a deliberate practice coach. Powered by a python-based machine learning pipeline, it tracks typing anomalies, delays, reaction times, and key errors to generate completely unique, real-time training curriculums personalized to your exact weaknesses.
+# TypeForge AI
+
+### Adaptive Typing Intelligence Powered by Machine Learning
+
+Transform typing practice into a personalized learning experience through real-time behavioral analysis, predictive analytics, and adaptive training generation.
+
+[Live Demo](https://typeforge.fun) • [Documentation](#architecture) • [Features](#features) • [Contributing](#contributing)
+
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Python](https://img.shields.io/badge/Python-FastAPI-green)
+![Frontend](https://img.shields.io/badge/Frontend-Vanilla_JS-yellow)
+![Database](https://img.shields.io/badge/PostgreSQL-Supabase-3ECF8E)
+![Deployment](https://img.shields.io/badge/Deployment-Vercel%20%7C%20Render-black)
+
+</div>
 
 ---
 
-## 🏗️ Project Architecture
+## 🚀 What Is TypeForge?
 
-The application is built on a decoupled, production-ready stack:
+Most typing platforms only measure speed.
 
-- **Frontend**: High-performance, compile-less Vanilla HTML5, CSS3, and ES Module JavaScript. Styled with custom Outfit/Inter design tokens, glassmorphism, and aurora canvas overlays.
-- **Backend API**: Python FastAPI providing high-speed, asynchronous request routing, JWT validation, and automated database syncing.
-- **Database Layer**: Supabase PostgreSQL hosting with Row-Level Security (RLS) policies enforcing strict user-data partitioning.
-- **Machine Learning**: Custom pipeline utilizing K-Means Clustering for typing archetypes, XGBoost for progress forecasting, LightGBM for curriculum item ranking, and Isolation Forests for cheat/fatigue detection.
+**TypeForge analyzes how you type.**
+
+Using machine learning and keystroke telemetry, TypeForge identifies behavioral patterns, reaction delays, hesitation zones, accuracy bottlenecks, and typing weaknesses to generate personalized practice sessions that evolve with every user interaction.
+
+Instead of repeating generic typing tests, users receive training specifically optimized for their unique typing profile.
+
+---
+
+## ✨ Key Features
+
+### 🧠 Adaptive Learning Engine
+
+* Personalized typing curriculum generation
+* Dynamic difficulty adjustment
+* Real-time weakness detection
+* Continuous skill progression tracking
+
+### 📊 Advanced Analytics
+
+* WPM tracking
+* Accuracy scoring
+* Reaction-time analysis
+* Error heatmaps
+* Historical performance trends
+
+### 🤖 Machine Learning Pipeline
+
+* K-Means clustering for user archetypes
+* XGBoost performance forecasting
+* LightGBM exercise ranking
+* Isolation Forest anomaly detection
+
+### 🔒 Enterprise-Grade Security
+
+* Clerk Authentication
+* JWT validation
+* PostgreSQL Row Level Security
+* Cloudflare Turnstile protection
+* Secure API proxy architecture
+
+### ⚡ High Performance
+
+* Compile-free frontend
+* Lazy-loaded modules
+* Passive event listeners
+* Optimized rendering pipeline
+* Memory leak prevention
+
+---
+
+# 🏗 System Architecture
 
 ```mermaid
 graph TD
-    User([Browser Client]) -->|Requests /api/v1/*| Vercel[Vercel CDN Proxy]
-    Vercel -->|Proxies Relative Route| Backend[Render/Railway API Server]
-    Backend -->|Asynchronous Queries| Supabase[(Supabase PostgreSQL)]
-    User -->|Secure Token Auth| Clerk[Clerk Auth Module]
-    User -->|Invisible CAPTCHA| Turnstile[Cloudflare Turnstile]
+
+A[Browser Client] --> B[Vercel Edge CDN]
+
+B --> C[FastAPI Backend]
+
+C --> D[Supabase PostgreSQL]
+
+A --> E[Clerk Authentication]
+
+A --> F[Cloudflare Turnstile]
+
+C --> G[ML Analytics Pipeline]
+
+G --> H[K-Means]
+
+G --> I[XGBoost]
+
+G --> J[LightGBM]
+
+G --> K[Isolation Forest]
 ```
 
 ---
 
-## 📂 Project Structure
+# ⚙️ Tech Stack
 
+| Layer            | Technologies                       |
+| ---------------- | ---------------------------------- |
+| Frontend         | HTML5, CSS3, JavaScript ES Modules |
+| Backend          | FastAPI, Python                    |
+| Database         | PostgreSQL, Supabase               |
+| Authentication   | Clerk                              |
+| Security         | Cloudflare Turnstile               |
+| Machine Learning | Scikit-Learn, XGBoost, LightGBM    |
+| Deployment       | Vercel, Render                     |
+| Version Control  | Git, GitHub                        |
+
+---
+
+# 📈 Engineering Highlights
+
+## Custom Performance Manager
+
+Built a client-side performance layer that:
+
+* Pauses off-screen animations
+* Prevents telemetry memory leaks
+* Optimizes mobile rendering
+* Uses IntersectionObserver for resource efficiency
+
+---
+
+## Real-Time Typing Intelligence
+
+Tracks:
+
+* Key latency
+* Burst speed
+* Error frequency
+* Recovery speed
+* Character-level weaknesses
+
+to build personalized training recommendations.
+
+---
+
+## Production Security Model
+
+```text
+Browser
+   ↓
+Vercel Proxy
+   ↓
+FastAPI
+   ↓
+Supabase
 ```
+
+No database credentials or service keys are ever exposed to the client.
+
+---
+
+# 📂 Project Structure
+
+```text
 TypeForge/
-├── index.html                  # Main landing page
-├── features.html               # Features breakdown page
-├── about.html                  # Product & team story page
-├── blog.html                   # TypeForge journal
-├── feedback.html               # Interactive feedback & CAPTCHA page
-├── login.html                  # Clerk Auth widget landing
-├── vercel.json                 # Vercel CDN routing & Proxy config
-├── sitemap.xml                 # Search engine index mapping
-├── robots.txt                  # Crawl indexing rules
 │
-├── css/
-│   ├── global.css              # Typography, variables, & styling tokens
-│   ├── animations.css          # Complex CSS keyframe micro-animations
-│   ├── components.css          # Shareable components (Navbar, Sidebar, Buttons)
-│   ├── landing.css             # Page-specific landing UI overrides
-│   ├── typing.css              # Core typing interface styles
-│   └── dashboard.css           # Analytics grid positioning
-│
-├── js/
-│   ├── common.js               # Shared ESM utilities, animations, & draw tools
-│   ├── api.js                  # Authenticated proxy client & API wrapper
-│   ├── clerk.js                # Clerk SDK token auth management
-│   └── accessibility.js        # Dyslexia-friendly settings panel
-│
+├── frontend/
+├── backend/
 ├── app/
-│   ├── onboarding.html         # Interactive onboarding layout
-│   ├── typing.html             # Core adaptive typing application
-│   ├── dashboard.html          # Performance charts & stats dashboard
-│   ├── history.html            # Session telemetry grid logs
-│   ├── achievements.html       # Bento achievements grid & progress ring
-│   └── settings.html           # Clerk user settings widget container
-│
-└── backend/
-    ├── main.py                 # FastAPI core application runner
-    ├── config.py               # Pydantic Settings env loader
-    ├── database.py             # PostgreSQL async connection pool
-    ├── dependencies.py         # Clerk auth and dependency middleware
-    ├── schema.sql              # Database schema tables and RLS config
-    ├── requirements.txt        # Production Python dependencies
-    ├── .env.example            # Environment variables placeholder
-    │
-    ├── routers/
-    │   ├── auth.py             # Cloudflare Turnstile token validation
-    │   ├── users.py            # User stats & achievements database queries
-    │   ├── sessions.py         # Typing sessions logger & analysis
-    │   ├── analytics.py        # DNA & performance metrics compiler
-    │   └── training.py         # Adaptive test scheduler
-    │
-    ├── models/
-    │   └── models.py           # Pydantic models for type checking
-    │
-    ├── services/
-    │   ├── adaptive.py         # Keystroke telemetry & text generator
-    │   └── achievements.py     # Achievement unlocker service
-    │
-    └── ml/
-        └── pipeline.py         # K-Means, XGBoost, and ranking algorithms
+├── css/
+├── js/
+└── ml/
+```
+
+Detailed structure available in project documentation.
+
+---
+
+# 🚀 Getting Started
+
+## Clone Repository
+
+```bash
+git clone https://github.com/rotric04/TypeForge.git
+
+cd TypeForge
 ```
 
 ---
 
-## ⚡ Quick Start (Local Development)
+## Frontend
 
-### 1. Run the Frontend Client
-The frontend is compile-free and runs directly on static servers.
 ```bash
-# Serve the root folder using Python's built-in server
 python -m http.server 8000
-
-# Open your browser and navigate to:
-# http://localhost:8000
 ```
 
-### 2. Configure & Run the Backend
-The FastAPI server manages ML processing and Supabase data piping.
+Visit:
+
+```text
+http://localhost:8000
+```
+
+---
+
+## Backend
+
 ```bash
 cd backend
 
-# Initialize a clean virtual environment
 python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
-# Install dependencies
+source .venv/bin/activate
+
 pip install -r requirements.txt
+```
 
-# Create your local environment settings
-cp .env.example .env
-# Open .env and insert your Clerk, Supabase, and Turnstile secrets
+Create:
 
-# Spin up the API server locally on port 8001
+```env
+CLERK_SECRET_KEY=
+SUPABASE_URL=
+SUPABASE_SERVICE_KEY=
+TURNSTILE_SECRET_KEY=
+```
+
+Run:
+
+```bash
 python main.py
 ```
-*API documentation is auto-generated and available at `http://localhost:8001/docs` in development.*
+
+API Docs:
+
+```text
+http://localhost:8001/docs
+```
 
 ---
 
-## 🔒 Security & Key Masking
+# 📊 Roadmap
 
-In production, client-side scripts are routed through a secure **Vercel API Proxy** to ensure sensitive server configurations remain protected:
-
-1. **Proxy Handshake**: Requests to backend servers are sent via relative routes (e.g. `/api/v1/sessions`) rather than hardcoded endpoints, masking the origin domain.
-2. **Reverse Proxying**: Vercel handles the API handshake server-side using rules defined in [vercel.json](vercel.json).
-3. **Environment Security**: All sensitive keys (`CLERK_SECRET_KEY`, `SUPABASE_SERVICE_KEY`, etc.) reside safely as environment variables on your Render/Railway backend hosting platform, completely inaccessible from browser inspector tools.
+* [x] Adaptive typing engine
+* [x] User authentication
+* [x] Analytics dashboard
+* [x] Achievement system
+* [x] ML personalization
+* [ ] Real-time multiplayer races
+* [ ] AI-generated typing lessons
+* [ ] Typing coach assistant
+* [ ] Mobile application
+* [ ] Browser extension
 
 ---
 
-## 📄 License & Credits
+# 🤝 Contributing
 
-© 2026 TypeForge AI. 
+Contributions are welcome.
 
-Designed and Developed by [rotric04](https://github.com/rotric04).
+Whether you're interested in:
+
+* UI/UX improvements
+* Backend optimization
+* Machine learning research
+* Documentation
+* Testing
+
+Feel free to fork the repository and submit a pull request.
+
+```bash
+git checkout -b feature/amazing-feature
+git commit -m "Add amazing feature"
+git push origin feature/amazing-feature
+```
+
+---
+
+# 🌟 Support The Project
+
+If you find TypeForge useful:
+
+⭐ Star the repository
+
+🍴 Fork the project
+
+🛠 Contribute improvements
+
+📢 Share it with others
+
+Every star helps increase visibility and encourages future development.
+
+---
+
+# 👨‍💻 About The Developer
+
+## Mohit Assudani
+
+Software Engineer focused on:
+
+* Machine Learning
+* High-Performance Web Systems
+* Full-Stack Engineering
+* Human-Computer Interaction
+
+### Connect
+
+GitHub: https://github.com/rotric04
+
+LinkedIn: https://linkedin.com/in/mohitassudani
+
+Portfolio: https://typeforge.fun
+
+Email: [mohitassudani.3@gmail.com](mailto:mohitassudani.3@gmail.com)
+
+---
+
+## License
+
+Released under the MIT License.
+
+Built with curiosity, engineering discipline, and a passion for creating better learning experiences.
