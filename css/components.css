@@ -269,7 +269,9 @@ body.tf-authenticated .nav-auth-signed-in  { display: flex; }
 /* Mobile bottom-sheet drawer */
 .nav-drawer {
   position: fixed;
-  bottom: -100%;
+  bottom: 0;
+  transform: translateY(100%);
+  visibility: hidden;
   left: 0;
   right: 0;
   background: rgba(10, 10, 20, 0.97);
@@ -279,12 +281,16 @@ body.tf-authenticated .nav-auth-signed-in  { display: flex; }
   border-radius: var(--r-3xl) var(--r-3xl) 0 0;
   padding: 32px var(--sp-6) calc(var(--sp-6) + env(safe-area-inset-bottom));
   z-index: calc(var(--z-nav) - 1);
-  transition: bottom var(--duration-slow) var(--ease-expo);
+  transition: transform var(--duration-slow) var(--ease-expo),
+              visibility var(--duration-slow) var(--ease-expo);
   display: flex;
   flex-direction: column;
   gap: var(--sp-2);
 }
-.nav-drawer.open { bottom: 0; }
+.nav-drawer.open {
+  transform: translateY(0);
+  visibility: visible;
+}
 
 /* Drag handle */
 .nav-drawer::before {

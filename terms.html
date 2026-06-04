@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Terms of Service — TypeForge AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="css/global.css"/>
+  <link rel="stylesheet" href="css/animations.css"/>
+  <link rel="stylesheet" href="css/components.css"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>"/>
+  <style>
+    .legal-content {
+      max-width: 800px;
+      margin: 140px auto 80px;
+      padding: 0 24px;
+      line-height: 1.8;
+      color: var(--text-2);
+    }
+    .legal-content h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin-bottom: var(--sp-4);
+      color: var(--text-1);
+    }
+    .legal-content h2 {
+      font-size: var(--text-2xl);
+      margin: var(--sp-8) 0 var(--sp-3);
+      color: var(--text-1);
+      border-bottom: 1px solid var(--border-1);
+      padding-bottom: 8px;
+    }
+    .legal-content p {
+      margin-bottom: var(--sp-4);
+    }
+    .legal-content ul {
+      margin-bottom: var(--sp-4);
+      padding-left: var(--sp-6);
+    }
+    .legal-content li {
+      margin-bottom: var(--sp-2);
+    }
+    .legal-date {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--brand-light);
+      margin-bottom: var(--sp-8);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+<!-- Aurora -->
+<div class="aurora-container" aria-hidden="true">
+  <div class="aurora-blob aurora-blob-1" style="opacity:0.08;"></div>
+  <div class="aurora-blob aurora-blob-3" style="opacity:0.05;"></div>
+</div>
+<div class="noise-overlay" aria-hidden="true"></div>
+
+<!-- Navbar -->
+<nav class="navbar" id="main-nav" role="navigation" aria-label="Main navigation">
+  <div class="navbar-inner">
+    <a href="/" class="navbar-logo">
+      <div class="navbar-logo-icon">⌨️</div>
+      <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
+    </a>
+    <ul class="navbar-links" role="list">
+      <li><a href="/features">Features</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/feedback">Community</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <div class="nav-auth-signed-out">
+        <a href="/login" class="btn btn-outline btn-sm">Sign In</a>
+        <a href="/login" class="btn btn-primary btn-sm">Start Free</a>
+      </div>
+      <div class="nav-auth-signed-in">
+        <a href="/app/dashboard" class="btn btn-ghost btn-sm">Dashboard</a>
+        <div class="nav-user-avatar" title="Profile">U</div>
+        <button class="btn btn-ghost btn-sm" data-auth-signout style="font-size:12px;">Sign Out</button>
+      </div>
+      <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" id="nav-hamburger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="nav-backdrop" id="nav-backdrop"></div>
+<nav class="nav-drawer" id="nav-drawer" role="dialog" aria-label="Mobile navigation">
+  <a href="/features">✦ Features</a>
+  <a href="/about">✦ About</a>
+  <a href="/blog">✦ Blog</a>
+  <a href="/feedback">✦ Community</a>
+  <div class="nav-drawer-divider"></div>
+  <a href="/app/typing">⌨️ Open App</a>
+</nav>
+
+<main class="legal-content">
+  <h1>Terms of Service</h1>
+  <div class="legal-date">Last Updated: June 4, 2026</div>
+  
+  <p>Welcome to TypeForge AI. By accessing or using our website, typing application, and backend services, you agree to comply with and be bound by the following Terms of Service. Please read them carefully.</p>
+  
+  <h2>1. Acceptance of Terms</h2>
+  <p>By registering for an account or using our training interface, you represent that you are at least 13 years of age and agree to these terms. If you do not agree, you are not authorized to use the platform.</p>
+  
+  <h2>2. User Accounts & Responsibilities</h2>
+  <p>Your profile is managed securely using Clerk. You are responsible for safeguarding your login credentials and are fully liable for all activities that occur under your account. You agree to notify us immediately of any unauthorized use of your account.</p>
+  
+  <h2>3. License & Intellectual Property</h2>
+  <p>The client interface, design system, and custom machine learning algorithms are part of TypeForge AI. We grant you a personal, non-transferable, non-exclusive license to use the training software. The core components of TypeForge are open source and subject to the terms of our official GitHub repository licenses.</p>
+  
+  <h2>4. Prohibited Conduct</h2>
+  <p>You agree not to manipulate typing records, deploy automation bots to generate fake high-scores, attempt to scrape sentences or exercises in bulk, or disrupt backend APIs. Accounts exhibiting bot-like or abusive API request rates may be throttled or terminated.</p>
+  
+  <h2>5. Limitation of Liability</h2>
+  <p>TypeForge AI is provided on an "as-is" and "as-available" basis. We make no guarantees regarding continuous uptime, database persistence, or metric forecasting accuracy. In no event shall TypeForge AI or its contributors be liable for any damages arising out of your use of the website.</p>
+</main>
+
+<footer class="footer" style="padding:40px 0;border-top:1px solid var(--border-1);">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+      <a href="/" class="navbar-logo">
+        <div class="navbar-logo-icon">⌨️</div>
+        <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
+      </a>
+      <nav style="display:flex;gap:20px;flex-wrap:wrap;" aria-label="Footer">
+        <a href="/features" style="font-size:13px;color:var(--text-4);">Features</a>
+        <a href="/blog" style="font-size:13px;color:var(--text-4);">Blog</a>
+        <a href="/feedback" style="font-size:13px;color:var(--text-4);">Community</a>
+        <a href="/privacy" style="font-size:13px;color:var(--text-4);">Privacy</a>
+        <a href="/security" style="font-size:13px;color:var(--text-4);">Security</a>
+      </nav>
+      <p style="font-size:12px;color:var(--text-4);">© 2026 TypeForge AI · Designed & Developed by <a href="https://github.com/rotric04" target="_blank" class="creator-link">rotric04</a></p>
+    </div>
+  </div>
+</footer>
+
+<script type="module">
+import { initNavbar } from './js/common.js';
+import Auth from './js/clerk.js';
+initNavbar();
+</script>
+</body>
+</html>

@@ -43,7 +43,7 @@
 <!-- Navbar -->
 <nav class="navbar scrolled" id="main-nav">
   <div class="navbar-inner">
-    <a href="../index.html" class="navbar-logo">
+    <a href="/" class="navbar-logo">
       <div class="navbar-logo-icon">⌨️</div>
       <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
     </a>
@@ -59,27 +59,27 @@
 <div class="app-layout">
   <!-- Sidebar -->
   <aside class="app-sidebar" role="navigation" aria-label="App navigation">
-    <a href="../index.html" class="sidebar-logo" aria-label="TypeForge AI Home">⌨️</a>
+    <a href="/" class="sidebar-logo" aria-label="TypeForge AI Home">⌨️</a>
     <nav class="sidebar-nav">
-      <div class="sidebar-item" onclick="location.href='typing.html'" title="Train" aria-label="Train">
+      <div class="sidebar-item" onclick="location.href='/app/typing'" title="Train" aria-label="Train">
         <span class="sidebar-icon">⌨️</span>
         <span class="sidebar-label">Train</span>
       </div>
-      <div class="sidebar-item" onclick="location.href='dashboard.html'" title="Dashboard" aria-label="Dashboard">
+      <div class="sidebar-item" onclick="location.href='/app/dashboard'" title="Dashboard" aria-label="Dashboard">
         <span class="sidebar-icon">📊</span>
         <span class="sidebar-label">Dashboard</span>
       </div>
-      <div class="sidebar-item" onclick="location.href='achievements.html'" title="Achievements" aria-label="Achievements">
+      <div class="sidebar-item" onclick="location.href='/app/achievements'" title="Achievements" aria-label="Achievements">
         <span class="sidebar-icon">🏆</span>
         <span class="sidebar-label">Achievements</span>
       </div>
-      <div class="sidebar-item" onclick="location.href='history.html'" title="History" aria-label="History">
+      <div class="sidebar-item" onclick="location.href='/app/history'" title="History" aria-label="History">
         <span class="sidebar-icon">📜</span>
         <span class="sidebar-label">History</span>
       </div>
     </nav>
     <div class="sidebar-bottom">
-      <div class="sidebar-item active" onclick="location.href='settings.html'" title="Settings" aria-label="Settings">
+      <div class="sidebar-item active" onclick="location.href='/app/settings'" title="Settings" aria-label="Settings">
         <span class="sidebar-icon">⚙️</span>
         <span class="sidebar-label">Settings</span>
       </div>
@@ -112,7 +112,7 @@
   async function init() {
     const user = await Auth.init();
     if (!user && window.location.hostname !== 'localhost') {
-      window.location.href = '../login.html';
+      window.location.href = '/login';
       return;
     }
 

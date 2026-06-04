@@ -189,7 +189,7 @@
 <!-- Navbar -->
 <nav class="navbar scrolled" id="main-nav">
   <div class="navbar-inner">
-    <a href="../index.html" class="navbar-logo">
+    <a href="/" class="navbar-logo">
       <div class="navbar-logo-icon">⌨️</div>
       <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
     </a>
@@ -205,27 +205,27 @@
 <div class="app-layout">
   <!-- Sidebar -->
   <aside class="app-sidebar" role="navigation" aria-label="App navigation">
-    <a href="../index.html" class="sidebar-logo" aria-label="TypeForge AI Home">⌨️</a>
+    <a href="/" class="sidebar-logo" aria-label="TypeForge AI Home">⌨️</a>
     <nav class="sidebar-nav">
-      <div class="sidebar-item" onclick="location.href='typing.html'" title="Train" aria-label="Train">
+      <div class="sidebar-item" onclick="location.href='/app/typing'" title="Train" aria-label="Train">
         <span class="sidebar-icon">⌨️</span>
         <span class="sidebar-label">Train</span>
       </div>
-      <div class="sidebar-item active" onclick="location.href='dashboard.html'" title="Dashboard" aria-label="Dashboard">
+      <div class="sidebar-item active" onclick="location.href='/app/dashboard'" title="Dashboard" aria-label="Dashboard">
         <span class="sidebar-icon">📊</span>
         <span class="sidebar-label">Dashboard</span>
       </div>
-      <div class="sidebar-item" onclick="location.href='achievements.html'" title="Achievements" aria-label="Achievements">
+      <div class="sidebar-item" onclick="location.href='/app/achievements'" title="Achievements" aria-label="Achievements">
         <span class="sidebar-icon">🏆</span>
         <span class="sidebar-label">Achievements</span>
       </div>
-      <div class="sidebar-item" onclick="location.href='history.html'" title="History" aria-label="History">
+      <div class="sidebar-item" onclick="location.href='/app/history'" title="History" aria-label="History">
         <span class="sidebar-icon">📜</span>
         <span class="sidebar-label">History</span>
       </div>
     </nav>
     <div class="sidebar-bottom">
-      <div class="sidebar-item" onclick="location.href='settings.html'" title="Settings" aria-label="Settings">
+      <div class="sidebar-item" onclick="location.href='/app/settings'" title="Settings" aria-label="Settings">
         <span class="sidebar-icon">⚙️</span>
         <span class="sidebar-label">Settings</span>
       </div>
@@ -247,7 +247,7 @@
         <h1 class="greeting">Welcome back, <span data-auth-name>Typist</span>.</h1>
         <p class="subtitle">Here's your typing telemetry for the last 30 days.</p>
       </div>
-      <a href="typing.html" class="btn btn-primary">Start Session</a>
+      <a href="/app/typing" class="btn btn-primary">Start Session</a>
     </div>
 
     <div class="bento-grid">
@@ -341,69 +341,229 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
 <script type="module">
 import Auth from '../js/clerk.js';
+import API from '../js/api.js';
 
 // Init auth to protect page
 (async () => {
   const user = await Auth.init();
   if (!user && window.location.hostname !== 'localhost') {
     window.location.href = '../login.html';
+    return;
   }
-})();
 
-// Draw line chart path animation
-const path = document.querySelector('.line-path');
-if (path) {
-  const length = path.getTotalLength();
-  path.style.strokeDasharray = length;
-  path.style.strokeDashoffset = length;
-  anime({
-    targets: path,
-    strokeDashoffset: [length, 0],
-    duration: 2000,
-    easing: 'easeInOutQuart',
-    delay: 300
-  });
-}
-
-// Fade in area chart
-anime({
-  targets: '.area-path',
-  opacity: [0, 0.5],
-  duration: 2000,
-  easing: 'linear',
-  delay: 800
-});
-
-// Counter animations
-document.querySelectorAll('[data-counter]').forEach(el => {
-  const end = parseInt(el.dataset.counter);
-  const suffix = el.dataset.suffix || '';
-  anime({
-    targets: el,
-    innerHTML: [0, end],
-    round: 1,
-    duration: 2000,
-    easing: 'easeOutExpo',
-    update: function() { el.innerHTML = el.innerHTML + suffix; }
-  });
-});
-
-// Generate dummy heatmap
-const heatmap = document.getElementById('heatmap');
-if (heatmap) {
-  for (let i = 0; i < 60; i++) { // 3 rows of 20 approx
-    const cell = document.createElement('div');
-    cell.className = 'heatmap-cell';
-    // Random activity level 0-4
-    if (Math.random() > 0.4) {
-      const level = Math.floor(Math.random() * 4) + 1;
-      cell.setAttribute('data-level', level);
+  // Set greeting name
+  if (user) {
+    const nameEl = document.querySelector('[data-auth-name]');
+    if (nameEl) {
+      nameEl.textContent = user.firstName || user.username || 'Typist';
     }
-    // Animate in
-    cell.style.opacity = 0;
-    heatmap.appendChild(cell);
   }
-  
+
+  try {
+    // Fetch real metrics
+    const profile = await API.getUserProfile().catch(() => ({}));
+    const history = await API.getHistory(60, 0).catch(() => []);
+    
+    // 1. Calculate stats from history
+    let latestWpm = 0;
+    let avgAccuracy = 0;
+    let avgConsistency = 0;
+    let wpmChangeText = "No trend data";
+    let accChangeText = "No trend data";
+    
+    if (history.length > 0) {
+      latestWpm = history[0].wpm || 0;
+      
+      const totalAcc = history.reduce((sum, s) => sum + (s.accuracy || 0), 0);
+      avgAccuracy = Math.round(totalAcc / history.length);
+      
+      const totalCons = history.reduce((sum, s) => sum + (s.consistency || 0), 0);
+      avgConsistency = Math.round(totalCons / history.length);
+      
+      // Calculate WPM and Accuracy changes if we have at least 2 sessions
+      if (history.length >= 2) {
+        const prevWpm = history[1].wpm || 0;
+        const diff = latestWpm - prevWpm;
+        wpmChangeText = diff >= 0 ? `↑ +${diff} WPM` : `↓ ${diff} WPM`;
+        
+        const prevAcc = history[1].accuracy || 0;
+        const accDiff = (history[0].accuracy || 0) - prevAcc;
+        accChangeText = accDiff >= 0 ? `↑ +${accDiff.toFixed(1)}%` : `↓ ${accDiff.toFixed(1)}%`;
+      }
+    }
+    
+    // Update WPM Metric
+    const wpmEl = document.querySelector('.span-8 .metric-value');
+    if (wpmEl) {
+      wpmEl.dataset.counter = latestWpm;
+      wpmEl.textContent = latestWpm;
+    }
+    const wpmTrendEl = document.querySelector('.span-8 .metric-trend');
+    if (wpmTrendEl) {
+      wpmTrendEl.textContent = wpmChangeText;
+      wpmTrendEl.className = `metric-trend ${wpmChangeText.includes('↓') ? 'trend-down' : 'trend-up'}`;
+    }
+    
+    // Update Accuracy Metric
+    const accEl = document.querySelector('.span-4:nth-of-type(2) .metric-value');
+    if (accEl) {
+      accEl.dataset.counter = avgAccuracy;
+      accEl.textContent = avgAccuracy + '%';
+      accEl.dataset.suffix = '%';
+    }
+    const accTrendEl = document.querySelector('.span-4:nth-of-type(2) .metric-trend');
+    if (accTrendEl) {
+      accTrendEl.textContent = accChangeText;
+      accTrendEl.className = `metric-trend ${accChangeText.includes('↓') ? 'trend-down' : 'trend-up'}`;
+    }
+    const accProgressEl = document.querySelector('.span-4:nth-of-type(2) div div');
+    if (accProgressEl) {
+      accProgressEl.style.width = `${avgAccuracy}%`;
+    }
+
+    // Update Consistency Metric
+    const consEl = document.querySelector('.dna-score');
+    if (consEl) {
+      consEl.dataset.counter = avgConsistency;
+      consEl.textContent = avgConsistency;
+    }
+
+    // 2. Generate Real Activity Map
+    const counts = {};
+    history.forEach(session => {
+      const dateStr = new Date(session.created_at || session.Date).toDateString();
+      counts[dateStr] = (counts[dateStr] || 0) + 1;
+    });
+
+    const heatmap = document.getElementById('heatmap');
+    if (heatmap) {
+      heatmap.innerHTML = '';
+      const now = new Date();
+      for (let i = 59; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(now.getDate() - i);
+        const dateStr = d.toDateString();
+        const count = counts[dateStr] || 0;
+        
+        const cell = document.createElement('div');
+        cell.className = 'heatmap-cell';
+        cell.title = `${dateStr}: ${count} session${count !== 1 ? 's' : ''}`;
+        
+        let level = 0;
+        if (count > 0) {
+          if (count === 1) level = 1;
+          else if (count <= 3) level = 2;
+          else if (count <= 5) level = 3;
+          else level = 4;
+        }
+        if (level > 0) {
+          cell.setAttribute('data-level', level);
+        }
+        cell.style.opacity = 0;
+        heatmap.appendChild(cell);
+      }
+      
+      const totalIn60Days = history.filter(s => {
+        const diff = now - new Date(s.created_at || s.Date);
+        return diff <= 60 * 24 * 60 * 60 * 1000;
+      }).length;
+      const descEl = heatmap.previousElementSibling;
+      if (descEl) {
+        descEl.textContent = `${totalIn60Days} sessions in the last 60 days`;
+      }
+    }
+
+    // 3. Render real WPM line chart
+    const linePath = document.querySelector('.line-path');
+    const areaPath = document.querySelector('.area-path');
+    if (linePath && areaPath && history.length >= 2) {
+      const historyCopy = [...history].reverse(); // oldest first
+      const minWpm = Math.min(...historyCopy.map(s => s.wpm || 0));
+      const maxWpm = Math.max(...historyCopy.map(s => s.wpm || 0));
+      const range = maxWpm - minWpm || 10;
+      
+      const width = 600;
+      const height = 200;
+      const points = [];
+      
+      historyCopy.forEach((s, idx) => {
+        const x = (idx / (historyCopy.length - 1)) * (width - 40) + 20;
+        const normalizedY = ((s.wpm || 0) - minWpm) / range;
+        const y = height - (normalizedY * (height - 60) + 30);
+        points.push(`${x.toFixed(1)},${y.toFixed(1)}`);
+      });
+      
+      const lineD = 'M' + points.join(' L');
+      const areaD = `${lineD} L${points[points.length - 1].split(',')[0]},180 L${points[0].split(',')[0]},180 Z`;
+      
+      linePath.setAttribute('d', lineD);
+      areaPath.setAttribute('d', areaD);
+      
+      // Update chart labels
+      const startText = document.querySelector('.chart-labels text:first-of-type');
+      if (startText) {
+        startText.textContent = new Date(historyCopy[0].created_at || historyCopy[0].Date).toLocaleDateString(undefined, {month: 'short', day: 'numeric'});
+      }
+    }
+
+    // 4. Update Target Areas (Weak Keys)
+    const weakKeysContainer = document.querySelector('.span-6:nth-of-type(2) div[style*="display:flex"]');
+    if (weakKeysContainer && profile.weak_keys) {
+      const keys = profile.weak_keys.slice(0, 3);
+      if (keys.length > 0) {
+        weakKeysContainer.innerHTML = '';
+        keys.forEach(k => {
+          const card = document.createElement('div');
+          card.style.cssText = 'flex:1;background:rgba(240,92,110,0.1);border:1px solid rgba(240,92,110,0.2);border-radius:12px;padding:12px;text-align:center;';
+          card.innerHTML = `
+            <div style="font-family:var(--font-mono);font-size:24px;color:var(--error);font-weight:700;">${k.toUpperCase()}</div>
+            <div style="font-size:11px;color:var(--text-3);margin-top:4px;">Slow reaction</div>
+          `;
+          weakKeysContainer.appendChild(card);
+        });
+      }
+    }
+
+  } catch (err) {
+    console.error('Failed to load dashboard metrics:', err);
+  }
+
+  // Trigger animations
+  const path = document.querySelector('.line-path');
+  if (path) {
+    const length = path.getTotalLength();
+    path.style.strokeDasharray = length;
+    path.style.strokeDashoffset = length;
+    anime({
+      targets: path,
+      strokeDashoffset: [length, 0],
+      duration: 2000,
+      easing: 'easeInOutQuart',
+      delay: 300
+    });
+  }
+
+  anime({
+    targets: '.area-path',
+    opacity: [0, 0.5],
+    duration: 2000,
+    easing: 'linear',
+    delay: 800
+  });
+
+  document.querySelectorAll('[data-counter]').forEach(el => {
+    const end = parseInt(el.dataset.counter || 0);
+    const suffix = el.dataset.suffix || '';
+    anime({
+      targets: el,
+      innerHTML: [0, end],
+      round: 1,
+      duration: 2000,
+      easing: 'easeOutExpo',
+      update: function() { el.innerHTML = el.innerHTML + suffix; }
+    });
+  });
+
   anime({
     targets: '.heatmap-cell',
     opacity: [0, 1],
@@ -411,17 +571,16 @@ if (heatmap) {
     delay: anime.stagger(15, {grid: [20, 3], from: 'first'}),
     easing: 'easeOutBack'
   });
-}
 
-// Bento card stagger in
-anime({
-  targets: '.bento-item',
-  translateY: [20, 0],
-  opacity: [0, 1],
-  delay: anime.stagger(100),
-  easing: 'easeOutExpo',
-  duration: 800
-});
+  anime({
+    targets: '.bento-item',
+    translateY: [20, 0],
+    opacity: [0, 1],
+    delay: anime.stagger(100),
+    easing: 'easeOutExpo',
+    duration: 800
+  });
+})();
 </script>
 </body>
 </html>
