@@ -97,11 +97,15 @@ export const Auth = {
 
         if (Clerk && Clerk.user) {
           currentUser = mapClerkUser(Clerk.user);
+          // Set cookie for instant client-side route guards
+          document.cookie = "tf_authenticated=true; path=/; max-age=31536000; SameSite=Lax; Secure";
           updateNavAuthState(currentUser);
           // Sync any local offline sessions to the database
           syncLocalSessions();
         } else {
           currentUser = null;
+          // Clear cookie
+          document.cookie = "tf_authenticated=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
           updateNavAuthState(null);
         }
 
@@ -148,6 +152,9 @@ export const Auth = {
    */
   async signOut() {
     if (clerkInstance) {
+      // Clear authenticated routing cookie
+      document.cookie = "tf_authenticated=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+
       // Purge all user-specific progress cache in localStorage to prevent data bleed
       localStorage.removeItem('tf_xp');
       localStorage.removeItem('tf_level');
