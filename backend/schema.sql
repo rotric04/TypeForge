@@ -84,16 +84,39 @@ CREATE TABLE IF NOT EXISTS public.typing_dna (
 
 -- RLS (Row Level Security) Setup
 ALTER TABLE public.users ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.sessions DISABLE ROW LEVEL SECURITY;
-ALTER TABLE public.keystrokes DISABLE ROW LEVEL SECURITY;
-ALTER TABLE public.achievements DISABLE ROW LEVEL SECURITY;
-ALTER TABLE public.typing_dna DISABLE ROW LEVEL SECURITY;
+ALTER TABLE public.sessions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.keystrokes ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.achievements ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.typing_dna ENABLE ROW LEVEL SECURITY;
 
--- Create policies for Users (Users can read/update their own data)
+-- Create policies for Users
 DROP POLICY IF EXISTS "Users can view own profile" ON public.users;
 CREATE POLICY "Users can view own profile" 
     ON public.users FOR SELECT 
-    USING (auth.uid()::text = clerk_id OR true); -- Allowing true for server-to-server operations if bypassing RLS via service role
+    USING (auth.uid()::text = clerk_id OR true);
+
+-- Create restricted policies for backend-only tables
+-- Evaluates to false for anonymous client-side API calls (100% secure),
+-- but permits backend access via postgres direct connection.
+DROP POLICY IF EXISTS "Sessions restricted to API backend" ON public.sessions;
+CREATE POLICY "Sessions restricted to API backend" 
+    ON public.sessions FOR ALL TO anon 
+    USING (false) WITH CHECK (false);
+
+DROP POLICY IF EXISTS "Keystrokes restricted to API backend" ON public.keystrokes;
+CREATE POLICY "Keystrokes restricted to API backend" 
+    ON public.keystrokes FOR ALL TO anon 
+    USING (false) WITH CHECK (false);
+
+DROP POLICY IF EXISTS "Achievements restricted to API backend" ON public.achievements;
+CREATE POLICY "Achievements restricted to API backend" 
+    ON public.achievements FOR ALL TO anon 
+    USING (false) WITH CHECK (false);
+
+DROP POLICY IF EXISTS "Typing DNA restricted to API backend" ON public.typing_dna;
+CREATE POLICY "Typing DNA restricted to API backend" 
+    ON public.typing_dna FOR ALL TO anon 
+    USING (false) WITH CHECK (false);
 
 -- Note: Because we access Supabase from FastAPI via Service Role key or `asyncpg` pool, 
 -- we bypass RLS for server operations. The policies above are mostly useful if we query from client.
