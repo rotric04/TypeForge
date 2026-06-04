@@ -627,15 +627,15 @@
     <div class="container">
       <div class="numbers-grid">
         <div class="number-item">
-          <div class="number-val gradient-text" data-counter="12000">0</div>
+          <div class="number-val gradient-text" data-counter="0">0</div>
           <div class="number-label">Active Typists</div>
         </div>
         <div class="number-item">
-          <div class="number-val gradient-text-teal" data-counter="4200000">0</div>
+          <div class="number-val gradient-text-teal" data-counter="0">0</div>
           <div class="number-label">Keystrokes Analyzed</div>
         </div>
         <div class="number-item">
-          <div class="number-val gradient-text-warm" data-counter="31">0</div>
+          <div class="number-val gradient-text-warm" data-counter="0">0</div>
           <div class="number-label">WPM Average Improvement</div>
         </div>
         <div class="number-item">
@@ -978,12 +978,12 @@ const counterObserver = new IntersectionObserver((entries) => {
       const stats = await res.json();
       document.querySelectorAll('[data-counter]').forEach(el => {
         const label = el.nextElementSibling?.textContent || '';
-        if (label.includes('Active Typists')) {
-          el.dataset.counter = stats.active_typists;
-        } else if (label.includes('Keystrokes Analyzed')) {
-          el.dataset.counter = stats.keystrokes_analyzed;
-        } else if (label.includes('Average Improvement')) {
-          el.dataset.counter = stats.wpm_improvement;
+        if (label.includes('Active Typists') && stats.db_connected !== false) {
+          el.dataset.counter = stats.active_typists ?? 0;
+        } else if (label.includes('Keystrokes Analyzed') && stats.db_connected !== false) {
+          el.dataset.counter = stats.keystrokes_analyzed ?? 0;
+        } else if (label.includes('Average Improvement') && stats.db_connected !== false) {
+          el.dataset.counter = stats.wpm_improvement ?? 0;
         }
       });
     }

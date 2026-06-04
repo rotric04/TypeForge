@@ -346,7 +346,7 @@ import { showToast } from '../js/common.js';
       state.level = profile.level || 1;
       state.sessionCount = profile.total_sessions || 0;
       updateXPBar();
-      loadWeakKeys();
+      loadWeakKeys(profile.weak_keys);
     }
   } catch (err) {
     console.error('Failed to load user profile in typing page:', err);
@@ -603,6 +603,7 @@ function initSession() {
   state.startTime = 0;
   state.wpmHistory = [];
   errorSet.clear();
+  resetKeyboardHeatmap();
 
   state.timeLeft = state.timerDuration;
   state.currentText = adaptText(getRandomText());
@@ -805,6 +806,11 @@ function calcWPM(elapsed) {
   return Math.round((state.correctChars / 5) / (elapsed / 60));
 }
 
+function calcRawWPM(elapsed) {
+  if (!elapsed || elapsed < 0.5) return 0;
+  return Math.round((state.typedChars / 5) / (elapsed / 60));
+}
+
 function calcAccuracy() {
   if (!state.typedChars) return 100;
   return Math.round((state.correctChars / state.typedChars) * 100);
@@ -865,6 +871,7 @@ function endSession() {
   const elapsed = state.startTime ? (performance.now() - state.startTime) / 1000 : (state.timerDuration - state.timeLeft);
   const elapsedSecs = Math.max(0.5, state.mode === 'zen' ? elapsed : Math.min(state.timerDuration, elapsed));
   const finalWPM  = calcWPM(elapsedSecs);
+  const finalRawWPM = calcRawWPM(elapsedSecs);
   const finalAcc  = calcAccuracy();
   const consistency = calcConsistency();
   const xpEarned  = calcXP(finalWPM, finalAcc, consistency);
@@ -876,7 +883,7 @@ function endSession() {
     duration_secs: Math.round(elapsedSecs) || 60,
     text_used: state.currentText || "",
     wpm: Math.round(finalWPM),
-    raw_wpm: Math.round(finalWPM),
+    raw_wpm: Math.round(finalRawWPM),
     accuracy: parseFloat(finalAcc),
     correct_chars: parseInt(state.correctChars),
     error_chars: parseInt(state.errorChars),
@@ -908,7 +915,7 @@ function endSession() {
             state.level = profile.level || 1;
             state.sessionCount = profile.total_sessions || 0;
             updateXPBar();
-            loadWeakKeys();
+            loadWeakKeys(profile.weak_keys);
           }
         })
         .catch(err => {
@@ -1189,14 +1196,21 @@ function updateXPBar() {
 // ═══════════════════════════════════════════════════════
 // WEAK KEYS
 // ═══════════════════════════════════════════════════════
-function loadWeakKeys() {
+function loadWeakKeys(profileWeakKeys) {
   try {
-    const saved = JSON.parse(localStorage.getItem('tf_key_stats') || '{}');
-    const weak = Object.entries(saved)
-      .filter(([k,v]) => v.misses > 2 && k.trim().length === 1)
-      .sort((a,b) => (b[1].misses/(b[1].hits+b[1].misses+0.01)) - (a[1].misses/(a[1].hits+a[1].misses+0.01)))
-      .slice(0, 6)
-      .map(([k]) => k);
+    let weak = Array.isArray(profileWeakKeys) ? profileWeakKeys.filter(k => k && String(k).trim()) : [];
+    if (!weak.length) {
+      const saved = JSON.parse(localStorage.getItem('tf_key_stats') || '{}');
+      weak = Object.entries(saved)
+        .filter(([k, v]) => (v.misses || 0) > 0 && String(k).trim().length >= 1)
+        .sort((a, b) => {
+          const rateA = (a[1].misses || 0) / ((a[1].hits || 0) + (a[1].misses || 0) + 0.01);
+          const rateB = (b[1].misses || 0) / ((b[1].hits || 0) + (b[1].misses || 0) + 0.01);
+          return rateB - rateA;
+        })
+        .slice(0, 6)
+        .map(([k]) => k);
+    }
 
     const bar = document.getElementById('weak-keys-bar');
     const chips = document.getElementById('weak-keys-chips');
@@ -1256,15 +1270,21 @@ function buildKeyboard() {
   container.appendChild(spaceRow);
 }
 
+function resetKeyboardHeatmap() {
+  Object.keys(sessionKeyHits).forEach(k => delete sessionKeyHits[k]);
+  Object.keys(sessionKeyErrors).forEach(k => delete sessionKeyErrors[k]);
+  document.querySelectorAll('.key[data-heat]').forEach(el => { el.dataset.heat = '0'; });
+}
+
 function updateKeyboardHeatmap(char, correct) {
   if (!char) return;
-  const key = char.toLowerCase();
+  const key = char === ' ' ? ' ' : char.toLowerCase();
   if (correct) {
     sessionKeyHits[key] = (sessionKeyHits[key] || 0) + 1;
   } else {
     sessionKeyErrors[key] = (sessionKeyErrors[key] || 0) + 1;
   }
-  const keyEl = document.querySelector(`.key[data-key="${key}"]`);
+  const keyEl = document.querySelector(`.key[data-key="${CSS.escape(key)}"]`);
   if (!keyEl) return;
   const hits   = sessionKeyHits[key] || 0;
   const errors = sessionKeyErrors[key] || 0;

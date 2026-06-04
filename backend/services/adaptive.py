@@ -11,12 +11,31 @@ from collections import defaultdict
 logger = logging.getLogger("typeforge.adaptive")
 
 
+def normalize_key_stats(key_stats: Dict[str, Dict]) -> Dict[str, Dict]:
+    """Normalize client key_stats (totalDelay) for server-side analysis."""
+    normalized: Dict[str, Dict] = {}
+    for key, stats in (key_stats or {}).items():
+        hits = int(stats.get("hits", 0) or 0)
+        misses = int(stats.get("misses", 0) or 0)
+        total_delay = float(stats.get("totalDelay") or stats.get("total_delay") or 0)
+        avg_delay = float(stats.get("avg_delay", 0) or 0)
+        if avg_delay <= 0 and hits > 0:
+            avg_delay = total_delay / hits
+        normalized[key] = {
+            "hits": hits,
+            "misses": misses,
+            "totalDelay": total_delay,
+            "avg_delay": avg_delay,
+        }
+    return normalized
+
+
 # ── Weak Key Analyzer ─────────────────────────────────────────────
 class WeakKeyAnalyzer:
     """Identifies weak keys and patterns from keystroke data."""
 
     def __init__(self, key_stats: Dict[str, Dict]):
-        self.key_stats = key_stats
+        self.key_stats = normalize_key_stats(key_stats)
 
     def get_weak_keys(self, threshold: float = 0.15) -> List[str]:
         """Keys with error rate above threshold."""

@@ -11,7 +11,7 @@ import logging
 from database import get_db, DB
 from dependencies import get_current_user
 from models.models import SessionCreate, SessionResponse, UserProfile
-from services.adaptive import WeakKeyAnalyzer, PerformanceAnalyzer
+from services.adaptive import WeakKeyAnalyzer, PerformanceAnalyzer, normalize_key_stats
 from services.achievements import AchievementEngine
 from config import settings
 
@@ -71,8 +71,8 @@ async def create_session(
             detail=f"Session duration exceeds maximum of {settings.MAX_SESSION_DURATION_SECONDS}s"
         )
 
-    # Analyze weak patterns
-    analyzer = WeakKeyAnalyzer(session.key_stats)
+    # Analyze weak patterns from normalized per-key stats
+    analyzer = WeakKeyAnalyzer(normalize_key_stats(session.key_stats))
     weak_keys = analyzer.get_weak_keys()
 
     # Calculate XP
