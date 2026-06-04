@@ -113,6 +113,8 @@ export const Auth = {
           // Set cookie for instant client-side route guards
           document.cookie = "tf_authenticated=true; path=/; max-age=31536000; SameSite=Lax; Secure";
           updateNavAuthState(currentUser);
+          // Sync Clerk profile (name/email) into Supabase so display name is always correct
+          syncProfileToDatabase(Clerk.user);
           // Sync any local offline sessions to the database
           syncLocalSessions();
         } else {
@@ -182,6 +184,24 @@ export const Auth = {
     }
   }
 };
+
+// ── Sync Clerk Profile to Supabase ────────────────────────────────
+async function syncProfileToDatabase(clerkUser) {
+  try {
+    if (!clerkUser) return;
+    const firstName = clerkUser.firstName || '';
+    const lastName  = clerkUser.lastName  || '';
+    const email     = clerkUser.primaryEmailAddress?.emailAddress || '';
+    const username  = clerkUser.username || '';
+    // Only sync if we have something meaningful to save
+    if (!firstName && !lastName && !username && !email) return;
+    const { API } = await import('./api.js');
+    await API.syncProfile({ firstName, lastName, email, username });
+  } catch (e) {
+    // Non-critical — fail silently, name will still show from Clerk object
+    console.warn('TF Auth: Could not sync profile to DB', e?.message || e);
+  }
+}
 
 // ── Sync Local Sessions to DB ──────────────────────────────────────
 async function syncLocalSessions() {

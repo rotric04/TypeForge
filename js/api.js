@@ -119,6 +119,20 @@ export const API = {
   },
 
   /**
+   * Sync Clerk profile (name/email) into Supabase users table
+   */
+  async syncProfile(userData) {
+    return apiClient.post('/users/me/sync-profile', userData);
+  },
+
+  /**
+   * Update username directly
+   */
+  async updateUsername(username) {
+    return apiClient.patch('/users/me', { username });
+  },
+
+  /**
    * Get current user profile information
    */
   async getUserProfile() {

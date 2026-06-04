@@ -115,11 +115,17 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
     record = await DB.fetchone("SELECT * FROM users WHERE clerk_id = $1", clerk_id)
     
     if not record:
-        # If user does not exist, auto-create them. 
-        # In a real app, you might want to use Clerk Webhooks to create users,
-        # but JIT (Just-in-Time) creation is fine too.
+        # If user does not exist, auto-create them (Just-in-Time provisioning).
         email = payload.get("email", f"{clerk_id}@placeholder.com")
-        username = payload.get("username", clerk_id[:8])
+        # Use a real name from Clerk JWT claims if available, otherwise use email prefix
+        # Clerk JWT can include 'first_name', 'last_name', 'username', 'email' if configured
+        first_name = payload.get("first_name") or payload.get("given_name") or ""
+        last_name  = payload.get("last_name")  or payload.get("family_name") or ""
+        full_name  = f"{first_name} {last_name}".strip()
+        clerk_username = payload.get("username") or ""
+        # Derive a clean display username: prefer Clerk username, then full name, then email prefix
+        email_prefix = email.split("@")[0] if "@" in email else ""
+        username = clerk_username or full_name or email_prefix or clerk_id[:8]
         
         insert_query = """
             INSERT INTO users (clerk_id, email, username)

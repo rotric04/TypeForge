@@ -57,8 +57,54 @@ async def get_user_achievements(user: UserProfile = Depends(get_current_user)):
     return engine.get_all_achievements(unlocked_ids)
 
 @router.patch("/me")
-async def update_user_profile(user: UserProfile = Depends(get_current_user)):
-    return {"message": "Update user profile — requires Clerk auth"}
+async def update_user_profile(
+    body: dict,
+    user: UserProfile = Depends(get_current_user)
+):
+    """Update display name / username for the current user."""
+    username = (body.get("username") or "").strip()
+    if not username:
+        from fastapi import HTTPException
+        raise HTTPException(status_code=400, detail="Username cannot be empty")
+    if len(username) > 50:
+        from fastapi import HTTPException
+        raise HTTPException(status_code=400, detail="Username too long (max 50 chars)")
+    
+    await DB.execute(
+        "UPDATE users SET username = $1, updated_at = NOW() WHERE id = $2",
+        username, user.id
+    )
+    return {"username": username, "message": "Profile updated successfully"}
+
+
+@router.post("/me/sync-profile")
+async def sync_clerk_profile(
+    body: dict,
+    user: UserProfile = Depends(get_current_user)
+):
+    """Sync Clerk profile data (name, email) into Supabase users table.
+    Called by frontend after user updates their profile in the Clerk widget."""
+    first_name = (body.get("firstName") or "").strip()
+    last_name  = (body.get("lastName") or "").strip()
+    email      = (body.get("email") or "").strip()
+    username   = (body.get("username") or "").strip()
+    
+    # Build display name: full name > username > keep existing
+    full_name = f"{first_name} {last_name}".strip()
+    new_username = username or full_name or None
+    
+    if new_username:
+        await DB.execute(
+            "UPDATE users SET username = $1, updated_at = NOW() WHERE id = $2",
+            new_username, user.id
+        )
+    if email:
+        await DB.execute(
+            "UPDATE users SET email = $1, updated_at = NOW() WHERE id = $2",
+            email, user.id
+        )
+    
+    return {"message": "Profile synced", "username": new_username}
 
 @router.delete("/me")
 async def delete_account(user: UserProfile = Depends(get_current_user)):
