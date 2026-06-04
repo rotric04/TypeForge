@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="../css/components.css"/>
   <link rel="stylesheet" href="../css/typing.css"/>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>"/>
+  <!-- Vercel Web Analytics -->
+  <script defer src="https://cdn.vercel-insights.com/v1/script.js"></script>
 </head>
 <body>
 <div class="aurora-container" aria-hidden="true">
@@ -997,7 +999,7 @@ document.getElementById('focus-mode-btn').addEventListener('click', toggleFocusM
 
 // ═══════════════════════════════════════════════════════
 // XP BAR
-// ═══════════════════════════════════════════════════════
+// ═════════════════���═════════════════════════════════════
 function updateXPBar() {
   const nextLevelXP = state.level * 500;
   const pct = Math.min(100, (state.xp / nextLevelXP) * 100);
@@ -1100,7 +1102,7 @@ function updateKeyboardHeatmap(char, correct) {
 
 // ═══════════════════════════════════════════════════════
 // CUSTOM TEXT MODAL
-// ═══════════════════════════════════════════════════════
+// ════════════���══════════════════════════════════════════
 const customInput = document.getElementById('custom-text-input');
 customInput.addEventListener('input', () => {
   document.getElementById('custom-char-count').textContent = `${customInput.value.length} characters`;
