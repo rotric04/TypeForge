@@ -95,6 +95,19 @@ export const Auth = {
           await Clerk.load();
         }
 
+        if (Clerk) {
+          // Listen to session state changes to keep the tf_authenticated cookie in sync.
+          // This ensures that when a user logs in (or out), the cookie is updated instantly,
+          // avoiding redirect loops and flickering when navigating to the dashboard.
+          Clerk.addListener(({ session, user }) => {
+            if (session && user) {
+              document.cookie = "tf_authenticated=true; path=/; max-age=31536000; SameSite=Lax; Secure";
+            } else {
+              document.cookie = "tf_authenticated=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=Lax; Secure";
+            }
+          });
+        }
+
         if (Clerk && Clerk.user) {
           currentUser = mapClerkUser(Clerk.user);
           // Set cookie for instant client-side route guards
@@ -105,7 +118,7 @@ export const Auth = {
         } else {
           currentUser = null;
           // Clear cookie
-          document.cookie = "tf_authenticated=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+          document.cookie = "tf_authenticated=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=Lax; Secure";
           updateNavAuthState(null);
         }
 
@@ -141,10 +154,10 @@ export const Auth = {
    * Mount or open Sign In modal
    */
   openSignIn() {
-    window.location.href = '/login.html';
+    window.location.href = '/login';
   },
   openSignUp() {
-    window.location.href = '/login.html';
+    window.location.href = '/login';
   },
 
   /**
@@ -153,7 +166,7 @@ export const Auth = {
   async signOut() {
     if (clerkInstance) {
       // Clear authenticated routing cookie
-      document.cookie = "tf_authenticated=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      document.cookie = "tf_authenticated=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=Lax; Secure";
 
       // Purge all user-specific progress cache in localStorage to prevent data bleed
       localStorage.removeItem('tf_xp');
@@ -165,7 +178,7 @@ export const Auth = {
       await clerkInstance.signOut();
       currentUser = null;
       updateNavAuthState(null);
-      window.location.href = '/index.html';
+      window.location.href = '/';
     }
   }
 };

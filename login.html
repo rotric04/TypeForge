@@ -163,20 +163,9 @@
     import Auth from './js/clerk.js';
     
     async function initLogin() {
-      // Instant redirect if cookie shows they are already authenticated
-      const getCookie = (name) => {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-      };
-      if (getCookie('tf_authenticated') === 'true') {
-        window.location.href = 'app/dashboard.html';
-        return;
-      }
-
       const user = await Auth.init();
       if (user) {
-        window.location.href = 'app/dashboard.html';
+        window.location.href = '/app/dashboard';
         return;
       }
       
@@ -185,9 +174,9 @@
       
       if (clerk && signInDiv) {
         clerk.mountSignIn(signInDiv, {
-          redirectUrl: window.location.origin + '/app/dashboard.html',
-          afterSignInUrl: window.location.origin + '/app/dashboard.html',
-          afterSignUpUrl: window.location.origin + '/app/dashboard.html',
+          redirectUrl: window.location.origin + '/app/dashboard',
+          afterSignInUrl: window.location.origin + '/app/dashboard',
+          afterSignUpUrl: window.location.origin + '/app/dashboard',
           appearance: {
             variables: {
               colorPrimary: '#e8734a',

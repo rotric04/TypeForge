@@ -334,13 +334,13 @@
       if (parts.length === 2) return parts.pop().split(';').shift();
     };
     if (getCookie('tf_authenticated') !== 'true' && window.location.hostname !== 'localhost') {
-      window.location.href = '../login.html';
+      window.location.href = '/login';
       return;
     }
 
     const user = await Auth.init();
     if (!user && window.location.hostname !== 'localhost') {
-      window.location.href = '../login.html';
+      window.location.href = '/login';
       return;
     }
 
