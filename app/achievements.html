@@ -220,7 +220,8 @@
       };
       
       sessionHistory = historyRes.value || JSON.parse(localStorage.getItem('tf_session_history') || '[]');
-      const unlockedIds = achRes.value ? achRes.value.filter(a => a.is_unlocked).map(a => a.id) : [];
+      const achList = achRes.value || [];
+      const unlockedIds = achList.filter(a => a.is_unlocked).map(a => a.id);
 
       const computed = computeProgress(sessionHistory, userProfile);
       achievementsData = ALL_ACHIEVEMENTS.map(ach => ({
@@ -234,12 +235,51 @@
       renderGrid('all');
       setupFilters();
 
+      // Show toast for newly unlocked achievements
+      // Check URL param first (?unlocked=badge_id from typing page redirect)
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlUnlocked = urlParams.get('unlocked');
+      if (urlUnlocked) {
+        const badge = ALL_ACHIEVEMENTS.find(a => a.id === urlUnlocked);
+        if (badge) {
+          setTimeout(() => showAchToast(badge.icon, 'Achievement Unlocked!', badge.name), 600);
+        }
+      } else {
+        // Check for newly unlocked since last visit
+        const seenKey = 'tf_seen_achievements';
+        const seenIds = JSON.parse(localStorage.getItem(seenKey) || '[]');
+        const allUnlocked = achievementsData.filter(a => a.is_unlocked).map(a => a.id);
+        const newlyUnlocked = allUnlocked.filter(id => !seenIds.includes(id));
+        // Save updated seen list
+        localStorage.setItem(seenKey, JSON.stringify(allUnlocked));
+        if (newlyUnlocked.length > 0) {
+          // Show toast for the first newly unlocked badge
+          const firstNew = ALL_ACHIEVEMENTS.find(a => a.id === newlyUnlocked[0]);
+          if (firstNew) {
+            setTimeout(() => showAchToast(firstNew.icon, 'Achievement Unlocked!', firstNew.name), 800);
+          }
+        }
+      }
+
     } catch (err) {
       console.error('Failed to load achievements:', err);
       achievementsData = ALL_ACHIEVEMENTS.map(ach => ({ ...ach, is_unlocked: false, progress: 0 }));
       renderGrid('all');
       setupFilters();
     }
+  }
+
+  function showAchToast(icon, title, msg, duration = 4000) {
+    const toast = document.getElementById('ach-toast');
+    const iconEl = document.getElementById('toast-icon');
+    const titleEl = document.getElementById('toast-title');
+    const msgEl = document.getElementById('toast-msg');
+    if (!toast) return;
+    if (iconEl) iconEl.textContent = icon || '🏆';
+    if (titleEl) titleEl.textContent = title || 'Achievement Unlocked!';
+    if (msgEl) msgEl.textContent = msg || 'You earned a new badge.';
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), duration);
   }
 
   function computeProgress(history, profile) {
