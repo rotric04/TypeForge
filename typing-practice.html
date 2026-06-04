@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Typing Practice | Improve Keyboard Speed & Accuracy - TypeForge</title>
+  <meta name="description" content="Engage in structured typing practice on TypeForge AI. Access adaptive coding drills, developer keyboard exercises, and real-time accuracy coaching." />
+  <meta name="keywords" content="typing practice, coding typing practice, typing speed, touch typing, developer typing practice, learn typing, online typing drills" />
+  <link rel="canonical" href="https://www.typeforge.fun/typing-practice" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://esm.sh" crossorigin />
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>" />
+  <!-- Vercel Web Analytics -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <style>
+    .landing-page-hero {
+      padding: 120px 0 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .landing-mesh {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 30%, rgba(232, 115, 74, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .landing-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: rgba(232, 115, 74, 0.1);
+      border: 1px solid rgba(232, 115, 74, 0.25);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--brand-light);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .landing-heading {
+      font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+    .landing-sub {
+      font-size: 18px;
+      color: var(--text-2);
+      max-width: 700px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+    .content-section {
+      padding: 60px 0;
+    }
+    .article-layout {
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      gap: 60px;
+    }
+    .main-article {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-2);
+    }
+    .main-article h2 {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-1);
+      margin-top: 40px;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+    .main-article h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-1);
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+    .main-article p {
+      margin-bottom: 20px;
+    }
+    .main-article ul, .main-article ol {
+      margin-bottom: 20px;
+      padding-left: 24px;
+    }
+    .main-article li {
+      margin-bottom: 8px;
+    }
+    .sidebar {
+      position: sticky;
+      top: 100px;
+      height: fit-content;
+    }
+    .sidebar-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-1);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 30px;
+    }
+    .sidebar-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-1);
+      margin-bottom: 16px;
+    }
+    .sidebar-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .sidebar-links a {
+      font-size: 14px;
+      color: var(--text-3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .sidebar-links a:hover {
+      color: var(--brand);
+    }
+    .cta-banner {
+      background: linear-gradient(135deg, rgba(232, 115, 74, 0.15) 0%, rgba(0, 201, 167, 0.05) 100%);
+      border: 1px solid var(--border-2);
+      border-radius: 24px;
+      padding: 60px;
+      text-align: center;
+      margin-top: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-heading {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .cta-text {
+      font-size: 16px;
+      color: var(--text-2);
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+    @media (max-width: 900px) {
+      .article-layout {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        display: none;
+      }
+      .cta-banner {
+        padding: 40px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Aurora Background -->
+  <div class="aurora-container" aria-hidden="true">
+    <div class="aurora-blob aurora-blob-1" style="opacity:0.1;"></div>
+    <div class="aurora-blob aurora-blob-2" style="opacity:0.06;"></div>
+  </div>
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="main-nav" role="navigation" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <a href="/" class="navbar-logo" aria-label="TypeForge AI home">
+        <div class="navbar-logo-icon" aria-hidden="true">⌨️</div>
+        <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
+      </a>
+      <ul class="navbar-links" role="list">
+        <li><a href="/features">Features</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/feedback">Community</a></li>
+      </ul>
+      <div class="navbar-actions">
+        <div class="nav-auth-signed-out">
+          <button class="btn btn-ghost btn-sm" data-auth-signin>Sign In</button>
+          <a href="/app/onboarding.html" class="btn btn-primary btn-sm">Start Free</a>
+        </div>
+        <div class="nav-auth-signed-in">
+          <a href="/app/dashboard.html" class="btn btn-ghost btn-sm">Dashboard</a>
+          <div class="nav-user-avatar" title="Profile" aria-label="User account">U</div>
+          <button class="btn btn-ghost btn-sm" data-auth-signout style="font-size:12px;">Sign Out</button>
+        </div>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div class="nav-backdrop" id="nav-backdrop"></div>
+  <nav class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+    <a href="/features">✦ Features</a>
+    <a href="/about">✦ About</a>
+    <a href="/blog">✦ Blog</a>
+    <a href="/feedback">✦ Community</a>
+    <div class="nav-drawer-divider"></div>
+    <a href="/app/typing.html">⌨️ Open App</a>
+  </nav>
+
+  <main class="page-content">
+    <section class="landing-page-hero">
+      <div class="landing-mesh"></div>
+      <div class="container">
+        <div class="landing-eyebrow">✦ Professional Keyboarding Practice</div>
+        <h1 class="landing-heading">Online Typing Practice</h1>
+        <p class="landing-sub">Ditch repetitive tests. Engage in deliberate, adaptive training designed to optimize finger positioning, accuracy, and developer coding speed.</p>
+        <a href="/app/typing.html" class="btn btn-primary btn-lg">Start Typing Practice</a>
+      </div>
+    </section>
+
+    <section class="container content-section">
+      <div class="article-layout">
+        <article class="main-article">
+          <p>Many people spend hours taking online typing tests, hoping their speed will increase. However, constantly testing yourself is an inefficient way to learn. Tests only evaluate your current skills; they don't teach you new ones. To truly improve, you need structured, deliberate <strong>typing practice</strong>. Deliberate practice involves identifying your weak spots and repeating exercises designed specifically to fix them.</p>
+
+          <h2>Typing Practice vs. Typing Tests: The Big Difference</h2>
+          <p>Understanding the difference between assessment and practice is critical for skill development:
+            <ul>
+              <li><strong>Typing Tests</strong>: Evaluate your overall speed and accuracy using random paragraphs. They encourage you to rush, which can lead to mistakes and bad habits.</li>
+              <li><strong>Typing Practice</strong>: Focuses on specific patterns, row transitions, and weak fingers. It helps you build correct muscle memory, improve accuracy, and develop a steady typing rhythm.</li>
+            </ul>
+          </p>
+          <p>Think of it like learning to play an instrument: you don't improve by playing a full concert piece over and over (testing). You improve by practicing scales and difficult chord transitions (deliberate practice).</p>
+
+          <h2>Coding Typing Practice: A Vital Skill for Developers</h2>
+          <p>For software engineers, standard typing drills are often unhelpful. Writing code is very different from typing standard prose:
+            <ul>
+              <li><strong>Symbol Heavy</strong>: Code uses brackets, braces, parentheses, semi-colons, operators, and indentation. Standard tests rarely include these keys.</li>
+              <li><strong>Naming Conventions</strong>: Programmers frequently type variables in <code>camelCase</code>, <code>snake_case</code>, or <code>kebab-case</code>, which require quick and precise shift-key movements.</li>
+              <li><strong>Language Syntax</strong>: Different programming languages (HTML, JavaScript, Python, C++) have distinct structural layouts that demand specific muscle memory.</li>
+            </ul>
+          </p>
+          <p>TypeForge AI includes a dedicated **coding typing practice** mode. We support 10 different languages, letting developers practice typing real syntax, APIs, and templates. This helps you reduce coding typos and write code more fluidly.</p>
+
+          <h2>Core Elements of a Great Typing Practice Routine</h2>
+          <p>To get the most out of your practice sessions, focus on these five core principles:
+            <ol>
+              <li><strong>Slow Down for Accuracy</strong>: Always aim for 97% to 100% accuracy. If you make mistakes, slow down until your fingers move accurately, then let speed build naturally.</li>
+              <li><strong>Maintain a Steady Rhythm</strong>: Avoid typing simple words quickly only to freeze on difficult ones. Try to maintain a steady, metronome-like beat.</li>
+              <li><strong>Commit to the Home Row</strong>: Keep your hands anchored on the home row keys. Looking down at the keys breaks your focus and slows down muscle memory.</li>
+              <li><strong>Practice Short, Daily Sessions</strong>: 15 minutes of daily practice is much more effective than a single 2-hour session once a week. Your brain builds muscle memory best during sleep after short, focused training.</li>
+              <li><strong>Focus on Hand Ergonomics</strong>: Sit upright with elbows bent at 90 degrees and wrists straight. This helps prevent repetitive strain injuries (RSI) like carpal tunnel syndrome.</li>
+            </ol>
+          </p>
+
+          <h2>How TypeForge AI Customizes Your Drills</h2>
+          <p>TypeForge replaces static, pre-written texts with an adaptive, real-time training engine.
+            <ul>
+              <li><strong>Keystroke Delay Analysis</strong>: Our client-side code measures the delay between every key transition. If transitioning from 'E' to 'C' is slow, our engine creates exercises featuring those characters.</li>
+              <li><strong>Error Mitigation Loops</strong>: When you make a mistake, the platform creates custom drills targeting that key to help you unlearn the error.</li>
+              <li><strong>Gamified Progression</strong>: Track your progress with XP, unlock achievements, and watch your metrics improve over time.</li>
+            </ul>
+          </p>
+
+          <div class="cta-banner">
+            <h2 class="cta-heading" style="color: var(--text-1);">Start Deliberate Practice Today</h2>
+            <p class="cta-text">Level up your typing skills. Sign in to TypeForge, complete your onboarding, and let our AI platform generate practice sessions tailored to your unique keystroke dynamics.</p>
+            <a href="/app/onboarding.html" class="btn btn-primary btn-lg">Start Free Onboarding</a>
+          </div>
+        </article>
+
+        <aside class="sidebar">
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">Core Tests & Tools</h3>
+            <div class="sidebar-links">
+              <a href="/typing-test">✦ Typing Test</a>
+              <a href="/typing-speed-test">✦ Typing Speed Test</a>
+              <a href="/wpm-test">✦ WPM Test</a>
+              <a href="/typing-lessons">✦ Typing Lessons</a>
+              <a href="/touch-typing">✦ Touch Typing Guide</a>
+              <a href="/typing-accuracy-test">✦ Accuracy Test</a>
+            </div>
+          </div>
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">Learn More</h3>
+            <div class="sidebar-links">
+              <a href="/features">TypeForge Features</a>
+              <a href="/about">About Our Mission</a>
+              <a href="/blog">Read Our Blog</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" style="padding:40px 0;border-top:1px solid var(--border-1);">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+        <a href="/" class="navbar-logo">
+          <div class="navbar-logo-icon">⌨️</div>
+          <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
+        </a>
+        <nav style="display:flex;gap:20px;flex-wrap:wrap;" aria-label="Footer">
+          <a href="/features" style="font-size:13px;color:var(--text-4);">Features</a>
+          <a href="/blog" style="font-size:13px;color:var(--text-4);">Blog</a>
+          <a href="/feedback" style="font-size:13px;color:var(--text-4);">Community</a>
+          <a href="/privacy" style="font-size:13px;color:var(--text-4);">Privacy Policy</a>
+          <a href="/terms" style="font-size:13px;color:var(--text-4);">Terms of Service</a>
+          <a href="/security" style="font-size:13px;color:var(--text-4);">Security</a>
+        </nav>
+        <p style="font-size:12px;color:var(--text-4);">© 2026 TypeForge AI · Designed & Developed by <a href="https://github.com/rotric04" target="_blank" class="creator-link">rotric04</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+  <script type="module">
+    import { initNavbar } from './js/common.js';
+    import Auth from './js/clerk.js?v=2';
+    import { initAccessibility } from './js/accessibility.js';
+
+    initNavbar();
+    initAccessibility();
+  </script>
+</body>
+</html>

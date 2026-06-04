@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WPM Test | Measure Your Words Per Minute Online - TypeForge</title>
+  <meta name="description" content="Check your WPM (Words Per Minute) with TypeForge AI. Understand standard typing math, Raw vs Net WPM, and improve your speed with interactive analytics." />
+  <meta name="keywords" content="WPM test, words per minute test, words per minute, typing test, free typing test, check WPM, typing speed, net WPM" />
+  <link rel="canonical" href="https://www.typeforge.fun/wpm-test" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://esm.sh" crossorigin />
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>" />
+  <!-- Vercel Web Analytics -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <style>
+    .landing-page-hero {
+      padding: 120px 0 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .landing-mesh {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 30%, rgba(245, 200, 66, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .landing-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: rgba(245, 200, 66, 0.1);
+      border: 1px solid rgba(245, 200, 66, 0.25);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .landing-heading {
+      font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+    .landing-sub {
+      font-size: 18px;
+      color: var(--text-2);
+      max-width: 700px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+    .content-section {
+      padding: 60px 0;
+    }
+    .article-layout {
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      gap: 60px;
+    }
+    .main-article {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-2);
+    }
+    .main-article h2 {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-1);
+      margin-top: 40px;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+    .main-article h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-1);
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+    .main-article p {
+      margin-bottom: 20px;
+    }
+    .main-article ul, .main-article ol {
+      margin-bottom: 20px;
+      padding-left: 24px;
+    }
+    .main-article li {
+      margin-bottom: 8px;
+    }
+    .sidebar {
+      position: sticky;
+      top: 100px;
+      height: fit-content;
+    }
+    .sidebar-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-1);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 30px;
+    }
+    .sidebar-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-1);
+      margin-bottom: 16px;
+    }
+    .sidebar-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .sidebar-links a {
+      font-size: 14px;
+      color: var(--text-3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .sidebar-links a:hover {
+      color: var(--brand);
+    }
+    .cta-banner {
+      background: linear-gradient(135deg, rgba(245, 200, 66, 0.12) 0%, rgba(0, 201, 167, 0.05) 100%);
+      border: 1px solid var(--border-2);
+      border-radius: 24px;
+      padding: 60px;
+      text-align: center;
+      margin-top: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-heading {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .cta-text {
+      font-size: 16px;
+      color: var(--text-2);
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+    @media (max-width: 900px) {
+      .article-layout {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        display: none;
+      }
+      .cta-banner {
+        padding: 40px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Aurora Background -->
+  <div class="aurora-container" aria-hidden="true">
+    <div class="aurora-blob aurora-blob-3" style="opacity:0.1;"></div>
+    <div class="aurora-blob aurora-blob-1" style="opacity:0.06;"></div>
+  </div>
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="main-nav" role="navigation" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <a href="/" class="navbar-logo" aria-label="TypeForge AI home">
+        <div class="navbar-logo-icon" aria-hidden="true">⌨️</div>
+        <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
+      </a>
+      <ul class="navbar-links" role="list">
+        <li><a href="/features">Features</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/feedback">Community</a></li>
+      </ul>
+      <div class="navbar-actions">
+        <div class="nav-auth-signed-out">
+          <button class="btn btn-ghost btn-sm" data-auth-signin>Sign In</button>
+          <a href="/app/onboarding.html" class="btn btn-primary btn-sm">Start Free</a>
+        </div>
+        <div class="nav-auth-signed-in">
+          <a href="/app/dashboard.html" class="btn btn-ghost btn-sm">Dashboard</a>
+          <div class="nav-user-avatar" title="Profile" aria-label="User account">U</div>
+          <button class="btn btn-ghost btn-sm" data-auth-signout style="font-size:12px;">Sign Out</button>
+        </div>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div class="nav-backdrop" id="nav-backdrop"></div>
+  <nav class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+    <a href="/features">✦ Features</a>
+    <a href="/about">✦ About</a>
+    <a href="/blog">✦ Blog</a>
+    <a href="/feedback">✦ Community</a>
+    <div class="nav-drawer-divider"></div>
+    <a href="/app/typing.html">⌨️ Open App</a>
+  </nav>
+
+  <main class="page-content">
+    <section class="landing-page-hero">
+      <div class="landing-mesh"></div>
+      <div class="container">
+        <div class="landing-eyebrow" style="border-color: rgba(245, 200, 66, 0.25);">✦ Words Per Minute Analysis</div>
+        <h1 class="landing-heading">WPM Test</h1>
+        <p class="landing-sub">Discover your true typing performance. Learn standard typing speed formulas, run a WPM test, and identify mechanical inefficiencies.</p>
+        <a href="/app/typing.html" class="btn btn-primary btn-lg">Start WPM Test</a>
+      </div>
+    </section>
+
+    <section class="container content-section">
+      <div class="article-layout">
+        <article class="main-article">
+          <p>When you take a typing speed checker, your final score is presented in <strong>WPM (Words Per Minute)</strong>. But what does WPM actually represent? In the early days of typing, measuring speed was difficult because some words are short (like "the") and others are long (like "keyboard"). To establish a fair baseline for testing, the typing industry created a standardized calculation. Understanding this math is key to evaluating and improving your keyboard skills.</p>
+
+          <h2>The History and Definition of Words Per Minute</h2>
+          <p>Historically, WPM was created during the typewriter era. To ensure speed evaluations were standardized, developers defined a "word" as exactly <strong>5 keystrokes</strong>. This count includes not only letters but also spaces, numbers, and punctuation marks. 
+          <p>For example, typing the phrase <code>"I type"</code> takes 6 keystrokes (including the space). In standard typing tests, that counts as 1.2 words, not 2. This rule ensures that your score represents your actual keyboard movements, regardless of vocabulary difficulty.</p>
+
+          <h2>How a WPM Test is Calculated</h2>
+          <p>The calculation of your typing score involves two distinct steps: finding your raw speed and then subtracting penalties for errors.
+            <ol>
+              <li><strong>Raw WPM</strong>: This is your absolute finger speed. It measures how many total keys you hit, regardless of mistakes.
+                <br>
+                <code>Raw WPM = (Total Keystrokes / 5) / (Time in Minutes)</code>
+              </li>
+              <li><strong>Net WPM</strong>: This is your true, functional typing speed. It penalizes you for any errors that you leave uncorrected at the end of the test.
+                <br>
+                <code>Net WPM = Raw WPM - (Uncorrected Errors / Time in Minutes)</code>
+              </li>
+            </ol>
+          </p>
+          <p>For example, if you type 400 characters in a 1-minute test, your Raw WPM is 80 (400 / 5 / 1). If you leave 5 errors uncorrected, your Net WPM drops to 75. If you made 20 errors, your Net WPM falls to 60. This highlights why speed without precision is counter-productive.</p>
+
+          <h2>Typing Speed Milestones: What is a Good WPM?</h2>
+          <p>Different professions have different expectations for keyboard efficiency:
+            <ul>
+              <li><strong>35 - 40 WPM</strong>: The average speed for general computer users. At this speed, typing is a conscious task that requires some focus.</li>
+              <li><strong>50 - 60 WPM</strong>: Good typing speed. It meets the requirements for office work, data entry, and customer support.</li>
+              <li><strong>70 - 80 WPM</strong>: Professional speed. The threshold for writers, editors, programmers, and executive assistants. Typing becomes an automatic task, letting you focus entirely on your work.</li>
+              <li><strong>90 - 100+ WPM</strong>: High-speed typing. Typical for court reporters, medical transcriptionists, and elite programmers.</li>
+            </ul>
+          </p>
+
+          <h2>Why the Backspace Key is the Ultimate Speed Killer</h2>
+          <p>Many typists think that hitting the backspace key quickly allows them to type fast while ignoring errors. This is a common misconception. When you make a mistake, you must:
+            <ul>
+              <li>Stop typing forward.</li>
+              <li>Coordinate your hand to hit the backspace key (which is located away from the home row).</li>
+              <li>Delete the incorrect character.</li>
+              <li>Type the correct key.</li>
+              <li>Realign your hands on the home row and resume typing.</li>
+            </ul>
+          </p>
+          <p>This sequence breaks your typing flow, increases fatigue, and slows down your average WPM. To improve your speed, you must train your fingers to only press keys with high accuracy, letting speed grow naturally.</p>
+
+          <h2>How TypeForge AI Tracks Your WPM Dynamics</h2>
+          <p>Traditional WPM tests show you a single score at the end of a session. TypeForge analyzes your performance in real-time, mapping:
+            <ul>
+              <li><strong>Real-time WPM Curve</strong>: Shows how your speed fluctuates during a test. Consistent speed is a sign of good rhythm, while spikes and drops suggest struggle.</li>
+              <li><strong>In-flight Key Latency</strong>: Maps the physical delay between hitting specific letters, helping you see where your fingers struggle.</li>
+              <li><strong>Fatigue Index</strong>: Measures if your speed drops during the final seconds of a long test, indicating physical or mental fatigue.</li>
+            </ul>
+          </p>
+
+          <div class="cta-banner">
+            <h2 class="cta-heading" style="color: var(--text-1);">Benchmark Your WPM</h2>
+            <p class="cta-text">Take our modern, browser-based WPM test. Discover your net typing speed, accuracy, and key latency. Let our AI platform build a personalized training plan for you.</p>
+            <a href="/app/typing.html" class="btn btn-primary btn-lg" style="background: var(--gold); border-color: var(--gold); color: #000; font-weight: 700;">Take the WPM Test</a>
+          </div>
+        </article>
+
+        <aside class="sidebar">
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">Core Tests & Tools</h3>
+            <div class="sidebar-links">
+              <a href="/typing-test">✦ Typing Test</a>
+              <a href="/typing-speed-test">✦ Typing Speed Test</a>
+              <a href="/typing-practice">✦ Typing Practice</a>
+              <a href="/typing-lessons">✦ Typing Lessons</a>
+              <a href="/touch-typing">✦ Touch Typing Guide</a>
+              <a href="/typing-accuracy-test">✦ Accuracy Test</a>
+            </div>
+          </div>
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">Learn More</h3>
+            <div class="sidebar-links">
+              <a href="/features">TypeForge Features</a>
+              <a href="/about">About Our Mission</a>
+              <a href="/blog">Read Our Blog</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" style="padding:40px 0;border-top:1px solid var(--border-1);">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+        <a href="/" class="navbar-logo">
+          <div class="navbar-logo-icon">⌨️</div>
+          <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
+        </a>
+        <nav style="display:flex;gap:20px;flex-wrap:wrap;" aria-label="Footer">
+          <a href="/features" style="font-size:13px;color:var(--text-4);">Features</a>
+          <a href="/blog" style="font-size:13px;color:var(--text-4);">Blog</a>
+          <a href="/feedback" style="font-size:13px;color:var(--text-4);">Community</a>
+          <a href="/privacy" style="font-size:13px;color:var(--text-4);">Privacy Policy</a>
+          <a href="/terms" style="font-size:13px;color:var(--text-4);">Terms of Service</a>
+          <a href="/security" style="font-size:13px;color:var(--text-4);">Security</a>
+        </nav>
+        <p style="font-size:12px;color:var(--text-4);">© 2026 TypeForge AI · Designed & Developed by <a href="https://github.com/rotric04" target="_blank" class="creator-link">rotric04</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+  <script type="module">
+    import { initNavbar } from './js/common.js';
+    import Auth from './js/clerk.js?v=2';
+    import { initAccessibility } from './js/accessibility.js';
+
+    initNavbar();
+    initAccessibility();
+  </script>
+</body>
+</html>

@@ -27,6 +27,7 @@ desktop.ini
 
 # IDE Settings
 .vscode/
+.cursor/
 .idea/
 *.suo
 *.ntvs*

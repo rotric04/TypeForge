@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Free Typing Test | Check Your WPM Online - TypeForge</title>
+  <meta name="description" content="Take a free typing test on TypeForge AI. Measure your typing speed (WPM) and accuracy in real-time, analyze keystroke metrics, and get AI-powered feedback." />
+  <meta name="keywords" content="typing test, free typing test, typing speed test, WPM test, words per minute, typing accuracy test, touch typing" />
+  <link rel="canonical" href="https://www.typeforge.fun/typing-test" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://esm.sh" crossorigin />
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>" />
+  <!-- Vercel Web Analytics -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <style>
+    .landing-page-hero {
+      padding: 120px 0 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .landing-mesh {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 30%, rgba(232, 115, 74, 0.1) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .landing-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: rgba(232, 115, 74, 0.1);
+      border: 1px solid rgba(232, 115, 74, 0.25);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--brand-light);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .landing-heading {
+      font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+    .landing-sub {
+      font-size: 18px;
+      color: var(--text-2);
+      max-width: 700px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+    .content-section {
+      padding: 60px 0;
+    }
+    .article-layout {
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      gap: 60px;
+    }
+    .main-article {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-2);
+    }
+    .main-article h2 {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-1);
+      margin-top: 40px;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+    .main-article h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-1);
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+    .main-article p {
+      margin-bottom: 20px;
+    }
+    .main-article ul, .main-article ol {
+      margin-bottom: 20px;
+      padding-left: 24px;
+    }
+    .main-article li {
+      margin-bottom: 8px;
+    }
+    .sidebar {
+      position: sticky;
+      top: 100px;
+      height: fit-content;
+    }
+    .sidebar-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-1);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 30px;
+    }
+    .sidebar-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-1);
+      margin-bottom: 16px;
+    }
+    .sidebar-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .sidebar-links a {
+      font-size: 14px;
+      color: var(--text-3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .sidebar-links a:hover {
+      color: var(--brand);
+    }
+    .cta-banner {
+      background: linear-gradient(135deg, rgba(232, 115, 74, 0.15) 0%, rgba(0, 201, 167, 0.05) 100%);
+      border: 1px solid var(--border-2);
+      border-radius: 24px;
+      padding: 60px;
+      text-align: center;
+      margin-top: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-heading {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .cta-text {
+      font-size: 16px;
+      color: var(--text-2);
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+    @media (max-width: 900px) {
+      .article-layout {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        display: none;
+      }
+      .cta-banner {
+        padding: 40px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Aurora Background -->
+  <div class="aurora-container" aria-hidden="true">
+    <div class="aurora-blob aurora-blob-1" style="opacity:0.1;"></div>
+    <div class="aurora-blob aurora-blob-3" style="opacity:0.08;"></div>
+  </div>
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="main-nav" role="navigation" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <a href="/" class="navbar-logo" aria-label="TypeForge AI home">
+        <div class="navbar-logo-icon" aria-hidden="true">⌨️</div>
+        <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
+      </a>
+      <ul class="navbar-links" role="list">
+        <li><a href="/features">Features</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/feedback">Community</a></li>
+      </ul>
+      <div class="navbar-actions">
+        <div class="nav-auth-signed-out">
+          <button class="btn btn-ghost btn-sm" data-auth-signin>Sign In</button>
+          <a href="/app/onboarding.html" class="btn btn-primary btn-sm">Start Free</a>
+        </div>
+        <div class="nav-auth-signed-in">
+          <a href="/app/dashboard.html" class="btn btn-ghost btn-sm">Dashboard</a>
+          <div class="nav-user-avatar" title="Profile" aria-label="User account">U</div>
+          <button class="btn btn-ghost btn-sm" data-auth-signout style="font-size:12px;">Sign Out</button>
+        </div>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div class="nav-backdrop" id="nav-backdrop"></div>
+  <nav class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+    <a href="/features">✦ Features</a>
+    <a href="/about">✦ About</a>
+    <a href="/blog">✦ Blog</a>
+    <a href="/feedback">✦ Community</a>
+    <div class="nav-drawer-divider"></div>
+    <a href="/app/typing.html">⌨️ Open App</a>
+  </nav>
+
+  <main class="page-content">
+    <section class="landing-page-hero">
+      <div class="landing-mesh"></div>
+      <div class="container">
+        <div class="landing-eyebrow">✦ Typing Practice & Assessment</div>
+        <h1 class="landing-heading">Free Typing Test</h1>
+        <p class="landing-sub">Evaluate your baseline typing speed, identify keystroke inefficiencies, and establish a solid benchmark for improvement.</p>
+        <a href="/app/typing.html" class="btn btn-primary btn-lg">Take the Typing Test Now</a>
+      </div>
+    </section>
+
+    <section class="container content-section">
+      <div class="article-layout">
+        <article class="main-article">
+          <p>Whether you're a developer writing code, a professional writing emails, or a student preparing essays, keyboard efficiency directly dictates your daily productivity. A <strong>free typing test</strong> is the first step toward reclaiming hours of lost time by identifying slow finger movements, accuracy bottlenecks, and posture-induced fatigue. On TypeForge AI, we provide more than just a raw words-per-minute counter; we give you a deep architectural breakdown of how you type.</p>
+
+          <h2>Why Take a Online Typing Test?</h2>
+          <p>Most online typing speed tests measure only two simple variables: raw word velocity and total errors. While these metrics give you a basic score, they hide the root causes of why you type the way you type. A complete typing evaluation should dissect your keystroke dynamics, highlight which finger pairings cause delay, and explain how stress influences your muscle memory.</p>
+          <p>By measuring your typing speed regularly, you gain insights into:
+            <ul>
+              <li><strong>Keystroke Latency</strong>: The milliseconds of lag between hitting specific keys (e.g., transitioning from 'T' to 'H').</li>
+              <li><strong>Rhythm Consistency</strong>: How evenly spaced your key presses are. A jerky rhythm leads to quick fatigue and error clusters.</li>
+              <li><strong>Error Clustering</strong>: Finding out if you tend to make consecutive mistakes after a single typo because your rhythm gets thrown off.</li>
+            </ul>
+          </p>
+
+          <h2>How Typing Speed (WPM) is Calculated</h2>
+          <p>In standard typing diagnostics, <strong>Words Per Minute (WPM)</strong> is calculated using a universally agreed-upon formula. Instead of counting actual dictionary words (which vary in length), one "word" is standardized as exactly <strong>5 keystrokes</strong> (including spaces, numbers, and punctuation). This creates a fair and absolute unit of measurement across different languages and text contexts.</p>
+          <p>The standard formula is:
+            <br>
+            <code>WPM = (Total Keystrokes / 5) / (Time in Minutes)</code>
+          </p>
+          <p>However, raw WPM does not account for spelling mistakes. To find your true efficiency, we calculate <strong>Net WPM</strong>, which penalizes uncorrected errors:
+            <br>
+            <code>Net WPM = Raw WPM - (Uncorrected Errors / Time in Minutes)</code>
+          </p>
+          <p>At TypeForge, we track both metrics. If you type at 80 WPM but make 10 mistakes, your Net WPM drops drastically, emphasizing that accuracy is the fundamental base of keyboard mastery.</p>
+
+          <h2>Understanding Typing Accuracy & Precision</h2>
+          <p>Many typists try to speed up by moving their fingers faster, only to suffer a high error rate. This is a counter-productive strategy. When you make an error, the time it takes to recognize the mistake, hit the backspace key, type the correct character, and rebuild your cognitive momentum actually cuts your typing speed by up to 50% during that sequence.</p>
+          <p>Maintaining an accuracy rate of <strong>97% or higher</strong> is the ideal threshold. If your accuracy drops below 95%, you are moving faster than your muscle memory can support. You should slow down, focus entirely on key precision, and let speed develop naturally as a byproduct of accurate finger placement.</p>
+
+          <h2>Touch Typing: The Mechanics of Finger Placement</h2>
+          <p>To pass any professional typing speed test, you must learn and master the art of <strong>touch typing</strong>. Touch typing is the technique of typing without looking down at the keyboard. It relies on the tactile feel of the keys and the physical layout of your keyboard to build muscle memory.</p>
+          <p>The core components of touch typing include:
+            <ul>
+              <li><strong>The Home Row</strong>: Resting your fingers on A-S-D-F for the left hand and J-K-L-; for the right hand. The raised ridges on the 'F' and 'J' keys act as home markers.</li>
+              <li><strong>Assigned Zones</strong>: Each finger is responsible for a vertical column of keys. Using the wrong finger for a key disrupts your hand alignment and leads to inaccuracies.</li>
+              <li><strong>Ergonomics</strong>: Keeping your wrists neutral, elbows at 90 degrees, and sitting upright reduces strain and allows you to type comfortably for hours.</li>
+            </ul>
+          </p>
+
+          <h2>How TypeForge AI Redefines the Typing Test</h2>
+          <p>Standard tests treat every user like a blank slate. TypeForge is built differently. We use local client-side analysis to map your typing patterns in real-time. Our algorithms identify which letters you struggle with, which hand is weaker, and how fatigue affects your speed over a test session.</p>
+          <p>We generate a personalized <strong>Typing DNA Profile</strong> for each user, providing:
+            <ul>
+              <li><strong>Mistake Analytics</strong>: Highlighting the exact key combinations that trigger backspace hits.</li>
+              <li><strong>Adaptive Feedback</strong>: Custom-tailored text prompts that force you to practice keys where your latency is highest.</li>
+              <li><strong>XP and Progression Tracking</strong>: Gamified training loops that reward accuracy and persistent improvement.</li>
+            </ul>
+          </p>
+
+          <div class="cta-banner">
+            <h2 class="cta-heading">Ready to Benchmark Your Skills?</h2>
+            <p class="cta-text">Take our modern, browser-based typing test. Get instant feedback on your words-per-minute, accuracy, and keystroke latency with our AI-powered analysis tool.</p>
+            <a href="/app/typing.html" class="btn btn-primary btn-lg">Start Free Typing Test</a>
+          </div>
+        </article>
+
+        <aside class="sidebar">
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">Core Tests & Tools</h3>
+            <div class="sidebar-links">
+              <a href="/typing-speed-test">✦ Typing Speed Test</a>
+              <a href="/wpm-test">✦ WPM Test</a>
+              <a href="/typing-practice">✦ Typing Practice</a>
+              <a href="/typing-lessons">✦ Typing Lessons</a>
+              <a href="/touch-typing">✦ Touch Typing Guide</a>
+              <a href="/typing-accuracy-test">✦ Accuracy Test</a>
+            </div>
+          </div>
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">Learn More</h3>
+            <div class="sidebar-links">
+              <a href="/features">TypeForge Features</a>
+              <a href="/about">About Our Mission</a>
+              <a href="/blog">Read Our Blog</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" style="padding:40px 0;border-top:1px solid var(--border-1);">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+        <a href="/" class="navbar-logo">
+          <div class="navbar-logo-icon">⌨️</div>
+          <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
+        </a>
+        <nav style="display:flex;gap:20px;flex-wrap:wrap;" aria-label="Footer">
+          <a href="/features" style="font-size:13px;color:var(--text-4);">Features</a>
+          <a href="/blog" style="font-size:13px;color:var(--text-4);">Blog</a>
+          <a href="/feedback" style="font-size:13px;color:var(--text-4);">Community</a>
+          <a href="/privacy" style="font-size:13px;color:var(--text-4);">Privacy Policy</a>
+          <a href="/terms" style="font-size:13px;color:var(--text-4);">Terms of Service</a>
+          <a href="/security" style="font-size:13px;color:var(--text-4);">Security</a>
+        </nav>
+        <p style="font-size:12px;color:var(--text-4);">© 2026 TypeForge AI · Designed & Developed by <a href="https://github.com/rotric04" target="_blank" class="creator-link">rotric04</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+  <script type="module">
+    import { initNavbar } from './js/common.js';
+    import Auth from './js/clerk.js?v=2';
+    import { initAccessibility } from './js/accessibility.js';
+
+    initNavbar();
+    initAccessibility();
+  </script>
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Online Typing Lessons | Step-by-Step Touch Typing Guides - TypeForge</title>
+  <meta name="description" content="Master touch typing with step-by-step typing lessons on TypeForge AI. Learn proper finger placement, ergonomic postures, and track your muscle memory." />
+  <meta name="keywords" content="typing lessons, typing trainer, learn touch typing, touch typing lessons, home row, keyboard training, typing speed" />
+  <link rel="canonical" href="https://www.typeforge.fun/typing-lessons" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://esm.sh" crossorigin />
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>" />
+  <!-- Vercel Web Analytics -->
+  <script>
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <style>
+    .landing-page-hero {
+      padding: 120px 0 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .landing-mesh {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 30%, rgba(0, 201, 167, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .landing-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: rgba(0, 201, 167, 0.1);
+      border: 1px solid rgba(0, 201, 167, 0.25);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--teal);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .landing-heading {
+      font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+    .landing-sub {
+      font-size: 18px;
+      color: var(--text-2);
+      max-width: 700px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+    .content-section {
+      padding: 60px 0;
+    }
+    .article-layout {
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      gap: 60px;
+    }
+    .main-article {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--text-2);
+    }
+    .main-article h2 {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-1);
+      margin-top: 40px;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+    .main-article h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-1);
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+    .main-article p {
+      margin-bottom: 20px;
+    }
+    .main-article ul, .main-article ol {
+      margin-bottom: 20px;
+      padding-left: 24px;
+    }
+    .main-article li {
+      margin-bottom: 8px;
+    }
+    .sidebar {
+      position: sticky;
+      top: 100px;
+      height: fit-content;
+    }
+    .sidebar-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-1);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 30px;
+    }
+    .sidebar-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-1);
+      margin-bottom: 16px;
+    }
+    .sidebar-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .sidebar-links a {
+      font-size: 14px;
+      color: var(--text-3);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .sidebar-links a:hover {
+      color: var(--brand);
+    }
+    .cta-banner {
+      background: linear-gradient(135deg, rgba(0, 201, 167, 0.15) 0%, rgba(232, 115, 74, 0.05) 100%);
+      border: 1px solid var(--border-2);
+      border-radius: 24px;
+      padding: 60px;
+      text-align: center;
+      margin-top: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-heading {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .cta-text {
+      font-size: 16px;
+      color: var(--text-2);
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+    @media (max-width: 900px) {
+      .article-layout {
+        grid-template-columns: 1fr;
+      }
+      .sidebar {
+        display: none;
+      }
+      .cta-banner {
+        padding: 40px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Aurora Background -->
+  <div class="aurora-container" aria-hidden="true">
+    <div class="aurora-blob aurora-blob-2" style="opacity:0.1;"></div>
+    <div class="aurora-blob aurora-blob-1" style="opacity:0.06;"></div>
+  </div>
+  <div class="noise-overlay" aria-hidden="true"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar" id="main-nav" role="navigation" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <a href="/" class="navbar-logo" aria-label="TypeForge AI home">
+        <div class="navbar-logo-icon" aria-hidden="true">⌨️</div>
+        <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
+      </a>
+      <ul class="navbar-links" role="list">
+        <li><a href="/features">Features</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/feedback">Community</a></li>
+      </ul>
+      <div class="navbar-actions">
+        <div class="nav-auth-signed-out">
+          <button class="btn btn-ghost btn-sm" data-auth-signin>Sign In</button>
+          <a href="/app/onboarding.html" class="btn btn-primary btn-sm">Start Free</a>
+        </div>
+        <div class="nav-auth-signed-in">
+          <a href="/app/dashboard.html" class="btn btn-ghost btn-sm">Dashboard</a>
+          <div class="nav-user-avatar" title="Profile" aria-label="User account">U</div>
+          <button class="btn btn-ghost btn-sm" data-auth-signout style="font-size:12px;">Sign Out</button>
+        </div>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div class="nav-backdrop" id="nav-backdrop"></div>
+  <nav class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+    <a href="/features">✦ Features</a>
+    <a href="/about">✦ About</a>
+    <a href="/blog">✦ Blog</a>
+    <a href="/feedback">✦ Community</a>
+    <div class="nav-drawer-divider"></div>
+    <a href="/app/typing.html">⌨️ Open App</a>
+  </nav>
+
+  <main class="page-content">
+    <section class="landing-page-hero">
+      <div class="landing-mesh"></div>
+      <div class="container">
+        <div class="landing-eyebrow" style="border-color: rgba(0, 201, 167, 0.25);">✦ Step-by-Step Training Guides</div>
+        <h1 class="landing-heading">Online Typing Lessons</h1>
+        <p class="landing-sub">Master touch typing with our structured curriculum. From home row placement to symbol-intensive developer syntax, we train your muscle memory.</p>
+        <a href="/app/typing.html" class="btn btn-primary btn-lg">Start Free Lessons</a>
+      </div>
+    </section>
+
+    <section class="container content-section">
+      <div class="article-layout">
+        <article class="main-article">
+          <p>Learning how to type efficiently is one of the most valuable digital skills you can acquire. Yet, most computer users hunt-and-peck their way across the keyboard, relying on visual feedback instead of muscle memory. With structured <strong>typing lessons</strong>, you can transition from look-down typing to automated touch typing, doubling your productivity and reducing keyboard fatigue.</p>
+
+          <h2>Why You Need a Structured Typing Trainer</h2>
+          <p>Without a structured trainer, self-taught typists often develop bad habits. They might use only two or three fingers, look down constantly, or rely heavily on their dominant hand. Over time, these habits limit your speed and can lead to repetitive strain injuries (RSI) like carpal tunnel syndrome.</p>
+          <p>A professional typing trainer helps you:
+            <ul>
+              <li><strong>Build Muscle Memory</strong>: Trains your brain to connect letters with specific finger movements, making typing an automatic task.</li>
+              <li><strong>Implement Ergonomic Layouts</strong>: Teaches proper hand posture, wrist angles, and finger extensions to protect your health.</li>
+              <li><strong>Develop Balanced Speed</strong>: Ensures both hands share the typing load equally, reducing fatigue and errors.</li>
+            </ul>
+          </p>
+
+          <h2>The Roadmap of Touch Typing Lessons</h2>
+          <p>Our curriculum is divided into progressive stages, helping you build skills systematically:
+            <ol>
+              <li><strong>Lesson 1: The Home Row</strong>: The foundation of all typing. Rest your fingers on <code>A-S-D-F</code> for the left hand and <code>J-K-L-;</code> for the right. Practice typing these keys without moving your hands.</li>
+              <li><strong>Lesson 2: Top Row Extensions</strong>: Practice moving your fingers up to reach <code>Q-W-E-R-T</code> and <code>Y-U-I-O-P</code>, returning immediately to the home row after each press.</li>
+              <li><strong>Lesson 3: Bottom Row Extensions</strong>: Master the bottom keys (<code>Z-X-C-V-B</code> and <code>N-M-,-.-/</code>), focusing on keeping your wrists straight and wrists slightly raised.</li>
+              <li><strong>Lesson 4: Capitalization & Space</strong>: Incorporate the Shift key and thumb-based Spacebar coordination, learning to use the opposite hand's shift key.</li>
+              <li><strong>Lesson 5: Numbers and Symbols</strong>: Crucial for office work and coding. Master the number row and standard punctuation without looking down.</li>
+            </ol>
+          </p>
+
+          <h2>Deliberate Practice: Why Repeating Hard Transitions Works</h2>
+          <p>Typical online lessons ask you to type the same phrases repeatedly. While this can help you memorize specific words, it doesn't build flexible typing skills. Effective learning requires practicing the transitions between letters. For example, moving from 'A' to 'Q' is simple, but moving from 'O' to 'P' or 'C' to 'X' can be awkward.</p>
+          <p>TypeForge AI uses real-time telemetry to track your finger movements. If our system detects that you struggle with a specific key transition, it automatically creates custom exercises to help you master that movement.</p>
+
+          <h2>How TypeForge AI Acts as Your AI Typing Coach</h2>
+          <p>Our platform uses client-side telemetry and smart algorithms to personalize your learning experience:
+            <ul>
+              <li><strong>Dynamic Lesson Customization</strong>: Unlike static courses, TypeForge adjusts its prompts in real-time based on your typing speed and accuracy.</li>
+              <li><strong>Typing DNA Archetypes</strong>: Get insights into your typing style, finger biases, and fatigue curves.</li>
+              <li><strong>Visual Progress Tracking</strong>: Watch your WPM, accuracy, and heatmaps improve over time, providing clear milestones for your progress.</li>
+            </ul>
+          </p>
+
+          <div class="cta-banner">
+            <h2 class="cta-heading" style="color: var(--text-1);">Master the Keyboard Today</h2>
+            <p class="cta-text">Start your first lesson on TypeForge. Complete our brief onboarding, set your daily speed goals, and let our adaptive AI trainer guide your learning journey.</p>
+            <a href="/app/onboarding.html" class="btn btn-primary btn-lg" style="background: var(--teal); border-color: var(--teal); color: #fff;">Get Started Now</a>
+          </div>
+        </article>
+
+        <aside class="sidebar">
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">Core Tests & Tools</h3>
+            <div class="sidebar-links">
+              <a href="/typing-test">✦ Typing Test</a>
+              <a href="/typing-speed-test">✦ Typing Speed Test</a>
+              <a href="/wpm-test">✦ WPM Test</a>
+              <a href="/typing-practice">✦ Typing Practice</a>
+              <a href="/touch-typing">✦ Touch Typing Guide</a>
+              <a href="/typing-accuracy-test">✦ Accuracy Test</a>
+            </div>
+          </div>
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">Learn More</h3>
+            <div class="sidebar-links">
+              <a href="/features">TypeForge Features</a>
+              <a href="/about">About Our Mission</a>
+              <a href="/blog">Read Our Blog</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" style="padding:40px 0;border-top:1px solid var(--border-1);">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+        <a href="/" class="navbar-logo">
+          <div class="navbar-logo-icon">⌨️</div>
+          <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
+        </a>
+        <nav style="display:flex;gap:20px;flex-wrap:wrap;" aria-label="Footer">
+          <a href="/features" style="font-size:13px;color:var(--text-4);">Features</a>
+          <a href="/blog" style="font-size:13px;color:var(--text-4);">Blog</a>
+          <a href="/feedback" style="font-size:13px;color:var(--text-4);">Community</a>
+          <a href="/privacy" style="font-size:13px;color:var(--text-4);">Privacy Policy</a>
+          <a href="/terms" style="font-size:13px;color:var(--text-4);">Terms of Service</a>
+          <a href="/security" style="font-size:13px;color:var(--text-4);">Security</a>
+        </nav>
+        <p style="font-size:12px;color:var(--text-4);">© 2026 TypeForge AI · Designed & Developed by <a href="https://github.com/rotric04" target="_blank" class="creator-link">rotric04</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+  <script type="module">
+    import { initNavbar } from './js/common.js';
+    import Auth from './js/clerk.js?v=2';
+    import { initAccessibility } from './js/accessibility.js';
+
+    initNavbar();
+    initAccessibility();
+  </script>
+</body>
+</html>
