@@ -99,10 +99,10 @@ async def create_session(
     update_user_query = """
         UPDATE users 
         SET xp = xp + $1, 
+            level = FLOOR((xp + $1) / 500) + 1,
             total_sessions = total_sessions + 1,
             best_wpm = GREATEST(best_wpm, $2)
         WHERE id = $3::uuid
-        RETURNING xp
     """
     await DB.execute(update_user_query, xp_earned, session.wpm, user_id)
 

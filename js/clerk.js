@@ -94,6 +94,8 @@ export const Auth = {
         if (Clerk && Clerk.user) {
           currentUser = mapClerkUser(Clerk.user);
           updateNavAuthState(currentUser);
+          // Sync any local offline sessions to the database
+          syncLocalSessions();
         } else {
           currentUser = null;
           updateNavAuthState(null);
@@ -149,6 +151,55 @@ export const Auth = {
     }
   }
 };
+
+// ── Sync Local Sessions to DB ──────────────────────────────────────
+async function syncLocalSessions() {
+  try {
+    const localHistory = localStorage.getItem('tf_session_history');
+    if (!localHistory) return;
+    const sessions = JSON.parse(localHistory);
+    if (!Array.isArray(sessions) || sessions.length === 0) return;
+
+    console.log(`TF Auth: Found ${sessions.length} local sessions to sync to the server.`);
+
+    // Import API dynamically to avoid circular dependency
+    const { API } = await import('./api.js');
+
+    // Send sessions in chronological order (oldest first)
+    const sessionsToSync = [...sessions].reverse();
+
+    for (const session of sessionsToSync) {
+      try {
+        const payload = {
+          mode: session.mode || 'classic',
+          language: session.language || null,
+          duration_secs: session.duration_secs || session.timerDuration || 60,
+          text_used: session.text_used || "",
+          wpm: Math.round(session.wpm || 0),
+          raw_wpm: Math.round(session.raw_wpm || session.wpm || 0),
+          accuracy: parseFloat(session.accuracy || 100),
+          correct_chars: parseInt(session.correctChars || session.correct_chars || 0),
+          error_chars: parseInt(session.errorChars || session.error_chars || 0),
+          total_chars: parseInt(session.typedChars || session.total_chars || 0),
+          errors: parseInt(session.errors || session.totalErrors || 0),
+          consistency: parseFloat(session.consistency || 100),
+          max_streak: parseInt(session.maxStreak || session.max_streak || 0),
+          key_stats: session.keyStats || session.key_stats || {},
+          wpm_history: session.wpmHistory || session.wpm_history || []
+        };
+        await API.saveSession(payload);
+      } catch (err) {
+        console.error('TF Auth: Failed to sync local session', err);
+      }
+    }
+
+    // Once synced, clear local history
+    localStorage.removeItem('tf_session_history');
+    console.log('TF Auth: Local sessions sync complete.');
+  } catch (e) {
+    console.error('TF Auth: Error during local sessions sync', e);
+  }
+}
 
 // ── Nav State Update ───────────────────────────────────────────────
 function updateNavAuthState(user) {

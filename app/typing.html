@@ -336,6 +336,19 @@ import { initAccessibility } from '../js/accessibility.js';
   const user = await Auth.init();
   if (!user && window.location.hostname !== 'localhost') {
     window.location.href = '../login.html';
+    return;
+  }
+  try {
+    const profile = await API.getUserProfile();
+    if (profile) {
+      state.xp = profile.xp || 0;
+      state.level = profile.level || 1;
+      state.sessionCount = profile.total_sessions || 0;
+      updateXPBar();
+      loadWeakKeys();
+    }
+  } catch (err) {
+    console.error('Failed to load user profile in typing page:', err);
   }
 })();
 
@@ -855,7 +868,25 @@ function endSession() {
   const xpEarned  = calcXP(finalWPM, finalAcc, consistency);
 
   // Save session via authenticated API instead of localStorage
-  API.saveSession({ wpm: finalWPM, raw_wpm: finalWPM, accuracy: finalAcc, errors: state.totalErrors, consistency, xp_earned: xpEarned, mode: state.mode, duration_secs: state.timerDuration, language: state.lang })
+  const payload = {
+    mode: state.mode,
+    language: state.mode === 'dev' ? state.lang : null,
+    duration_secs: Math.round(elapsed) || 60,
+    text_used: state.currentText || "",
+    wpm: Math.round(finalWPM),
+    raw_wpm: Math.round(finalWPM),
+    accuracy: parseFloat(finalAcc),
+    correct_chars: parseInt(state.correctChars),
+    error_chars: parseInt(state.errorChars),
+    total_chars: parseInt(state.typedChars),
+    errors: parseInt(state.totalErrors),
+    consistency: parseFloat(consistency),
+    max_streak: parseInt(state.maxStreak),
+    key_stats: state.keyStats,
+    wpm_history: state.wpmHistory
+  };
+
+  API.saveSession(payload)
     .then(data => {
       // Show results using backend validated data
       showResults(data.wpm, data.accuracy, data.consistency, data.xp_earned);
