@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Community & Feedback — TypeForge AI</title>
+  <title>Community & Feedback | TypeForge AI</title>
   <meta name="description" content="Help build TypeForge. Report bugs, suggest features, or say hi." />
   <link rel="canonical" href="https://typeforge.fun/feedback.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -352,48 +352,16 @@
     });
 
     // Turnstile logic
-    window.turnstileToken = null;
     window.onTurnstileSuccess = function (token) {
-      window.turnstileToken = token;
-      document.getElementById('submit-btn').disabled = false;
+      const btn = document.getElementById('submit-btn');
+      btn.disabled = false;
     };
 
     const formEl = document.getElementById('feedback-form');
-
-    async function handleFormSubmit(e) {
-      e.preventDefault();
-      if (!window.turnstileToken) return;
-
+    formEl.addEventListener('submit', () => {
       const btn = document.getElementById('submit-btn');
       btn.textContent = 'Sending...';
-      btn.disabled = true;
-
-      // Try to verify Turnstile on the backend.
-      // If the backend is unavailable (cold start / down), fall back to
-      // direct formsubmit.co submission so the user message is never lost.
-      let backendVerified = false;
-      try {
-        await Promise.race([
-          API.verifyTurnstile(window.turnstileToken),
-          new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 6000))
-        ]);
-        backendVerified = true;
-      } catch (err) {
-        // Backend unavailable — silently fall through to native form submit
-        console.warn('Turnstile API verify failed or timed out, using formsubmit fallback:', err.message);
-      }
-
-      if (backendVerified) {
-        // Backend verified: show success screen directly
-        window.location.href = '/feedback.html?success=true';
-      } else {
-        // Fallback: let the HTML form submit natively to formsubmit.co
-        formEl.removeEventListener('submit', handleFormSubmit);
-        formEl.submit();
-      }
-    }
-
-    formEl.addEventListener('submit', handleFormSubmit);
+    });
 
     // Check for success param
     if (window.location.search.includes('success=true')) {

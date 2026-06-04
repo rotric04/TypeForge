@@ -90,10 +90,10 @@
   --text-2xl:  1.5rem;
   --text-3xl:  1.875rem;
   --text-4xl:  2.25rem;
-  --text-5xl:  3rem;
-  --text-6xl:  3.75rem;
-  --text-7xl:  4.5rem;
-  --text-8xl:  6rem;
+  --text-5xl:  clamp(2.25rem, 4vw + 1rem, 3rem);
+  --text-6xl:  clamp(2.75rem, 5vw + 1rem, 3.75rem);
+  --text-7xl:  clamp(3.25rem, 6vw + 1rem, 4.5rem);
+  --text-8xl:  clamp(4rem, 8vw + 1rem, 6rem);
 
   /* ── Line Heights ── */
   --leading-tight:  1.2;
@@ -239,16 +239,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   max-width: 100%;
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .page-content {
-  flex: 1 0 auto;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  min-height: 0;
 }
 
 /* Sticky footer: no void below footer when main is stretched */

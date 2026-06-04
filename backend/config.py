@@ -69,8 +69,8 @@ class Settings(BaseSettings):
         "https://app.typeforge.ai",
         "https://typeforge.fun",
         "https://www.typeforge.fun",
+        "https://typeforge.vercel.app",
         "https://typeforge2.vercel.app",
-        # Render backend self-origin (needed for health-check proxying)
         "https://typeforge-tkw8.onrender.com",
     ]
     # TrustedHostMiddleware — MUST include every hostname the service is reached at.

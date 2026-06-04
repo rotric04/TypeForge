@@ -95,10 +95,10 @@
 }
 
 .ach-filter-btn.active {
-  background: var(--text-1);
-  color: var(--bg-base);
-  border-color: var(--text-1);
-  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
+  background: linear-gradient(135deg, var(--brand), var(--brand-dark));
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 4px 16px var(--brand-glow);
 }
 
 /* ── Achievements Grid ── */
