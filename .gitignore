@@ -3,6 +3,14 @@ backend/.env
 backend/.env.local
 .env
 .env.local
+.env.*.local
+
+# Node and package manager files
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
 
 # Python caches and compiled files
 __pycache__/
@@ -25,7 +33,7 @@ build/
 Thumbs.db
 desktop.ini
 
-# IDE Settings
+# IDE & Editor Settings
 .vscode/
 .cursor/
 .idea/
@@ -34,3 +42,18 @@ desktop.ini
 *.njsproj
 *.sln
 *.sw?
+.project
+.classpath
+.settings/
+
+# Local databases and logs
+*.db
+*.sqlite
+*.sqlite3
+*.log
+
+# Deployment & Vercel
+.vercel/
+.cache/
+.parcel-cache
+
