@@ -1,22 +1,74 @@
 /**
  * TypeForge AI — Common Utilities & Shared Logic
+ * Upgraded with GSAP, ScrollTrigger, and Lenis for cinematic experience.
  */
+import Lenis from 'https://esm.sh/@studio-freight/lenis@1.0.29';
+import gsap from 'https://esm.sh/gsap@3.12.2';
+import ScrollTrigger from 'https://esm.sh/gsap@3.12.2/ScrollTrigger.js';
 
-// ── Scroll-based Reveal ──────────────────────────────────────────────────────
+gsap.registerPlugin(ScrollTrigger);
+
+// ── Smooth Scrolling (Lenis) ─────────────────────────────────────────────────
+export function initLenis() {
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    direction: 'vertical',
+    gestureDirection: 'vertical',
+    smooth: true,
+    mouseMultiplier: 1,
+    smoothTouch: false,
+    touchMultiplier: 2,
+    infinite: false,
+  });
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+
+  // Sync Lenis with GSAP ScrollTrigger
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add((time) => {
+    lenis.raf(time * 1000);
+  });
+  gsap.ticker.lagSmoothing(0, 0);
+}
+
+// ── GSAP Scroll-based Reveal ────────────────────────────────────────────────
 export function initReveal() {
   const elements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
   if (!elements.length) return;
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        const el = entry.target;
-        const delay = parseInt(el.dataset.delay || 0);
-        setTimeout(() => el.classList.add('visible'), delay);
-        observer.unobserve(el);
-      }
+  
+  elements.forEach((el) => {
+    // Disable CSS transitions so GSAP can take full control without lag
+    el.style.transition = 'none';
+    
+    const delay = parseInt(el.dataset.delay || 0) / 1000;
+    let x = 0, y = 40, scale = 1;
+    
+    if (el.classList.contains('reveal-left')) { x = -60; y = 0; }
+    else if (el.classList.contains('reveal-right')) { x = 60; y = 0; }
+    else if (el.classList.contains('reveal-scale')) { y = 0; scale = 0.8; }
+    
+    gsap.set(el, { opacity: 0, x, y, scale });
+    
+    gsap.to(el, {
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 85%',
+        toggleActions: 'play none none none'
+      },
+      opacity: 1,
+      x: 0,
+      y: 0,
+      scale: 1,
+      duration: 0.8,
+      ease: 'power3.out',
+      delay: delay
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-  elements.forEach(el => observer.observe(el));
+  });
 }
 
 // ── Navbar Scroll Behavior ───────────────────────────────────────────────────
@@ -558,6 +610,7 @@ export const PerformanceManager = {
 
 // ── Init All ─────────────────────────────────────────────────────────────────
 export function initCommon() {
+  initLenis();
   initNavbar();
   initReveal();
   initCounters();
