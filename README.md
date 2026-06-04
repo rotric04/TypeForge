@@ -306,9 +306,7 @@ Software Engineer focused on:
 
 GitHub: https://github.com/rotric04
 
-LinkedIn: https://linkedin.com/in/mohitassudani
-
-Portfolio: https://typeforge.fun
+LinkedIn: https://linkedin.com/in/mohit-assudani-
 
 Email: [mohitassudani.3@gmail.com](mailto:mohitassudani.3@gmail.com)
 
