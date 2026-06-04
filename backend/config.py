@@ -64,9 +64,6 @@ class Settings(BaseSettings):
         "http://localhost:3000",
         "http://localhost:8080",
         "http://localhost:8001",
-        "https://typeforge.ai",
-        "https://www.typeforge.ai",
-        "https://app.typeforge.ai",
         "https://typeforge.fun",
         "https://www.typeforge.fun",
         "https://typeforge.vercel.app",
@@ -80,10 +77,6 @@ class Settings(BaseSettings):
         "typeforge.fun",
         "www.typeforge.fun",
         "api.typeforge.fun",
-        "typeforge.ai",
-        "api.typeforge.ai",
-        # Vercel preview / main deployment
-        "typeforge2.vercel.app",
         # Render backend public URL — critical: must match Host header Render sends
         "typeforge-tkw8.onrender.com",
         # Wildcard catches any future Render re-deploys under onrender.com
