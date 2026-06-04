@@ -333,6 +333,7 @@ import Auth from '../js/clerk.js?v=2';
 import API from '../js/api.js';
 import { initAccessibility } from '../js/accessibility.js';
 import { showToast } from '../js/common.js';
+import { startTourIfNew } from '../js/tour.js';
 
 // Init auth to protect page
 (async () => {
@@ -364,6 +365,8 @@ import { showToast } from '../js/common.js';
   } catch (err) {
     console.error('Failed to load user profile in typing page:', err);
   }
+  // Start guided tour on first visit (shows once, stored in localStorage)
+  startTourIfNew();
 })();
 
 // Init accessibility

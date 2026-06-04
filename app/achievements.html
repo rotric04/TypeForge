@@ -30,22 +30,30 @@
 
     #ach-toast {
       position: fixed; bottom: 24px; left: 50%;
-      transform: translateX(-50%) translateY(100px);
+      transform: translateX(-50%) translateY(120px);
       background: rgba(13, 13, 26, 0.95);
       backdrop-filter: blur(20px);
       border: 1px solid var(--border-brand);
       border-radius: 16px; padding: 14px 24px; display: flex; gap: 16px; align-items: center;
       z-index: 9999; transition: transform 0.5s var(--ease-spring); box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 20px var(--brand-glow);
+      max-width: calc(100vw - 32px);
     }
     #ach-toast.show { transform: translateX(-50%) translateY(0); }
 
-    .toast-icon { font-size: 32px; }
+    .toast-icon { font-size: 32px; flex-shrink: 0; }
     .toast-body { display: flex; flex-direction: column; }
     .toast-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 2px; }
     .toast-msg { font-size: 13px; color: var(--text-2); }
 
-    @media (max-width: 900px) {
-      .app-main { margin-left: 0; padding: 24px 16px 100px; }
+    @media (max-width: 768px) {
+      .app-main { margin-left: 0; padding: 20px 16px calc(80px + env(safe-area-inset-bottom)); }
+      .page-title { font-size: 24px; }
+      /* Toast sits above bottom nav on mobile */
+      #ach-toast { bottom: calc(76px + env(safe-area-inset-bottom)); }
+    }
+    @media (max-width: 480px) {
+      .page-title { font-size: 20px; }
+      .page-subtitle { font-size: 13px; }
     }
   </style>
 </head>

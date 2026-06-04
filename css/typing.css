@@ -387,13 +387,54 @@
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
-  .app-sidebar { display: none; }
-  .app-main { margin-left: 0; }
-  .typing-page { padding: var(--sp-4) var(--sp-4) var(--sp-12); }
+  /* sidebar becomes bottom bar via components.css — don't hide it */
+  .app-main {
+    margin-left: 0;
+    /* Extra bottom padding for the fixed bottom nav bar */
+    padding-bottom: calc(70px + env(safe-area-inset-bottom));
+  }
+  .typing-page {
+    padding: var(--sp-4) var(--sp-4) var(--sp-4);
+  }
+  .app-header {
+    padding: var(--sp-3) var(--sp-4);
+  }
+  .app-header-title {
+    font-size: var(--text-sm);
+  }
+  /* Stats — smaller on mobile */
   .typing-stat-val { font-size: var(--text-3xl); }
   .typing-stats { gap: var(--sp-4); }
+  /* Results grid: 2 columns on mobile */
   .results-stats-grid { grid-template-columns: repeat(2, 1fr); }
   .results-wpm { font-size: var(--text-6xl); }
+  /* Mode tabs: wrap neatly */
   .mode-tabs { flex-wrap: wrap; }
-  .typing-text { font-size: 1rem; }
+  /* Typing font slightly smaller */
+  .typing-text { font-size: 1rem; line-height: 2.2; }
+  /* Timer ring slightly smaller */
+  .timer-ring-wrapper { width: 72px; height: 72px; }
+  .timer-ring-text { font-size: var(--text-xl); }
+  /* Typing config: stack vertically */
+  .typing-config { flex-direction: column; align-items: flex-start; gap: var(--sp-3); }
+  .typing-settings { width: 100%; justify-content: space-between; }
+  /* Controls row: wrap */
+  .typing-controls { flex-wrap: wrap; justify-content: center; }
+  .typing-hint { display: none; } /* hide keyboard hints on mobile */
+  /* Keyboard display: hide on very small screens */
+  .keyboard-display { display: none; }
+  /* Header actions: only show critical buttons */
+  .app-header-actions .btn-ghost:not(#focus-mode-btn):not(#sound-toggle-btn) { display: none; }
+}
+
+@media (max-width: 480px) {
+  .typing-stat-val { font-size: var(--text-2xl); }
+  .typing-stats { gap: var(--sp-3); }
+  .timer-selector { flex-wrap: wrap; gap: var(--sp-1); }
+  .timer-btn { padding: 6px 10px; font-size: 11px; }
+  .results-stats-grid { grid-template-columns: repeat(2, 1fr); gap: var(--sp-2); }
+  .results-wpm { font-size: clamp(3rem, 15vw, 4rem); }
+  .typing-text { font-size: 0.9rem; line-height: 2; }
+  .typing-area { padding: var(--sp-4); }
+  .typing-page { padding: var(--sp-3) var(--sp-3) var(--sp-3); }
 }

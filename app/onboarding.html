@@ -23,7 +23,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px;
+      padding: 24px 16px;
       position: relative;
     }
     .onboarding-card {
@@ -65,6 +65,7 @@
       cursor: pointer;
       transition: all 0.2s var(--ease-out);
       user-select: none;
+      min-height: 44px; /* touch target */
     }
     .ob-option:hover { border-color: var(--border-3); background: var(--bg-card-hover); transform: translateX(4px); }
     .ob-option.selected { border-color: var(--brand); background: var(--brand-glow-sm); }
@@ -114,6 +115,7 @@
       cursor: pointer; text-align: center;
       transition: all 0.2s var(--ease-out);
       user-select: none;
+      min-height: 44px; /* touch target */
     }
     .ob-goal:hover { border-color: var(--border-3); transform: translateY(-2px); }
     .ob-goal.selected { border-color: var(--brand); background: var(--brand-glow-sm); }
@@ -123,7 +125,7 @@
     .ob-goal-desc { font-size: 11px; color: var(--text-3); }
 
     /* Navigation */
-    .ob-nav { display: flex; align-items: center; justify-content: space-between; margin-top: 32px; }
+    .ob-nav { display: flex; align-items: center; justify-content: space-between; margin-top: 32px; gap: 12px; }
     .ob-skip { font-size: 12px; color: var(--text-4); cursor: pointer; }
     .ob-skip:hover { color: var(--text-2); }
 
@@ -148,6 +150,25 @@
     .loading-dot:nth-child(2) { animation-delay: 0.15s; background: var(--coral); }
     .loading-dot:nth-child(3) { animation-delay: 0.30s; background: var(--mint); }
     .loading-status { font-size: 13px; color: var(--text-3); text-align: center; min-height: 20px; transition: opacity 0.3s; }
+
+    /* ── Mobile Fixes ── */
+    @media (max-width: 600px) {
+      .onboarding-card {
+        padding: 28px 20px;
+        border-radius: var(--r-2xl);
+      }
+      .ob-question { font-size: 1.3rem; }
+      .ob-sub { margin-bottom: 20px; }
+      .wpm-display { font-size: 3.5rem; }
+      .ob-goals { grid-template-columns: 1fr; }
+      .ob-option-icon { font-size: 1.3rem; width: 32px; }
+      .ob-option-title { font-size: 14px; }
+    }
+    @media (max-width: 380px) {
+      .onboarding-card { padding: 20px 16px; }
+      .ob-question { font-size: 1.2rem; }
+      .wpm-display { font-size: 3rem; }
+    }
   </style>
 </head>
 <body>

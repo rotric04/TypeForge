@@ -174,22 +174,23 @@
       .span-4 { grid-column: span 4; }
       .span-3 { grid-column: span 4; }
     }
-    @media (max-width: 900px) {
-      .app-sidebar {
-        width: 100%; height: 60px;
-        flex-direction: row; justify-content: center;
-        top: auto; bottom: 0; padding: 0; z-index: 100;
-        border-right: none; border-top: 1px solid var(--border-1);
+    @media (max-width: 768px) {
+      /* Bottom nav handled by components.css — just clear margin-left */
+      .app-main {
+        margin-left: 0;
+        padding: 20px 16px calc(80px + env(safe-area-inset-bottom));
       }
-      .sidebar-nav { flex-direction: row; justify-content: center; gap: 8px; }
-      .sidebar-link::after { display: none; }
-      .app-main { margin-left: 0; margin-bottom: 60px; padding: 24px; }
+      .dashboard-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .greeting { font-size: 22px; }
+      .bento-grid { gap: 12px; }
     }
     @media (max-width: 600px) {
-      .bento-grid { grid-template-columns: 1fr; }
+      .bento-grid { grid-template-columns: 1fr; gap: 12px; }
       .span-12, .span-8, .span-6, .span-4, .span-3 { grid-column: 1 / -1; }
-      .row-2 { grid-row: auto; min-height: 300px; }
+      .row-2 { grid-row: auto; min-height: 220px; }
       .heatmap-grid { grid-template-columns: repeat(14, 1fr); }
+      .metric-value { font-size: 32px; }
+      .dna-ring-container { width: 110px; height: 110px; }
     }
   </style>
 </head>

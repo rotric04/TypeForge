@@ -255,3 +255,36 @@
   animation: popCard 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   opacity: 0;
 }
+
+/* ── Mobile Responsive ── */
+@media (max-width: 768px) {
+  .achievements-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .ach-hero-bento {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .bento-card { padding: 20px; }
+  .bento-main { gap: 16px; }
+  .bento-avatar { width: 64px; height: 64px; border-radius: 16px; }
+  /* Filter bar: horizontal scroll on mobile */
+  .ach-filters {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+    padding-bottom: 4px;
+  }
+  .ach-filters::-webkit-scrollbar { height: 0; }
+}
+
+@media (max-width: 480px) {
+  .achievements-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .ach-card { padding: 16px; }
+  .ach-card-icon { font-size: 1.8rem; }
+}

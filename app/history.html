@@ -218,16 +218,25 @@
     @keyframes shimmer { to { left: 100%; } }
 
     /* Responsive */
-    @media (max-width: 900px) {
-      .app-main { margin-left: 0; padding: 80px 16px 100px; }
+    @media (max-width: 768px) {
+      .app-main { margin-left: 0; padding: 20px 16px calc(80px + env(safe-area-inset-bottom)); }
+      .page-title { font-size: 22px; }
       .session-card {
         grid-template-columns: 1fr 1fr;
         grid-template-rows: auto auto auto;
+        gap: 12px;
+        padding: 16px;
       }
       .sess-spark { display: none; }
+      .sess-cons { display: none; }
     }
-    @media (max-width: 600px) {
-      .session-card { grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 480px) {
+      .session-card {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+      .stats-bar { grid-template-columns: repeat(2, 1fr); }
+      .page-header { flex-direction: column; gap: 12px; }
     }
   </style>
 </head>
