@@ -377,12 +377,94 @@ export function createParticle(x, y, color = 'var(--brand)') {
   particle.addEventListener('animationend', () => particle.remove());
 }
 
+// ── Cookie Consent Banner ───────────────────────────────────────────────────
+export function initCookieConsent() {
+  if (storage.get('cookie_consent')) return;
+
+  setTimeout(() => {
+    const banner = document.createElement('div');
+    banner.className = 'cookie-banner';
+    banner.innerHTML = `
+      <div class="cookie-header">
+        <span>🍪</span> Cookies & Analytics
+      </div>
+      <div class="cookie-body">
+        We use lightweight keystroke telemetry cookies to analyze your typing DNA patterns and secure sessions. By using TypeForge, you agree to our policies.
+      </div>
+      <div class="cookie-actions">
+        <button class="btn btn-primary btn-sm" id="cookie-accept-all" style="font-size: 12px; padding: 6px 14px;">Accept All</button>
+        <button class="btn btn-outline btn-sm" id="cookie-essential" style="font-size: 12px; padding: 6px 14px; border-color: rgba(255,255,255,0.15);">Essential Only</button>
+      </div>
+    `;
+    document.body.appendChild(banner);
+
+    // Fade in
+    requestAnimationFrame(() => banner.classList.add('visible'));
+
+    const closeBanner = (consentType) => {
+      storage.set('cookie_consent', consentType);
+      banner.classList.remove('visible');
+      banner.addEventListener('transitionend', () => banner.remove());
+    };
+
+    document.getElementById('cookie-accept-all')?.addEventListener('click', () => closeBanner('accepted'));
+    document.getElementById('cookie-essential')?.addEventListener('click', () => closeBanner('essential'));
+  }, 1500);
+}
+
+// ── Automated Motivational Tip Toast ─────────────────────────────────────────
+export function initMotivationalPopup() {
+  // Only show on main site, not inside active typing tests to avoid distraction
+  if (window.location.pathname.includes('/app/typing')) return;
+
+  const tips = [
+    { title: "Wrist Position", desc: "Keep your wrists elevated! Resting them on the desk or a wrist rest can limit movement speed and cause fatigue.", icon: "⌨️" },
+    { title: "Did You Know?", desc: "The longest word typed using only the left hand on QWERTY is 'Stewardesses'. 'Skepticisms' is the longest for the right hand!", icon: "💡" },
+    { title: "Accuracy First", desc: "Speed is a byproduct of muscle memory and accuracy. Focus on slow, clean accuracy and speed will naturally follow.", icon: "🔥" },
+    { title: "Rhythm & Flow", desc: "Relax your shoulders and breathe. A steady rhythm is always faster and cleaner than bursts of fast typing followed by mistakes.", icon: "🧘" },
+    { title: "Layout History", desc: "The QWERTY layout was created in 1873 to prevent typewriter mechanical bars from jamming by separating common letter pairs.", icon: "📜" },
+    { title: "Typing Challenge", desc: "Try running a 1-minute test aiming for 100% accuracy. Go as slow as needed to build error-free memory paths!", icon: "🎯" }
+  ];
+
+  setTimeout(() => {
+    const selected = tips[Math.floor(Math.random() * tips.length)];
+    const toast = document.createElement('div');
+    toast.className = 'tip-toast';
+    toast.innerHTML = `
+      <div class="tip-icon">${selected.icon}</div>
+      <div class="tip-content">
+        <div class="tip-title">${selected.title}</div>
+        <div class="tip-desc">${selected.desc}</div>
+      </div>
+      <div class="tip-close" id="tip-close-btn">&times;</div>
+    `;
+    document.body.appendChild(toast);
+
+    // Slide in
+    requestAnimationFrame(() => toast.classList.add('visible'));
+
+    const dismissToast = () => {
+      toast.classList.remove('visible');
+      toast.addEventListener('transitionend', () => toast.remove());
+    };
+
+    document.getElementById('tip-close-btn')?.addEventListener('click', dismissToast);
+
+    // Auto-dismiss after 8 seconds
+    setTimeout(() => {
+      if (toast.parentNode) dismissToast();
+    }, 8000);
+  }, 5000);
+}
+
 // ── Init All ─────────────────────────────────────────────────────────────────
 export function initCommon() {
   initNavbar();
   initReveal();
   initCounters();
   initPageTransition();
+  initCookieConsent();
+  initMotivationalPopup();
 }
 
 // Auto-init if DOM is ready

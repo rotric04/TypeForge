@@ -11,15 +11,17 @@
   <link rel="stylesheet" href="css/components.css"/>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>"/>
   <style>
+    .legal-section {
+      padding: 160px 0 80px;
+    }
     .legal-content {
       max-width: 800px;
-      margin: 140px auto 80px;
-      padding: 0 24px;
+      margin: 0 auto;
       line-height: 1.8;
       color: var(--text-2);
     }
     .legal-content h1 {
-      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
       margin-bottom: var(--sp-4);
       color: var(--text-1);
     }
@@ -97,46 +99,53 @@
   <a href="/app/typing">⌨️ Open App</a>
 </nav>
 
-<main class="legal-content">
-  <h1>Terms of Service</h1>
-  <div class="legal-date">Last Updated: June 4, 2026</div>
-  
-  <p>Welcome to TypeForge AI. By accessing or using our website, typing application, and backend services, you agree to comply with and be bound by the following Terms of Service. Please read them carefully.</p>
-  
-  <h2>1. Acceptance of Terms</h2>
-  <p>By registering for an account or using our training interface, you represent that you are at least 13 years of age and agree to these terms. If you do not agree, you are not authorized to use the platform.</p>
-  
-  <h2>2. User Accounts & Responsibilities</h2>
-  <p>Your profile is managed securely using Clerk. You are responsible for safeguarding your login credentials and are fully liable for all activities that occur under your account. You agree to notify us immediately of any unauthorized use of your account.</p>
-  
-  <h2>3. License & Intellectual Property</h2>
-  <p>The client interface, design system, and custom machine learning algorithms are part of TypeForge AI. We grant you a personal, non-transferable, non-exclusive license to use the training software. The core components of TypeForge are open source and subject to the terms of our official GitHub repository licenses.</p>
-  
-  <h2>4. Prohibited Conduct</h2>
-  <p>You agree not to manipulate typing records, deploy automation bots to generate fake high-scores, attempt to scrape sentences or exercises in bulk, or disrupt backend APIs. Accounts exhibiting bot-like or abusive API request rates may be throttled or terminated.</p>
-  
-  <h2>5. Limitation of Liability</h2>
-  <p>TypeForge AI is provided on an "as-is" and "as-available" basis. We make no guarantees regarding continuous uptime, database persistence, or metric forecasting accuracy. In no event shall TypeForge AI or its contributors be liable for any damages arising out of your use of the website.</p>
-</main>
-
-<footer class="footer" style="padding:40px 0;border-top:1px solid var(--border-1);">
-  <div class="container">
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
-      <a href="/" class="navbar-logo">
-        <div class="navbar-logo-icon">⌨️</div>
-        <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
-      </a>
-      <nav style="display:flex;gap:20px;flex-wrap:wrap;" aria-label="Footer">
-        <a href="/features" style="font-size:13px;color:var(--text-4);">Features</a>
-        <a href="/blog" style="font-size:13px;color:var(--text-4);">Blog</a>
-        <a href="/feedback" style="font-size:13px;color:var(--text-4);">Community</a>
-        <a href="/privacy" style="font-size:13px;color:var(--text-4);">Privacy</a>
-        <a href="/security" style="font-size:13px;color:var(--text-4);">Security</a>
-      </nav>
-      <p style="font-size:12px;color:var(--text-4);">© 2026 TypeForge AI · Designed & Developed by <a href="https://github.com/rotric04" target="_blank" class="creator-link">rotric04</a></p>
+<main class="page-content">
+  <section class="legal-section">
+    <div class="container">
+      <div class="legal-content">
+        <h1>Terms of Service</h1>
+        <div class="legal-date">Last Updated: June 4, 2026</div>
+        
+        <p>Welcome to TypeForge AI. By accessing or using our website, typing application, and backend services, you agree to comply with and be bound by the following Terms of Service. Please read them carefully.</p>
+        
+        <h2>1. Acceptance of Terms</h2>
+        <p>By registering for an account or using our training interface, you represent that you are at least 13 years of age and agree to these terms. If you do not agree, you are not authorized to use the platform.</p>
+        
+        <h2>2. User Accounts & Responsibilities</h2>
+        <p>Your profile is managed securely using Clerk. You are responsible for safeguarding your login credentials and are fully liable for all activities that occur under your account. You agree to notify us immediately of any unauthorized use of your account.</p>
+        
+        <h2>3. License & Intellectual Property</h2>
+        <p>The client interface, design system, and custom machine learning algorithms are part of TypeForge AI. We grant you a personal, non-transferable, non-exclusive license to use the training software. The core components of TypeForge are open source and subject to the terms of our official GitHub repository licenses.</p>
+        
+        <h2>4. Prohibited Conduct</h2>
+        <p>You agree not to manipulate typing records, deploy automation bots to generate fake high-scores, attempt to scrape sentences or exercises in bulk, or disrupt backend APIs. Accounts exhibiting bot-like or abusive API request rates may be throttled or terminated.</p>
+        
+        <h2>5. Limitation of Liability</h2>
+        <p>TypeForge AI is provided on an "as-is" and "as-available" basis. We make no guarantees regarding continuous uptime, database persistence, or metric forecasting accuracy. In no event shall TypeForge AI or its contributors be liable for any damages arising out of your use of the website.</p>
+      </div>
     </div>
-  </div>
-</footer>
+  </section>
+
+  <footer class="footer" style="padding:40px 0;border-top:1px solid var(--border-1);">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+        <a href="/" class="navbar-logo">
+          <div class="navbar-logo-icon">⌨️</div>
+          <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
+        </a>
+        <nav style="display:flex;gap:20px;flex-wrap:wrap;" aria-label="Footer">
+          <a href="/features" style="font-size:13px;color:var(--text-4);">Features</a>
+          <a href="/blog" style="font-size:13px;color:var(--text-4);">Blog</a>
+          <a href="/feedback" style="font-size:13px;color:var(--text-4);">Community</a>
+          <a href="/privacy" style="font-size:13px;color:var(--text-4);">Privacy Policy</a>
+          <a href="/terms" style="font-size:13px;color:var(--text-4);">Terms of Service</a>
+          <a href="/security" style="font-size:13px;color:var(--text-4);">Security</a>
+        </nav>
+        <p style="font-size:12px;color:var(--text-4);">© 2026 TypeForge AI · Designed & Developed by <a href="https://github.com/rotric04" target="_blank" class="creator-link">rotric04</a></p>
+      </div>
+    </div>
+  </footer>
+</main>
 
 <script type="module">
 import { initNavbar } from './js/common.js';

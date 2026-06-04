@@ -215,8 +215,11 @@ html.a11y-dyslexia {
 html {
   font-size: calc(16px * var(--a11y-font-scale));
   scroll-behavior: smooth;
+  scroll-padding-top: 100px;
   -webkit-text-size-adjust: 100%;
   tab-size: 2;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
@@ -228,6 +231,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  max-width: 100%;
   min-height: 100vh;
 }
 

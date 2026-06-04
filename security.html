@@ -11,15 +11,17 @@
   <link rel="stylesheet" href="css/components.css"/>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>"/>
   <style>
+    .legal-section {
+      padding: 160px 0 80px;
+    }
     .legal-content {
       max-width: 800px;
-      margin: 140px auto 80px;
-      padding: 0 24px;
+      margin: 0 auto;
       line-height: 1.8;
       color: var(--text-2);
     }
     .legal-content h1 {
-      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
       margin-bottom: var(--sp-4);
       color: var(--text-1);
     }
@@ -97,43 +99,50 @@
   <a href="/app/typing">⌨️ Open App</a>
 </nav>
 
-<main class="legal-content">
-  <h1>Security Overview</h1>
-  <div class="legal-date">Last Updated: June 4, 2026</div>
-  
-  <p>At TypeForge AI, we implement robust, industrial-strength security patterns to protect your telemetry metrics, identity, and personal records. Below is an overview of how we secure your data from client to database.</p>
-  
-  <h2>1. Secure Authentication & JWT Verification</h2>
-  <p>User sessions are fully managed by Clerk using OpenID Connect (OIDC) protocols. Clerk issues cryptographically signed JSON Web Tokens (JWTs) on the client side. When you communicate with our FastAPI backend, the token is sent securely in the <code>Authorization: Bearer</code> header. The backend validates this token cryptographically using Clerk's public keys, verifying the signature, issuer, and expiration before processing any database operations.</p>
-  
-  <h2>2. Supabase Database Row-Level Security (RLS)</h2>
-  <p>All database tables in our Supabase PostgreSQL instance are protected by Row-Level Security (RLS) policies. When a request is made, PostgreSQL inspects the authenticated User ID (passed securely via JWT validation middleware) and restricts data access. A user is only authorized to read, write, or update records belonging to their unique user ID, preventing cross-user data leakage.</p>
-  
-  <h2>3. Vercel API Reverse Proxy (Key Protection)</h2>
-  <p>To avoid exposing internal API keys and server structures in browser inspection panels, we use a secure Vercel API Proxy. All API calls from the client use relative endpoints (like <code>/api/v1/sessions</code>) which Vercel forwards to the backend server. Sensitive credentials (such as database URLs and service keys) remain hosted as environment variables in Render/Railway hosting platforms and are never transmitted to the browser client.</p>
-  
-  <h2>4. Cloudflare Turnstile Bot Shield</h2>
-  <p>Our feedback and contact forms are protected by Cloudflare Turnstile CAPTCHA shields. Turnstile evaluates user behavior invisibly to prevent spam submissions and distributed API exhaustion attacks. Form submissions are verified server-side via a backend proxy request to Cloudflare's token verification endpoints using secret API keys stored in our secure backend environment variables.</p>
-</main>
-
-<footer class="footer" style="padding:40px 0;border-top:1px solid var(--border-1);">
-  <div class="container">
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
-      <a href="/" class="navbar-logo">
-        <div class="navbar-logo-icon">⌨️</div>
-        <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
-      </a>
-      <nav style="display:flex;gap:20px;flex-wrap:wrap;" aria-label="Footer">
-        <a href="/features" style="font-size:13px;color:var(--text-4);">Features</a>
-        <a href="/blog" style="font-size:13px;color:var(--text-4);">Blog</a>
-        <a href="/feedback" style="font-size:13px;color:var(--text-4);">Community</a>
-        <a href="/privacy" style="font-size:13px;color:var(--text-4);">Privacy</a>
-        <a href="/terms" style="font-size:13px;color:var(--text-4);">Terms of Service</a>
-      </nav>
-      <p style="font-size:12px;color:var(--text-4);">© 2026 TypeForge AI · Designed & Developed by <a href="https://github.com/rotric04" target="_blank" class="creator-link">rotric04</a></p>
+<main class="page-content">
+  <section class="legal-section">
+    <div class="container">
+      <div class="legal-content">
+        <h1>Security Overview</h1>
+        <div class="legal-date">Last Updated: June 4, 2026</div>
+        
+        <p>At TypeForge AI, we implement robust, industrial-strength security patterns to protect your telemetry metrics, identity, and personal records. Below is an overview of how we secure your data from client to database.</p>
+        
+        <h2>1. Secure Authentication & JWT Verification</h2>
+        <p>User sessions are fully managed by Clerk using OpenID Connect (OIDC) protocols. Clerk issues cryptographically signed JSON Web Tokens (JWTs) on the client side. When you communicate with our FastAPI backend, the token is sent securely in the <code>Authorization: Bearer</code> header. The backend validates this token cryptographically using Clerk's public keys, verifying the signature, issuer, and expiration before processing any database operations.</p>
+        
+        <h2>2. Supabase Database Row-Level Security (RLS)</h2>
+        <p>All database tables in our Supabase PostgreSQL instance are protected by Row-Level Security (RLS) policies. When a request is made, PostgreSQL inspects the authenticated User ID (passed securely via JWT validation middleware) and restricts data access. A user is only authorized to read, write, or update records belonging to their unique user ID, preventing cross-user data leakage.</p>
+        
+        <h2>3. Vercel API Reverse Proxy (Key Protection)</h2>
+        <p>To avoid exposing internal API keys and server structures in browser inspection panels, we use a secure Vercel API Proxy. All API calls from the client use relative endpoints (like <code>/api/v1/sessions</code>) which Vercel forwards to the backend server. Sensitive credentials (such as database URLs and service keys) remain hosted as environment variables in Render/Railway hosting platforms and are never transmitted to the browser client.</p>
+        
+        <h2>4. Cloudflare Turnstile Bot Shield</h2>
+        <p>Our feedback and contact forms are protected by Cloudflare Turnstile CAPTCHA shields. Turnstile evaluates user behavior invisibly to prevent spam submissions and distributed API exhaustion attacks. Form submissions are verified server-side via a backend proxy request to Cloudflare's token verification endpoints using secret API keys stored in our secure backend environment variables.</p>
+      </div>
     </div>
-  </div>
-</footer>
+  </section>
+
+  <footer class="footer" style="padding:40px 0;border-top:1px solid var(--border-1);">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+        <a href="/" class="navbar-logo">
+          <div class="navbar-logo-icon">⌨️</div>
+          <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
+        </a>
+        <nav style="display:flex;gap:20px;flex-wrap:wrap;" aria-label="Footer">
+          <a href="/features" style="font-size:13px;color:var(--text-4);">Features</a>
+          <a href="/blog" style="font-size:13px;color:var(--text-4);">Blog</a>
+          <a href="/feedback" style="font-size:13px;color:var(--text-4);">Community</a>
+          <a href="/privacy" style="font-size:13px;color:var(--text-4);">Privacy Policy</a>
+          <a href="/terms" style="font-size:13px;color:var(--text-4);">Terms of Service</a>
+          <a href="/security" style="font-size:13px;color:var(--text-4);">Security</a>
+        </nav>
+        <p style="font-size:12px;color:var(--text-4);">© 2026 TypeForge AI · Designed & Developed by <a href="https://github.com/rotric04" target="_blank" class="creator-link">rotric04</a></p>
+      </div>
+    </div>
+  </footer>
+</main>
 
 <script type="module">
 import { initNavbar } from './js/common.js';
