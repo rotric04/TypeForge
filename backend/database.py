@@ -31,17 +31,34 @@ async def init_db():
 
     if settings.DATABASE_URL:
         try:
+            db_url = settings.DATABASE_URL
+            # asyncpg requires 'postgresql://' scheme (not 'postgres://')
+            if db_url.startswith("postgres://"):
+                db_url = db_url.replace("postgres://", "postgresql://", 1)
+            
+            # Warn if using Supabase transaction pooler (port 6543)
+            # asyncpg is incompatible with PgBouncer transaction mode
+            # Use the Session pooler (port 5432) or Direct connection instead
+            if ":6543/" in db_url:
+                logger.warning(
+                    "DATABASE_URL uses Supabase Transaction Pooler (port 6543). "
+                    "This can cause asyncpg prepared statement errors. "
+                    "Please use Session Pooler (port 5432) or Direct connection instead. "
+                    "In Supabase: Settings → Database → Connection String → Session mode."
+                )
+            
             _pool = await asyncpg.create_pool(
-                settings.DATABASE_URL,
+                db_url,
                 min_size=2,
                 max_size=10,
                 command_timeout=30,
-                statement_cache_size=0,
+                statement_cache_size=0,  # Required for PgBouncer compatibility
                 ssl="require",
             )
-            logger.info("PostgreSQL pool created")
+            logger.info("PostgreSQL pool created successfully")
         except Exception as e:
-            logger.error("PostgreSQL pool failed: %s", e)
+            logger.error("PostgreSQL pool failed to create: %s", e)
+            logger.error("Sessions and XP will NOT persist until DATABASE_URL is fixed.")
             _pool = None
     else:
         logger.error("DATABASE_URL is not set. Sessions and XP will not persist.")

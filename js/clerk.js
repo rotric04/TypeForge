@@ -189,15 +189,29 @@ async function syncLocalSessions() {
     const localHistory = localStorage.getItem('tf_session_history');
     if (!localHistory) return;
     const sessions = JSON.parse(localHistory);
-    if (!Array.isArray(sessions) || sessions.length === 0) return;
+    if (!Array.isArray(sessions) || sessions.length === 0) {
+      // Clean up empty array to keep storage tidy
+      localStorage.removeItem('tf_session_history');
+      return;
+    }
 
-    console.log(`TF Auth: Found ${sessions.length} local sessions to sync to the server.`);
+    // Only sync sessions with a local_ prefix (truly offline sessions, not DB-cached ones)
+    const offlineSessions = sessions.filter(s => String(s.id || '').startsWith('local_'));
+    const alreadySynced = sessions.filter(s => !String(s.id || '').startsWith('local_'));
+    
+    if (offlineSessions.length === 0) {
+      // All sessions are already in DB — clear the local cache, DB is source of truth
+      localStorage.removeItem('tf_session_history');
+      return;
+    }
+    
+    console.log(`TF Auth: Found ${offlineSessions.length} offline session(s) to sync to the server.`);
 
     // Import API dynamically to avoid circular dependency
     const { API } = await import('./api.js');
 
     // Send sessions in chronological order (oldest first)
-    const sessionsToSync = [...sessions].reverse();
+    const sessionsToSync = [...offlineSessions].reverse();
 
     const remaining = [];
     let synced = 0;
@@ -229,14 +243,14 @@ async function syncLocalSessions() {
       }
     }
 
-    if (remaining.length) {
+    if (remaining.length > 0) {
+      // Keep only the ones that failed to sync
       localStorage.setItem('tf_session_history', JSON.stringify(remaining.slice(0, 100)));
       console.warn(`TF Auth: ${remaining.length} session(s) still local (API/DB unavailable).`);
     } else {
+      // All offline sessions synced — clear local cache entirely (DB is now source of truth)
       localStorage.removeItem('tf_session_history');
-    }
-    if (synced > 0) {
-      console.log(`TF Auth: Synced ${synced} session(s) to your account.`);
+      console.log(`TF Auth: All ${synced} offline session(s) synced. Local cache cleared.`);
     }
   } catch (e) {
     console.error('TF Auth: Error during local sessions sync', e);

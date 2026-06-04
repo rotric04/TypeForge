@@ -97,12 +97,16 @@ async def create_session(
                      session.max_streak, xp_earned)
 
     # Update user XP, level, total_sessions, best_wpm
+    # Level formula: every level requires 500 * level XP (progressive curve)
+    # Level 1: 0-499, Level 2: 500-1499, Level 3: 1500-2999, etc.
+    # We derive level from total XP after update: FLOOR(SQRT(new_xp / 250)) + 1
     update_user_query = """
         UPDATE users 
         SET xp = xp + $1, 
-            level = FLOOR((xp + $1) / 500) + 1,
+            level = GREATEST(1, FLOOR(SQRT((xp + $1)::float / 250.0))::int + 1),
             total_sessions = total_sessions + 1,
-            best_wpm = GREATEST(best_wpm, $2)
+            best_wpm = GREATEST(best_wpm, $2),
+            updated_at = NOW()
         WHERE id = $3::uuid
     """
     await DB.execute(update_user_query, xp_earned, session.wpm, user_id)

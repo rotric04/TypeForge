@@ -30,11 +30,9 @@ export async function loadProfileAndHistory() {
 
   try {
     const freshHistory = await API.getHistory(60, 0);
-    if (freshHistory && freshHistory.length) {
-      history = freshHistory;
-    } else {
-      // Fallback only to offline unsynced sessions (safety queue)
-      history = JSON.parse(localStorage.getItem('tf_session_history') || '[]');
+    // Only fall back to localStorage if the API call FAILS (throws), not if it returns empty []
+    if (freshHistory !== null && freshHistory !== undefined) {
+      history = freshHistory; // Could be [] — that's valid and means no DB sessions
     }
   } catch (err) {
     console.error("TF Auth: Failed to load history from API", err);
@@ -57,12 +55,20 @@ export async function loadDashboardAnalytics() {
   }
 }
 
+/**
+ * Compute XP progress toward next level.
+ * Backend level formula: level = FLOOR(SQRT(totalXP / 250)) + 1
+ * So XP needed for level N = (N-1)^2 * 250
+ *    XP needed for level N+1 = N^2 * 250
+ */
 export function xpToNextLevel(level, xp) {
   const lvl = Math.max(1, level || 1);
-  const xpPrev = (lvl - 1) * 500;
-  const xpNext = lvl * 500;
-  const cap = xpNext - xpPrev;
-  const inLevel = Math.max(0, (xp || 0) - xpPrev);
+  const totalXp = xp || 0;
+  // XP floor/ceiling for this level based on sqrt formula
+  const xpForCurrentLevel = (lvl - 1) * (lvl - 1) * 250;  // XP to START this level
+  const xpForNextLevel    = lvl * lvl * 250;                // XP to START next level
+  const cap    = xpForNextLevel - xpForCurrentLevel;        // XP required for this level
+  const inLevel = Math.max(0, totalXp - xpForCurrentLevel); // progress within this level
   return { cap, inLevel, pct: Math.min(100, cap > 0 ? (inLevel / cap) * 100 : 0) };
 }
 

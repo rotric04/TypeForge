@@ -984,12 +984,13 @@ function saveSession(localSession) {
     // Update in-memory state so UI reflects it immediately
     state.sessionCount++;
     state.xp += localSession.xp_earned;
-    const nextLevelXP = state.level * 500;
-    if (state.xp >= nextLevelXP) { 
-      state.level++; 
-      state.xp -= nextLevelXP; 
-      showLevelUp(); 
+    // Match backend progressive formula: level = FLOOR(SQRT(totalXP / 250)) + 1
+    const newLevel = Math.max(1, Math.floor(Math.sqrt(state.xp / 250)) + 1);
+    if (newLevel > state.level) {
+      state.level = newLevel;
+      showLevelUp();
     }
+    updateXPBar();
   } catch(e) {}
 }
 
@@ -1209,11 +1210,19 @@ document.getElementById('focus-mode-btn').addEventListener('click', toggleFocusM
 // XP BAR
 // ═══════════════════════════════════════════════════════
 function updateXPBar() {
-  const nextLevelXP = state.level * 500;
-  const pct = Math.min(100, (state.xp / nextLevelXP) * 100);
+  // Backend level formula: level = FLOOR(SQRT(totalXP / 250)) + 1
+  // XP needed to START level N  = (N-1)^2 * 250
+  // XP needed to START level N+1 = N^2 * 250
+  const totalXp = state.xp || 0;
+  const lvl = state.level || 1;
+  const xpForCurrentLevel = (lvl - 1) * (lvl - 1) * 250;
+  const xpForNextLevel    = lvl * lvl * 250;
+  const cap     = Math.max(1, xpForNextLevel - xpForCurrentLevel);
+  const inLevel = Math.max(0, totalXp - xpForCurrentLevel);
+  const pct     = Math.min(100, (inLevel / cap) * 100);
   document.getElementById('header-xp-fill').style.width = pct + '%';
-  document.getElementById('header-xp-text').textContent = `${state.xp} / ${nextLevelXP} XP`;
-  document.getElementById('header-level').textContent = `Lv.${state.level}`;
+  document.getElementById('header-xp-text').textContent = `${inLevel} / ${cap} XP`;
+  document.getElementById('header-level').textContent = `Lv.${lvl}`;
 }
 
 // ═══════════════════════════════════════════════════════
