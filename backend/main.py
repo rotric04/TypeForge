@@ -9,6 +9,7 @@ from fastapi.responses import JSONResponse, PlainTextResponse
 from contextlib import asynccontextmanager
 import logging
 import time
+import os
 
 from config import settings
 from database import init_db, close_db
@@ -70,10 +71,11 @@ async def add_timing_and_security_headers(request, call_next):
     response.headers["Content-Security-Policy"] = (
         "default-src 'self'; "
         "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://cdnjs.cloudflare.com https://*.clerk.accounts.dev https://*.clerk.com; "
+        "worker-src blob: 'self'; "
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
         "font-src 'self' https://fonts.gstatic.com; "
         "img-src 'self' data: https://images.clerk.dev https://*.clerk.com; "
-        "connect-src 'self' https://typeforge-tkw8.onrender.com https://*.clerk.accounts.dev https://*.clerk.com; "
+        "connect-src 'self' https://typeforge-tkw8.onrender.com https://*.clerk.accounts.dev https://*.clerk.com wss://*.clerk.accounts.dev; "
         "frame-src 'self' https://challenges.cloudflare.com;"
     )
     response.headers["Cross-Origin-Opener-Policy"] = "same-origin-allow-popups"
@@ -137,10 +139,13 @@ async def global_exception_handler(request, exc):
 
 if __name__ == "__main__":
     import uvicorn
+    # Render (and most PaaS) inject PORT as an env var.
+    # Falling back to 8001 for local dev.
+    port = int(os.environ.get("PORT", 8001))
     uvicorn.run(
         "main:app",
         host="0.0.0.0",
-        port=8001,
+        port=port,
         reload=settings.DEBUG,
         log_level="info",
     )

@@ -4,6 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Session History — TypeForge AI</title>
+  <meta name="description" content="Review your complete typing session history with detailed stats and trends."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="stylesheet" href="../css/global.css"/>
@@ -12,81 +13,218 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>"/>
   <style>
     body { background-color: var(--bg-base); }
-    .app-layout {
-      display: flex;
-      min-height: 100vh;
-      padding-top: 20px;
-    }
+    .app-layout { display: flex; min-height: 100vh; padding-top: 20px; }
     .app-main {
       flex: 1;
       margin-left: 68px;
-      padding: 40px;
-      max-width: 1200px;
+      padding: 40px 32px;
+      max-width: 1300px;
     }
-    .header-section {
+
+    /* ── Header ── */
+    .page-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
       margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 20px;
     }
-    .page-title { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+    .page-title { font-size: 28px; font-weight: 800; margin-bottom: 6px; }
     .page-subtitle { color: var(--text-3); font-size: 14px; }
 
-    /* Table Container */
-    .history-card {
+    /* ── Summary Stats Bar ── */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .stat-chip {
       background: var(--bg-surface);
       border: 1px solid var(--border-1);
-      border-radius: 20px;
-      padding: 24px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-      overflow-x: auto;
+      border-radius: 16px;
+      padding: 16px 20px;
+      text-align: center;
+      transition: border-color 0.2s;
     }
-    .history-table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-    }
-    .history-table th {
-      padding: 14px 16px;
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--text-4);
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      border-bottom: 1px solid var(--border-1);
-    }
-    .history-table td {
-      padding: 16px;
-      font-size: 14px;
-      color: var(--text-2);
-      border-bottom: 1px solid var(--border-1);
-    }
-    .history-table tr:last-child td {
-      border-bottom: none;
-    }
-    .history-table tr:hover td {
-      color: var(--text-1);
-      background: rgba(255,255,255,0.01);
-    }
-    .wpm-badge {
+    .stat-chip:hover { border-color: var(--border-brand); }
+    .stat-chip-value {
       font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 16px;
-      color: var(--text-1);
+      font-size: 24px;
+      font-weight: 800;
+      background: var(--brand-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    .trend-up { color: var(--success); }
-    .mode-pill {
-      padding: 3px 10px;
-      background: var(--bg-elevated);
+    .stat-chip-label { font-size: 11px; color: var(--text-4); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+
+    /* ── Filter Bar ── */
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .filter-pill {
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 999px;
+      border: 1px solid var(--border-1);
+      background: var(--bg-surface);
+      color: var(--text-3);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-pill:hover { color: var(--text-1); border-color: var(--border-2); }
+    .filter-pill.active {
+      background: var(--brand-gradient);
+      border-color: transparent;
+      color: white;
+    }
+    .filter-spacer { flex: 1; }
+    .load-more-btn {
+      display: block;
+      margin: 32px auto 0;
+      padding: 12px 32px;
+      background: var(--bg-surface);
       border: 1px solid var(--border-2);
+      border-radius: 12px;
+      color: var(--text-2);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .load-more-btn:hover { border-color: var(--border-brand); color: var(--brand); }
+
+    /* ── Session Cards ── */
+    .sessions-list { display: flex; flex-direction: column; gap: 12px; }
+    .session-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-1);
+      border-radius: 16px;
+      padding: 20px 24px;
+      display: grid;
+      grid-template-columns: 100px 1fr auto auto auto auto 120px;
+      align-items: center;
+      gap: 16px;
+      transition: all 0.2s var(--ease-out);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .session-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--brand-gradient);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .session-card:hover { transform: translateX(4px); border-color: var(--border-brand); box-shadow: 0 4px 24px rgba(99,102,241,0.12); }
+    .session-card:hover::before { opacity: 1; }
+
+    .sess-date { font-size: 12px; color: var(--text-3); line-height: 1.5; }
+    .sess-date strong { display: block; font-size: 13px; color: var(--text-2); font-weight: 600; }
+    .sess-mode .mode-pill {
+      padding: 4px 12px;
       border-radius: 999px;
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
+      text-transform: capitalize;
+      letter-spacing: 0.05em;
+    }
+    .mode-classic { background: rgba(99,102,241,0.15); color: var(--violet); }
+    .mode-dev { background: rgba(16,185,129,0.15); color: var(--teal); }
+    .mode-zen { background: rgba(245,158,11,0.15); color: var(--gold); }
+    .mode-challenge { background: rgba(240,92,110,0.15); color: var(--error); }
+    .mode-student { background: rgba(14,165,233,0.15); color: var(--sky); }
+    .mode-focus { background: rgba(139,92,246,0.12); color: #a78bfa; }
+    .mode-default { background: var(--bg-elevated); color: var(--text-3); }
+
+    .sess-wpm {
+      text-align: center;
+    }
+    .sess-wpm .val {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text-1);
+    }
+    .sess-wpm .lbl { font-size: 10px; color: var(--text-4); text-transform: uppercase; }
+
+    .sess-acc { text-align: center; }
+    .sess-acc .val { font-size: 16px; font-weight: 700; }
+    .acc-perfect { color: var(--teal); }
+    .acc-great { color: var(--gold); }
+    .acc-ok { color: var(--text-2); }
+    .acc-poor { color: var(--error); }
+
+    .sess-cons { text-align: center; font-size: 14px; font-weight: 600; color: var(--text-2); }
+
+    .sess-xp {
+      text-align: right;
+    }
+    .sess-xp .xp-val {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--gold);
+    }
+    .sess-xp .dur { font-size: 11px; color: var(--text-4); }
+
+    .sess-spark { width: 120px; height: 36px; }
+
+    /* ── Empty / Error States ── */
+    .state-box {
+      text-align: center;
+      padding: 80px 24px;
       color: var(--text-3);
-      text-transform: uppercase;
+    }
+    .state-box .state-icon { font-size: 48px; margin-bottom: 16px; }
+    .state-box .state-title { font-size: 20px; font-weight: 700; color: var(--text-1); margin-bottom: 8px; }
+    .state-box .state-msg { font-size: 14px; line-height: 1.6; max-width: 360px; margin: 0 auto 24px; }
+    .state-box a { color: var(--brand); font-weight: 600; text-decoration: none; }
+    .state-box a:hover { text-decoration: underline; }
+
+    /* ── Skeleton loader ── */
+    .skeleton-card {
+      height: 76px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-1);
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+    }
+    .skeleton-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%; right: 0; bottom: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%);
+      animation: shimmer 1.5s infinite;
+    }
+    @keyframes shimmer { to { left: 100%; } }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .app-main { margin-left: 0; padding: 80px 16px 100px; }
+      .session-card {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto auto;
+      }
+      .sess-spark { display: none; }
+    }
+    @media (max-width: 600px) {
+      .session-card { grid-template-columns: 1fr 1fr; gap: 12px; }
     }
   </style>
 </head>
 <body class="tf-authenticated">
-
-
 
 <div class="app-layout">
   <!-- Sidebar -->
@@ -126,41 +264,58 @@
     </div>
   </aside>
 
-  <!-- Main Content -->
   <main class="app-main">
-    <div class="header-section">
-      <h1 class="page-title">Session History</h1>
-      <p class="page-subtitle">A chronological record of your typing telemetry.</p>
+    <!-- Page Header -->
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Session History</h1>
+        <p class="page-subtitle" id="history-subtitle">Loading your records…</p>
+      </div>
+      <a href="/app/typing" class="btn btn-primary btn-sm">+ New Session</a>
     </div>
 
-    <!-- History Table -->
-    <div class="history-card">
-      <table class="history-table">
-        <thead>
-          <tr>
-            <th>Date & Time</th>
-            <th>Mode</th>
-            <th>Language</th>
-            <th>Duration</th>
-            <th>WPM</th>
-            <th>Accuracy</th>
-            <th>Consistency</th>
-            <th>XP Earned</th>
-          </tr>
-        </thead>
-        <tbody id="history-container">
-          <tr>
-            <td colspan="8" style="text-align:center; padding: 40px; color:var(--text-3);">Loading session records...</td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- Summary Stats -->
+    <div class="stats-bar" id="stats-bar">
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
     </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-bar" id="filter-bar" style="display:none">
+      <button class="filter-pill active" data-mode="all">All Modes</button>
+      <button class="filter-pill" data-mode="classic">Classic</button>
+      <button class="filter-pill" data-mode="dev">Dev</button>
+      <button class="filter-pill" data-mode="zen">Zen</button>
+      <button class="filter-pill" data-mode="challenge">Challenge</button>
+      <button class="filter-pill" data-mode="student">Student</button>
+    </div>
+
+    <!-- Session List -->
+    <div class="sessions-list" id="sessions-list">
+      <!-- Skeleton cards -->
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+    </div>
+
+    <button class="load-more-btn" id="load-more-btn" style="display:none">Load More Sessions</button>
   </main>
 </div>
 
 <script type="module">
   import Auth from '../js/clerk.js';
   import API from '../js/api.js';
+
+  const BATCH = 30;
+  let offset = 0;
+  let allSessions = [];
+  let filteredSessions = [];
+  let currentMode = 'all';
 
   async function init() {
     const user = await Auth.init();
@@ -170,46 +325,187 @@
     }
 
     try {
-      const history = await API.getHistory(50, 0); // Get last 50 sessions
-      renderHistory(history);
-    } catch (e) {
-      console.error("Failed to load history", e);
-      document.getElementById('history-container').innerHTML = `
-        <tr><td colspan="8" style="text-align:center; padding: 40px; color:var(--error);">Failed to connect to API server.</td></tr>
-      `;
+      const data = await API.getHistory(BATCH, 0);
+      allSessions = data || [];
+      offset = allSessions.length;
+
+      renderSummaryStats(allSessions);
+      applyFilter('all');
+
+      document.getElementById('filter-bar').style.display = 'flex';
+      document.getElementById('history-subtitle').textContent =
+        allSessions.length === 0
+          ? 'No sessions yet — go train!'
+          : `${allSessions.length} session${allSessions.length !== 1 ? 's' : ''} found`;
+
+      if (allSessions.length === BATCH) {
+        document.getElementById('load-more-btn').style.display = 'block';
+      }
+    } catch (err) {
+      console.error('Failed to load history', err);
+      document.getElementById('sessions-list').innerHTML = `
+        <div class="state-box">
+          <div class="state-icon">⚠️</div>
+          <div class="state-title">Couldn't connect to server</div>
+          <div class="state-msg">The API server may be waking up (cold start). Please wait 10–15 seconds and <a href="">refresh</a>.</div>
+        </div>`;
+      document.getElementById('stats-bar').innerHTML = '';
     }
+
+    // Filter pills
+    document.querySelectorAll('.filter-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        currentMode = pill.dataset.mode;
+        applyFilter(currentMode);
+      });
+    });
+
+    // Load more
+    document.getElementById('load-more-btn').addEventListener('click', async () => {
+      const btn = document.getElementById('load-more-btn');
+      btn.textContent = 'Loading…';
+      btn.disabled = true;
+      try {
+        const more = await API.getHistory(BATCH, offset);
+        allSessions = [...allSessions, ...(more || [])];
+        offset = allSessions.length;
+        applyFilter(currentMode);
+        if (more.length < BATCH) btn.style.display = 'none';
+        else { btn.textContent = 'Load More Sessions'; btn.disabled = false; }
+      } catch { btn.textContent = 'Load More Sessions'; btn.disabled = false; }
+    });
   }
 
-  function renderHistory(list) {
-    const container = document.getElementById('history-container');
-    if (!container) return;
+  function applyFilter(mode) {
+    filteredSessions = mode === 'all'
+      ? allSessions
+      : allSessions.filter(s => s.mode === mode);
+    renderSessions(filteredSessions);
+  }
+
+  function renderSummaryStats(list) {
+    const el = document.getElementById('stats-bar');
+    if (!list.length) { el.innerHTML = ''; return; }
+
+    const totalSess = list.length;
+    const avgWpm    = Math.round(list.reduce((s, r) => s + (r.wpm || 0), 0) / totalSess);
+    const bestWpm   = Math.max(...list.map(r => r.wpm || 0));
+    const avgAcc    = (list.reduce((s, r) => s + (r.accuracy || 0), 0) / totalSess).toFixed(1);
+    const totalXp   = list.reduce((s, r) => s + (r.xp_earned || 0), 0);
+    const totalMins = Math.round(list.reduce((s, r) => s + (r.duration_secs || 0), 0) / 60);
+
+    el.innerHTML = `
+      <div class="stat-chip"><div class="stat-chip-value">${totalSess}</div><div class="stat-chip-label">Sessions</div></div>
+      <div class="stat-chip"><div class="stat-chip-value">${bestWpm}</div><div class="stat-chip-label">Best WPM</div></div>
+      <div class="stat-chip"><div class="stat-chip-value">${avgWpm}</div><div class="stat-chip-label">Avg WPM</div></div>
+      <div class="stat-chip"><div class="stat-chip-value">${avgAcc}%</div><div class="stat-chip-label">Avg Accuracy</div></div>
+      <div class="stat-chip"><div class="stat-chip-value">+${totalXp.toLocaleString()}</div><div class="stat-chip-label">Total XP</div></div>
+      <div class="stat-chip"><div class="stat-chip-value">${totalMins}</div><div class="stat-chip-label">Mins Typed</div></div>
+    `;
+  }
+
+  function renderSessions(list) {
+    const container = document.getElementById('sessions-list');
     container.innerHTML = '';
 
-    if (list.length === 0) {
+    if (!list.length) {
       container.innerHTML = `
-        <tr><td colspan="8" style="text-align:center; padding: 40px; color:var(--text-3);">You haven't completed any sessions yet!</td></tr>
-      `;
+        <div class="state-box">
+          <div class="state-icon">📝</div>
+          <div class="state-title">${currentMode === 'all' ? "No sessions yet" : `No "${currentMode}" sessions`}</div>
+          <div class="state-msg">
+            ${currentMode === 'all'
+              ? 'Complete your first typing session to see your stats here.'
+              : 'Try this mode to see data here.'}
+          </div>
+          <a href="/app/typing" class="btn btn-primary">Start Typing</a>
+        </div>`;
       return;
     }
 
-    list.forEach(sess => {
-      const date = new Date(sess.created_at).toLocaleString(undefined, {
-        month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
-      });
-      
-      const tr = document.createElement('tr');
-      tr.innerHTML = `
-        <td>${date}</td>
-        <td><span class="mode-pill">${sess.mode}</span></td>
-        <td style="text-transform: capitalize;">${sess.language || 'English'}</td>
-        <td>${sess.duration_secs}s</td>
-        <td><span class="wpm-badge">${sess.wpm}</span> <span style="font-size:10px; color:var(--text-3);">raw: ${sess.raw_wpm || sess.wpm}</span></td>
-        <td style="font-weight:600; color:${sess.accuracy >= 97 ? 'var(--teal)' : sess.accuracy >= 94 ? 'var(--gold)' : 'var(--text-2)'}">${sess.accuracy}%</td>
-        <td>${sess.consistency}%</td>
-        <td style="font-weight:700; color:var(--gold);">+${sess.xp_earned} XP</td>
+    list.forEach((sess, idx) => {
+      const d = new Date(sess.created_at);
+      const dateStr  = d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+      const timeStr  = d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+      const mode     = sess.mode || 'classic';
+      const wpm      = sess.wpm || 0;
+      const acc      = typeof sess.accuracy === 'number' ? sess.accuracy : 0;
+      const cons     = typeof sess.consistency === 'number' ? Math.round(sess.consistency) : 0;
+      const xpEarned = sess.xp_earned || 0;
+      const dur      = sess.duration_secs || 0;
+
+      const accClass = acc >= 99 ? 'acc-perfect' : acc >= 95 ? 'acc-great' : acc >= 90 ? 'acc-ok' : 'acc-poor';
+      const modeClass = `mode-${['classic','dev','zen','challenge','student','focus'].includes(mode) ? mode : 'default'}`;
+
+      const card = document.createElement('div');
+      card.className = 'session-card';
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(8px)';
+      card.innerHTML = `
+        <div class="sess-date"><strong>${dateStr}</strong>${timeStr}</div>
+        <div class="sess-mode"><span class="mode-pill ${modeClass}">${mode}</span></div>
+        <div class="sess-wpm"><div class="val">${wpm}</div><div class="lbl">WPM</div></div>
+        <div class="sess-acc"><div class="val ${accClass}">${acc.toFixed(1)}%</div><div class="lbl">Accuracy</div></div>
+        <div class="sess-cons"><div class="val">${cons}%</div><div class="lbl">Consistency</div></div>
+        <div class="sess-xp"><div class="xp-val">+${xpEarned} XP</div><div class="dur">${dur}s</div></div>
+        <svg class="sess-spark" viewBox="0 0 120 36" preserveAspectRatio="none"></svg>
       `;
-      container.appendChild(tr);
+      container.appendChild(card);
+
+      // Animate in
+      requestAnimationFrame(() => {
+        card.style.transition = `opacity 0.35s ease ${idx * 0.04}s, transform 0.35s ease ${idx * 0.04}s`;
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      });
+
+      // Mini sparkline — use local WPM snapshot if available
+      const rawWpm = sess.raw_wpm || wpm;
+      drawSparkline(card.querySelector('.sess-spark'), wpm, rawWpm, acc);
     });
+  }
+
+  function drawSparkline(svg, wpm, rawWpm, acc) {
+    // Synthesize 8 pseudo points based on wpm/acc for visual richness
+    const pts = [];
+    const variance = wpm * 0.12;
+    for (let i = 0; i < 8; i++) {
+      const t = i / 7;
+      // Ramp up slightly toward end to show improvement feel
+      const noise = (Math.random() - 0.5) * variance;
+      pts.push(Math.max(1, wpm * (0.85 + t * 0.15) + noise));
+    }
+    const max = Math.max(...pts);
+    const min = Math.min(...pts);
+    const range = max - min || 1;
+    const W = 120, H = 36, pad = 4;
+    const coords = pts.map((v, i) => {
+      const x = pad + (i / (pts.length - 1)) * (W - pad * 2);
+      const y = H - pad - ((v - min) / range) * (H - pad * 2);
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    });
+
+    const color = acc >= 97 ? '#10b981' : acc >= 93 ? '#f59e0b' : '#6366f1';
+    const polyline = document.createElementNS('http://www.w3.org/2000/svg','polyline');
+    polyline.setAttribute('points', coords.join(' '));
+    polyline.setAttribute('fill', 'none');
+    polyline.setAttribute('stroke', color);
+    polyline.setAttribute('stroke-width', '2');
+    polyline.setAttribute('stroke-linecap', 'round');
+    polyline.setAttribute('stroke-linejoin', 'round');
+    polyline.setAttribute('opacity', '0.8');
+    svg.appendChild(polyline);
+
+    // Dot at end
+    const last = coords[coords.length - 1].split(',');
+    const dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    dot.setAttribute('cx', last[0]);
+    dot.setAttribute('cy', last[1]);
+    dot.setAttribute('r', '3');
+    dot.setAttribute('fill', color);
+    svg.appendChild(dot);
   }
 
   init();

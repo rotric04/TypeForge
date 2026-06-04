@@ -4,6 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Achievements — TypeForge AI</title>
+  <meta name="description" content="Track your typing milestones, unlock badges, and level up your skills."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="stylesheet" href="../css/global.css"/>
@@ -12,143 +13,333 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>"/>
   <style>
     body { background-color: var(--bg-base); }
-    .app-layout {
+    .app-layout { display: flex; min-height: 100vh; padding-top: 20px; }
+    .app-main { flex: 1; margin-left: 68px; padding: 40px 32px; max-width: 1300px; }
+
+    /* ── Hero XP Bar ── */
+    .xp-hero {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-1);
+      border-radius: 24px;
+      padding: 28px 32px;
+      margin-bottom: 28px;
       display: flex;
-      min-height: 100vh;
-      padding-top: 20px;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
     }
-    .app-main {
-      flex: 1;
-      margin-left: 68px;
-      padding: 40px;
-      max-width: 1200px;
+    .xp-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 300px; height: 200px;
+      background: radial-gradient(ellipse at 80% 0%, rgba(99,102,241,0.12) 0%, transparent 70%);
+      pointer-events: none;
     }
-    .header-section {
+    .xp-avatar {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--brand-gradient);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px;
+      flex-shrink: 0;
+      box-shadow: 0 0 24px rgba(99,102,241,0.3);
+    }
+    .xp-info { flex: 1; min-width: 200px; }
+    .xp-name { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
+    .xp-level { font-size: 13px; color: var(--text-3); margin-bottom: 12px; }
+    .xp-level strong { color: var(--brand); }
+    .xp-bar-wrap { position: relative; }
+    .xp-bar-bg {
+      height: 10px;
+      background: var(--bg-elevated);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .xp-bar-fill {
+      height: 100%;
+      background: var(--brand-gradient);
+      border-radius: 999px;
+      transition: width 1.2s cubic-bezier(0.23,1,0.32,1);
+      box-shadow: 0 0 8px rgba(99,102,241,0.4);
+    }
+    .xp-bar-labels {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 32px;
-      flex-wrap: wrap;
-      gap: 20px;
+      margin-top: 6px;
+      font-size: 11px;
+      color: var(--text-4);
     }
-    .page-title { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
-    .page-subtitle { color: var(--text-3); font-size: 14px; }
-    
-    /* Stats Card */
-    .achievements-stats {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-1);
-      border-radius: 20px;
-      padding: 24px;
+    .xp-chips {
       display: flex;
-      align-items: center;
-      gap: 24px;
-      min-width: 300px;
+      gap: 16px;
+      flex-wrap: wrap;
     }
-    .stats-progress-ring { width: 68px; height: 68px; flex-shrink: 0; }
-    .stats-text { font-size: 20px; font-weight: 800; font-family: var(--font-display); }
-    .stats-sub { font-size: 11px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.1em; }
+    .xp-chip {
+      text-align: center;
+      padding: 12px 20px;
+      background: var(--bg-elevated);
+      border-radius: 14px;
+      border: 1px solid var(--border-1);
+      min-width: 90px;
+    }
+    .xp-chip-val {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 800;
+      background: var(--brand-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .xp-chip-lbl { font-size: 11px; color: var(--text-4); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
 
-    /* Categories Tabs */
+    /* ── Progress Ring ── */
+    .progress-ring-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .progress-ring-svg { width: 80px; height: 80px; transform: rotate(-90deg); }
+    .ring-track { fill: none; stroke: rgba(255,255,255,0.06); stroke-width: 6; }
+    .ring-fill {
+      fill: none;
+      stroke: url(#ringGrad);
+      stroke-width: 6;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 1.2s cubic-bezier(0.23,1,0.32,1);
+    }
+    .ring-label { font-size: 12px; color: var(--text-3); text-align: center; }
+    .ring-pct { font-size: 20px; font-weight: 800; text-align: center; color: var(--text-1); }
+
+    /* ── Category Tabs ── */
     .filter-tabs {
       display: flex;
-      gap: 8px;
-      margin-bottom: 28px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-1);
-      padding: 4px;
-      border-radius: 12px;
-      width: fit-content;
+      gap: 6px;
+      margin-bottom: 24px;
       flex-wrap: wrap;
     }
     .filter-tab {
-      padding: 8px 16px;
+      padding: 7px 16px;
       font-size: 12px;
       font-weight: 600;
-      border-radius: 8px;
-      border: none;
-      background: transparent;
+      border-radius: 999px;
+      border: 1px solid var(--border-1);
+      background: var(--bg-surface);
       color: var(--text-3);
       cursor: pointer;
       transition: all 0.2s;
     }
-    .filter-tab:hover { color: var(--text-2); }
+    .filter-tab:hover { color: var(--text-1); border-color: var(--border-2); }
     .filter-tab.active {
-      background: var(--glass-bg);
-      border: 1px solid var(--border-2);
-      color: var(--text-1);
+      background: var(--brand-gradient);
+      border-color: transparent;
+      color: #fff;
     }
 
-    /* Grid */
+    /* ── Achievements Grid ── */
     .achievements-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
     }
-    .achievement-card {
+
+    /* ── Achievement Card ── */
+    .ach-card {
       background: var(--bg-surface);
       border: 1px solid var(--border-1);
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 20px;
-      display: flex;
-      gap: 16px;
       position: relative;
       overflow: hidden;
-      transition: all 0.2s var(--ease-out);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: all 0.25s var(--ease-out);
     }
-    .achievement-card.locked {
-      opacity: 0.65;
-    }
-    .achievement-card:not(.locked):hover {
-      transform: translateY(-2px);
+    .ach-card.unlocked:hover {
+      transform: translateY(-3px);
       border-color: var(--border-brand);
-      box-shadow: var(--shadow-brand);
+      box-shadow: var(--shadow-brand), 0 8px 32px rgba(0,0,0,0.2);
     }
-    .achievement-icon-wrapper {
-      width: 48px; height: 48px;
-      border-radius: 12px;
+    .ach-card.locked {
+      opacity: 0.55;
+    }
+    .ach-card.locked:hover { opacity: 0.75; }
+
+    /* Rarity glow strip at top */
+    .ach-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      border-radius: 18px 18px 0 0;
+    }
+    .ach-card.rarity-common::before  { background: #6b7280; }
+    .ach-card.rarity-rare::before    { background: linear-gradient(90deg, #0ea5e9, #38bdf8); }
+    .ach-card.rarity-epic::before    { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+    .ach-card.rarity-legendary::before { background: linear-gradient(90deg, #f59e0b, #fbbf24, #f59e0b); box-shadow: 0 0 12px rgba(245,158,11,0.4); }
+
+    .ach-top { display: flex; align-items: flex-start; gap: 14px; }
+    .ach-icon-wrap {
+      width: 52px; height: 52px;
+      border-radius: 14px;
       background: var(--bg-elevated);
       display: flex; align-items: center; justify-content: center;
-      font-size: 22px;
+      font-size: 24px;
       flex-shrink: 0;
-      transition: transform 0.25s;
+      transition: transform 0.3s;
+      border: 1px solid var(--border-1);
     }
-    .achievement-card:not(.locked):hover .achievement-icon-wrapper {
-      transform: scale(1.1) rotate(5deg);
+    .ach-card.unlocked:hover .ach-icon-wrap { transform: scale(1.12) rotate(8deg); }
+    .ach-card.locked .ach-icon-wrap { filter: grayscale(1); }
+    .ach-card.rarity-legendary.unlocked .ach-icon-wrap {
+      background: rgba(245,158,11,0.1);
+      border-color: rgba(245,158,11,0.3);
+      box-shadow: 0 0 12px rgba(245,158,11,0.2);
     }
-    .achievement-card.locked .achievement-icon-wrapper {
-      filter: grayscale(1);
-      opacity: 0.4;
+    .ach-card.rarity-epic.unlocked .ach-icon-wrap {
+      background: rgba(139,92,246,0.1);
+      border-color: rgba(139,92,246,0.3);
     }
-    .achievement-info { display: flex; flex-direction: column; justify-content: center; }
-    .achievement-name { font-size: 15px; font-weight: 700; color: var(--text-1); margin-bottom: 4px; }
-    .achievement-card.locked .achievement-name { color: var(--text-3); }
-    .achievement-desc { font-size: 12px; color: var(--text-3); line-height: 1.4; }
-    
-    /* Rarity Badge */
-    .rarity-dot {
-      position: absolute;
-      top: 12px; right: 12px;
-      width: 6px; height: 6px;
-      border-radius: 50%;
+    .ach-card.rarity-rare.unlocked .ach-icon-wrap {
+      background: rgba(14,165,233,0.1);
+      border-color: rgba(14,165,233,0.3);
     }
-    .rarity-common { background: var(--text-3); }
-    .rarity-rare { background: var(--sky); box-shadow: 0 0 6px var(--sky-glow); }
-    .rarity-epic { background: var(--violet); box-shadow: 0 0 8px rgba(139,92,246,0.5); }
-    .rarity-legendary { background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); }
 
-    /* Locked overlay icon */
-    .lock-overlay {
-      position: absolute;
-      bottom: 12px; right: 12px;
+    .ach-meta { flex: 1; }
+    .ach-name { font-size: 15px; font-weight: 700; color: var(--text-1); margin-bottom: 4px; }
+    .ach-card.locked .ach-name { color: var(--text-3); }
+    .ach-desc { font-size: 12px; color: var(--text-3); line-height: 1.5; }
+    .ach-rarity {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 6px;
+    }
+    .rarity-common  .ach-rarity { color: #9ca3af; }
+    .rarity-rare    .ach-rarity { color: #38bdf8; }
+    .rarity-epic    .ach-rarity { color: #a78bfa; }
+    .rarity-legendary .ach-rarity { color: #fbbf24; }
+
+    /* Progress bar on card */
+    .ach-progress-wrap { display: flex; flex-direction: column; gap: 4px; }
+    .ach-progress-label {
+      display: flex;
+      justify-content: space-between;
       font-size: 11px;
       color: var(--text-4);
+    }
+    .ach-progress-bar {
+      height: 5px;
+      background: var(--bg-elevated);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .ach-progress-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 1s cubic-bezier(0.23,1,0.32,1);
+    }
+    .rarity-common  .ach-progress-fill { background: #6b7280; }
+    .rarity-rare    .ach-progress-fill { background: linear-gradient(90deg, #0ea5e9, #38bdf8); }
+    .rarity-epic    .ach-progress-fill { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+    .rarity-legendary .ach-progress-fill { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+
+    .ach-unlocked-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--teal);
+      padding: 3px 10px;
+      background: rgba(16,185,129,0.1);
+      border-radius: 999px;
+      border: 1px solid rgba(16,185,129,0.2);
+      width: fit-content;
+    }
+    .lock-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: var(--text-4);
+      padding: 3px 10px;
+      background: var(--bg-elevated);
+      border-radius: 999px;
+      border: 1px solid var(--border-1);
+      width: fit-content;
+    }
+
+    /* Unlock pop animation */
+    @keyframes popIn {
+      0%   { transform: scale(0.7); opacity: 0; }
+      60%  { transform: scale(1.05); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .ach-card.pop { animation: popIn 0.45s cubic-bezier(0.23,1,0.32,1) forwards; }
+
+    /* Skeleton */
+    .skeleton-card {
+      height: 160px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-1);
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+    }
+    .skeleton-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%; right: 0; bottom: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%);
+      animation: shimmer 1.5s infinite;
+    }
+    @keyframes shimmer { to { left: 100%; } }
+
+    /* Empty state */
+    .empty-state {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 60px 24px;
+      color: var(--text-3);
+    }
+    .empty-state .icon { font-size: 40px; margin-bottom: 12px; }
+    .empty-state .msg { font-size: 15px; color: var(--text-2); font-weight: 600; }
+    .empty-state .sub { font-size: 13px; margin-top: 6px; }
+
+    /* Notification toast */
+    #ach-toast {
+      position: fixed; bottom: 32px; left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-brand);
+      border-radius: 16px;
+      padding: 16px 24px;
+      display: flex; align-items: center; gap: 14px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4), var(--shadow-brand);
+      z-index: 9999;
+      transition: transform 0.45s cubic-bezier(0.23,1,0.32,1);
+      min-width: 280px;
+    }
+    #ach-toast.show { transform: translateX(-50%) translateY(0); }
+    #ach-toast .toast-icon { font-size: 28px; }
+    #ach-toast .toast-body { display: flex; flex-direction: column; }
+    #ach-toast .toast-title { font-size: 14px; font-weight: 700; }
+    #ach-toast .toast-msg { font-size: 12px; color: var(--text-3); }
+
+    @media (max-width: 900px) {
+      .app-main { margin-left: 0; padding: 80px 16px 100px; }
+      .achievements-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
     }
   </style>
 </head>
 <body class="tf-authenticated">
-
-
 
 <div class="app-layout">
   <!-- Sidebar -->
@@ -156,79 +347,146 @@
     <a href="/" class="sidebar-logo" aria-label="TypeForge AI Home">⌨️</a>
     <nav class="sidebar-nav">
       <div class="sidebar-item" onclick="location.href='/app/typing'" title="Train" aria-label="Train">
-        <span class="sidebar-icon">⌨️</span>
-        <span class="sidebar-label">Train</span>
+        <span class="sidebar-icon">⌨️</span><span class="sidebar-label">Train</span>
       </div>
       <div class="sidebar-item" onclick="location.href='/app/dashboard'" title="Dashboard" aria-label="Dashboard">
-        <span class="sidebar-icon">📊</span>
-        <span class="sidebar-label">Dashboard</span>
+        <span class="sidebar-icon">📊</span><span class="sidebar-label">Dashboard</span>
       </div>
       <div class="sidebar-item active" onclick="location.href='/app/achievements'" title="Achievements" aria-label="Achievements">
-        <span class="sidebar-icon">🏆</span>
-        <span class="sidebar-label">Achievements</span>
+        <span class="sidebar-icon">🏆</span><span class="sidebar-label">Achievements</span>
       </div>
       <div class="sidebar-item" onclick="location.href='/app/history'" title="History" aria-label="History">
-        <span class="sidebar-icon">📜</span>
-        <span class="sidebar-label">History</span>
+        <span class="sidebar-icon">📜</span><span class="sidebar-label">History</span>
       </div>
     </nav>
     <div class="sidebar-bottom">
       <div class="sidebar-item" onclick="location.href='/app/settings'" title="Settings" aria-label="Settings">
-        <span class="sidebar-icon">⚙️</span>
-        <span class="sidebar-label">Settings</span>
+        <span class="sidebar-icon">⚙️</span><span class="sidebar-label">Settings</span>
       </div>
       <div class="sidebar-item" title="Profile" aria-label="Profile" id="sidebar-profile">
         <span class="sidebar-icon" id="nav-avatar">U</span>
         <span class="sidebar-label" data-auth-name>Profile</span>
       </div>
       <div class="sidebar-item" title="Sign Out" aria-label="Sign Out" data-auth-signout>
-        <span class="sidebar-icon">🚪</span>
-        <span class="sidebar-label">Sign Out</span>
+        <span class="sidebar-icon">🚪</span><span class="sidebar-label">Sign Out</span>
       </div>
     </div>
   </aside>
 
-  <!-- Main Content -->
   <main class="app-main">
-    <div class="header-section">
-      <div>
-        <h1 class="page-title">Achievements</h1>
-        <p class="page-subtitle">Track your milestones and keyboard mastery badges.</p>
-      </div>
-      <div class="achievements-stats">
-        <svg class="stats-progress-ring" id="progress-svg" viewBox="0 0 60 60"></svg>
-        <div>
-          <div class="stats-text" id="unlocked-count">0 / 0</div>
-          <div class="stats-sub">Unlocked Badges</div>
+    <h1 style="font-size:28px;font-weight:800;margin-bottom:24px;">Achievements</h1>
+
+    <!-- XP Hero -->
+    <div class="xp-hero" id="xp-hero">
+      <div class="xp-avatar" id="xp-avatar">⌨️</div>
+      <div class="xp-info">
+        <div class="xp-name" id="xp-name">Loading…</div>
+        <div class="xp-level">Level <strong id="xp-level-num">—</strong> Typist</div>
+        <div class="xp-bar-wrap">
+          <div class="xp-bar-bg"><div class="xp-bar-fill" id="xp-bar-fill" style="width:0%"></div></div>
+          <div class="xp-bar-labels"><span id="xp-current">0 XP</span><span id="xp-next">— XP to next level</span></div>
         </div>
       </div>
+
+      <!-- Progress ring -->
+      <div class="progress-ring-wrap">
+        <svg class="progress-ring-svg" id="ring-svg" viewBox="0 0 80 80">
+          <defs>
+            <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#6366f1"/>
+              <stop offset="100%" stop-color="#8b5cf6"/>
+            </linearGradient>
+          </defs>
+          <circle class="ring-track" cx="40" cy="40" r="32"/>
+          <circle class="ring-fill" id="ring-fill" cx="40" cy="40" r="32" stroke-dasharray="201" stroke-dashoffset="201"/>
+        </svg>
+        <div class="ring-pct" id="ring-pct">0%</div>
+        <div class="ring-label">Badges<br>Unlocked</div>
+      </div>
+
+      <!-- Quick chips -->
+      <div class="xp-chips" id="xp-chips">
+        <div class="xp-chip"><div class="xp-chip-val" id="chip-unlocked">—</div><div class="xp-chip-lbl">Unlocked</div></div>
+        <div class="xp-chip"><div class="xp-chip-val" id="chip-total">—</div><div class="xp-chip-lbl">Total</div></div>
+        <div class="xp-chip"><div class="xp-chip-val" id="chip-sessions">—</div><div class="xp-chip-lbl">Sessions</div></div>
+      </div>
     </div>
 
-    <!-- Filter Tabs -->
-    <div class="filter-tabs">
-      <button class="filter-tab active" data-category="all">All</button>
-      <button class="filter-tab" data-category="speed">Speed</button>
-      <button class="filter-tab" data-category="accuracy">Accuracy</button>
-      <button class="filter-tab" data-category="streak">Streak</button>
-      <button class="filter-tab" data-category="special">Special</button>
-      <button class="filter-tab" data-category="milestone">Milestones</button>
-      <button class="filter-tab" data-category="time">Time</button>
-      <button class="filter-tab" data-category="dev">Developer</button>
+    <!-- Category Tabs -->
+    <div class="filter-tabs" id="filter-tabs">
+      <button class="filter-tab active" data-category="all">🎖 All</button>
+      <button class="filter-tab" data-category="speed">⚡ Speed</button>
+      <button class="filter-tab" data-category="accuracy">🎯 Accuracy</button>
+      <button class="filter-tab" data-category="streak">📅 Streak</button>
+      <button class="filter-tab" data-category="special">✨ Special</button>
+      <button class="filter-tab" data-category="milestone">🚀 Milestones</button>
+      <button class="filter-tab" data-category="time">🦉 Time</button>
+      <button class="filter-tab" data-category="dev">💻 Developer</button>
     </div>
 
-    <!-- Achievements Grid -->
-    <div class="achievements-grid" id="achievements-container">
-      <!-- Loaded dynamically -->
+    <!-- Grid -->
+    <div class="achievements-grid" id="achievements-grid">
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
     </div>
   </main>
+</div>
+
+<!-- Unlock Toast -->
+<div id="ach-toast">
+  <div class="toast-icon" id="toast-icon">🏆</div>
+  <div class="toast-body">
+    <div class="toast-title" id="toast-title">Achievement Unlocked!</div>
+    <div class="toast-msg" id="toast-msg">You earned a new badge.</div>
+  </div>
 </div>
 
 <script type="module">
   import Auth from '../js/clerk.js';
   import API from '../js/api.js';
-  import { drawRing } from '../js/common.js';
+
+  // ── Local-only achievement definitions (mirror of backend ALL_ACHIEVEMENTS)
+  const ALL_ACHIEVEMENTS = [
+    // Speed
+    { id:"wpm_50",  name:"Half Century",    icon:"🔥", desc:"Reach 50 WPM in a session",  category:"speed",    rarity:"common",    goal:50,  metric:"wpm" },
+    { id:"wpm_80",  name:"Fast Fingers",    icon:"⚡", desc:"Reach 80 WPM in a session",  category:"speed",    rarity:"common",    goal:80,  metric:"wpm" },
+    { id:"wpm_100", name:"Century Club",    icon:"💯", desc:"Reach 100 WPM in a session", category:"speed",    rarity:"rare",      goal:100, metric:"wpm" },
+    { id:"wpm_120", name:"Speed Demon",     icon:"🏎️", desc:"Reach 120 WPM in a session", category:"speed",    rarity:"epic",      goal:120, metric:"wpm" },
+    { id:"wpm_150", name:"Ghost Fingers",   icon:"👻", desc:"Reach 150 WPM in a session", category:"speed",    rarity:"legendary", goal:150, metric:"wpm" },
+    // Accuracy
+    { id:"acc_95",  name:"Sharp Eyes",      icon:"👁️", desc:"95%+ accuracy in a session", category:"accuracy", rarity:"common",    goal:95,  metric:"accuracy" },
+    { id:"acc_99",  name:"Perfect Aim",     icon:"🎯", desc:"99%+ accuracy in a session", category:"accuracy", rarity:"rare",      goal:99,  metric:"accuracy" },
+    { id:"acc_100", name:"Flawless",        icon:"💎", desc:"100% accuracy — no errors",  category:"accuracy", rarity:"epic",      goal:100, metric:"accuracy" },
+    // Special
+    { id:"no_errors",name:"Zero Error",     icon:"🧊", desc:"Complete a session with 0 errors",   category:"special",  rarity:"rare",    goal:0,   metric:"errors" },
+    { id:"survivor", name:"The Survivor",   icon:"🦺", desc:"Finish with 20+ errors but still going", category:"special", rarity:"common", goal:20, metric:"errors_max" },
+    { id:"on_fire",  name:"On Fire",        icon:"🔥", desc:"50-key error-free streak in a session", category:"special", rarity:"rare",  goal:50, metric:"streak" },
+    // Streak / Sessions
+    { id:"sessions_10",  name:"Getting Started",  icon:"🌱", desc:"Complete 10 sessions",   category:"streak", rarity:"common",    goal:10,  metric:"sessions" },
+    { id:"sessions_50",  name:"Dedicated",        icon:"📅", desc:"Complete 50 sessions",   category:"streak", rarity:"rare",      goal:50,  metric:"sessions" },
+    { id:"sessions_100", name:"Century Typist",   icon:"💯", desc:"Complete 100 sessions",  category:"streak", rarity:"epic",      goal:100, metric:"sessions" },
+    { id:"sessions_500", name:"Legendary Typist", icon:"👑", desc:"Complete 500 sessions",  category:"streak", rarity:"legendary", goal:500, metric:"sessions" },
+    // Developer
+    { id:"dev_10",  name:"Code Curious",    icon:"💻", desc:"10 developer mode sessions",  category:"dev",    rarity:"common",    goal:10,  metric:"dev_sessions" },
+    { id:"dev_100", name:"Code Assassin",   icon:"💀", desc:"100 developer mode sessions", category:"dev",    rarity:"legendary", goal:100, metric:"dev_sessions" },
+    // Time
+    { id:"night_owl",  name:"Night Owl",   icon:"🦉", desc:"30 sessions after midnight",   category:"time",   rarity:"rare",      goal:30,  metric:"night_sessions" },
+    { id:"early_bird", name:"Early Bird",  icon:"🐦", desc:"10 sessions before 7am",       category:"time",   rarity:"common",    goal:10,  metric:"early_sessions" },
+    // Accuracy special
+    { id:"punct_pro",   name:"Punctuation Slayer", icon:"🥷", desc:"98%+ accuracy in a punctuation-heavy session", category:"accuracy", rarity:"epic", goal:98, metric:"punct_accuracy" },
+    // Milestone
+    { id:"first_session", name:"Launched",  icon:"🚀", desc:"Complete your very first session",  category:"milestone", rarity:"common",    goal:1,  metric:"sessions" },
+    { id:"best_100wpm",   name:"Centurion", icon:"🏆", desc:"Reach a personal best of 100 WPM",  category:"milestone", rarity:"rare",      goal:100, metric:"best_wpm" },
+    { id:"best_120wpm",   name:"Elite",     icon:"⭐", desc:"Reach a personal best of 120 WPM",  category:"milestone", rarity:"epic",      goal:120, metric:"best_wpm" },
+  ];
 
   let achievementsData = [];
+  let userProfile = {};
+  let sessionHistory = [];
 
   async function init() {
     const user = await Auth.init();
@@ -237,15 +495,209 @@
       return;
     }
 
-    try {
-      achievementsData = await API.getAchievements();
-      renderStats(achievementsData);
-      renderGrid('all');
-    } catch (e) {
-      console.error("Failed to load achievements", e);
+    // Update avatar
+    const nameEl = document.querySelector('[data-auth-name]');
+    if (user) {
+      const displayName = user.firstName || user.username || 'Typist';
+      if (nameEl) nameEl.textContent = displayName;
+      document.getElementById('xp-name').textContent = displayName;
+      document.getElementById('xp-avatar').textContent =
+        (user.firstName || user.username || 'T')[0].toUpperCase();
     }
 
-    // Bind filters
+    try {
+      // Load profile and achievements in parallel
+      const [profile, history, apiAchs] = await Promise.allSettled([
+        API.getUserProfile(),
+        API.getHistory(100, 0),
+        API.getAchievements()
+      ]);
+
+      userProfile = profile.status === 'fulfilled' ? (profile.value || {}) : {};
+      sessionHistory = history.status === 'fulfilled' ? (history.value || []) : [];
+      const unlockedIds = apiAchs.status === 'fulfilled'
+        ? (apiAchs.value || []).filter(a => a.is_unlocked).map(a => a.id)
+        : [];
+
+      // Compute local progress from history if API has limited data
+      const computed = computeProgress(sessionHistory, userProfile);
+      achievementsData = ALL_ACHIEVEMENTS.map(ach => ({
+        ...ach,
+        is_unlocked: unlockedIds.includes(ach.id) || computed.unlocked.includes(ach.id),
+        progress: computed.progress[ach.id] ?? 0,
+      }));
+
+      renderXPHero(userProfile, sessionHistory);
+      renderGrid('all');
+      setupFilters();
+
+    } catch (err) {
+      console.error('Failed to load achievements:', err);
+      // Fall back to local-only mode using session history
+      achievementsData = ALL_ACHIEVEMENTS.map(ach => ({
+        ...ach, is_unlocked: false, progress: 0
+      }));
+      renderGrid('all');
+      setupFilters();
+    }
+  }
+
+  function computeProgress(history, profile) {
+    const unlocked = [];
+    const progress = {};
+    const totalSessions = history.length;
+    const bestWpm = profile.best_wpm || Math.max(0, ...history.map(s => s.wpm || 0));
+    const devSessions = history.filter(s => s.mode === 'dev').length;
+
+    ALL_ACHIEVEMENTS.forEach(ach => {
+      let pct = 0;
+      switch (ach.metric) {
+        case 'wpm': {
+          const best = bestWpm;
+          pct = Math.min(100, Math.round((best / ach.goal) * 100));
+          if (best >= ach.goal) unlocked.push(ach.id);
+          break;
+        }
+        case 'accuracy': {
+          const bestAcc = Math.max(0, ...history.map(s => s.accuracy || 0));
+          pct = Math.min(100, Math.round((bestAcc / ach.goal) * 100));
+          if (bestAcc >= ach.goal) unlocked.push(ach.id);
+          break;
+        }
+        case 'sessions': {
+          pct = Math.min(100, Math.round((totalSessions / ach.goal) * 100));
+          if (totalSessions >= ach.goal) unlocked.push(ach.id);
+          break;
+        }
+        case 'dev_sessions': {
+          pct = Math.min(100, Math.round((devSessions / ach.goal) * 100));
+          if (devSessions >= ach.goal) unlocked.push(ach.id);
+          break;
+        }
+        case 'errors': {
+          const hadZeroErrors = history.some(s => (s.errors || 0) === 0);
+          pct = hadZeroErrors ? 100 : 0;
+          if (hadZeroErrors) unlocked.push(ach.id);
+          break;
+        }
+        case 'best_wpm': {
+          pct = Math.min(100, Math.round((bestWpm / ach.goal) * 100));
+          if (bestWpm >= ach.goal) unlocked.push(ach.id);
+          break;
+        }
+        default:
+          pct = 0;
+      }
+      progress[ach.id] = pct;
+    });
+    return { unlocked, progress };
+  }
+
+  function renderXPHero(profile, history) {
+    const xp = profile.xp || 0;
+    const level = profile.level || Math.max(1, Math.floor(xp / 500) + 1);
+    const xpForLevel = level * 500;
+    const xpPrev = (level - 1) * 500;
+    const xpInLevel = xp - xpPrev;
+    const xpNeeded = xpForLevel - xpPrev;
+    const pct = Math.min(100, Math.round((xpInLevel / xpNeeded) * 100));
+
+    document.getElementById('xp-level-num').textContent = level;
+    document.getElementById('xp-current').textContent = `${xpInLevel.toLocaleString()} XP`;
+    document.getElementById('xp-next').textContent = `${(xpNeeded - xpInLevel).toLocaleString()} to Level ${level + 1}`;
+    setTimeout(() => {
+      document.getElementById('xp-bar-fill').style.width = pct + '%';
+    }, 200);
+
+    const total = ALL_ACHIEVEMENTS.length;
+    const unlocked = achievementsData.filter(a => a.is_unlocked).length;
+    const ringPct = total > 0 ? Math.round((unlocked / total) * 100) : 0;
+    const circumference = 2 * Math.PI * 32; // r=32
+    const offset = circumference * (1 - ringPct / 100);
+
+    setTimeout(() => {
+      document.getElementById('ring-fill').style.strokeDashoffset = offset;
+      document.getElementById('ring-pct').textContent = ringPct + '%';
+    }, 300);
+
+    document.getElementById('chip-unlocked').textContent = unlocked;
+    document.getElementById('chip-total').textContent = total;
+    document.getElementById('chip-sessions').textContent = profile.total_sessions || history.length;
+  }
+
+  function renderGrid(category) {
+    const grid = document.getElementById('achievements-grid');
+    grid.innerHTML = '';
+
+    const list = category === 'all'
+      ? achievementsData
+      : achievementsData.filter(a => a.category === category);
+
+    // Sort: unlocked first, then by rarity desc
+    const rarityOrder = { legendary: 0, epic: 1, rare: 2, common: 3 };
+    const sorted = [...list].sort((a, b) => {
+      if (a.is_unlocked !== b.is_unlocked) return a.is_unlocked ? -1 : 1;
+      return (rarityOrder[a.rarity] ?? 3) - (rarityOrder[b.rarity] ?? 3);
+    });
+
+    if (!sorted.length) {
+      grid.innerHTML = `<div class="empty-state"><div class="icon">🔍</div><div class="msg">No achievements in this category</div><div class="sub">Keep training to unlock more!</div></div>`;
+      return;
+    }
+
+    sorted.forEach((ach, idx) => {
+      const card = document.createElement('div');
+      card.className = `ach-card rarity-${ach.rarity} ${ach.is_unlocked ? 'unlocked' : 'locked'}`;
+      card.style.opacity = '0';
+      card.style.transform = 'scale(0.95)';
+
+      const progressPct = ach.is_unlocked ? 100 : (ach.progress || 0);
+      const progressText = ach.is_unlocked ? 'Completed!' : `${progressPct}% progress`;
+
+      card.innerHTML = `
+        <div class="ach-top">
+          <div class="ach-icon-wrap">${ach.icon}</div>
+          <div class="ach-meta">
+            <div class="ach-name">${ach.name}</div>
+            <div class="ach-desc">${ach.desc}</div>
+            <div class="ach-rarity">${ach.rarity}</div>
+          </div>
+        </div>
+        <div class="ach-progress-wrap">
+          <div class="ach-progress-label">
+            <span>${progressText}</span>
+            ${!ach.is_unlocked && ach.progress > 0 ? `<span>${progressPct}%</span>` : ''}
+          </div>
+          <div class="ach-progress-bar">
+            <div class="ach-progress-fill" style="width:0%" data-target="${progressPct}"></div>
+          </div>
+        </div>
+        ${ach.is_unlocked
+          ? `<div class="ach-unlocked-badge">✓ Unlocked</div>`
+          : `<div class="lock-badge">🔒 Locked — keep typing!</div>`
+        }
+      `;
+
+      grid.appendChild(card);
+
+      // Staggered animation in
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          card.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+          card.style.opacity = '1';
+          card.style.transform = 'scale(1)';
+
+          // Animate progress bar after card appears
+          setTimeout(() => {
+            const fill = card.querySelector('.ach-progress-fill');
+            if (fill) fill.style.width = fill.dataset.target + '%';
+          }, 200);
+        }, idx * 45);
+      });
+    });
+  }
+
+  function setupFilters() {
     document.querySelectorAll('.filter-tab').forEach(tab => {
       tab.addEventListener('click', () => {
         document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
@@ -255,48 +707,14 @@
     });
   }
 
-  function renderStats(list) {
-    const total = list.length;
-    const unlocked = list.filter(a => a.is_unlocked).length;
-    const pct = total > 0 ? Math.round((unlocked / total) * 100) : 0;
-    
-    document.getElementById('unlocked-count').textContent = `${unlocked} / ${total}`;
-    const progressSvg = document.getElementById('progress-svg');
-    if (progressSvg) {
-      drawRing(progressSvg, pct, 'var(--brand)', 'rgba(255,255,255,0.06)');
-    }
-  }
-
-  function renderGrid(category) {
-    const container = document.getElementById('achievements-container');
-    if (!container) return;
-    container.innerHTML = '';
-
-    const filtered = category === 'all' 
-      ? achievementsData 
-      : achievementsData.filter(a => a.category === category);
-
-    if (filtered.length === 0) {
-      container.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 40px; color:var(--text-3);">No achievements found in this category.</div>`;
-      return;
-    }
-
-    filtered.forEach(ach => {
-      const card = document.createElement('div');
-      card.className = `achievement-card ${ach.is_unlocked ? '' : 'locked'}`;
-      card.innerHTML = `
-        <div class="rarity-dot rarity-${ach.rarity}" title="${ach.rarity.toUpperCase()}"></div>
-        <div class="achievement-icon-wrapper">
-          ${ach.icon}
-        </div>
-        <div class="achievement-info">
-          <div class="achievement-name">${ach.name}</div>
-          <div class="achievement-desc">${ach.desc}</div>
-        </div>
-        ${ach.is_unlocked ? '' : '<div class="lock-overlay">🔒 Locked</div>'}
-      `;
-      container.appendChild(card);
-    });
+  // Toast notification for newly unlocked achievements
+  function showToast(name, icon) {
+    const toast = document.getElementById('ach-toast');
+    document.getElementById('toast-icon').textContent = icon;
+    document.getElementById('toast-title').textContent = 'Achievement Unlocked!';
+    document.getElementById('toast-msg').textContent = name;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 4000);
   }
 
   init();
