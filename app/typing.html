@@ -338,6 +338,97 @@ import { initAccessibility } from '../js/accessibility.js';
 initAccessibility();
 
 // ═══════════════════════════════════════════════════════
+// TYPING SOUND ENGINE (Web Audio API — no files needed)
+// ═══════════════════════════════════════════════════════
+let audioCtx = null;
+let soundEnabled = localStorage.getItem('tf_sound') !== 'off'; // default: on
+
+function getAudioCtx() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  // Resume if suspended (browser policy)
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+  return audioCtx;
+}
+
+function playKeyClick(isError = false) {
+  if (!soundEnabled) return;
+  try {
+    const ctx = getAudioCtx();
+    const now = ctx.currentTime;
+
+    // Oscillator for the key thump
+    const osc = ctx.createOscillator();
+    const gainNode = ctx.createGain();
+    const filter = ctx.createBiquadFilter();
+
+    filter.type = 'bandpass';
+    filter.frequency.value = isError ? 220 : 800;
+    filter.Q.value = 0.8;
+
+    osc.type = 'square';
+    osc.frequency.setValueAtTime(isError ? 180 : 600, now);
+    osc.frequency.exponentialRampToValueAtTime(isError ? 100 : 200, now + 0.06);
+
+    gainNode.gain.setValueAtTime(isError ? 0.18 : 0.12, now);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.07);
+
+    osc.connect(filter);
+    filter.connect(gainNode);
+    gainNode.connect(ctx.destination);
+
+    osc.start(now);
+    osc.stop(now + 0.08);
+  } catch (e) { /* audio not supported */ }
+}
+
+function playSessionEnd() {
+  if (!soundEnabled) return;
+  try {
+    const ctx = getAudioCtx();
+    const now = ctx.currentTime;
+    [0, 0.1, 0.2, 0.35].forEach((delay, i) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      const freqs = [523, 659, 784, 1047]; // C5 E5 G5 C6
+      osc.type = 'sine';
+      osc.frequency.value = freqs[i];
+      gain.gain.setValueAtTime(0.15, now + delay);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + delay + 0.3);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now + delay);
+      osc.stop(now + delay + 0.35);
+    });
+  } catch (e) {}
+}
+
+// Sound toggle button (injected into header actions)
+(function() {
+  const actionsEl = document.querySelector('.app-header-actions');
+  if (!actionsEl) return;
+  const btn = document.createElement('button');
+  btn.id = 'sound-toggle-btn';
+  btn.className = 'btn btn-ghost btn-icon btn-sm';
+  btn.setAttribute('aria-label', 'Toggle typing sounds');
+  btn.title = soundEnabled ? 'Sounds On' : 'Sounds Off';
+  btn.textContent = soundEnabled ? '🔊' : '🔇';
+  btn.style.cssText = 'font-size:16px;min-width:36px;';
+  btn.addEventListener('click', () => {
+    soundEnabled = !soundEnabled;
+    localStorage.setItem('tf_sound', soundEnabled ? 'on' : 'off');
+    btn.textContent = soundEnabled ? '🔊' : '🔇';
+    btn.title = soundEnabled ? 'Sounds On' : 'Sounds Off';
+    // Resume AudioContext on first user gesture
+    if (soundEnabled) getAudioCtx();
+  });
+  // Insert before focus-mode-btn
+  const focusBtn = document.getElementById('focus-mode-btn');
+  actionsEl.insertBefore(btn, focusBtn);
+})();
+
+// ═══════════════════════════════════════════════════════
 // TEXT POOLS
 // ═══════════════════════════════════════════════════════
 const TEXT_POOLS = {
@@ -660,6 +751,9 @@ typingInput.addEventListener('input', (e) => {
   updateStats();
   updateKeyboardHeatmap(expectedChar, isCorrect);
 
+  // Sound feedback
+  playKeyClick(!isCorrect);
+
   // Brief shake on error
   if (!isCorrect) {
     typingArea.classList.add('error');
@@ -743,6 +837,9 @@ function endSession() {
   if (state.finished) return;
   clearInterval(state.timerInterval);
   state.finished = true;
+
+  // Play session-complete arpeggio
+  playSessionEnd();
 
   const elapsed = state.mode === 'zen'
     ? (state.keystrokeLog.length > 0 ? (state.keystrokeLog[state.keystrokeLog.length-1].timestamp - state.keystrokeLog[0].timestamp) / 1000 : 0)

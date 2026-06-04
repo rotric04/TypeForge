@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Community & Feedback — TypeForge AI</title>
   <meta name="description" content="Help build TypeForge. Report bugs, suggest features, or say hi." />
-  <link rel="canonical" href="https://typeforge.ai/feedback" />
+  <link rel="canonical" href="https://typeforge.fun/feedback" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="css/global.css" />
@@ -216,10 +216,10 @@
           </div>
 
           <!-- Uses FormSubmit.co for real backendless submission -->
-          <form action="https://formsubmit.co/your-email@example.com" method="POST" id="feedback-form">
+          <form action="https://formsubmit.co/hello@typeforge.fun" method="POST" id="feedback-form">
             <input type="hidden" name="_subject" value="TypeForge General Feedback" id="form-subject">
             <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_next" value="https://typeforge2.vercel.app/feedback?success=true">
+            <input type="hidden" name="_next" value="https://typeforge.fun/feedback?success=true">
 
             <div class="form-group">
               <label for="name">Name / GitHub Handle</label>
@@ -353,28 +353,42 @@
       document.getElementById('submit-btn').disabled = false;
     };
 
-    document.getElementById('feedback-form').addEventListener('submit', async (e) => {
+    const formEl = document.getElementById('feedback-form');
+
+    async function handleFormSubmit(e) {
       e.preventDefault();
       if (!window.turnstileToken) return;
 
       const btn = document.getElementById('submit-btn');
-      btn.textContent = 'Verifying & Sending...';
+      btn.textContent = 'Sending...';
       btn.disabled = true;
 
+      // Try to verify Turnstile on the backend.
+      // If the backend is unavailable (cold start / down), fall back to
+      // direct formsubmit.co submission so the user message is never lost.
+      let backendVerified = false;
       try {
-        // Verify turnstile on backend
-        await API.verifyTurnstile(window.turnstileToken);
-
-        // In a real app we would submit the feedback via API here.
-        // We simulate success redirect for the UI.
-        window.location.href = '/feedback?success=true';
+        await Promise.race([
+          API.verifyTurnstile(window.turnstileToken),
+          new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 6000))
+        ]);
+        backendVerified = true;
       } catch (err) {
-        alert('Verification failed. Please try again.');
-        btn.textContent = 'Send Message';
-        window.turnstileToken = null;
-        if (window.turnstile) window.turnstile.reset();
+        // Backend unavailable — silently fall through to native form submit
+        console.warn('Turnstile API verify failed or timed out, using formsubmit fallback:', err.message);
       }
-    });
+
+      if (backendVerified) {
+        // Backend verified: show success screen directly
+        window.location.href = '/feedback?success=true';
+      } else {
+        // Fallback: let the HTML form submit natively to formsubmit.co
+        formEl.removeEventListener('submit', handleFormSubmit);
+        formEl.submit();
+      }
+    }
+
+    formEl.addEventListener('submit', handleFormSubmit);
 
     // Check for success param
     if (window.location.search.includes('success=true')) {

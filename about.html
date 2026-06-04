@@ -857,11 +857,8 @@
   </footer>
 </main>
 
-<!-- Anime.js -->
+<!-- Anime.js only -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
-<!-- GSAP + ScrollTrigger -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
 <script type="module">
 import { initNavbar, initReveal } from './js/common.js';
@@ -887,20 +884,27 @@ function toggleDrawer(open) {
 hamburger.addEventListener('click', () => toggleDrawer(!drawer.classList.contains('open')));
 backdrop.addEventListener('click', () => toggleDrawer(false));
 
-// ── GSAP Parallax ───────────────────────────────────────
-gsap.registerPlugin(ScrollTrigger);
+// ── Lightweight scroll parallax (no GSAP) ──────────────────────────
+const heroSection = document.querySelector('.about-hero');
+const parallaxKb  = document.querySelector('[data-parallax="0.25"]');
+const parallaxTxt = document.querySelector('.parallax-layer[data-speed="0.15"]');
 
-// Hero parallax
-gsap.to('[data-parallax="0.25"]', {
-  y: -60,
-  ease: 'none',
-  scrollTrigger: { trigger: '.about-hero', start: 'top top', end: 'bottom top', scrub: 1 }
-});
-gsap.to('.parallax-layer[data-speed="0.15"]', {
-  y: -40,
-  ease: 'none',
-  scrollTrigger: { trigger: '.about-hero', start: 'top top', end: 'bottom top', scrub: 1 }
-});
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      if (!heroSection) { ticking = false; return; }
+      const scrolled = window.scrollY;
+      const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+      if (scrolled <= heroBottom) {
+        if (parallaxKb)  parallaxKb.style.transform  = `translateY(${-scrolled * 0.25}px)`;
+        if (parallaxTxt) parallaxTxt.style.transform = `translateY(${-scrolled * 0.12}px)`;
+      }
+      ticking = false;
+    });
+    ticking = true;
+  }
+}, { passive: true });
 
 // ── Anime.js entry animations ───────────────────────────
 function animateEnter(el, delay = 0) {
@@ -938,6 +942,7 @@ const counterObserver = new IntersectionObserver((entries) => {
       const el  = e.target;
       const end = parseInt(el.dataset.counter);
       const isLarge = end > 10000;
+      const isSuffix99 = el.dataset.counter === '99';
       anime({
         targets: el,
         innerHTML: [0, end],
@@ -945,12 +950,13 @@ const counterObserver = new IntersectionObserver((entries) => {
         duration: 2000,
         easing: 'easeOutExpo',
         update() {
+          const v = parseInt(el.innerHTML) || 0;
           if (isLarge) {
-            el.innerHTML = (parseInt(el.innerHTML) / 1000).toFixed(0) + 'k+';
-          } else if (el.dataset.counter === '99') {
-            el.innerHTML = el.innerHTML + '%';
+            el.textContent = Math.floor(v / 1000) + 'k+';
+          } else if (isSuffix99) {
+            el.textContent = v + '%';
           } else {
-            el.innerHTML = '+' + el.innerHTML + ' WPM';
+            el.textContent = '+' + v + ' WPM';
           }
         }
       });
@@ -964,16 +970,23 @@ document.querySelectorAll('[data-counter]').forEach(el => counterObserver.observ
 // ── 3D Keyboard mouse tilt ──────────────────────────────
 const kb = document.getElementById('kb3d');
 if (kb) {
+  let kbRaf = null;
   document.querySelector('.keyboard-scene').addEventListener('mousemove', (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    const dx = (e.clientX - cx) / rect.width;
-    const dy = (e.clientY - cy) / rect.height;
-    kb.style.transform = `rotateX(${20 - dy * 12}deg) rotateY(${-10 + dx * 14}deg) rotateZ(${dx * 2}deg)`;
-    kb.style.transition = 'transform 0.15s ease-out';
-  });
+    if (kbRaf) return; // throttle
+    kbRaf = requestAnimationFrame(() => {
+      const rect = e.currentTarget?.getBoundingClientRect();
+      if (!rect) { kbRaf = null; return; }
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = (e.clientX - cx) / rect.width;
+      const dy = (e.clientY - cy) / rect.height;
+      kb.style.transform = `rotateX(${20 - dy * 12}deg) rotateY(${-10 + dx * 14}deg) rotateZ(${dx * 2}deg)`;
+      kb.style.transition = 'transform 0.1s ease-out';
+      kbRaf = null;
+    });
+  }, { passive: true });
   document.querySelector('.keyboard-scene').addEventListener('mouseleave', () => {
+    kbRaf = null;
     kb.style.transform = '';
     kb.style.transition = 'transform 0.8s var(--ease-out)';
   });
