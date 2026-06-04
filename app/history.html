@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Session History — TypeForge AI</title>
+  <title>Session History | TypeForge AI</title>
   <meta name="description" content="Review your complete typing session history with detailed stats and trends."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="stylesheet" href="../css/global.css"/>
   <link rel="stylesheet" href="../css/animations.css"/>
   <link rel="stylesheet" href="../css/components.css"/>
+  <link rel="stylesheet" href="../css/app-pages.css"/>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>"/>
   <!-- Vercel Web Analytics -->
   <script>
@@ -276,7 +277,7 @@
         <h1 class="page-title">Session History</h1>
         <p class="page-subtitle" id="history-subtitle">Loading your records…</p>
       </div>
-      <a href="typing.html" class="btn btn-primary btn-sm">+ New Session</a>
+      <a href="typing.html" class="btn btn-primary btn-lg">+ New Session</a>
     </div>
 
     <!-- Summary Stats -->
@@ -315,6 +316,8 @@
 <script type="module">
   import Auth from '../js/clerk.js';
   import API from '../js/api.js';
+  import { loadProfileAndHistory, displayName } from '../js/app-data.js';
+  import { initScrollReveal } from '../js/motion.js';
 
   const BATCH = 30;
   let offset = 0;
@@ -329,16 +332,9 @@
       return;
     }
 
-    let data = [];
-    try {
-      data = await API.getHistory(BATCH, 0);
-      if (!data || data.length === 0) {
-        data = JSON.parse(localStorage.getItem('tf_session_history') || '[]');
-      }
-    } catch (err) {
-      console.warn('Failed to load history from API, falling back to localStorage:', err);
-      data = JSON.parse(localStorage.getItem('tf_session_history') || '[]');
-    }
+    const { profile, history: data } = await loadProfileAndHistory();
+    const name = displayName(user, profile);
+    document.querySelectorAll('[data-auth-name]').forEach((el) => { el.textContent = name; });
 
     allSessions = data || [];
     offset = allSessions.length;
@@ -349,7 +345,7 @@
     document.getElementById('filter-bar').style.display = 'flex';
     document.getElementById('history-subtitle').textContent =
       allSessions.length === 0
-        ? 'No sessions yet — go train!'
+        ? 'No sessions yet. Your first run takes one minute.'
         : `${allSessions.length} session${allSessions.length !== 1 ? 's' : ''} found`;
 
     if (allSessions.length === BATCH) {
@@ -425,7 +421,7 @@
               ? 'Complete your first typing session to see your stats here.'
               : 'Try this mode to see data here.'}
           </div>
-          <a href="typing.html" class="btn btn-primary">Start Typing</a>
+          <a href="typing.html" class="btn btn-primary btn-lg">Start Typing</a>
         </div>`;
       return;
     }
@@ -513,7 +509,7 @@
     svg.appendChild(dot);
   }
 
-  init();
+  init().then(() => initScrollReveal(document.getElementById('sessions-list')));
 </script>
 </body>
 </html>

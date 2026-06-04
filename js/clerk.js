@@ -64,10 +64,14 @@ function loadClerkScript() {
 
 function mapClerkUser(clerkUser) {
   if (!clerkUser) return null;
+  const firstName = clerkUser.firstName || clerkUser.fullName?.split(' ')?.[0];
+  const username = clerkUser.username || clerkUser.primaryEmailAddress?.emailAddress?.split('@')[0];
   return {
     id: clerkUser.id,
     email: clerkUser.primaryEmailAddress?.emailAddress,
-    name: clerkUser.fullName || clerkUser.username || clerkUser.primaryEmailAddress?.emailAddress?.split('@')[0],
+    firstName,
+    username,
+    name: clerkUser.fullName || firstName || username || 'Typist',
     avatarUrl: clerkUser.imageUrl,
     provider: 'clerk',
     createdAt: clerkUser.createdAt,

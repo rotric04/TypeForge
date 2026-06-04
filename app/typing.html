@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Train — TypeForge AI</title>
+  <title>Train | TypeForge AI</title>
   <meta name="description" content="Adaptive typing training powered by AI. Improve speed, accuracy, and coding proficiency with personalized sessions."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="stylesheet" href="../css/global.css"/>
   <link rel="stylesheet" href="../css/animations.css"/>
   <link rel="stylesheet" href="../css/components.css"/>
+  <link rel="stylesheet" href="../css/app-pages.css"/>
   <link rel="stylesheet" href="../css/typing.css"/>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>"/>
   <!-- Vercel Web Analytics -->
@@ -906,7 +907,10 @@ function endSession() {
       } catch (e) {}
 
       showResults(data.wpm, data.accuracy, data.consistency, data.xp_earned);
-      
+      if (data.badges_earned?.length) {
+        showBadgeUnlocks(data.badges_earned);
+      }
+
       // Fetch fresh details from database to update XP bar and sync state
       API.getUserProfile()
         .then(profile => {
@@ -981,6 +985,19 @@ function saveSession(localSession) {
     // Save key stats
     localStorage.setItem('tf_key_stats', JSON.stringify(state.keyStats));
   } catch(e) {}
+}
+
+function showBadgeUnlocks(badgeIds) {
+  badgeIds.slice(0, 3).forEach((id, i) => {
+    setTimeout(() => {
+      showToast({
+        title: 'Badge unlocked!',
+        desc: id.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
+        type: 'success',
+        duration: 5000,
+      });
+    }, i * 600);
+  });
 }
 
 function showLevelUp() {

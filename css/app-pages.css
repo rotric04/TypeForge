@@ -1,0 +1,193 @@
+/* TypeForge — App pages (dashboard, history, achievements) */
+
+.app-main .btn-primary,
+.app-main a.btn-primary,
+.state-box .btn-primary,
+.state-box a.btn-primary {
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
+  color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 20px var(--brand-glow);
+}
+
+.app-main .btn-primary:hover,
+.state-box a.btn-primary:hover {
+  color: #fff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 28px var(--brand-glow);
+}
+
+/* Welcome / empty states */
+.welcome-hero {
+  grid-column: 1 / -1;
+  padding: 28px 32px;
+  border-radius: 24px;
+  border: 1px solid var(--border-brand);
+  background: linear-gradient(135deg, rgba(232, 115, 74, 0.12), rgba(0, 201, 167, 0.06));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 8px;
+}
+
+.welcome-hero h2 {
+  font-size: 22px;
+  font-weight: 800;
+  margin: 0 0 8px;
+}
+
+.welcome-hero p {
+  margin: 0;
+  color: var(--text-2);
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 520px;
+}
+
+.welcome-emoji {
+  font-size: 48px;
+  line-height: 1;
+  filter: drop-shadow(0 8px 16px rgba(232, 115, 74, 0.35));
+}
+
+.xp-strip {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.xp-strip-card {
+  flex: 1;
+  min-width: 200px;
+  padding: 16px 20px;
+  border-radius: 16px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-1);
+}
+
+.xp-strip-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-4);
+  margin-bottom: 8px;
+}
+
+.xp-bar-track {
+  height: 8px;
+  background: var(--border-1);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.xp-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--brand), var(--teal));
+  border-radius: 999px;
+  transition: width 0.8s var(--ease-out);
+}
+
+.next-badge-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 240px;
+}
+
+.next-badge-icon {
+  font-size: 32px;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: rgba(245, 200, 66, 0.12);
+  border: 1px solid rgba(245, 200, 66, 0.25);
+}
+
+.live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--teal);
+  margin-bottom: 8px;
+}
+
+.live-pill::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 8px var(--teal);
+  animation: pulse 2s ease infinite;
+}
+
+.chart-empty-msg {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--text-3);
+  font-size: 14px;
+  padding: 24px;
+  min-height: 160px;
+}
+
+/* Scroll reveal (CSS-only fallback) */
+.tf-reveal {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+}
+
+html.tf-js .tf-reveal-pending {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+html.tf-js .tf-reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Performance: contain paint, skip off-screen work */
+.bento-item,
+.session-card,
+.achievements-grid .ach-card {
+  content-visibility: auto;
+  contain-intrinsic-size: 180px;
+}
+
+.heatmap-cell {
+  opacity: 1 !important;
+  transform: scale(1);
+}
+
+@media (max-width: 600px) {
+  .welcome-hero {
+    flex-direction: column;
+    text-align: center;
+  }
+  .welcome-hero .btn-primary {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live-pill::before {
+    animation: none;
+  }
+  .dna-ring {
+    animation: none !important;
+  }
+}

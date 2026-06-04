@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Achievements — TypeForge AI</title>
+  <title>Achievements | TypeForge AI</title>
   <meta name="description" content="Track your typing milestones, unlock badges, and level up your skills."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="stylesheet" href="../css/global.css"/>
   <link rel="stylesheet" href="../css/animations.css"/>
   <link rel="stylesheet" href="../css/components.css"/>
+  <link rel="stylesheet" href="../css/app-pages.css"/>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>"/>
   <!-- Vercel Web Analytics -->
   <script>
@@ -453,10 +454,13 @@
 <script type="module">
   import Auth from '../js/clerk.js';
   import API from '../js/api.js';
+  import { displayName, personalizeBadge } from '../js/app-data.js';
+  import { initScrollReveal } from '../js/motion.js';
 
   // ── Local-only achievement definitions (mirror of backend ALL_ACHIEVEMENTS)
   const ALL_ACHIEVEMENTS = [
     // Speed
+    { id:"wpm_40",  name:"Warming Up",      icon:"☕", desc:"Reach 40 WPM in a session",  category:"speed",    rarity:"common",    goal:40,  metric:"wpm" },
     { id:"wpm_50",  name:"Half Century",    icon:"🔥", desc:"Reach 50 WPM in a session",  category:"speed",    rarity:"common",    goal:50,  metric:"wpm" },
     { id:"wpm_80",  name:"Fast Fingers",    icon:"⚡", desc:"Reach 80 WPM in a session",  category:"speed",    rarity:"common",    goal:80,  metric:"wpm" },
     { id:"wpm_100", name:"Century Club",    icon:"💯", desc:"Reach 100 WPM in a session", category:"speed",    rarity:"rare",      goal:100, metric:"wpm" },
@@ -484,6 +488,12 @@
     // Accuracy special
     { id:"punct_pro",   name:"Punctuation Slayer", icon:"🥷", desc:"98%+ accuracy in a punctuation-heavy session", category:"accuracy", rarity:"epic", goal:98, metric:"punct_accuracy" },
     // Milestone
+    { id:"sessions_5",  name:"Finding Rhythm", icon:"🎵", desc:"Complete 5 sessions", category:"streak", rarity:"common", goal:5, metric:"sessions" },
+    { id:"xp_200",  name:"XP Spark", icon:"✨", desc:"Earn 200 total XP", category:"xp", rarity:"common", goal:200, metric:"xp" },
+    { id:"xp_500",  name:"XP Surge", icon:"🌟", desc:"Earn 500 total XP", category:"xp", rarity:"common", goal:500, metric:"xp" },
+    { id:"level_3", name:"Level 3 Crew", icon:"🥉", desc:"Reach level 3", category:"xp", rarity:"common", goal:3, metric:"level" },
+    { id:"level_5", name:"Rising Star", icon:"⭐", desc:"Reach level 5", category:"xp", rarity:"rare", goal:5, metric:"level" },
+    { id:"dev_1",   name:"Hello World", icon:"👋", desc:"First developer session", category:"dev", rarity:"common", goal:1, metric:"dev_sessions" },
     { id:"first_session", name:"Launched",  icon:"🚀", desc:"Complete your very first session",  category:"milestone", rarity:"common",    goal:1,  metric:"sessions" },
     { id:"best_100wpm",   name:"Centurion", icon:"🏆", desc:"Reach a personal best of 100 WPM",  category:"milestone", rarity:"rare",      goal:100, metric:"best_wpm" },
     { id:"best_120wpm",   name:"Elite",     icon:"⭐", desc:"Reach a personal best of 120 WPM",  category:"milestone", rarity:"epic",      goal:120, metric:"best_wpm" },
@@ -492,6 +502,7 @@
   let achievementsData = [];
   let userProfile = {};
   let sessionHistory = [];
+  let userDisplayName = 'Typist';
 
   async function init() {
     const user = await Auth.init();
@@ -503,11 +514,10 @@
     // Update avatar
     const nameEl = document.querySelector('[data-auth-name]');
     if (user) {
-      const displayName = user.firstName || user.username || 'Typist';
-      if (nameEl) nameEl.textContent = displayName;
-      document.getElementById('xp-name').textContent = displayName;
-      document.getElementById('xp-avatar').textContent =
-        (user.firstName || user.username || 'T')[0].toUpperCase();
+      userDisplayName = displayName(user, null);
+      if (nameEl) nameEl.textContent = userDisplayName;
+      document.getElementById('xp-name').textContent = userDisplayName;
+      document.getElementById('xp-avatar').textContent = userDisplayName[0].toUpperCase();
     }
 
     try {
@@ -542,9 +552,11 @@
         progress: computed.progress[ach.id] ?? 0,
       }));
 
+      userDisplayName = displayName(user, userProfile);
       renderXPHero(userProfile, sessionHistory);
       renderGrid('all');
       setupFilters();
+      initScrollReveal(document.getElementById('achievements-grid'));
 
     } catch (err) {
       console.error('Failed to load achievements:', err);
@@ -560,7 +572,9 @@
   function computeProgress(history, profile) {
     const unlocked = [];
     const progress = {};
-    const totalSessions = history.length;
+    const totalSessions = profile.total_sessions || history.length;
+    const totalXp = profile.xp || 0;
+    const userLevel = profile.level || 1;
     const bestWpm = profile.best_wpm || Math.max(0, ...history.map(s => s.wpm || 0));
     const devSessions = history.filter(s => s.mode === 'dev').length;
 
@@ -598,6 +612,16 @@
         case 'best_wpm': {
           pct = Math.min(100, Math.round((bestWpm / ach.goal) * 100));
           if (bestWpm >= ach.goal) unlocked.push(ach.id);
+          break;
+        }
+        case 'xp': {
+          pct = Math.min(100, Math.round((totalXp / ach.goal) * 100));
+          if (totalXp >= ach.goal) unlocked.push(ach.id);
+          break;
+        }
+        case 'level': {
+          pct = Math.min(100, Math.round((userLevel / ach.goal) * 100));
+          if (userLevel >= ach.goal) unlocked.push(ach.id);
           break;
         }
         default:
@@ -660,11 +684,10 @@
       return;
     }
 
-    sorted.forEach((ach, idx) => {
+    sorted.forEach((ach) => {
+      const show = personalizeBadge(ach, userDisplayName);
       const card = document.createElement('div');
-      card.className = `ach-card rarity-${ach.rarity} ${ach.is_unlocked ? 'unlocked' : 'locked'}`;
-      card.style.opacity = '0';
-      card.style.transform = 'scale(0.95)';
+      card.className = `ach-card rarity-${ach.rarity} ${ach.is_unlocked ? 'unlocked' : 'locked'} tf-reveal`;
 
       const progressPct = ach.is_unlocked ? 100 : (ach.progress || 0);
       const progressText = ach.is_unlocked ? 'Completed!' : `${progressPct}% progress`;
@@ -673,8 +696,8 @@
         <div class="ach-top">
           <div class="ach-icon-wrap">${ach.icon}</div>
           <div class="ach-meta">
-            <div class="ach-name">${ach.name}</div>
-            <div class="ach-desc">${ach.desc}</div>
+            <div class="ach-name">${show.name}</div>
+            <div class="ach-desc">${show.desc}</div>
             <div class="ach-rarity">${ach.rarity}</div>
           </div>
         </div>
@@ -689,7 +712,7 @@
         </div>
         ${ach.is_unlocked
           ? `<div class="ach-unlocked-badge">✓ Unlocked</div>`
-          : `<div class="lock-badge">🔒 Locked — keep typing!</div>`
+          : `<div class="lock-badge">🔒 Locked. One more session could unlock this.</div>`
         }
       `;
 

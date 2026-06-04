@@ -81,7 +81,11 @@ export const API = {
    */
   async getHistory(limit = 20, offset = 0) {
     return this.fetch(`/sessions/history?limit=${limit}&offset=${offset}`);
-  }
+  },
+
+  async getDashboardAnalytics() {
+    return this.fetch('/analytics/dashboard');
+  },
 };
 
 export default API;

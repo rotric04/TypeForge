@@ -2,7 +2,7 @@
 TypeForge AI — Sessions Router
 Handles typing session creation, retrieval, and real-time updates
 """
-from fastapi import APIRouter, Depends, HTTPException, status, BackgroundTasks
+from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List, Optional
 from datetime import datetime, timedelta
 import uuid
@@ -56,7 +56,6 @@ def generate_ai_insight(wpm: int, accuracy: float, consistency: float, weak_keys
 @router.post("/", response_model=SessionResponse, status_code=status.HTTP_201_CREATED)
 async def create_session(
     session: SessionCreate,
-    background_tasks: BackgroundTasks,
     user: UserProfile = Depends(get_current_user),
     db = Depends(get_db),
 ):
@@ -125,9 +124,9 @@ async def create_session(
     except Exception as dna_err:
         logger.error(f"Failed to update typing DNA in database: {dna_err}")
 
-    # Check achievements in background
-    background_tasks.add_task(
-        check_achievements_bg, user_id, session.wpm, session.accuracy, session.errors
+    badges_earned = await check_achievements_sync(
+        user_id, session.wpm, session.accuracy, session.errors,
+        session.max_streak, session.mode.value,
     )
 
     return SessionResponse(
@@ -142,7 +141,7 @@ async def create_session(
         errors=session.errors,
         consistency=session.consistency,
         xp_earned=xp_earned,
-        badges_earned=[],
+        badges_earned=[b["id"] for b in badges_earned],
         ai_insight=ai_insight,
         weak_keys=weak_keys,
         created_at=datetime.utcnow(),
@@ -188,7 +187,14 @@ async def get_session(session_id: str, db = Depends(get_db)):
     raise HTTPException(status_code=404, detail="Session not found")
 
 
-async def check_achievements_bg(user_id: str, wpm: int, accuracy: float, errors: int):
-    """Background task to check and award achievements."""
+async def check_achievements_sync(
+    user_id: str,
+    wpm: int,
+    accuracy: float,
+    errors: int,
+    max_streak: int,
+    mode: str,
+) -> list:
+    """Check and award achievements; return newly earned badge metadata."""
     engine = AchievementEngine(user_id)
-    await engine.check_session_achievements(wpm, accuracy, errors)
+    return await engine.check_session_achievements(wpm, accuracy, errors, max_streak, mode)
