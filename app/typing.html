@@ -330,6 +330,7 @@
 import Auth from '../js/clerk.js';
 import API from '../js/api.js';
 import { initAccessibility } from '../js/accessibility.js';
+import { showToast } from '../js/common.js';
 
 // Init auth to protect page
 (async () => {
@@ -888,11 +889,44 @@ function endSession() {
 
   API.saveSession(payload)
     .then(data => {
-      // Show results using backend validated data
+      // Save locally as cache/history backup
+      try {
+        const sessions = JSON.parse(localStorage.getItem('tf_session_history') || '[]');
+        sessions.unshift({ ...payload, id: data.id, timestamp: Date.now() });
+        localStorage.setItem('tf_session_history', JSON.stringify(sessions.slice(0, 100)));
+        localStorage.setItem('tf_key_stats', JSON.stringify(state.keyStats));
+      } catch (e) {}
+
       showResults(data.wpm, data.accuracy, data.consistency, data.xp_earned);
+      
+      // Fetch fresh details from database to update XP bar and sync state
+      API.getUserProfile()
+        .then(profile => {
+          if (profile) {
+            state.xp = profile.xp || 0;
+            state.level = profile.level || 1;
+            state.sessionCount = profile.total_sessions || 0;
+            updateXPBar();
+            loadWeakKeys();
+          }
+        })
+        .catch(err => {
+          console.error('Failed to refresh profile after save:', err);
+        });
     })
     .catch(err => {
-      console.error('Failed to save session', err);
+      console.error('Failed to save session:', err);
+      
+      // Fallback: save entirely to localStorage
+      saveSession({ wpm: finalWPM, acc: finalAcc, consistency, xp: xpEarned });
+      
+      if (typeof showToast === 'function') {
+        showToast({
+          title: "Offline Mode",
+          desc: "Failed to sync session with database. Saved progress locally.",
+          type: "warning"
+        });
+      }
       showResults(finalWPM, finalAcc, consistency, xpEarned);
     });
 }
