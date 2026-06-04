@@ -1676,10 +1676,73 @@ body.tf-authenticated .nav-auth-signed-in  { display: flex; }
 
 @media (max-width: 768px) {
   .app-sidebar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: auto;
+    width: 100% !important;
+    height: 60px;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 0;
+    background: rgba(7, 7, 26, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-right: none;
+    border-top: 1px solid var(--border-1);
+    z-index: var(--z-nav);
+    display: flex !important;
+  }
+  .sidebar-logo {
+    display: none !important;
+  }
+  .sidebar-nav {
+    flex-direction: row;
+    width: 80%;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0;
+    flex: none;
+  }
+  .sidebar-bottom {
+    display: flex;
+    flex-direction: row;
+    width: 20%;
+    margin: 0;
+    padding: 0;
+    flex: none;
+    justify-content: space-around;
+  }
+  .sidebar-item {
+    flex-direction: column;
+    gap: 2px;
+    padding: 6px 0;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    border-radius: 0;
+    margin: 0;
+  }
+  .sidebar-item::before {
+    display: none !important;
+  }
+  .sidebar-icon {
+    font-size: 18px !important;
+  }
+  .sidebar-label {
+    font-size: 9px !important;
+    opacity: 0.7 !important;
+    width: auto !important;
+    display: block !important;
+  }
+  /* Hide profile and signout from mobile bottom bar */
+  #sidebar-profile, [data-auth-signout], .app-sidebar [data-auth-signout] {
     display: none !important;
   }
   .app-main {
     margin-left: 0 !important;
+    padding: var(--sp-6) var(--sp-4) 80px !important; /* space for bottom bar */
   }
 }
 

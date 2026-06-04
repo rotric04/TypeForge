@@ -66,8 +66,19 @@ class Settings(BaseSettings):
         "https://typeforge.ai",
         "https://www.typeforge.ai",
         "https://app.typeforge.ai",
+        "https://typeforge.fun",
+        "https://www.typeforge.fun",
+        "https://typeforge2.vercel.app",
     ]
-    ALLOWED_HOSTS: List[str] = ["typeforge.ai", "api.typeforge.ai", "localhost"]
+    ALLOWED_HOSTS: List[str] = [
+        "typeforge.ai",
+        "api.typeforge.ai",
+        "localhost",
+        "127.0.0.1",
+        "typeforge.fun",
+        "api.typeforge.fun",
+        "typeforge2.vercel.app",
+    ]
 
     # ── Rate Limiting ─────────────────────────────────
     RATE_LIMIT_DEFAULT:     int = 100   # requests per minute

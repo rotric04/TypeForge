@@ -15,7 +15,7 @@
     .app-layout {
       display: flex;
       min-height: 100vh;
-      padding-top: 70px;
+      padding-top: 20px;
     }
     .app-main {
       flex: 1;
@@ -148,21 +148,7 @@
 </head>
 <body class="tf-authenticated">
 
-<!-- Navbar -->
-<nav class="navbar scrolled" id="main-nav">
-  <div class="navbar-inner">
-    <a href="/" class="navbar-logo">
-      <div class="navbar-logo-icon">⌨️</div>
-      <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
-    </a>
-    <div class="navbar-actions">
-      <div class="nav-auth-signed-in" style="display:flex;">
-        <div class="nav-user-avatar" title="Profile" id="nav-avatar">U</div>
-        <button class="btn btn-ghost btn-sm" data-auth-signout>Sign Out</button>
-      </div>
-    </div>
-  </div>
-</nav>
+
 
 <div class="app-layout">
   <!-- Sidebar -->
@@ -225,6 +211,9 @@
       <button class="filter-tab" data-category="accuracy">Accuracy</button>
       <button class="filter-tab" data-category="streak">Streak</button>
       <button class="filter-tab" data-category="special">Special</button>
+      <button class="filter-tab" data-category="milestone">Milestones</button>
+      <button class="filter-tab" data-category="time">Time</button>
+      <button class="filter-tab" data-category="dev">Developer</button>
     </div>
 
     <!-- Achievements Grid -->

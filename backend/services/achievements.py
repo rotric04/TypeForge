@@ -86,7 +86,7 @@ class AchievementEngine:
             from database import DB
             for ach in new_achievements:
                 await DB.execute(
-                    "INSERT INTO achievements (user_id, badge_id) VALUES ($1, $2) ON CONFLICT (user_id, badge_id) DO NOTHING",
+                    "INSERT INTO achievements (user_id, badge_id) VALUES ($1::uuid, $2) ON CONFLICT (user_id, badge_id) DO NOTHING",
                     self.user_id, ach["id"]
                 )
 

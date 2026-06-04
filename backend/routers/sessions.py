@@ -88,7 +88,7 @@ async def create_session(
     query = """
         INSERT INTO sessions 
         (id, user_id, mode, language, duration_secs, wpm, raw_wpm, accuracy, correct_chars, error_chars, total_chars, errors, consistency, max_streak, xp_earned)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
+        VALUES ($1::uuid, $2::uuid, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15)
     """
     await DB.execute(query, session_id, user_id, session.mode, session.language, session.duration_secs, 
                      session.wpm, session.raw_wpm or session.wpm, session.accuracy, session.correct_chars, 
@@ -101,7 +101,7 @@ async def create_session(
         SET xp = xp + $1, 
             total_sessions = total_sessions + 1,
             best_wpm = GREATEST(best_wpm, $2)
-        WHERE id = $3
+        WHERE id = $3::uuid
         RETURNING xp
     """
     await DB.execute(update_user_query, xp_earned, session.wpm, user_id)
