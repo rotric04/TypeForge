@@ -1,6 +1,6 @@
--- TypeForge AI Supabase PostgreSQL Schema
+-- TypeForge AI — Supabase PostgreSQL Schema
+-- Run once in Supabase SQL Editor. See backend/SUPABASE_SETUP.md for Render env vars.
 
--- Enable UUID extension
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- Users Table
@@ -96,3 +96,7 @@ CREATE POLICY "Users can view own profile"
 
 -- Note: Because we access Supabase from FastAPI via Service Role key or `asyncpg` pool, 
 -- we bypass RLS for server operations. The policies above are mostly useful if we query from client.
+
+CREATE INDEX IF NOT EXISTS idx_users_clerk_id ON public.users (clerk_id);
+CREATE INDEX IF NOT EXISTS idx_sessions_user_created ON public.sessions (user_id, created_at DESC);
+CREATE INDEX IF NOT EXISTS idx_achievements_user ON public.achievements (user_id);

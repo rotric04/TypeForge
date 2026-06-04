@@ -6,7 +6,7 @@ import Auth from './clerk.js';
 
 const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
   ? 'http://localhost:8001/api/v1'
-  : '/api/v1';
+  : 'https://typeforge-tkw8.onrender.com/api/v1';
 
 export const API = {
   /**
@@ -85,6 +85,13 @@ export const API = {
 
   async getDashboardAnalytics() {
     return this.fetch('/analytics/dashboard');
+  },
+
+  async checkHealth() {
+    const base = API_BASE.replace(/\/api\/v1\/?$/, '');
+    const res = await fetch(`${base}/health`);
+    if (!res.ok) throw new Error('Health check failed');
+    return res.json();
   },
 };
 

@@ -16,7 +16,12 @@
   border-radius: 50%;
   filter: blur(100px);
   opacity: 0.18;
-  will-change: transform;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .aurora-blob {
+    will-change: transform;
+  }
 }
 
 .aurora-blob-1 {

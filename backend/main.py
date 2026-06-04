@@ -12,7 +12,7 @@ import time
 import os
 
 from config import settings
-from database import init_db, close_db
+from database import init_db, close_db, is_db_connected, DatabaseUnavailableError
 from routers import auth, users, sessions, analytics, training
 
 # ── Logging ──────────────────────────────────────────────────────
@@ -100,12 +100,32 @@ app.include_router(training.router,  prefix="/api/v1/training",  tags=["Training
 # ── Health Check ──────────────────────────────────────────────────
 @app.get("/health", tags=["System"])
 async def health_check():
+    db_ok = is_db_connected()
+    if db_ok:
+        try:
+            from database import DB
+            row = await DB.fetchone("SELECT 1 AS ok")
+            db_ok = row is not None
+        except Exception:
+            db_ok = False
     return {
-        "status": "healthy",
+        "status": "healthy" if db_ok else "degraded",
         "service": "TypeForge AI API",
         "version": "1.0.0",
+        "db_connected": db_ok,
         "timestamp": time.time(),
     }
+
+
+@app.exception_handler(DatabaseUnavailableError)
+async def database_unavailable_handler(request, exc):
+    return JSONResponse(
+        status_code=503,
+        content={
+            "detail": str(exc),
+            "hint": "Configure DATABASE_URL on the API host using the Supabase Session pooler URI (port 5432).",
+        },
+    )
 
 @app.get("/", tags=["System"])
 async def root():

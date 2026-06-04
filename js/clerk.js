@@ -172,6 +172,9 @@ async function syncLocalSessions() {
     // Send sessions in chronological order (oldest first)
     const sessionsToSync = [...sessions].reverse();
 
+    const remaining = [];
+    let synced = 0;
+
     for (const session of sessionsToSync) {
       try {
         const payload = {
@@ -192,14 +195,22 @@ async function syncLocalSessions() {
           wpm_history: session.wpmHistory || session.wpm_history || []
         };
         await API.saveSession(payload);
+        synced++;
       } catch (err) {
         console.error('TF Auth: Failed to sync local session', err);
+        remaining.push(session);
       }
     }
 
-    // Once synced, clear local history
-    localStorage.removeItem('tf_session_history');
-    console.log('TF Auth: Local sessions sync complete.');
+    if (remaining.length) {
+      localStorage.setItem('tf_session_history', JSON.stringify(remaining.slice(0, 100)));
+      console.warn(`TF Auth: ${remaining.length} session(s) still local (API/DB unavailable).`);
+    } else {
+      localStorage.removeItem('tf_session_history');
+    }
+    if (synced > 0) {
+      console.log(`TF Auth: Synced ${synced} session(s) to your account.`);
+    }
   } catch (e) {
     console.error('TF Auth: Error during local sessions sync', e);
   }

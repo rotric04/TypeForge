@@ -222,7 +222,6 @@ html.a11y-reduce-motion *::after {
 
 html {
   font-size: calc(16px * var(--a11y-font-scale));
-  scroll-behavior: smooth;
   scroll-padding-top: 100px;
   -webkit-text-size-adjust: 100%;
   tab-size: 2;
@@ -247,6 +246,16 @@ body {
 
 .page-content {
   flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* Sticky footer: no void below footer when main is stretched */
+.page-content > footer.footer,
+.page-content > .footer {
+  margin-top: auto;
+  flex-shrink: 0;
 }
 
 img, video, svg { display: block; max-width: 100%; }

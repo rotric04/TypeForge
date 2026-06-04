@@ -1,6 +1,6 @@
 import logging
 from fastapi import APIRouter, Depends
-from database import DB
+from database import DB, is_db_connected
 from dependencies import get_current_user
 from models.models import UserProfile
 from services.adaptive import PerformanceAnalyzer
@@ -60,6 +60,8 @@ async def get_platform_stats():
 
 
 async def _db_available() -> bool:
+    if not is_db_connected():
+        return False
     try:
         row = await DB.fetchone("SELECT 1 AS ok")
         return row is not None

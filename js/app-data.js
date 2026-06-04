@@ -15,7 +15,12 @@ export async function loadProfileAndHistory() {
 
   try {
     profile = await API.getUserProfile();
-  } catch {
+    // Persist to local storage in case of future offline/logout
+    localStorage.setItem('tf_xp', (profile.xp || 0).toString());
+    localStorage.setItem('tf_level', (profile.level || 1).toString());
+    localStorage.setItem('tf_sessions', (profile.total_sessions || 0).toString());
+  } catch (err) {
+    console.warn("TF Auth: Falling back to local storage profile", err);
     profile = {
       xp: parseInt(localStorage.getItem('tf_xp') || '0', 10),
       level: parseInt(localStorage.getItem('tf_level') || '1', 10),

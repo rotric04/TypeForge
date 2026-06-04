@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../css/animations.css"/>
   <link rel="stylesheet" href="../css/components.css"/>
   <link rel="stylesheet" href="../css/app-pages.css"/>
+  <link rel="stylesheet" href="../css/achievements.css"/>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>"/>
   <!-- Vercel Web Analytics -->
   <script>
@@ -19,329 +20,31 @@
   <script defer src="/_vercel/insights/script.js"></script>
   <style>
     body { background-color: var(--bg-base); }
-    .app-layout { display: flex; min-height: 100vh; padding-top: 20px; }
-    .app-main { flex: 1; margin-left: 68px; padding: 40px 32px; max-width: 1300px; }
+    .app-layout { display: flex; min-height: 100dvh; padding-top: 12px; }
+    .app-main { flex: 1; margin-left: 68px; padding: 32px; max-width: 1400px; }
+    
+    .page-title-wrap { margin-bottom: 32px; }
+    .page-title { font-size: 32px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .page-subtitle { color: var(--text-3); font-size: 15px; }
 
-    /* ── Hero XP Bar ── */
-    .xp-hero {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-1);
-      border-radius: 24px;
-      padding: 28px 32px;
-      margin-bottom: 28px;
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      flex-wrap: wrap;
-      position: relative;
-      overflow: hidden;
-    }
-    .xp-hero::before {
-      content: '';
-      position: absolute;
-      top: 0; right: 0;
-      width: 300px; height: 200px;
-      background: radial-gradient(ellipse at 80% 0%, rgba(99,102,241,0.12) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .xp-avatar {
-      width: 72px; height: 72px;
-      border-radius: 50%;
-      background: var(--brand-gradient);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 28px;
-      flex-shrink: 0;
-      box-shadow: 0 0 24px rgba(99,102,241,0.3);
-    }
-    .xp-info { flex: 1; min-width: 200px; }
-    .xp-name { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
-    .xp-level { font-size: 13px; color: var(--text-3); margin-bottom: 12px; }
-    .xp-level strong { color: var(--brand); }
-    .xp-bar-wrap { position: relative; }
-    .xp-bar-bg {
-      height: 10px;
-      background: var(--bg-elevated);
-      border-radius: 999px;
-      overflow: hidden;
-    }
-    .xp-bar-fill {
-      height: 100%;
-      background: var(--brand-gradient);
-      border-radius: 999px;
-      transition: width 1.2s cubic-bezier(0.23,1,0.32,1);
-      box-shadow: 0 0 8px rgba(99,102,241,0.4);
-    }
-    .xp-bar-labels {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 6px;
-      font-size: 11px;
-      color: var(--text-4);
-    }
-    .xp-chips {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .xp-chip {
-      text-align: center;
-      padding: 12px 20px;
-      background: var(--bg-elevated);
-      border-radius: 14px;
-      border: 1px solid var(--border-1);
-      min-width: 90px;
-    }
-    .xp-chip-val {
-      font-family: var(--font-display);
-      font-size: 20px;
-      font-weight: 800;
-      background: var(--brand-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .xp-chip-lbl { font-size: 11px; color: var(--text-4); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
-
-    /* ── Progress Ring ── */
-    .progress-ring-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-    }
-    .progress-ring-svg { width: 80px; height: 80px; transform: rotate(-90deg); }
-    .ring-track { fill: none; stroke: rgba(255,255,255,0.06); stroke-width: 6; }
-    .ring-fill {
-      fill: none;
-      stroke: url(#ringGrad);
-      stroke-width: 6;
-      stroke-linecap: round;
-      transition: stroke-dashoffset 1.2s cubic-bezier(0.23,1,0.32,1);
-    }
-    .ring-label { font-size: 12px; color: var(--text-3); text-align: center; }
-    .ring-pct { font-size: 20px; font-weight: 800; text-align: center; color: var(--text-1); }
-
-    /* ── Category Tabs ── */
-    .filter-tabs {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
-    }
-    .filter-tab {
-      padding: 7px 16px;
-      font-size: 12px;
-      font-weight: 600;
-      border-radius: 999px;
-      border: 1px solid var(--border-1);
-      background: var(--bg-surface);
-      color: var(--text-3);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .filter-tab:hover { color: var(--text-1); border-color: var(--border-2); }
-    .filter-tab.active {
-      background: var(--brand-gradient);
-      border-color: transparent;
-      color: #fff;
-    }
-
-    /* ── Achievements Grid ── */
-    .achievements-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
-    }
-
-    /* ── Achievement Card ── */
-    .ach-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border-1);
-      border-radius: 18px;
-      padding: 20px;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      transition: all 0.25s var(--ease-out);
-    }
-    .ach-card.unlocked:hover {
-      transform: translateY(-3px);
-      border-color: var(--border-brand);
-      box-shadow: var(--shadow-brand), 0 8px 32px rgba(0,0,0,0.2);
-    }
-    .ach-card.locked {
-      opacity: 0.55;
-    }
-    .ach-card.locked:hover { opacity: 0.75; }
-
-    /* Rarity glow strip at top */
-    .ach-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      border-radius: 18px 18px 0 0;
-    }
-    .ach-card.rarity-common::before  { background: #6b7280; }
-    .ach-card.rarity-rare::before    { background: linear-gradient(90deg, #0ea5e9, #38bdf8); }
-    .ach-card.rarity-epic::before    { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
-    .ach-card.rarity-legendary::before { background: linear-gradient(90deg, #f59e0b, #fbbf24, #f59e0b); box-shadow: 0 0 12px rgba(245,158,11,0.4); }
-
-    .ach-top { display: flex; align-items: flex-start; gap: 14px; }
-    .ach-icon-wrap {
-      width: 52px; height: 52px;
-      border-radius: 14px;
-      background: var(--bg-elevated);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 24px;
-      flex-shrink: 0;
-      transition: transform 0.3s;
-      border: 1px solid var(--border-1);
-    }
-    .ach-card.unlocked:hover .ach-icon-wrap { transform: scale(1.12) rotate(8deg); }
-    .ach-card.locked .ach-icon-wrap { filter: grayscale(1); }
-    .ach-card.rarity-legendary.unlocked .ach-icon-wrap {
-      background: rgba(245,158,11,0.1);
-      border-color: rgba(245,158,11,0.3);
-      box-shadow: 0 0 12px rgba(245,158,11,0.2);
-    }
-    .ach-card.rarity-epic.unlocked .ach-icon-wrap {
-      background: rgba(139,92,246,0.1);
-      border-color: rgba(139,92,246,0.3);
-    }
-    .ach-card.rarity-rare.unlocked .ach-icon-wrap {
-      background: rgba(14,165,233,0.1);
-      border-color: rgba(14,165,233,0.3);
-    }
-
-    .ach-meta { flex: 1; }
-    .ach-name { font-size: 15px; font-weight: 700; color: var(--text-1); margin-bottom: 4px; }
-    .ach-card.locked .ach-name { color: var(--text-3); }
-    .ach-desc { font-size: 12px; color: var(--text-3); line-height: 1.5; }
-    .ach-rarity {
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-top: 6px;
-    }
-    .rarity-common  .ach-rarity { color: #9ca3af; }
-    .rarity-rare    .ach-rarity { color: #38bdf8; }
-    .rarity-epic    .ach-rarity { color: #a78bfa; }
-    .rarity-legendary .ach-rarity { color: #fbbf24; }
-
-    /* Progress bar on card */
-    .ach-progress-wrap { display: flex; flex-direction: column; gap: 4px; }
-    .ach-progress-label {
-      display: flex;
-      justify-content: space-between;
-      font-size: 11px;
-      color: var(--text-4);
-    }
-    .ach-progress-bar {
-      height: 5px;
-      background: var(--bg-elevated);
-      border-radius: 999px;
-      overflow: hidden;
-    }
-    .ach-progress-fill {
-      height: 100%;
-      border-radius: 999px;
-      transition: width 1s cubic-bezier(0.23,1,0.32,1);
-    }
-    .rarity-common  .ach-progress-fill { background: #6b7280; }
-    .rarity-rare    .ach-progress-fill { background: linear-gradient(90deg, #0ea5e9, #38bdf8); }
-    .rarity-epic    .ach-progress-fill { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
-    .rarity-legendary .ach-progress-fill { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
-
-    .ach-unlocked-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--teal);
-      padding: 3px 10px;
-      background: rgba(16,185,129,0.1);
-      border-radius: 999px;
-      border: 1px solid rgba(16,185,129,0.2);
-      width: fit-content;
-    }
-    .lock-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 11px;
-      color: var(--text-4);
-      padding: 3px 10px;
-      background: var(--bg-elevated);
-      border-radius: 999px;
-      border: 1px solid var(--border-1);
-      width: fit-content;
-    }
-
-    /* Unlock pop animation */
-    @keyframes popIn {
-      0%   { transform: scale(0.7); opacity: 0; }
-      60%  { transform: scale(1.05); }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    .ach-card.pop { animation: popIn 0.45s cubic-bezier(0.23,1,0.32,1) forwards; }
-
-    /* Skeleton */
-    .skeleton-card {
-      height: 160px;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-1);
-      border-radius: 18px;
-      overflow: hidden;
-      position: relative;
-    }
-    .skeleton-card::after {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%; right: 0; bottom: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%);
-      animation: shimmer 1.5s infinite;
-    }
-    @keyframes shimmer { to { left: 100%; } }
-
-    /* Empty state */
-    .empty-state {
-      grid-column: 1/-1;
-      text-align: center;
-      padding: 60px 24px;
-      color: var(--text-3);
-    }
-    .empty-state .icon { font-size: 40px; margin-bottom: 12px; }
-    .empty-state .msg { font-size: 15px; color: var(--text-2); font-weight: 600; }
-    .empty-state .sub { font-size: 13px; margin-top: 6px; }
-
-    /* Notification toast */
     #ach-toast {
-      position: fixed; bottom: 32px; left: 50%;
-      transform: translateX(-50%) translateY(80px);
-      background: var(--bg-surface);
+      position: fixed; bottom: 24px; left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(13, 13, 26, 0.95);
+      backdrop-filter: blur(20px);
       border: 1px solid var(--border-brand);
-      border-radius: 16px;
-      padding: 16px 24px;
-      display: flex; align-items: center; gap: 14px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4), var(--shadow-brand);
-      z-index: 9999;
-      transition: transform 0.45s cubic-bezier(0.23,1,0.32,1);
-      min-width: 280px;
+      border-radius: 16px; padding: 14px 24px; display: flex; gap: 16px; align-items: center;
+      z-index: 9999; transition: transform 0.5s var(--ease-spring); box-shadow: 0 16px 40px rgba(0,0,0,0.5), 0 0 20px var(--brand-glow);
     }
     #ach-toast.show { transform: translateX(-50%) translateY(0); }
-    #ach-toast .toast-icon { font-size: 28px; }
-    #ach-toast .toast-body { display: flex; flex-direction: column; }
-    #ach-toast .toast-title { font-size: 14px; font-weight: 700; }
-    #ach-toast .toast-msg { font-size: 12px; color: var(--text-3); }
+
+    .toast-icon { font-size: 32px; }
+    .toast-body { display: flex; flex-direction: column; }
+    .toast-title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 2px; }
+    .toast-msg { font-size: 13px; color: var(--text-2); }
 
     @media (max-width: 900px) {
-      .app-main { margin-left: 0; padding: 80px 16px 100px; }
-      .achievements-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+      .app-main { margin-left: 0; padding: 24px 16px 100px; }
     }
   </style>
 </head>
@@ -380,64 +83,55 @@
   </aside>
 
   <main class="app-main">
-    <h1 style="font-size:28px;font-weight:800;margin-bottom:24px;">Achievements</h1>
+    <div class="page-title-wrap">
+      <h1 class="page-title">Achievements</h1>
+      <p class="page-subtitle">Track your milestones, unlock rare badges, and build your typing legacy.</p>
+    </div>
 
-    <!-- XP Hero -->
-    <div class="xp-hero" id="xp-hero">
-      <div class="xp-avatar" id="xp-avatar">⌨️</div>
-      <div class="xp-info">
-        <div class="xp-name" id="xp-name">Loading…</div>
-        <div class="xp-level">Level <strong id="xp-level-num">—</strong> Typist</div>
-        <div class="xp-bar-wrap">
-          <div class="xp-bar-bg"><div class="xp-bar-fill" id="xp-bar-fill" style="width:0%"></div></div>
-          <div class="xp-bar-labels"><span id="xp-current">0 XP</span><span id="xp-next">— XP to next level</span></div>
+    <!-- Bento Hero -->
+    <div class="ach-hero-bento">
+      
+      <!-- Primary Profile Bento -->
+      <div class="bento-card">
+        <div class="bento-main">
+          <div class="bento-avatar" id="xp-avatar">U</div>
+          <div class="bento-info">
+            <div class="bento-title" id="xp-name">Typist</div>
+            <div class="bento-subtitle">Level <strong id="xp-level-num">1</strong></div>
+          </div>
+        </div>
+        <div class="xp-progress-wrap">
+          <div class="xp-track"><div class="xp-fill" id="xp-bar-fill" style="width:0%"></div></div>
+          <div class="xp-labels"><span id="xp-current">0 XP</span><span id="xp-next">500 XP to next level</span></div>
         </div>
       </div>
 
-      <!-- Progress ring -->
-      <div class="progress-ring-wrap">
-        <svg class="progress-ring-svg" id="ring-svg" viewBox="0 0 80 80">
-          <defs>
-            <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#6366f1"/>
-              <stop offset="100%" stop-color="#8b5cf6"/>
-            </linearGradient>
-          </defs>
-          <circle class="ring-track" cx="40" cy="40" r="32"/>
-          <circle class="ring-fill" id="ring-fill" cx="40" cy="40" r="32" stroke-dasharray="201" stroke-dashoffset="201"/>
-        </svg>
-        <div class="ring-pct" id="ring-pct">0%</div>
-        <div class="ring-label">Badges<br>Unlocked</div>
+      <!-- Stats Bento 1 -->
+      <div class="bento-card" style="align-items:center; text-align:center; justify-content:center;">
+        <div class="bento-stat-val" id="chip-unlocked">0</div>
+        <div class="bento-stat-lbl">Badges Unlocked</div>
       </div>
 
-      <!-- Quick chips -->
-      <div class="xp-chips" id="xp-chips">
-        <div class="xp-chip"><div class="xp-chip-val" id="chip-unlocked">—</div><div class="xp-chip-lbl">Unlocked</div></div>
-        <div class="xp-chip"><div class="xp-chip-val" id="chip-total">—</div><div class="xp-chip-lbl">Total</div></div>
-        <div class="xp-chip"><div class="xp-chip-val" id="chip-sessions">—</div><div class="xp-chip-lbl">Sessions</div></div>
+      <!-- Stats Bento 2 -->
+      <div class="bento-card" style="align-items:center; text-align:center; justify-content:center;">
+        <div class="bento-stat-val" id="chip-sessions">0</div>
+        <div class="bento-stat-lbl">Total Sessions</div>
       </div>
+
     </div>
 
-    <!-- Category Tabs -->
-    <div class="filter-tabs" id="filter-tabs">
-      <button class="filter-tab active" data-category="all">🎖 All</button>
-      <button class="filter-tab" data-category="speed">⚡ Speed</button>
-      <button class="filter-tab" data-category="accuracy">🎯 Accuracy</button>
-      <button class="filter-tab" data-category="streak">📅 Streak</button>
-      <button class="filter-tab" data-category="special">✨ Special</button>
-      <button class="filter-tab" data-category="milestone">🚀 Milestones</button>
-      <button class="filter-tab" data-category="time">🦉 Time</button>
-      <button class="filter-tab" data-category="dev">💻 Developer</button>
+    <!-- Category Filters -->
+    <div class="ach-filters" id="filter-tabs">
+      <button class="ach-filter-btn active" data-category="all">All Badges</button>
+      <button class="ach-filter-btn" data-category="speed">⚡ Speed</button>
+      <button class="ach-filter-btn" data-category="accuracy">🎯 Accuracy</button>
+      <button class="ach-filter-btn" data-category="streak">📅 Consistency</button>
+      <button class="ach-filter-btn" data-category="milestone">🚀 Milestones</button>
     </div>
 
-    <!-- Grid -->
+    <!-- Achievements Grid -->
     <div class="achievements-grid" id="achievements-grid">
-      <div class="skeleton-card"></div>
-      <div class="skeleton-card"></div>
-      <div class="skeleton-card"></div>
-      <div class="skeleton-card"></div>
-      <div class="skeleton-card"></div>
-      <div class="skeleton-card"></div>
+      <!-- Cards dynamically inserted here -->
     </div>
   </main>
 </div>
@@ -454,49 +148,30 @@
 <script type="module">
   import Auth from '../js/clerk.js';
   import API from '../js/api.js';
-  import { displayName, personalizeBadge } from '../js/app-data.js';
-  import { initScrollReveal } from '../js/motion.js';
+  import { displayName, personalizeBadge, xpToNextLevel } from '../js/app-data.js';
 
-  // ── Local-only achievement definitions (mirror of backend ALL_ACHIEVEMENTS)
   const ALL_ACHIEVEMENTS = [
-    // Speed
+    { id:"first_session", name:"Launched",  icon:"🚀", desc:"Complete your very first session",  category:"milestone", rarity:"common",    goal:1,  metric:"sessions" },
+    { id:"sessions_5",  name:"Finding Rhythm", icon:"🎵", desc:"Complete 5 sessions", category:"streak", rarity:"common", goal:5, metric:"sessions" },
+    { id:"sessions_10",  name:"Getting Started",  icon:"🌱", desc:"Complete 10 sessions",   category:"streak", rarity:"common",    goal:10,  metric:"sessions" },
+    { id:"sessions_50",  name:"Dedicated",        icon:"📅", desc:"Complete 50 sessions",   category:"streak", rarity:"rare",      goal:50,  metric:"sessions" },
+    { id:"sessions_100", name:"Century Typist",   icon:"💯", desc:"Complete 100 sessions",  category:"streak", rarity:"epic",      goal:100, metric:"sessions" },
+    { id:"sessions_500", name:"Legendary Typist", icon:"👑", desc:"Complete 500 sessions",  category:"streak", rarity:"legendary", goal:500, metric:"sessions" },
+    
     { id:"wpm_40",  name:"Warming Up",      icon:"☕", desc:"Reach 40 WPM in a session",  category:"speed",    rarity:"common",    goal:40,  metric:"wpm" },
     { id:"wpm_50",  name:"Half Century",    icon:"🔥", desc:"Reach 50 WPM in a session",  category:"speed",    rarity:"common",    goal:50,  metric:"wpm" },
     { id:"wpm_80",  name:"Fast Fingers",    icon:"⚡", desc:"Reach 80 WPM in a session",  category:"speed",    rarity:"common",    goal:80,  metric:"wpm" },
     { id:"wpm_100", name:"Century Club",    icon:"💯", desc:"Reach 100 WPM in a session", category:"speed",    rarity:"rare",      goal:100, metric:"wpm" },
     { id:"wpm_120", name:"Speed Demon",     icon:"🏎️", desc:"Reach 120 WPM in a session", category:"speed",    rarity:"epic",      goal:120, metric:"wpm" },
     { id:"wpm_150", name:"Ghost Fingers",   icon:"👻", desc:"Reach 150 WPM in a session", category:"speed",    rarity:"legendary", goal:150, metric:"wpm" },
-    // Accuracy
+    
     { id:"acc_95",  name:"Sharp Eyes",      icon:"👁️", desc:"95%+ accuracy in a session", category:"accuracy", rarity:"common",    goal:95,  metric:"accuracy" },
     { id:"acc_99",  name:"Perfect Aim",     icon:"🎯", desc:"99%+ accuracy in a session", category:"accuracy", rarity:"rare",      goal:99,  metric:"accuracy" },
     { id:"acc_100", name:"Flawless",        icon:"💎", desc:"100% accuracy — no errors",  category:"accuracy", rarity:"epic",      goal:100, metric:"accuracy" },
-    // Special
-    { id:"no_errors",name:"Zero Error",     icon:"🧊", desc:"Complete a session with 0 errors",   category:"special",  rarity:"rare",    goal:0,   metric:"errors" },
-    { id:"survivor", name:"The Survivor",   icon:"🦺", desc:"Finish with 20+ errors but still going", category:"special", rarity:"common", goal:20, metric:"errors_max" },
-    { id:"on_fire",  name:"On Fire",        icon:"🔥", desc:"50-key error-free streak in a session", category:"special", rarity:"rare",  goal:50, metric:"streak" },
-    // Streak / Sessions
-    { id:"sessions_10",  name:"Getting Started",  icon:"🌱", desc:"Complete 10 sessions",   category:"streak", rarity:"common",    goal:10,  metric:"sessions" },
-    { id:"sessions_50",  name:"Dedicated",        icon:"📅", desc:"Complete 50 sessions",   category:"streak", rarity:"rare",      goal:50,  metric:"sessions" },
-    { id:"sessions_100", name:"Century Typist",   icon:"💯", desc:"Complete 100 sessions",  category:"streak", rarity:"epic",      goal:100, metric:"sessions" },
-    { id:"sessions_500", name:"Legendary Typist", icon:"👑", desc:"Complete 500 sessions",  category:"streak", rarity:"legendary", goal:500, metric:"sessions" },
-    // Developer
-    { id:"dev_10",  name:"Code Curious",    icon:"💻", desc:"10 developer mode sessions",  category:"dev",    rarity:"common",    goal:10,  metric:"dev_sessions" },
-    { id:"dev_100", name:"Code Assassin",   icon:"💀", desc:"100 developer mode sessions", category:"dev",    rarity:"legendary", goal:100, metric:"dev_sessions" },
-    // Time
-    { id:"night_owl",  name:"Night Owl",   icon:"🦉", desc:"30 sessions after midnight",   category:"time",   rarity:"rare",      goal:30,  metric:"night_sessions" },
-    { id:"early_bird", name:"Early Bird",  icon:"🐦", desc:"10 sessions before 7am",       category:"time",   rarity:"common",    goal:10,  metric:"early_sessions" },
-    // Accuracy special
-    { id:"punct_pro",   name:"Punctuation Slayer", icon:"🥷", desc:"98%+ accuracy in a punctuation-heavy session", category:"accuracy", rarity:"epic", goal:98, metric:"punct_accuracy" },
-    // Milestone
-    { id:"sessions_5",  name:"Finding Rhythm", icon:"🎵", desc:"Complete 5 sessions", category:"streak", rarity:"common", goal:5, metric:"sessions" },
-    { id:"xp_200",  name:"XP Spark", icon:"✨", desc:"Earn 200 total XP", category:"xp", rarity:"common", goal:200, metric:"xp" },
-    { id:"xp_500",  name:"XP Surge", icon:"🌟", desc:"Earn 500 total XP", category:"xp", rarity:"common", goal:500, metric:"xp" },
-    { id:"level_3", name:"Level 3 Crew", icon:"🥉", desc:"Reach level 3", category:"xp", rarity:"common", goal:3, metric:"level" },
-    { id:"level_5", name:"Rising Star", icon:"⭐", desc:"Reach level 5", category:"xp", rarity:"rare", goal:5, metric:"level" },
-    { id:"dev_1",   name:"Hello World", icon:"👋", desc:"First developer session", category:"dev", rarity:"common", goal:1, metric:"dev_sessions" },
-    { id:"first_session", name:"Launched",  icon:"🚀", desc:"Complete your very first session",  category:"milestone", rarity:"common",    goal:1,  metric:"sessions" },
-    { id:"best_100wpm",   name:"Centurion", icon:"🏆", desc:"Reach a personal best of 100 WPM",  category:"milestone", rarity:"rare",      goal:100, metric:"best_wpm" },
-    { id:"best_120wpm",   name:"Elite",     icon:"⭐", desc:"Reach a personal best of 120 WPM",  category:"milestone", rarity:"epic",      goal:120, metric:"best_wpm" },
+    
+    { id:"xp_500",  name:"XP Surge", icon:"🌟", desc:"Earn 500 total XP", category:"milestone", rarity:"common", goal:500, metric:"xp" },
+    { id:"level_5", name:"Rising Star", icon:"⭐", desc:"Reach level 5", category:"milestone", rarity:"rare", goal:5, metric:"level" },
+    { id:"no_errors",name:"Zero Error",     icon:"🧊", desc:"Complete a session with 0 errors",   category:"accuracy",  rarity:"rare",    goal:0,   metric:"errors" },
   ];
 
   let achievementsData = [];
@@ -511,40 +186,30 @@
       return;
     }
 
-    // Update avatar
-    const nameEl = document.querySelector('[data-auth-name]');
     if (user) {
       userDisplayName = displayName(user, null);
-      if (nameEl) nameEl.textContent = userDisplayName;
+      document.querySelectorAll('[data-auth-name]').forEach(el => el.textContent = userDisplayName);
       document.getElementById('xp-name').textContent = userDisplayName;
       document.getElementById('xp-avatar').textContent = userDisplayName[0].toUpperCase();
     }
 
     try {
-      // Load profile and achievements in parallel
-      const [profile, history, apiAchs] = await Promise.allSettled([
+      const [profileRes, historyRes, achRes] = await Promise.allSettled([
         API.getUserProfile(),
         API.getHistory(100, 0),
         API.getAchievements()
       ]);
 
-      userProfile = (profile.status === 'fulfilled' && profile.value && Object.keys(profile.value).length > 0)
-        ? profile.value
-        : {
-            xp: parseInt(localStorage.getItem('tf_xp') || '0'),
-            level: parseInt(localStorage.getItem('tf_level') || '1'),
-            total_sessions: parseInt(localStorage.getItem('tf_sessions') || '0'),
-            best_wpm: 0,
-            weak_keys: []
-          };
-      sessionHistory = (history.status === 'fulfilled' && history.value && history.value.length > 0)
-        ? history.value
-        : JSON.parse(localStorage.getItem('tf_session_history') || '[]');
-      const unlockedIds = (apiAchs.status === 'fulfilled' && apiAchs.value)
-        ? (apiAchs.value || []).filter(a => a.is_unlocked).map(a => a.id)
-        : [];
+      userProfile = profileRes.value || {
+        xp: parseInt(localStorage.getItem('tf_xp') || '0'),
+        level: parseInt(localStorage.getItem('tf_level') || '1'),
+        total_sessions: parseInt(localStorage.getItem('tf_sessions') || '0'),
+        best_wpm: 0
+      };
+      
+      sessionHistory = historyRes.value || JSON.parse(localStorage.getItem('tf_session_history') || '[]');
+      const unlockedIds = achRes.value ? achRes.value.filter(a => a.is_unlocked).map(a => a.id) : [];
 
-      // Compute local progress from history if API has limited data
       const computed = computeProgress(sessionHistory, userProfile);
       achievementsData = ALL_ACHIEVEMENTS.map(ach => ({
         ...ach,
@@ -553,17 +218,13 @@
       }));
 
       userDisplayName = displayName(user, userProfile);
-      renderXPHero(userProfile, sessionHistory);
+      renderHero(userProfile, sessionHistory);
       renderGrid('all');
       setupFilters();
-      initScrollReveal(document.getElementById('achievements-grid'));
 
     } catch (err) {
       console.error('Failed to load achievements:', err);
-      // Fall back to local-only mode using session history
-      achievementsData = ALL_ACHIEVEMENTS.map(ach => ({
-        ...ach, is_unlocked: false, progress: 0
-      }));
+      achievementsData = ALL_ACHIEVEMENTS.map(ach => ({ ...ach, is_unlocked: false, progress: 0 }));
       renderGrid('all');
       setupFilters();
     }
@@ -576,183 +237,110 @@
     const totalXp = profile.xp || 0;
     const userLevel = profile.level || 1;
     const bestWpm = profile.best_wpm || Math.max(0, ...history.map(s => s.wpm || 0));
-    const devSessions = history.filter(s => s.mode === 'dev').length;
 
     ALL_ACHIEVEMENTS.forEach(ach => {
       let pct = 0;
       switch (ach.metric) {
-        case 'wpm': {
-          const best = bestWpm;
-          pct = Math.min(100, Math.round((best / ach.goal) * 100));
-          if (best >= ach.goal) unlocked.push(ach.id);
-          break;
-        }
+        case 'wpm': pct = Math.min(100, Math.round((bestWpm / ach.goal) * 100)); if (bestWpm >= ach.goal) unlocked.push(ach.id); break;
         case 'accuracy': {
           const bestAcc = Math.max(0, ...history.map(s => s.accuracy || 0));
-          pct = Math.min(100, Math.round((bestAcc / ach.goal) * 100));
-          if (bestAcc >= ach.goal) unlocked.push(ach.id);
-          break;
+          pct = Math.min(100, Math.round((bestAcc / ach.goal) * 100)); if (bestAcc >= ach.goal) unlocked.push(ach.id); break;
         }
-        case 'sessions': {
-          pct = Math.min(100, Math.round((totalSessions / ach.goal) * 100));
-          if (totalSessions >= ach.goal) unlocked.push(ach.id);
-          break;
-        }
-        case 'dev_sessions': {
-          pct = Math.min(100, Math.round((devSessions / ach.goal) * 100));
-          if (devSessions >= ach.goal) unlocked.push(ach.id);
-          break;
-        }
+        case 'sessions': pct = Math.min(100, Math.round((totalSessions / ach.goal) * 100)); if (totalSessions >= ach.goal) unlocked.push(ach.id); break;
         case 'errors': {
           const hadZeroErrors = history.some(s => (s.errors || 0) === 0);
-          pct = hadZeroErrors ? 100 : 0;
-          if (hadZeroErrors) unlocked.push(ach.id);
-          break;
+          pct = hadZeroErrors ? 100 : 0; if (hadZeroErrors) unlocked.push(ach.id); break;
         }
-        case 'best_wpm': {
-          pct = Math.min(100, Math.round((bestWpm / ach.goal) * 100));
-          if (bestWpm >= ach.goal) unlocked.push(ach.id);
-          break;
-        }
-        case 'xp': {
-          pct = Math.min(100, Math.round((totalXp / ach.goal) * 100));
-          if (totalXp >= ach.goal) unlocked.push(ach.id);
-          break;
-        }
-        case 'level': {
-          pct = Math.min(100, Math.round((userLevel / ach.goal) * 100));
-          if (userLevel >= ach.goal) unlocked.push(ach.id);
-          break;
-        }
-        default:
-          pct = 0;
+        case 'xp': pct = Math.min(100, Math.round((totalXp / ach.goal) * 100)); if (totalXp >= ach.goal) unlocked.push(ach.id); break;
+        case 'level': pct = Math.min(100, Math.round((userLevel / ach.goal) * 100)); if (userLevel >= ach.goal) unlocked.push(ach.id); break;
       }
       progress[ach.id] = pct;
     });
     return { unlocked, progress };
   }
 
-  function renderXPHero(profile, history) {
+  function renderHero(profile, history) {
     const xp = profile.xp || 0;
-    const level = profile.level || Math.max(1, Math.floor(xp / 500) + 1);
-    const xpForLevel = level * 500;
-    const xpPrev = (level - 1) * 500;
-    const xpInLevel = xp - xpPrev;
-    const xpNeeded = xpForLevel - xpPrev;
-    const pct = Math.min(100, Math.round((xpInLevel / xpNeeded) * 100));
+    const level = profile.level || 1;
+    const { cap, inLevel, pct } = xpToNextLevel(level, xp);
 
     document.getElementById('xp-level-num').textContent = level;
-    document.getElementById('xp-current').textContent = `${xpInLevel.toLocaleString()} XP`;
-    document.getElementById('xp-next').textContent = `${(xpNeeded - xpInLevel).toLocaleString()} to Level ${level + 1}`;
+    document.getElementById('xp-current').textContent = `${inLevel.toLocaleString()} XP`;
+    document.getElementById('xp-next').textContent = `${cap} XP to Level ${level + 1}`;
+    
     setTimeout(() => {
       document.getElementById('xp-bar-fill').style.width = pct + '%';
     }, 200);
 
-    const total = ALL_ACHIEVEMENTS.length;
-    const unlocked = achievementsData.filter(a => a.is_unlocked).length;
-    const ringPct = total > 0 ? Math.round((unlocked / total) * 100) : 0;
-    const circumference = 2 * Math.PI * 32; // r=32
-    const offset = circumference * (1 - ringPct / 100);
+    const unlockedCount = achievementsData.filter(a => a.is_unlocked).length;
+    const sessionCount = profile.total_sessions || history.length;
 
-    setTimeout(() => {
-      document.getElementById('ring-fill').style.strokeDashoffset = offset;
-      document.getElementById('ring-pct').textContent = ringPct + '%';
-    }, 300);
+    // Counter animation
+    animateVal(document.getElementById('chip-unlocked'), 0, unlockedCount, 1000);
+    animateVal(document.getElementById('chip-sessions'), 0, sessionCount, 1000);
+  }
 
-    document.getElementById('chip-unlocked').textContent = unlocked;
-    document.getElementById('chip-total').textContent = total;
-    document.getElementById('chip-sessions').textContent = profile.total_sessions || history.length;
+  function animateVal(obj, start, end, duration) {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+      obj.innerHTML = Math.floor(progress * (end - start) + start);
+      if (progress < 1) window.requestAnimationFrame(step);
+    };
+    window.requestAnimationFrame(step);
   }
 
   function renderGrid(category) {
     const grid = document.getElementById('achievements-grid');
     grid.innerHTML = '';
 
-    const list = category === 'all'
-      ? achievementsData
-      : achievementsData.filter(a => a.category === category);
-
-    // Sort: unlocked first, then by rarity desc
+    const list = category === 'all' ? achievementsData : achievementsData.filter(a => a.category === category);
+    
     const rarityOrder = { legendary: 0, epic: 1, rare: 2, common: 3 };
     const sorted = [...list].sort((a, b) => {
       if (a.is_unlocked !== b.is_unlocked) return a.is_unlocked ? -1 : 1;
       return (rarityOrder[a.rarity] ?? 3) - (rarityOrder[b.rarity] ?? 3);
     });
 
-    if (!sorted.length) {
-      grid.innerHTML = `<div class="empty-state"><div class="icon">🔍</div><div class="msg">No achievements in this category</div><div class="sub">Keep training to unlock more!</div></div>`;
-      return;
-    }
-
-    sorted.forEach((ach) => {
+    sorted.forEach((ach, idx) => {
       const show = personalizeBadge(ach, userDisplayName);
+      const isUnl = ach.is_unlocked;
+      const prog = isUnl ? 100 : ach.progress;
+      
       const card = document.createElement('div');
-      card.className = `ach-card rarity-${ach.rarity} ${ach.is_unlocked ? 'unlocked' : 'locked'} tf-reveal`;
-
-      const progressPct = ach.is_unlocked ? 100 : (ach.progress || 0);
-      const progressText = ach.is_unlocked ? 'Completed!' : `${progressPct}% progress`;
+      card.className = `ach-card rarity-${ach.rarity} ${isUnl ? 'unlocked' : 'locked'} tf-reveal`;
+      card.style.animationDelay = `${idx * 0.05}s`;
 
       card.innerHTML = `
-        <div class="ach-top">
-          <div class="ach-icon-wrap">${ach.icon}</div>
+        <div class="ach-header">
+          <div class="ach-icon-container">${ach.icon}</div>
           <div class="ach-meta">
-            <div class="ach-name">${show.name}</div>
+            <div class="ach-title">${show.name}</div>
             <div class="ach-desc">${show.desc}</div>
-            <div class="ach-rarity">${ach.rarity}</div>
+            <div class="ach-badge-tag">${ach.rarity}</div>
           </div>
         </div>
-        <div class="ach-progress-wrap">
-          <div class="ach-progress-label">
-            <span>${progressText}</span>
-            ${!ach.is_unlocked && ach.progress > 0 ? `<span>${progressPct}%</span>` : ''}
-          </div>
-          <div class="ach-progress-bar">
-            <div class="ach-progress-fill" style="width:0%" data-target="${progressPct}"></div>
-          </div>
-        </div>
-        ${ach.is_unlocked
-          ? `<div class="ach-unlocked-badge">✓ Unlocked</div>`
-          : `<div class="lock-badge">🔒 Locked. One more session could unlock this.</div>`
+        ${isUnl 
+          ? `<div class="ach-unlocked-stamp">✓ Unlocked</div>`
+          : `<div class="ach-prog-container">
+               <div class="ach-prog-lbl"><span>Progress</span><span>${prog}%</span></div>
+               <div class="ach-prog-track"><div class="ach-prog-fill" style="width:${prog}%"></div></div>
+             </div>`
         }
       `;
-
       grid.appendChild(card);
-
-      // Staggered animation in
-      requestAnimationFrame(() => {
-        setTimeout(() => {
-          card.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
-          card.style.opacity = '1';
-          card.style.transform = 'scale(1)';
-
-          // Animate progress bar after card appears
-          setTimeout(() => {
-            const fill = card.querySelector('.ach-progress-fill');
-            if (fill) fill.style.width = fill.dataset.target + '%';
-          }, 200);
-        }, idx * 45);
-      });
     });
   }
 
   function setupFilters() {
-    document.querySelectorAll('.filter-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        renderGrid(tab.dataset.category);
+    document.querySelectorAll('.ach-filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.ach-filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderGrid(btn.dataset.category);
       });
     });
-  }
-
-  // Toast notification for newly unlocked achievements
-  function showToast(name, icon) {
-    const toast = document.getElementById('ach-toast');
-    document.getElementById('toast-icon').textContent = icon;
-    document.getElementById('toast-title').textContent = 'Achievement Unlocked!';
-    document.getElementById('toast-msg').textContent = name;
-    toast.classList.add('show');
-    setTimeout(() => toast.classList.remove('show'), 4000);
   }
 
   init();

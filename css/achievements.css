@@ -1,0 +1,257 @@
+/* ============================================================
+   TYPEFORGE AI — PREMIUM ACHIEVEMENTS v2
+   ============================================================ */
+
+/* ── Hero / Summary Section ── */
+.ach-hero-bento {
+  display: grid;
+  grid-template-columns: minmax(300px, 1.2fr) repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 900px) {
+  .ach-hero-bento {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bento-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-1);
+  border-radius: 24px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.bento-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+}
+
+.bento-main {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.bento-avatar {
+  width: 80px; height: 80px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--brand), var(--coral));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  color: #fff;
+  box-shadow: 0 12px 32px var(--brand-glow), inset 0 2px 4px rgba(255,255,255,0.3);
+  position: relative;
+}
+
+.bento-info { flex: 1; }
+.bento-title { font-size: 24px; font-weight: 800; color: var(--text-1); margin-bottom: 4px; }
+.bento-subtitle { font-size: 14px; color: var(--text-3); font-weight: 500; }
+.bento-subtitle strong { color: var(--brand-light); }
+
+.bento-stat-val { font-family: var(--font-display); font-size: 48px; font-weight: 800; line-height: 1; color: var(--text-1); }
+.bento-stat-lbl { font-size: 13px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-top: 8px; }
+
+.xp-progress-wrap { margin-top: auto; padding-top: 24px; }
+.xp-track { height: 10px; background: var(--bg-elevated); border-radius: 999px; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0,0,0,0.4); }
+.xp-fill { height: 100%; background: linear-gradient(90deg, var(--brand), var(--gold)); border-radius: 999px; transition: width 1s cubic-bezier(0.16, 1, 0.3, 1); position: relative; }
+.xp-fill::after { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 40px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4)); filter: blur(4px); }
+.xp-labels { display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; color: var(--text-3); margin-top: 10px; }
+
+/* ── Filter Tabs ── */
+.ach-filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.ach-filter-btn {
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-2);
+  color: var(--text-2);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s var(--ease-out);
+}
+
+.ach-filter-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-1);
+}
+
+.ach-filter-btn.active {
+  background: var(--text-1);
+  color: var(--bg-base);
+  border-color: var(--text-1);
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.15);
+}
+
+/* ── Achievements Grid ── */
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+/* ── Individual Card ── */
+.ach-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-1);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s var(--ease-spring), box-shadow 0.3s var(--ease-out), border-color 0.3s;
+}
+
+.ach-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  opacity: 0.5;
+  transition: opacity 0.3s;
+}
+
+.ach-card.unlocked:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-2);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+}
+
+.ach-card.unlocked:hover::before { opacity: 1; }
+
+.ach-card.locked {
+  filter: grayscale(0.8);
+  opacity: 0.6;
+}
+.ach-card.locked:hover { opacity: 0.9; filter: grayscale(0.4); transform: translateY(-2px); }
+
+/* Rarity Accents */
+.rarity-common::before { background: #6b7280; }
+.rarity-rare::before { background: linear-gradient(90deg, #0ea5e9, #38bdf8); }
+.rarity-epic::before { background: linear-gradient(90deg, #8b5cf6, #c084fc); }
+.rarity-legendary::before { background: linear-gradient(90deg, #f59e0b, #fcd34d, #f59e0b); }
+
+/* Rarity Icon Glows */
+.ach-icon-container {
+  width: 60px; height: 60px;
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-2);
+  flex-shrink: 0;
+  transition: transform 0.4s var(--ease-spring);
+}
+
+.ach-card.unlocked:hover .ach-icon-container { transform: scale(1.1) rotate(5deg); }
+
+.rarity-legendary.unlocked .ach-icon-container {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: rgba(245, 158, 11, 0.4);
+  box-shadow: 0 0 24px rgba(245, 158, 11, 0.25);
+}
+.rarity-epic.unlocked .ach-icon-container {
+  background: rgba(139, 92, 246, 0.15);
+  border-color: rgba(139, 92, 246, 0.4);
+  box-shadow: 0 0 24px rgba(139, 92, 246, 0.2);
+}
+.rarity-rare.unlocked .ach-icon-container {
+  background: rgba(14, 165, 233, 0.15);
+  border-color: rgba(14, 165, 233, 0.4);
+  box-shadow: 0 0 24px rgba(14, 165, 233, 0.2);
+}
+
+.ach-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.ach-meta { flex: 1; }
+.ach-title { font-size: 16px; font-weight: 700; color: var(--text-1); margin-bottom: 6px; }
+.ach-desc { font-size: 13px; color: var(--text-3); line-height: 1.5; }
+
+.ach-badge-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: 6px;
+  margin-top: 10px;
+  background: var(--bg-elevated);
+}
+
+.rarity-common .ach-badge-tag { color: #9ca3af; border: 1px solid rgba(156,163,175,0.2); }
+.rarity-rare .ach-badge-tag { color: #38bdf8; border: 1px solid rgba(56,189,248,0.2); background: rgba(56,189,248,0.05); }
+.rarity-epic .ach-badge-tag { color: #c084fc; border: 1px solid rgba(192,132,252,0.2); background: rgba(192,132,252,0.05); }
+.rarity-legendary .ach-badge-tag { color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); background: rgba(251,191,36,0.08); }
+
+/* Progress bar inside cards */
+.ach-prog-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ach-prog-lbl {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-4);
+}
+.ach-prog-track { height: 6px; background: var(--border-1); border-radius: 999px; overflow: hidden; }
+.ach-prog-fill { height: 100%; border-radius: 999px; transition: width 1s cubic-bezier(0.16, 1, 0.3, 1); }
+
+.rarity-common .ach-prog-fill { background: #6b7280; }
+.rarity-rare .ach-prog-fill { background: linear-gradient(90deg, #0ea5e9, #38bdf8); }
+.rarity-epic .ach-prog-fill { background: linear-gradient(90deg, #8b5cf6, #c084fc); }
+.rarity-legendary .ach-prog-fill { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+
+.ach-card.unlocked .ach-prog-container { display: none; }
+.ach-card.unlocked .ach-unlocked-stamp {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--success);
+  padding: 8px 12px;
+  background: var(--success-bg);
+  border: 1px solid rgba(16, 217, 160, 0.2);
+  border-radius: 10px;
+  width: fit-content;
+}
+
+/* Animations */
+@keyframes popCard {
+  0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.tf-reveal {
+  animation: popCard 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
