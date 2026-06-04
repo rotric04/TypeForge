@@ -530,10 +530,10 @@ const state = {
   lastKeystrokeTime: 0,
   startTime: 0,
   wpmHistory: [],   // WPM samples over time
-  xp: parseInt(localStorage.getItem('tf_xp') || '0'),
-  level: parseInt(localStorage.getItem('tf_level') || '1'),
+  xp: 0,
+  level: 1,
   keyStats: {},     // {key: {hits, misses, totalDelay}}
-  sessionCount: parseInt(localStorage.getItem('tf_sessions') || '0'),
+  sessionCount: 0,
 };
 
 // ═══════════════════════════════════════════════════════
@@ -904,7 +904,6 @@ function endSession() {
         const sessions = JSON.parse(localStorage.getItem('tf_session_history') || '[]');
         sessions.unshift({ ...payload, id: data.id, xp_earned: data.xp_earned, created_at: data.created_at || new Date().toISOString(), timestamp: Date.now() });
         localStorage.setItem('tf_session_history', JSON.stringify(sessions.slice(0, 100)));
-        localStorage.setItem('tf_key_stats', JSON.stringify(state.keyStats));
       } catch (e) {}
 
       showResults(data.wpm, data.accuracy, data.consistency, data.xp_earned);
@@ -966,13 +965,13 @@ function calcXP(wpm, acc, consistency) {
 
 function saveSession(localSession) {
   try {
+    // Append session strictly to offline unsynced sessions queue
     const sessions = JSON.parse(localStorage.getItem('tf_session_history') || '[]');
     sessions.unshift(localSession);
     localStorage.setItem('tf_session_history', JSON.stringify(sessions.slice(0, 100)));
+    
+    // Update in-memory state so UI reflects it immediately
     state.sessionCount++;
-    localStorage.setItem('tf_sessions', state.sessionCount);
-
-    // Update XP and Level
     state.xp += localSession.xp_earned;
     const nextLevelXP = state.level * 500;
     if (state.xp >= nextLevelXP) { 
@@ -980,11 +979,6 @@ function saveSession(localSession) {
       state.xp -= nextLevelXP; 
       showLevelUp(); 
     }
-    localStorage.setItem('tf_xp', state.xp);
-    localStorage.setItem('tf_level', state.level);
-
-    // Save key stats
-    localStorage.setItem('tf_key_stats', JSON.stringify(state.keyStats));
   } catch(e) {}
 }
 

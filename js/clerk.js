@@ -148,6 +148,13 @@ export const Auth = {
    */
   async signOut() {
     if (clerkInstance) {
+      // Purge all user-specific progress cache in localStorage to prevent data bleed
+      localStorage.removeItem('tf_xp');
+      localStorage.removeItem('tf_level');
+      localStorage.removeItem('tf_sessions');
+      localStorage.removeItem('tf_session_history');
+      localStorage.removeItem('tf_key_stats');
+
       await clerkInstance.signOut();
       currentUser = null;
       updateNavAuthState(null);

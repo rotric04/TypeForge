@@ -10,39 +10,35 @@ export function displayName(user, profile) {
 }
 
 export async function loadProfileAndHistory() {
-  let profile = {};
+  let profile = {
+    xp: 0,
+    level: 1,
+    total_sessions: 0,
+    best_wpm: 0,
+    weak_keys: [],
+  };
   let history = [];
 
   try {
-    profile = await API.getUserProfile();
-    // Persist to local storage in case of future offline/logout
-    localStorage.setItem('tf_xp', (profile.xp || 0).toString());
-    localStorage.setItem('tf_level', (profile.level || 1).toString());
-    localStorage.setItem('tf_sessions', (profile.total_sessions || 0).toString());
+    const freshProfile = await API.getUserProfile();
+    if (freshProfile) {
+      profile = freshProfile;
+    }
   } catch (err) {
-    console.warn("TF Auth: Falling back to local storage profile", err);
-    profile = {
-      xp: parseInt(localStorage.getItem('tf_xp') || '0', 10),
-      level: parseInt(localStorage.getItem('tf_level') || '1', 10),
-      total_sessions: parseInt(localStorage.getItem('tf_sessions') || '0', 10),
-      best_wpm: 0,
-      weak_keys: [],
-    };
-    try {
-      const stats = JSON.parse(localStorage.getItem('tf_key_stats') || '{}');
-      profile.weak_keys = Object.keys(stats)
-        .filter((k) => k.trim())
-        .sort((a, b) => (stats[b].misses || 0) - (stats[a].misses || 0))
-        .slice(0, 5);
-    } catch { /* ignore */ }
+    console.error("TF Auth: Failed to load user profile from API", err);
   }
 
   try {
-    history = await API.getHistory(60, 0);
-    if (!history?.length) {
+    const freshHistory = await API.getHistory(60, 0);
+    if (freshHistory && freshHistory.length) {
+      history = freshHistory;
+    } else {
+      // Fallback only to offline unsynced sessions (safety queue)
       history = JSON.parse(localStorage.getItem('tf_session_history') || '[]');
     }
-  } catch {
+  } catch (err) {
+    console.error("TF Auth: Failed to load history from API", err);
+    // Fallback only to offline unsynced sessions (safety queue)
     history = JSON.parse(localStorage.getItem('tf_session_history') || '[]');
   }
 
