@@ -31,7 +31,7 @@ class Settings(BaseSettings):
 
     # ── Email (Resend) ─────────────────────────────────
     RESEND_API_KEY:   str = ""
-    EMAIL_FROM:       str = "noreply@typeforge.ai"
+    EMAIL_FROM:       str = "noreply@typeforge.fun"
     EMAIL_FROM_NAME:  str = "TypeForge AI"
 
     # ── Cloudflare Turnstile ──────────────────────────

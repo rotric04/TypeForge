@@ -7,7 +7,7 @@ router = APIRouter()
 
 class MagicLinkRequest(BaseModel):
     email: str
-    redirect_url: str = "https://typeforge.ai/app/dashboard"
+    redirect_url: str = "https://typeforge.fun/app/dashboard"
 
 class TurnstileRequest(BaseModel):
     token: str
