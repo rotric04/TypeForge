@@ -90,6 +90,7 @@ ALTER TABLE public.achievements ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.typing_dna ENABLE ROW LEVEL SECURITY;
 
 -- Create policies for Users (Users can read/update their own data)
+DROP POLICY IF EXISTS "Users can view own profile" ON public.users;
 CREATE POLICY "Users can view own profile" 
     ON public.users FOR SELECT 
     USING (auth.uid()::text = clerk_id OR true); -- Allowing true for server-to-server operations if bypassing RLS via service role
