@@ -231,6 +231,10 @@
       }));
 
       userDisplayName = displayName(user, userProfile);
+      // Update the displayed name now that we have the real profile
+      document.getElementById('xp-name').textContent = userDisplayName;
+      document.getElementById('xp-avatar').textContent = (userDisplayName[0] || 'T').toUpperCase();
+      document.querySelectorAll('[data-auth-name]').forEach(el => el.textContent = userDisplayName);
       renderHero(userProfile, sessionHistory);
       renderGrid('all');
       setupFilters();

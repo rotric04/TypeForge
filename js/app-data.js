@@ -4,14 +4,28 @@
 import API from './api.js';
 
 export function displayName(user, profile) {
-  // Prefer Clerk-provided real name (firstName/fullName) first
-  const fromClerk = user?.firstName || user?.name;
-  // Only use DB username if it's a real name (not a Clerk user ID like 'user_2abc...' or email prefix)
-  const dbUsername = profile?.username;
-  const isClerkId = dbUsername && (dbUsername.startsWith('user_') || dbUsername.match(/^[a-z0-9]{8,}$/i));
-  const fromProfile = isClerkId ? null : (dbUsername || profile?.email?.split('@')[0]);
-  // Fallback chain: real Clerk name > profile username (if real) > Clerk username > email prefix > 'Typist'
-  return fromClerk || fromProfile || user?.username || profile?.email?.split('@')[0] || 'Typist';
+  // Helper to check if a string is a Clerk user ID (user_XXXX...) — never show these
+  const isClerkId = (s) => !s || s.startsWith('user_');
+
+  // 1. Always prefer Clerk firstName (set by user in Clerk dashboard)
+  if (user?.firstName && !isClerkId(user.firstName)) return user.firstName;
+
+  // 2. Clerk fullName
+  if (user?.name && !isClerkId(user.name)) return user.name;
+
+  // 3. DB username (if it's a real name, not a Clerk ID)
+  if (profile?.username && !isClerkId(profile.username)) return profile.username;
+
+  // 4. Email prefix from DB
+  if (profile?.email) return profile.email.split('@')[0];
+
+  // 5. Clerk username
+  if (user?.username && !isClerkId(user.username)) return user.username;
+
+  // 6. Email prefix from Clerk
+  if (user?.email) return user.email.split('@')[0];
+
+  return 'Typist';
 }
 
 export async function loadProfileAndHistory() {
