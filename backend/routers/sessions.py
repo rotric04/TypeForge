@@ -108,6 +108,23 @@ async def create_session(
     """
     await DB.execute(update_user_query, xp_earned, session.wpm, user_id)
 
+    # Save/update typing DNA for the user
+    try:
+        dna_id = f"TF-DNA-{user_id[:8].upper()}"
+        dna_record = await DB.fetchone("SELECT id FROM typing_dna WHERE user_id = $1::uuid", user.id)
+        if dna_record:
+            await DB.execute(
+                "UPDATE typing_dna SET weak_keys = $1, generated_at = NOW() WHERE user_id = $2::uuid",
+                weak_keys, user.id
+            )
+        else:
+            await DB.execute(
+                "INSERT INTO typing_dna (user_id, dna_id, archetype, weak_keys) VALUES ($1::uuid, $2, $3, $4)",
+                user.id, dna_id, "Typist", weak_keys
+            )
+    except Exception as dna_err:
+        logger.error(f"Failed to update typing DNA in database: {dna_err}")
+
     # Check achievements in background
     background_tasks.add_task(
         check_achievements_bg, user_id, session.wpm, session.accuracy, session.errors

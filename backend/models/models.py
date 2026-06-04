@@ -100,10 +100,10 @@ class KeystrokeEntry(BaseModel):
 class SessionCreate(BaseModel):
     mode:            TypingMode                    = TypingMode.CLASSIC
     language:        Optional[ProgrammingLanguage] = None
-    duration_secs:   int                           = Field(60, ge=15, le=600)
+    duration_secs:   int                           = Field(60, ge=1, le=1800)
     text_used:       str                           = ""
-    wpm:             int                           = Field(0, ge=0, le=300)
-    raw_wpm:         int                           = Field(0, ge=0, le=400)
+    wpm:             int                           = Field(0, ge=0, le=1000)
+    raw_wpm:         int                           = Field(0, ge=0, le=1000)
     accuracy:        float                         = Field(0.0, ge=0, le=100)
     correct_chars:   int                           = Field(0, ge=0)
     error_chars:     int                           = Field(0, ge=0)

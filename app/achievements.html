@@ -518,9 +518,19 @@
         API.getAchievements()
       ]);
 
-      userProfile = profile.status === 'fulfilled' ? (profile.value || {}) : {};
-      sessionHistory = history.status === 'fulfilled' ? (history.value || []) : [];
-      const unlockedIds = apiAchs.status === 'fulfilled'
+      userProfile = (profile.status === 'fulfilled' && profile.value && Object.keys(profile.value).length > 0)
+        ? profile.value
+        : {
+            xp: parseInt(localStorage.getItem('tf_xp') || '0'),
+            level: parseInt(localStorage.getItem('tf_level') || '1'),
+            total_sessions: parseInt(localStorage.getItem('tf_sessions') || '0'),
+            best_wpm: 0,
+            weak_keys: []
+          };
+      sessionHistory = (history.status === 'fulfilled' && history.value && history.value.length > 0)
+        ? history.value
+        : JSON.parse(localStorage.getItem('tf_session_history') || '[]');
+      const unlockedIds = (apiAchs.status === 'fulfilled' && apiAchs.value)
         ? (apiAchs.value || []).filter(a => a.is_unlocked).map(a => a.id)
         : [];
 

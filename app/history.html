@@ -329,33 +329,33 @@
       return;
     }
 
+    let data = [];
     try {
-      const data = await API.getHistory(BATCH, 0);
-      allSessions = data || [];
-      offset = allSessions.length;
-
-      renderSummaryStats(allSessions);
-      applyFilter('all');
-
-      document.getElementById('filter-bar').style.display = 'flex';
-      document.getElementById('history-subtitle').textContent =
-        allSessions.length === 0
-          ? 'No sessions yet — go train!'
-          : `${allSessions.length} session${allSessions.length !== 1 ? 's' : ''} found`;
-
-      if (allSessions.length === BATCH) {
-        document.getElementById('load-more-btn').style.display = 'block';
+      data = await API.getHistory(BATCH, 0);
+      if (!data || data.length === 0) {
+        data = JSON.parse(localStorage.getItem('tf_session_history') || '[]');
       }
     } catch (err) {
-      console.error('Failed to load history', err);
-      document.getElementById('sessions-list').innerHTML = `
-        <div class="state-box">
-          <div class="state-icon">⚠️</div>
-          <div class="state-title">Couldn't connect to server</div>
-          <div class="state-msg">The API server may be waking up (cold start). Please wait 10–15 seconds and <a href="">refresh</a>.</div>
-        </div>`;
-      document.getElementById('stats-bar').innerHTML = '';
+      console.warn('Failed to load history from API, falling back to localStorage:', err);
+      data = JSON.parse(localStorage.getItem('tf_session_history') || '[]');
     }
+
+    allSessions = data || [];
+    offset = allSessions.length;
+
+    renderSummaryStats(allSessions);
+    applyFilter('all');
+
+    document.getElementById('filter-bar').style.display = 'flex';
+    document.getElementById('history-subtitle').textContent =
+      allSessions.length === 0
+        ? 'No sessions yet — go train!'
+        : `${allSessions.length} session${allSessions.length !== 1 ? 's' : ''} found`;
+
+    if (allSessions.length === BATCH) {
+      document.getElementById('load-more-btn').style.display = 'block';
+    }
+
 
     // Filter pills
     document.querySelectorAll('.filter-pill').forEach(pill => {
@@ -431,7 +431,7 @@
     }
 
     list.forEach((sess, idx) => {
-      const d = new Date(sess.created_at);
+      const d = new Date(sess.created_at || sess.timestamp);
       const dateStr  = d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
       const timeStr  = d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
       const mode     = sess.mode || 'classic';

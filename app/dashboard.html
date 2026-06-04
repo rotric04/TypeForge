@@ -350,9 +350,45 @@ import API from '../js/api.js';
   }
 
   try {
-    // Fetch real metrics
-    const profile = await API.getUserProfile().catch(() => ({}));
-    const history = await API.getHistory(60, 0).catch(() => []);
+    // Fetch real metrics with local fallback
+    let profile = {};
+    let history = [];
+
+    try {
+      profile = await API.getUserProfile();
+    } catch (e) {
+      console.warn("Failed to fetch user profile, using local fallback");
+      profile = {
+        xp: parseInt(localStorage.getItem('tf_xp') || '0'),
+        level: parseInt(localStorage.getItem('tf_level') || '1'),
+        total_sessions: parseInt(localStorage.getItem('tf_sessions') || '0'),
+        best_wpm: 0,
+        weak_keys: []
+      };
+      // Pull weak keys from local key stats
+      try {
+        const stats = JSON.parse(localStorage.getItem('tf_key_stats') || '{}');
+        const sortedKeys = Object.keys(stats).filter(k => k.trim() !== '').sort((a, b) => {
+          const missesDiff = (stats[b].misses || 0) - (stats[a].misses || 0);
+          if (missesDiff !== 0) return missesDiff;
+          const delayA = stats[a].hits > 0 ? stats[a].totalDelay / stats[a].hits : 0;
+          const delayB = stats[b].hits > 0 ? stats[b].totalDelay / stats[b].hits : 0;
+          return delayB - delayA;
+        });
+        profile.weak_keys = sortedKeys.slice(0, 3);
+      } catch (err) {}
+    }
+
+    try {
+      history = await API.getHistory(60, 0);
+    } catch (e) {
+      console.warn("Failed to fetch session history, using local fallback");
+      history = JSON.parse(localStorage.getItem('tf_session_history') || '[]');
+    }
+
+    if (!profile.best_wpm && history.length > 0) {
+      profile.best_wpm = Math.max(...history.map(s => s.wpm || 0));
+    }
     
     // 1. Calculate stats from history
     let latestWpm = 0;
@@ -421,7 +457,7 @@ import API from '../js/api.js';
     // 2. Generate Real Activity Map
     const counts = {};
     history.forEach(session => {
-      const dateStr = new Date(session.created_at || session.Date).toDateString();
+      const dateStr = new Date(session.created_at || session.timestamp).toDateString();
       counts[dateStr] = (counts[dateStr] || 0) + 1;
     });
 
@@ -454,7 +490,7 @@ import API from '../js/api.js';
       }
       
       const totalIn60Days = history.filter(s => {
-        const diff = now - new Date(s.created_at || s.Date);
+        const diff = now - new Date(s.created_at || s.timestamp);
         return diff <= 60 * 24 * 60 * 60 * 1000;
       }).length;
       const descEl = heatmap.previousElementSibling;
@@ -492,14 +528,14 @@ import API from '../js/api.js';
       // Update chart labels
       const startText = document.querySelector('.chart-labels text:first-of-type');
       if (startText) {
-        startText.textContent = new Date(historyCopy[0].created_at || historyCopy[0].Date).toLocaleDateString(undefined, {month: 'short', day: 'numeric'});
+        startText.textContent = new Date(historyCopy[0].created_at || historyCopy[0].timestamp).toLocaleDateString(undefined, {month: 'short', day: 'numeric'});
       }
     }
 
     // 4. Update Target Areas (Weak Keys)
     const weakKeysContainer = document.querySelector('.span-6:nth-of-type(2) div[style*="display:flex"]');
-    if (weakKeysContainer && profile.weak_keys) {
-      const keys = profile.weak_keys.slice(0, 3);
+    if (weakKeysContainer) {
+      const keys = (profile.weak_keys || []).slice(0, 3);
       if (keys.length > 0) {
         weakKeysContainer.innerHTML = '';
         keys.forEach(k => {
@@ -511,6 +547,12 @@ import API from '../js/api.js';
           `;
           weakKeysContainer.appendChild(card);
         });
+      } else {
+        weakKeysContainer.innerHTML = `
+          <div style="flex:1;padding:16px;text-align:center;color:var(--text-4);font-size:13px;border:1px dashed var(--border-1);border-radius:12px;">
+            No weak keys detected yet. Start training to compile target keys!
+          </div>
+        `;
       }
     }
 

@@ -20,6 +20,19 @@ async def get_current_user_profile(user: UserProfile = Depends(get_current_user)
         raise HTTPException(status_code=404, detail="User profile not found")
     
     u_dict = dict(record)
+    
+    # Fetch weak keys from typing_dna table
+    weak_keys = []
+    try:
+        dna_record = await DB.fetchone(
+            "SELECT weak_keys FROM typing_dna WHERE user_id = $1::uuid ORDER BY generated_at DESC LIMIT 1",
+            user.id
+        )
+        if dna_record and dna_record["weak_keys"]:
+            weak_keys = dna_record["weak_keys"]
+    except Exception:
+        pass
+
     return {
         "id": str(u_dict["id"]),
         "clerk_id": u_dict["clerk_id"],
@@ -29,6 +42,7 @@ async def get_current_user_profile(user: UserProfile = Depends(get_current_user)
         "level": u_dict["level"],
         "total_sessions": u_dict["total_sessions"],
         "best_wpm": u_dict["best_wpm"],
+        "weak_keys": weak_keys,
         "created_at": u_dict["created_at"],
     }
 
