@@ -56,7 +56,34 @@ apiClient.interceptors.response.use((response) => {
     response.data = sanitizeData(response.data);
   }
   return response.data;
-}, (error) => {
+}, async (error) => {
+  const config = error.config;
+  
+  // If the request failed because the server is unreachable (Network Error / Timeout)
+  // and we were targeting localhost:8001, automatically switch to production Render API
+  const isLocalhost = config && config.baseURL && (config.baseURL.includes('localhost:8001') || config.baseURL.includes('127.0.0.1:8001'));
+  
+  if (isLocalhost && !error.response) {
+    console.warn("TF API: Local backend at localhost:8001 is unreachable. Automatically falling back to production Render API...");
+    const prodBase = 'https://typeforge-tkw8.onrender.com/api/v1';
+    
+    // Update the instance default base URL for all future requests
+    apiClient.defaults.baseURL = prodBase;
+    
+    // Update this request config base URL and construct the new endpoint
+    config.baseURL = prodBase;
+    if (config.url && (config.url.startsWith('http://localhost:8001') || config.url.startsWith('http://127.0.0.1:8001'))) {
+      config.url = config.url.replace(/https?:\/\/(localhost|127\.0\.0\.1):8001\/api\/v1/, prodBase);
+    }
+    
+    // Retry the request
+    try {
+      return await apiClient(config);
+    } catch (retryErr) {
+      return Promise.reject(retryErr);
+    }
+  }
+
   // Global Error Handling
   if (error.response) {
     // 401 Unauthorized globally handled

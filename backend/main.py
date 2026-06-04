@@ -45,6 +45,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.ALLOWED_ORIGINS,
+    allow_origin_regex=r"https?://(localhost|127\.0\.0\.1)(:\d+)?",
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allow_headers=["*"],
@@ -70,12 +71,12 @@ async def add_timing_and_security_headers(request, call_next):
     # Robust Security Headers
     response.headers["Content-Security-Policy"] = (
         "default-src 'self'; "
-        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://cdnjs.cloudflare.com https://*.clerk.accounts.dev https://*.clerk.com https://va.vercel-scripts.com https://static.cloudflareinsights.com; "
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://cdnjs.cloudflare.com https://*.clerk.accounts.dev https://*.clerk.com https://va.vercel-scripts.com https://static.cloudflareinsights.com https://esm.sh https://*.esm.sh; "
         "worker-src blob: 'self'; "
         "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
         "font-src 'self' https://fonts.gstatic.com; "
         "img-src 'self' data: https://images.clerk.dev https://*.clerk.com; "
-        "connect-src 'self' https://typeforge-tkw8.onrender.com https://*.clerk.accounts.dev https://*.clerk.com wss://*.clerk.accounts.dev https://va.vercel-scripts.com https://vitals.vercel-insights.com https://vitals.vercel-analytics.com https://cloudflareinsights.com; "
+        "connect-src 'self' https://typeforge-tkw8.onrender.com https://*.clerk.accounts.dev https://*.clerk.com wss://*.clerk.accounts.dev https://va.vercel-scripts.com https://vitals.vercel-insights.com https://vitals.vercel-analytics.com https://cloudflareinsights.com https://esm.sh https://*.esm.sh; "
         "frame-src 'self' https://challenges.cloudflare.com;"
     )
     response.headers["Cross-Origin-Opener-Policy"] = "same-origin-allow-popups"
