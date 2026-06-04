@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About TypeForge AI — Our Mission & Story</title>
-  <meta name="description" content="Learn about TypeForge AI's mission to reshape how touch typing is learned and mastered. Built by typists, our AI-powered platform provides deliberate, adaptive training to help you type faster."/>
-  <meta name="keywords" content="about typeforge, touch typing history, keyboard muscle memory, deliberate typing practice, ASSUD K."/>
-  <link rel="canonical" href="https://typeforge.fun/about"/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link rel="preconnect" href="https://esm.sh" crossorigin/>
-  <link rel="stylesheet" href="css/global.css"/>
-  <link rel="stylesheet" href="css/animations.css"/>
-  <link rel="stylesheet" href="css/components.css"/>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>"/>
+  <meta name="description"
+    content="Learn about TypeForge AI's mission to reshape how touch typing is learned and mastered. Built by typists, our AI-powered platform provides deliberate, adaptive training to help you type faster." />
+  <meta name="keywords"
+    content="about typeforge, touch typing history, keyboard muscle memory, deliberate typing practice, ASSUD K." />
+  <link rel="canonical" href="https://typeforge.fun/about" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://esm.sh" crossorigin />
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>" />
   <!-- Vercel Web Analytics -->
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -23,8 +27,14 @@
     /* ── About Page Styles ─────────────────────────────── */
 
     /* Parallax layers */
-    .parallax-scene { position: relative; overflow: hidden; }
-    .parallax-layer { will-change: transform; }
+    .parallax-scene {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .parallax-layer {
+      will-change: transform;
+    }
 
     /* Hero */
     .about-hero {
@@ -40,9 +50,9 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 60% 50% at 15% 60%, rgba(232,115,74,0.12) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 60% at 85% 30%, rgba(0,201,167,0.1) 0%, transparent 60%),
-        radial-gradient(ellipse 40% 40% at 50% 80%, rgba(245,200,66,0.07) 0%, transparent 60%);
+        radial-gradient(ellipse 60% 50% at 15% 60%, rgba(232, 115, 74, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 85% 30%, rgba(0, 201, 167, 0.1) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 50% 80%, rgba(245, 200, 66, 0.07) 0%, transparent 60%);
       pointer-events: none;
     }
 
@@ -61,8 +71,8 @@
       gap: 8px;
       padding: 5px 14px;
       border-radius: 999px;
-      background: rgba(232,115,74,0.1);
-      border: 1px solid rgba(232,115,74,0.25);
+      background: rgba(232, 115, 74, 0.1);
+      border: 1px solid rgba(232, 115, 74, 0.25);
       font-size: 12px;
       font-weight: 600;
       color: var(--brand-light);
@@ -105,8 +115,15 @@
     }
 
     @keyframes keyboard-float {
-      0%, 100% { transform: rotateX(20deg) rotateY(-10deg) rotateZ(2deg) translateY(0); }
-      50%       { transform: rotateX(18deg) rotateY(-8deg)  rotateZ(1deg) translateY(-12px); }
+
+      0%,
+      100% {
+        transform: rotateX(20deg) rotateY(-10deg) rotateZ(2deg) translateY(0);
+      }
+
+      50% {
+        transform: rotateX(18deg) rotateY(-8deg) rotateZ(1deg) translateY(-12px);
+      }
     }
 
     .keyboard-3d:hover {
@@ -118,11 +135,11 @@
       background: linear-gradient(160deg, #1a1a2e 0%, #0f0f1e 100%);
       border-radius: 14px;
       padding: 16px 14px 22px;
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       box-shadow:
-        0 60px 80px rgba(0,0,0,0.8),
-        0 0 0 1px rgba(255,255,255,0.05),
-        inset 0 1px 0 rgba(255,255,255,0.08);
+        0 60px 80px rgba(0, 0, 0, 0.8),
+        0 0 0 1px rgba(255, 255, 255, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
       position: relative;
     }
 
@@ -130,7 +147,9 @@
     .kb-base::after {
       content: '';
       position: absolute;
-      bottom: -12px; left: 8px; right: 8px;
+      bottom: -12px;
+      left: 8px;
+      right: 8px;
       height: 12px;
       background: linear-gradient(160deg, #0a0a18 0%, #060610 100%);
       border-radius: 0 0 10px 10px;
@@ -157,17 +176,17 @@
       font-family: var(--font-mono);
       font-size: 9px;
       font-weight: 500;
-      color: rgba(255,255,255,0.55);
+      color: rgba(255, 255, 255, 0.55);
       cursor: default;
       position: relative;
       transition: transform 0.1s, box-shadow 0.1s;
       user-select: none;
 
       background: linear-gradient(160deg, #22223a 0%, #18182e 100%);
-      border: 1px solid rgba(255,255,255,0.07);
+      border: 1px solid rgba(255, 255, 255, 0.07);
       box-shadow:
-        0 3px 0 rgba(0,0,0,0.5),
-        inset 0 1px 0 rgba(255,255,255,0.07);
+        0 3px 0 rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07);
     }
 
     .kb-key.active {
@@ -176,7 +195,7 @@
       box-shadow:
         0 3px 0 var(--brand-dark),
         0 0 16px var(--brand-glow),
-        inset 0 1px 0 rgba(255,255,255,0.2);
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
       animation: key-press 0.5s ease-in-out var(--delay, 0s) infinite;
     }
 
@@ -186,19 +205,44 @@
       box-shadow:
         0 3px 0 var(--teal-dark),
         0 0 16px var(--teal-glow),
-        inset 0 1px 0 rgba(255,255,255,0.2);
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
       animation: key-press 0.5s ease-in-out var(--delay, 0s) infinite;
     }
 
-    .kb-key.w2 { min-width: 52px; flex: none; }
-    .kb-key.w25 { min-width: 65px; flex: none; }
-    .kb-key.w3 { min-width: 80px; flex: none; }
-    .kb-key.w4 { min-width: 100px; flex: none; }
-    .kb-key.space { flex: 5; }
+    .kb-key.w2 {
+      min-width: 52px;
+      flex: none;
+    }
+
+    .kb-key.w25 {
+      min-width: 65px;
+      flex: none;
+    }
+
+    .kb-key.w3 {
+      min-width: 80px;
+      flex: none;
+    }
+
+    .kb-key.w4 {
+      min-width: 100px;
+      flex: none;
+    }
+
+    .kb-key.space {
+      flex: 5;
+    }
 
     @keyframes key-press {
-      0%, 100% { transform: translateY(0); }
-      40%       { transform: translateY(2px); }
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      40% {
+        transform: translateY(2px);
+      }
     }
 
     /* Floating label on keyboard */
@@ -214,9 +258,20 @@
       opacity: 0;
       animation: label-appear 3s ease-in-out 2s infinite;
     }
+
     @keyframes label-appear {
-      0%, 100% { opacity: 0; transform: translateX(-50%) translateY(4px); }
-      20%, 80%  { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+      0%,
+      100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(4px);
+      }
+
+      20%,
+      80% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
     }
 
     /* ── Story Section ───────────────────────────────── */
@@ -243,8 +298,8 @@
       gap: 8px;
       padding: 6px 16px;
       border-radius: 999px;
-      background: rgba(0,201,167,0.1);
-      border: 1px solid rgba(0,201,167,0.25);
+      background: rgba(0, 201, 167, 0.1);
+      border: 1px solid rgba(0, 201, 167, 0.25);
       font-size: 12px;
       font-weight: 600;
       color: var(--teal);
@@ -267,15 +322,21 @@
       color: var(--text-2);
       margin-bottom: 20px;
     }
-    .story-body p:last-child { margin-bottom: 0; }
 
-    .story-body strong { color: var(--text-1); font-weight: 600; }
+    .story-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .story-body strong {
+      color: var(--text-1);
+      font-weight: 600;
+    }
 
     .story-quote {
       margin: 32px 0;
       padding: 20px 24px;
       border-left: 3px solid var(--brand);
-      background: rgba(232,115,74,0.06);
+      background: rgba(232, 115, 74, 0.06);
       border-radius: 0 12px 12px 0;
       font-size: 16px;
       line-height: 1.7;
@@ -284,7 +345,10 @@
     }
 
     /* ── Values Grid ─────────────────────────────────── */
-    .values-section { padding: 50px 0; }
+    .values-section {
+      padding: 50px 0;
+    }
+
     .values-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -308,7 +372,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 80% 80% at 50% -20%, rgba(255,255,255,0.04), transparent);
+      background: radial-gradient(ellipse 80% 80% at 50% -20%, rgba(255, 255, 255, 0.04), transparent);
       pointer-events: none;
     }
 
@@ -338,7 +402,10 @@
     }
 
     /* ── Team ────────────────────────────────────────── */
-    .team-section { padding: 50px 0; }
+    .team-section {
+      padding: 50px 0;
+    }
+
     .team-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -360,38 +427,66 @@
     .team-card:hover {
       transform: translateY(-4px);
       border-color: var(--border-2);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
     }
 
     .team-avatar {
-      width: 72px; height: 72px;
+      width: 72px;
+      height: 72px;
       border-radius: 50%;
       margin: 0 auto 16px;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 2rem;
       border: 2px solid var(--border-2);
       transition: border-color 0.3s;
     }
-    .team-card:hover .team-avatar { border-color: var(--brand); }
 
-    .team-name { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
-    .team-role { font-size: 12px; color: var(--teal); font-weight: 500; margin-bottom: 8px; }
-    .team-bio  { font-size: 12px; color: var(--text-4); line-height: 1.6; }
+    .team-card:hover .team-avatar {
+      border-color: var(--brand);
+    }
+
+    .team-name {
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .team-role {
+      font-size: 12px;
+      color: var(--teal);
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .team-bio {
+      font-size: 12px;
+      color: var(--text-4);
+      line-height: 1.6;
+    }
 
     /* ── Timeline ────────────────────────────────────── */
-    .timeline-section { padding: 50px 0; }
+    .timeline-section {
+      padding: 50px 0;
+    }
+
     .timeline {
       position: relative;
       max-width: 720px;
       margin: 60px auto 0;
     }
+
     .timeline::before {
       content: '';
       position: absolute;
-      left: 24px; top: 0; bottom: 0;
+      left: 24px;
+      top: 0;
+      bottom: 0;
       width: 1px;
       background: linear-gradient(to bottom, transparent, var(--brand), var(--teal), transparent);
     }
+
     .timeline-item {
       display: flex;
       gap: 32px;
@@ -399,8 +494,10 @@
       padding-left: 16px;
       position: relative;
     }
+
     .timeline-dot {
-      width: 18px; height: 18px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
       background: var(--bg-base);
       border: 2px solid var(--brand);
@@ -409,10 +506,12 @@
       box-shadow: 0 0 12px var(--brand-glow);
       transition: all 0.3s;
     }
+
     .timeline-item:hover .timeline-dot {
       background: var(--brand);
       box-shadow: 0 0 24px var(--brand-glow);
     }
+
     .timeline-date {
       font-family: var(--font-mono);
       font-size: 12px;
@@ -422,27 +521,43 @@
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
-    .timeline-title { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
-    .timeline-desc  { font-size: 14px; color: var(--text-3); line-height: 1.7; }
+
+    .timeline-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .timeline-desc {
+      font-size: 14px;
+      color: var(--text-3);
+      line-height: 1.7;
+    }
 
     /* ── Numbers Banner ──────────────────────────────── */
     .numbers-banner {
       padding: 80px 0;
-      background: linear-gradient(135deg, rgba(232,115,74,0.06), rgba(0,201,167,0.04));
+      background: linear-gradient(135deg, rgba(232, 115, 74, 0.06), rgba(0, 201, 167, 0.04));
       border-top: 1px solid var(--border-1);
       border-bottom: 1px solid var(--border-1);
     }
+
     .numbers-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 0;
       text-align: center;
     }
+
     .number-item {
       padding: 24px;
       border-right: 1px solid var(--border-1);
     }
-    .number-item:last-child { border-right: none; }
+
+    .number-item:last-child {
+      border-right: none;
+    }
+
     .number-val {
       font-family: var(--font-display);
       font-size: 3rem;
@@ -451,7 +566,11 @@
       line-height: 1;
       margin-bottom: 6px;
     }
-    .number-label { font-size: 13px; color: var(--text-3); }
+
+    .number-label {
+      font-size: 13px;
+      color: var(--text-3);
+    }
 
     /* ── CTA ──────────────────────────────────────────── */
     .about-cta {
@@ -461,577 +580,670 @@
 
     /* Responsive */
     @media (max-width: 900px) {
-      .hero-content { grid-template-columns: 1fr; gap: 48px; }
-      .story-grid   { grid-template-columns: 1fr; }
-      .story-sticky { position: static; }
-      .values-grid  { grid-template-columns: 1fr 1fr; }
-      .numbers-grid { grid-template-columns: 1fr 1fr; }
-      .number-item:nth-child(2) { border-right: none; }
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .story-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .story-sticky {
+        position: static;
+      }
+
+      .values-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .numbers-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .number-item:nth-child(2) {
+        border-right: none;
+      }
     }
+
     @media (max-width: 600px) {
-      .values-grid  { grid-template-columns: 1fr; }
-      .numbers-grid { grid-template-columns: 1fr 1fr; }
-      .keyboard-3d  { width: 300px; }
-      .kb-key       { height: 26px; min-width: 20px; font-size: 7px; }
-      .kb-key.w2    { min-width: 38px; }
-      .kb-key.w3    { min-width: 58px; }
-      .kb-key.space { flex: 4; }
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .numbers-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .keyboard-3d {
+        width: 300px;
+      }
+
+      .kb-key {
+        height: 26px;
+        min-width: 20px;
+        font-size: 7px;
+      }
+
+      .kb-key.w2 {
+        min-width: 38px;
+      }
+
+      .kb-key.w3 {
+        min-width: 58px;
+      }
+
+      .kb-key.space {
+        flex: 4;
+      }
     }
   </style>
 </head>
+
 <body>
-<!-- Aurora -->
-<div class="aurora-container" aria-hidden="true">
-  <div class="aurora-blob aurora-blob-1" style="opacity:0.12;"></div>
-  <div class="aurora-blob aurora-blob-2" style="opacity:0.08;top:60%;right:5%;"></div>
-  <div class="aurora-blob aurora-blob-3" style="opacity:0.08;"></div>
-</div>
-<div class="noise-overlay" aria-hidden="true"></div>
-
-<!-- Navbar -->
-<nav class="navbar" id="main-nav" role="navigation" aria-label="Main navigation">
-  <div class="navbar-inner">
-    <a href="/" class="navbar-logo" aria-label="TypeForge AI home">
-      <div class="navbar-logo-icon" aria-hidden="true">⌨️</div>
-      <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
-    </a>
-    <ul class="navbar-links" role="list">
-      <li><a href="/features">Features</a></li>
-      <li><a href="/about" class="active" aria-current="page">About</a></li>
-      <li><a href="/blog">Blog</a></li>
-      <li><a href="/feedback">Community</a></li>
-    </ul>
-    <div class="navbar-actions">
-      <div class="nav-auth-signed-out">
-        <button class="btn btn-ghost btn-sm" data-auth-signin>Sign In</button>
-        <a href="/app/onboarding.html" class="btn btn-primary btn-sm">Start Free</a>
-      </div>
-      <div class="nav-auth-signed-in">
-        <a href="/app/dashboard.html" class="btn btn-ghost btn-sm">Dashboard</a>
-        <div class="nav-user-avatar" title="Profile" aria-label="User account">U</div>
-        <button class="btn btn-ghost btn-sm" data-auth-signout style="font-size:12px;">Sign Out</button>
-      </div>
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
+  <!-- Aurora -->
+  <div class="aurora-container" aria-hidden="true">
+    <div class="aurora-blob aurora-blob-1" style="opacity:0.12;"></div>
+    <div class="aurora-blob aurora-blob-2" style="opacity:0.08;top:60%;right:5%;"></div>
+    <div class="aurora-blob aurora-blob-3" style="opacity:0.08;"></div>
   </div>
-</nav>
-<div class="nav-backdrop" id="nav-backdrop"></div>
-<nav class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
-  <a href="/features">✦ Features</a>
-  <a href="/about" aria-current="page">✦ About</a>
-  <a href="/blog">✦ Blog</a>
-  <a href="/feedback">✦ Community</a>
-  <div class="nav-drawer-divider"></div>
-  <a href="/app/typing.html">⌨️ Open App</a>
-</nav>
+  <div class="noise-overlay" aria-hidden="true"></div>
 
-<main class="page-content">
-
-  <!-- ── HERO ─────────────────────────────────────────────── -->
-  <section class="about-hero parallax-scene">
-    <div class="hero-gradient-mesh"></div>
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-text parallax-layer" data-speed="0.15">
-          <div class="hero-eyebrow" data-anime="fade-up">✦ Our Story</div>
-          <h1 class="hero-heading" data-anime="fade-up" data-delay="80">
-            Built by typists.<br/>
-            <span class="gradient-text-warm">For typists.</span>
-          </h1>
-          <p class="hero-body" data-anime="fade-up" data-delay="160">
-            We got tired of typing websites that felt like IQ tests. Cold. Clinical. Mechanical. TypeForge started as a personal tool: a way to actually improve, not just measure.
-          </p>
-          <div style="display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;" data-anime="fade-up" data-delay="240">
-            <a href="/app/onboarding.html" class="btn btn-primary btn-lg">Start Training Free</a>
-            <a href="/feedback" class="btn btn-secondary btn-lg">Join the Community</a>
-          </div>
+  <!-- Navbar -->
+  <nav class="navbar" id="main-nav" role="navigation" aria-label="Main navigation">
+    <div class="navbar-inner">
+      <a href="/" class="navbar-logo" aria-label="TypeForge AI home">
+        <div class="navbar-logo-icon" aria-hidden="true">⌨️</div>
+        <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
+      </a>
+      <ul class="navbar-links" role="list">
+        <li><a href="/features">Features</a></li>
+        <li><a href="/about" class="active" aria-current="page">About</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/feedback">Community</a></li>
+      </ul>
+      <div class="navbar-actions">
+        <div class="nav-auth-signed-out">
+          <button class="btn btn-ghost btn-sm" data-auth-signin>Sign In</button>
+          <a href="/app/onboarding.html" class="btn btn-primary btn-sm">Start Free</a>
         </div>
+        <div class="nav-auth-signed-in">
+          <a href="/app/dashboard.html" class="btn btn-ghost btn-sm">Dashboard</a>
+          <div class="nav-user-avatar" title="Profile" aria-label="User account">U</div>
+          <button class="btn btn-ghost btn-sm" data-auth-signout style="font-size:12px;">Sign Out</button>
+        </div>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false"
+          aria-controls="nav-drawer">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+  <div class="nav-backdrop" id="nav-backdrop"></div>
+  <nav class="nav-drawer" id="nav-drawer" aria-label="Mobile navigation">
+    <a href="/features">✦ Features</a>
+    <a href="/about" aria-current="page">✦ About</a>
+    <a href="/blog">✦ Blog</a>
+    <a href="/feedback">✦ Community</a>
+    <div class="nav-drawer-divider"></div>
+    <a href="/app/typing.html">⌨️ Open App</a>
+  </nav>
 
-        <!-- 3D CSS Keyboard -->
-        <div class="keyboard-scene" data-anime="fade-in" data-delay="200" data-parallax="0.25">
-          <div class="keyboard-3d" id="kb3d" aria-hidden="true">
-            <div class="kb-label">typing at 87 WPM · 96% acc</div>
-            <div class="kb-base">
-              <!-- Row 1: Number row -->
-              <div class="kb-row">
-                <div class="kb-key w2">`</div>
-                <div class="kb-key">1</div><div class="kb-key">2</div>
-                <div class="kb-key active" style="--delay:0s">3</div>
-                <div class="kb-key">4</div><div class="kb-key">5</div>
-                <div class="kb-key teal" style="--delay:0.3s">6</div>
-                <div class="kb-key">7</div><div class="kb-key">8</div>
-                <div class="kb-key active" style="--delay:0.6s">9</div>
-                <div class="kb-key">0</div><div class="kb-key">-</div>
-                <div class="kb-key">=</div><div class="kb-key w2">⌫</div>
-              </div>
-              <!-- Row 2: QWERTY -->
-              <div class="kb-row">
-                <div class="kb-key w25">Tab</div>
-                <div class="kb-key teal" style="--delay:0.1s">Q</div>
-                <div class="kb-key active" style="--delay:0.4s">W</div>
-                <div class="kb-key">E</div>
-                <div class="kb-key active" style="--delay:0.7s">R</div>
-                <div class="kb-key">T</div><div class="kb-key">Y</div>
-                <div class="kb-key teal" style="--delay:0.2s">U</div>
-                <div class="kb-key">I</div><div class="kb-key">O</div>
-                <div class="kb-key active" style="--delay:0.5s">P</div>
-                <div class="kb-key">[</div><div class="kb-key">]</div>
-                <div class="kb-key w2">\</div>
-              </div>
-              <!-- Row 3: ASDF -->
-              <div class="kb-row">
-                <div class="kb-key w3">Caps</div>
-                <div class="kb-key active" style="--delay:0.15s">A</div>
-                <div class="kb-key teal" style="--delay:0.45s">S</div>
-                <div class="kb-key">D</div>
-                <div class="kb-key active" style="--delay:0.75s">F</div>
-                <div class="kb-key">G</div><div class="kb-key">H</div>
-                <div class="kb-key active" style="--delay:0.35s">J</div>
-                <div class="kb-key">K</div>
-                <div class="kb-key teal" style="--delay:0.65s">L</div>
-                <div class="kb-key">;</div><div class="kb-key">'</div>
-                <div class="kb-key w3">Enter</div>
-              </div>
-              <!-- Row 4: ZXCV -->
-              <div class="kb-row">
-                <div class="kb-key w4">⇧ Shift</div>
-                <div class="kb-key">Z</div><div class="kb-key">X</div>
-                <div class="kb-key active" style="--delay:0.25s">C</div>
-                <div class="kb-key teal" style="--delay:0.55s">V</div>
-                <div class="kb-key">B</div>
-                <div class="kb-key active" style="--delay:0.85s">N</div>
-                <div class="kb-key">M</div>
-                <div class="kb-key">,</div><div class="kb-key">.</div>
-                <div class="kb-key">/</div>
-                <div class="kb-key w4">⇧ Shift</div>
-              </div>
-              <!-- Row 5: Space row -->
-              <div class="kb-row">
-                <div class="kb-key w25">Ctrl</div>
-                <div class="kb-key w2">⌘</div>
-                <div class="kb-key w2">Alt</div>
-                <div class="kb-key space teal" style="--delay:0.5s"></div>
-                <div class="kb-key w2">Alt</div>
-                <div class="kb-key w2">⌘</div>
-                <div class="kb-key w25">Ctrl</div>
+  <main class="page-content">
+
+    <!-- ── HERO ─────────────────────────────────────────────── -->
+    <section class="about-hero parallax-scene">
+      <div class="hero-gradient-mesh"></div>
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text parallax-layer" data-speed="0.15">
+            <div class="hero-eyebrow" data-anime="fade-up">✦ Our Story</div>
+            <h1 class="hero-heading" data-anime="fade-up" data-delay="80">
+              Built by typists.<br />
+              <span class="gradient-text-warm">For typists.</span>
+            </h1>
+            <p class="hero-body" data-anime="fade-up" data-delay="160">
+              We got tired of typing websites that felt like IQ tests. Cold. Clinical. Mechanical. TypeForge started as
+              a personal tool: a way to actually improve, not just measure.
+            </p>
+            <div style="display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;" data-anime="fade-up" data-delay="240">
+              <a href="/app/onboarding.html" class="btn btn-primary btn-lg">Start Training Free</a>
+              <a href="/feedback" class="btn btn-secondary btn-lg">Join the Community</a>
+            </div>
+          </div>
+
+          <!-- 3D CSS Keyboard -->
+          <div class="keyboard-scene" data-anime="fade-in" data-delay="200" data-parallax="0.25">
+            <div class="keyboard-3d" id="kb3d" aria-hidden="true">
+              <div class="kb-label">typing at 87 WPM · 96% acc</div>
+              <div class="kb-base">
+                <!-- Row 1: Number row -->
+                <div class="kb-row">
+                  <div class="kb-key w2">`</div>
+                  <div class="kb-key">1</div>
+                  <div class="kb-key">2</div>
+                  <div class="kb-key active" style="--delay:0s">3</div>
+                  <div class="kb-key">4</div>
+                  <div class="kb-key">5</div>
+                  <div class="kb-key teal" style="--delay:0.3s">6</div>
+                  <div class="kb-key">7</div>
+                  <div class="kb-key">8</div>
+                  <div class="kb-key active" style="--delay:0.6s">9</div>
+                  <div class="kb-key">0</div>
+                  <div class="kb-key">-</div>
+                  <div class="kb-key">=</div>
+                  <div class="kb-key w2">⌫</div>
+                </div>
+                <!-- Row 2: QWERTY -->
+                <div class="kb-row">
+                  <div class="kb-key w25">Tab</div>
+                  <div class="kb-key teal" style="--delay:0.1s">Q</div>
+                  <div class="kb-key active" style="--delay:0.4s">W</div>
+                  <div class="kb-key">E</div>
+                  <div class="kb-key active" style="--delay:0.7s">R</div>
+                  <div class="kb-key">T</div>
+                  <div class="kb-key">Y</div>
+                  <div class="kb-key teal" style="--delay:0.2s">U</div>
+                  <div class="kb-key">I</div>
+                  <div class="kb-key">O</div>
+                  <div class="kb-key active" style="--delay:0.5s">P</div>
+                  <div class="kb-key">[</div>
+                  <div class="kb-key">]</div>
+                  <div class="kb-key w2">\</div>
+                </div>
+                <!-- Row 3: ASDF -->
+                <div class="kb-row">
+                  <div class="kb-key w3">Caps</div>
+                  <div class="kb-key active" style="--delay:0.15s">A</div>
+                  <div class="kb-key teal" style="--delay:0.45s">S</div>
+                  <div class="kb-key">D</div>
+                  <div class="kb-key active" style="--delay:0.75s">F</div>
+                  <div class="kb-key">G</div>
+                  <div class="kb-key">H</div>
+                  <div class="kb-key active" style="--delay:0.35s">J</div>
+                  <div class="kb-key">K</div>
+                  <div class="kb-key teal" style="--delay:0.65s">L</div>
+                  <div class="kb-key">;</div>
+                  <div class="kb-key">'</div>
+                  <div class="kb-key w3">Enter</div>
+                </div>
+                <!-- Row 4: ZXCV -->
+                <div class="kb-row">
+                  <div class="kb-key w4">⇧ Shift</div>
+                  <div class="kb-key">Z</div>
+                  <div class="kb-key">X</div>
+                  <div class="kb-key active" style="--delay:0.25s">C</div>
+                  <div class="kb-key teal" style="--delay:0.55s">V</div>
+                  <div class="kb-key">B</div>
+                  <div class="kb-key active" style="--delay:0.85s">N</div>
+                  <div class="kb-key">M</div>
+                  <div class="kb-key">,</div>
+                  <div class="kb-key">.</div>
+                  <div class="kb-key">/</div>
+                  <div class="kb-key w4">⇧ Shift</div>
+                </div>
+                <!-- Row 5: Space row -->
+                <div class="kb-row">
+                  <div class="kb-key w25">Ctrl</div>
+                  <div class="kb-key w2">⌘</div>
+                  <div class="kb-key w2">Alt</div>
+                  <div class="kb-key space teal" style="--delay:0.5s"></div>
+                  <div class="kb-key w2">Alt</div>
+                  <div class="kb-key w2">⌘</div>
+                  <div class="kb-key w25">Ctrl</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ── NUMBERS BANNER ─────────────────────────────────── -->
-  <div class="numbers-banner">
-    <div class="container">
-      <div class="numbers-grid">
-        <div class="number-item">
-          <div class="number-val gradient-text" data-counter="0">0</div>
-          <div class="number-label">Active Typists</div>
-        </div>
-        <div class="number-item">
-          <div class="number-val gradient-text-teal" data-counter="0">0</div>
-          <div class="number-label">Keystrokes Analyzed</div>
-        </div>
-        <div class="number-item">
-          <div class="number-val gradient-text-warm" data-counter="0">0</div>
-          <div class="number-label">WPM Average Improvement</div>
-        </div>
-        <div class="number-item">
-          <div class="number-val gradient-text-teal" data-counter="99">0</div>
-          <div class="number-label">% Open Source Code</div>
+    <!-- ── NUMBERS BANNER ─────────────────────────────────── -->
+    <div class="numbers-banner">
+      <div class="container">
+        <div class="numbers-grid">
+          <div class="number-item">
+            <div class="number-val gradient-text" data-counter="0">0</div>
+            <div class="number-label">Active Typists</div>
+          </div>
+          <div class="number-item">
+            <div class="number-val gradient-text-teal" data-counter="0">0</div>
+            <div class="number-label">Keystrokes Analyzed</div>
+          </div>
+          <div class="number-item">
+            <div class="number-val gradient-text-warm" data-counter="0">0</div>
+            <div class="number-label">WPM Average Improvement</div>
+          </div>
+          <div class="number-item">
+            <div class="number-val gradient-text-teal" data-counter="99">0</div>
+            <div class="number-label">% Open Source Code</div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- ── STORY ──────────────────────────────────────────── -->
-  <section class="story-section">
-    <div class="container">
-      <div class="story-grid">
-        <!-- Sticky label side -->
-        <div class="story-sticky">
-          <div class="story-badge" data-anime="fade-up">Our Story</div>
-          <h2 class="story-heading" data-anime="fade-up" data-delay="80">
-            We didn't want another speed test.
+    <!-- ── STORY ──────────────────────────────────────────── -->
+    <section class="story-section">
+      <div class="container">
+        <div class="story-grid">
+          <!-- Sticky label side -->
+          <div class="story-sticky">
+            <div class="story-badge" data-anime="fade-up">Our Story</div>
+            <h2 class="story-heading" data-anime="fade-up" data-delay="80">
+              We didn't want another speed test.
+            </h2>
+            <div style="margin-top:24px;">
+              <div
+                style="display:flex;align-items:center;gap:12px;margin-bottom:16px;padding:16px;background:var(--bg-card);border:1px solid var(--border-1);border-radius:16px;">
+                <div style="font-size:2rem;">👤</div>
+                <div>
+                  <div style="font-size:14px;font-weight:600;">Assud K.</div>
+                  <div style="font-size:12px;color:var(--text-4);">Founder & Developer</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Long-form story -->
+          <div class="story-body" data-anime="fade-up" data-delay="100">
+            <p>
+              It started with frustration. I was using every typing site I could find, and they all felt the same. You
+              type a paragraph, see your WPM, feel vaguely disappointed, and close the tab. <strong>Nothing ever
+                actually changed.</strong>
+            </p>
+            <div class="story-quote">
+              "Most typing platforms measure performance. TypeForge improves it."
+            </div>
+            <p>
+              So I started tracking my own patterns. I noticed I consistently fumbled the letter 'p' when it followed
+              'o'. I noticed that my accuracy dropped after about 45 seconds due to fatigue patterns. I noticed that
+              switching from prose to code caused a 20% WPM drop I never recovered from mid-session.
+            </p>
+            <p>
+              None of that showed up in a WPM score. <strong>None of it was being addressed.</strong> The sites were
+              measuring me, not training me.
+            </p>
+            <p>
+              TypeForge was built to solve exactly that. To watch every single keystroke, not as a number, but as a
+              behavioral signal. To understand that typing is not just speed, it's rhythm, confidence, pattern
+              recognition, and muscle memory working together.
+            </p>
+            <p>
+              We're a small, open-source-first project. If you're a developer who cares about this problem, we'd love
+              your help building it. Check out our <a href="/feedback" style="color:var(--brand-light);">community
+                page</a> — your first PR could land this week.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── VALUES ──────────────────────────────────────────── -->
+    <section class="values-section">
+      <div class="container">
+        <div style="text-align:center;margin-bottom:0;">
+          <div class="story-badge" style="margin:0 auto 16px;" data-anime="fade-up">What We Stand For</div>
+          <h2 style="font-size:clamp(2rem,3.5vw,3rem);font-weight:800;letter-spacing:-0.025em;" data-anime="fade-up"
+            data-delay="80">
+            Principles over <span class="gradient-text">metrics</span>
           </h2>
-          <div style="margin-top:24px;">
-            <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;padding:16px;background:var(--bg-card);border:1px solid var(--border-1);border-radius:16px;">
-              <div style="font-size:2rem;">👤</div>
-              <div>
-                <div style="font-size:14px;font-weight:600;">Assud K.</div>
-                <div style="font-size:12px;color:var(--text-4);">Founder & Developer</div>
-              </div>
+        </div>
+        <div class="values-grid" id="values-grid">
+          <div class="value-card" data-anime="fade-up" data-delay="0">
+            <span class="value-icon">🎯</span>
+            <div class="value-name">Training, not testing</div>
+            <div class="value-desc">You should never feel judged. Every session is a workout, not an exam. We design
+              every interaction to feel like a coach, not a stopwatch.</div>
+          </div>
+          <div class="value-card" data-anime="fade-up" data-delay="80">
+            <span class="value-icon">🔬</span>
+            <div class="value-name">Evidence-based learning</div>
+            <div class="value-desc">Everything we recommend is grounded in how motor learning actually works, utilizing
+              spaced repetition, difficulty scaling, and deliberate practice with feedback.</div>
+          </div>
+          <div class="value-card" data-anime="fade-up" data-delay="160">
+            <span class="value-icon">🌱</span>
+            <div class="value-name">Open by default</div>
+            <div class="value-desc">The core platform is open source. We believe typing training should be accessible to
+              everyone, rather than locked behind a subscription wall.</div>
+          </div>
+          <div class="value-card" data-anime="fade-up" data-delay="0">
+            <span class="value-icon">🛡️</span>
+            <div class="value-name">Privacy first</div>
+            <div class="value-desc">Your keystroke data belongs to you. We never sell it, never share it without
+              consent, and let you export or delete it at any time, no questions asked.</div>
+          </div>
+          <div class="value-card" data-anime="fade-up" data-delay="80">
+            <span class="value-icon">⚡</span>
+            <div class="value-name">Craft over features</div>
+            <div class="value-desc">We'd rather one thing work beautifully than ten things work adequately. We obsess
+              over every interaction, every animation, every moment of friction.</div>
+          </div>
+          <div class="value-card" data-anime="fade-up" data-delay="160">
+            <span class="value-icon">🤝</span>
+            <div class="value-name">Community-driven</div>
+            <div class="value-desc">Our roadmap is shaped by the people using the platform. Bug reports, feature
+              requests, and pull requests directly influence what we build next.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TEAM ────────────────────────────────────────────── -->
+    <section class="team-section">
+      <div class="container">
+        <div style="text-align:center;margin-bottom:0;">
+          <div class="story-badge"
+            style="margin:0 auto 16px;background:rgba(245,200,66,0.1);border-color:rgba(245,200,66,0.25);color:var(--gold);">
+            The People</div>
+          <h2 style="font-size:clamp(2rem,3.5vw,3rem);font-weight:800;letter-spacing:-0.025em;">
+            Small team. <span class="gradient-text-teal">Big obsession.</span>
+          </h2>
+          <p style="color:var(--text-3);margin-top:12px;font-size:15px;">We're a small core team and a growing community
+            of contributors.</p>
+        </div>
+        <div class="team-grid">
+          <div class="team-card" data-anime="scale-up" data-delay="0">
+            <div class="team-avatar" style="background:linear-gradient(135deg,var(--brand),var(--coral));">👤</div>
+            <div class="team-name">Assud K.</div>
+            <div class="team-role">Founder & Lead Dev</div>
+            <div class="team-bio">Started TypeForge after getting fed up with every other typing website. Types at ~110
+              WPM and still makes typos.</div>
+          </div>
+          <div class="team-card" data-anime="scale-up" data-delay="80">
+            <div class="team-avatar" style="background:linear-gradient(135deg,var(--gold),var(--amber));">🌍</div>
+            <div class="team-name">The Community</div>
+            <div class="team-role">Open Source Contributors</div>
+            <div class="team-bio">Developers from around the world who file issues, submit PRs, and help make TypeForge
+              better every week.</div>
+          </div>
+          <div class="team-card" data-anime="scale-up" data-delay="160"
+            style="border-style:dashed;border-color:var(--border-2);background:transparent;cursor:pointer;"
+            onclick="location.href='/feedback'">
+            <div class="team-avatar" style="background:rgba(255,255,255,0.04);border:2px dashed var(--border-2);">➕
+            </div>
+            <div class="team-name" style="color:var(--text-3);">That Could Be You</div>
+            <div class="team-role">Open Role</div>
+            <div class="team-bio">We're always looking for contributors who care about this problem. Any skill level
+              welcome.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TIMELINE ────────────────────────────────────────── -->
+    <section class="timeline-section">
+      <div class="container">
+        <div style="text-align:center;margin-bottom:0;">
+          <div class="story-badge"
+            style="margin:0 auto 16px;background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.25);color:var(--accent);">
+            How We Got Here</div>
+          <h2 style="font-size:clamp(2rem,3.5vw,3rem);font-weight:800;letter-spacing:-0.025em;">The journey</h2>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item" data-anime="fade-right">
+            <div class="timeline-dot"></div>
+            <div>
+              <div class="timeline-date">Early 2025</div>
+              <div class="timeline-title">The frustration</div>
+              <div class="timeline-desc">Using every typing site available. Realizing none of them were actually
+                training, but only measuring. Started building a personal tool.</div>
+            </div>
+          </div>
+          <div class="timeline-item" data-anime="fade-right" data-delay="80">
+            <div class="timeline-dot"></div>
+            <div>
+              <div class="timeline-date">Mid 2025</div>
+              <div class="timeline-title">First prototype</div>
+              <div class="timeline-desc">A simple HTML page with character-level tracking and a basic heatmap. Shared
+                with a few developer friends. The feedback was overwhelmingly positive.</div>
+            </div>
+          </div>
+          <div class="timeline-item" data-anime="fade-right" data-delay="160">
+            <div class="timeline-dot" style="border-color:var(--teal);box-shadow:0 0 12px var(--teal-glow);"></div>
+            <div>
+              <div class="timeline-date" style="color:var(--teal);">Late 2025</div>
+              <div class="timeline-title">AI training engine</div>
+              <div class="timeline-desc">Added K-Means clustering for archetype detection, weak-key adaptive text
+                generation, and the XP/level system. Sessions doubled overnight.</div>
+            </div>
+          </div>
+          <div class="timeline-item" data-anime="fade-right" data-delay="240">
+            <div class="timeline-dot" style="border-color:var(--gold);box-shadow:0 0 12px var(--gold-glow);"></div>
+            <div>
+              <div class="timeline-date" style="color:var(--gold);">2026</div>
+              <div class="timeline-title">Going open source</div>
+              <div class="timeline-desc">Decided to open the core platform. TypeForge should be accessible to everyone.
+                You're reading this at exactly that moment.</div>
+            </div>
+          </div>
+          <div class="timeline-item" data-anime="fade-right" data-delay="320">
+            <div class="timeline-dot"
+              style="border-color:var(--brand-light);border-style:dashed;background:transparent;animation:pulse-ring 2s ease-in-out infinite;">
+            </div>
+            <div>
+              <div class="timeline-date">→ Next</div>
+              <div class="timeline-title">Your chapter</div>
+              <div class="timeline-desc">We're building in public. Follow along, contribute, or just keep typing. Every
+                keystroke helps.</div>
             </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <!-- Long-form story -->
-        <div class="story-body" data-anime="fade-up" data-delay="100">
-          <p>
-            It started with frustration. I was using every typing site I could find, and they all felt the same. You type a paragraph, see your WPM, feel vaguely disappointed, and close the tab. <strong>Nothing ever actually changed.</strong>
+    <!-- ── CTA ──────────────────────────────────────────────── -->
+    <section class="about-cta">
+      <div class="container">
+        <div data-anime="fade-up" style="max-width:600px;margin:0 auto;">
+          <div style="font-size:3rem;margin-bottom:16px;">⌨️</div>
+          <h2 style="font-size:clamp(2rem,4vw,3.2rem);font-weight:800;letter-spacing:-0.025em;margin-bottom:16px;">
+            Ready to actually <span class="gradient-text-warm">improve?</span>
+          </h2>
+          <p style="color:var(--text-2);font-size:17px;line-height:1.7;margin-bottom:32px;">
+            Take the 5-minute onboarding. Get your Typing DNA. Start your first adaptive session, free forever.
           </p>
-          <div class="story-quote">
-            "Most typing platforms measure performance. TypeForge improves it."
-          </div>
-          <p>
-            So I started tracking my own patterns. I noticed I consistently fumbled the letter 'p' when it followed 'o'. I noticed that my accuracy dropped after about 45 seconds due to fatigue patterns. I noticed that switching from prose to code caused a 20% WPM drop I never recovered from mid-session.
-          </p>
-          <p>
-            None of that showed up in a WPM score. <strong>None of it was being addressed.</strong> The sites were measuring me, not training me.
-          </p>
-          <p>
-            TypeForge was built to solve exactly that. To watch every single keystroke, not as a number, but as a behavioral signal. To understand that typing is not just speed, it's rhythm, confidence, pattern recognition, and muscle memory working together.
-          </p>
-          <p>
-            We're a small, open-source-first project. If you're a developer who cares about this problem, we'd love your help building it. Check out our <a href="/feedback" style="color:var(--brand-light);">community page</a> — your first PR could land this week.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── VALUES ──────────────────────────────────────────── -->
-  <section class="values-section">
-    <div class="container">
-      <div style="text-align:center;margin-bottom:0;">
-        <div class="story-badge" style="margin:0 auto 16px;" data-anime="fade-up">What We Stand For</div>
-        <h2 style="font-size:clamp(2rem,3.5vw,3rem);font-weight:800;letter-spacing:-0.025em;" data-anime="fade-up" data-delay="80">
-          Principles over <span class="gradient-text">metrics</span>
-        </h2>
-      </div>
-      <div class="values-grid" id="values-grid">
-        <div class="value-card" data-anime="fade-up" data-delay="0">
-          <span class="value-icon">🎯</span>
-          <div class="value-name">Training, not testing</div>
-          <div class="value-desc">You should never feel judged. Every session is a workout, not an exam. We design every interaction to feel like a coach, not a stopwatch.</div>
-        </div>
-        <div class="value-card" data-anime="fade-up" data-delay="80">
-          <span class="value-icon">🔬</span>
-          <div class="value-name">Evidence-based learning</div>
-          <div class="value-desc">Everything we recommend is grounded in how motor learning actually works, utilizing spaced repetition, difficulty scaling, and deliberate practice with feedback.</div>
-        </div>
-        <div class="value-card" data-anime="fade-up" data-delay="160">
-          <span class="value-icon">🌱</span>
-          <div class="value-name">Open by default</div>
-          <div class="value-desc">The core platform is open source. We believe typing training should be accessible to everyone, rather than locked behind a subscription wall.</div>
-        </div>
-        <div class="value-card" data-anime="fade-up" data-delay="0">
-          <span class="value-icon">🛡️</span>
-          <div class="value-name">Privacy first</div>
-          <div class="value-desc">Your keystroke data belongs to you. We never sell it, never share it without consent, and let you export or delete it at any time, no questions asked.</div>
-        </div>
-        <div class="value-card" data-anime="fade-up" data-delay="80">
-          <span class="value-icon">⚡</span>
-          <div class="value-name">Craft over features</div>
-          <div class="value-desc">We'd rather one thing work beautifully than ten things work adequately. We obsess over every interaction, every animation, every moment of friction.</div>
-        </div>
-        <div class="value-card" data-anime="fade-up" data-delay="160">
-          <span class="value-icon">🤝</span>
-          <div class="value-name">Community-driven</div>
-          <div class="value-desc">Our roadmap is shaped by the people using the platform. Bug reports, feature requests, and pull requests directly influence what we build next.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── TEAM ────────────────────────────────────────────── -->
-  <section class="team-section">
-    <div class="container">
-      <div style="text-align:center;margin-bottom:0;">
-        <div class="story-badge" style="margin:0 auto 16px;background:rgba(245,200,66,0.1);border-color:rgba(245,200,66,0.25);color:var(--gold);">The People</div>
-        <h2 style="font-size:clamp(2rem,3.5vw,3rem);font-weight:800;letter-spacing:-0.025em;">
-          Small team. <span class="gradient-text-teal">Big obsession.</span>
-        </h2>
-        <p style="color:var(--text-3);margin-top:12px;font-size:15px;">We're a small core team and a growing community of contributors.</p>
-      </div>
-      <div class="team-grid">
-        <div class="team-card" data-anime="scale-up" data-delay="0">
-          <div class="team-avatar" style="background:linear-gradient(135deg,var(--brand),var(--coral));">👤</div>
-          <div class="team-name">Assud K.</div>
-          <div class="team-role">Founder & Lead Dev</div>
-          <div class="team-bio">Started TypeForge after getting fed up with every other typing website. Types at ~110 WPM and still makes typos.</div>
-        </div>
-        <div class="team-card" data-anime="scale-up" data-delay="80">
-          <div class="team-avatar" style="background:linear-gradient(135deg,var(--gold),var(--amber));">🌍</div>
-          <div class="team-name">The Community</div>
-          <div class="team-role">Open Source Contributors</div>
-          <div class="team-bio">Developers from around the world who file issues, submit PRs, and help make TypeForge better every week.</div>
-        </div>
-        <div class="team-card" data-anime="scale-up" data-delay="160" style="border-style:dashed;border-color:var(--border-2);background:transparent;cursor:pointer;" onclick="location.href="/feedback"">
-          <div class="team-avatar" style="background:rgba(255,255,255,0.04);border:2px dashed var(--border-2);">➕</div>
-          <div class="team-name" style="color:var(--text-3);">That Could Be You</div>
-          <div class="team-role">Open Role</div>
-          <div class="team-bio">We're always looking for contributors who care about this problem. Any skill level welcome.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── TIMELINE ────────────────────────────────────────── -->
-  <section class="timeline-section">
-    <div class="container">
-      <div style="text-align:center;margin-bottom:0;">
-        <div class="story-badge" style="margin:0 auto 16px;background:rgba(167,139,250,0.1);border-color:rgba(167,139,250,0.25);color:var(--accent);">How We Got Here</div>
-        <h2 style="font-size:clamp(2rem,3.5vw,3rem);font-weight:800;letter-spacing:-0.025em;">The journey</h2>
-      </div>
-      <div class="timeline">
-        <div class="timeline-item" data-anime="fade-right">
-          <div class="timeline-dot"></div>
-          <div>
-            <div class="timeline-date">Early 2025</div>
-            <div class="timeline-title">The frustration</div>
-            <div class="timeline-desc">Using every typing site available. Realizing none of them were actually training, but only measuring. Started building a personal tool.</div>
-          </div>
-        </div>
-        <div class="timeline-item" data-anime="fade-right" data-delay="80">
-          <div class="timeline-dot"></div>
-          <div>
-            <div class="timeline-date">Mid 2025</div>
-            <div class="timeline-title">First prototype</div>
-            <div class="timeline-desc">A simple HTML page with character-level tracking and a basic heatmap. Shared with a few developer friends. The feedback was overwhelmingly positive.</div>
-          </div>
-        </div>
-        <div class="timeline-item" data-anime="fade-right" data-delay="160">
-          <div class="timeline-dot" style="border-color:var(--teal);box-shadow:0 0 12px var(--teal-glow);"></div>
-          <div>
-            <div class="timeline-date" style="color:var(--teal);">Late 2025</div>
-            <div class="timeline-title">AI training engine</div>
-            <div class="timeline-desc">Added K-Means clustering for archetype detection, weak-key adaptive text generation, and the XP/level system. Sessions doubled overnight.</div>
-          </div>
-        </div>
-        <div class="timeline-item" data-anime="fade-right" data-delay="240">
-          <div class="timeline-dot" style="border-color:var(--gold);box-shadow:0 0 12px var(--gold-glow);"></div>
-          <div>
-            <div class="timeline-date" style="color:var(--gold);">2026</div>
-            <div class="timeline-title">Going open source</div>
-            <div class="timeline-desc">Decided to open the core platform. TypeForge should be accessible to everyone. You're reading this at exactly that moment.</div>
-          </div>
-        </div>
-        <div class="timeline-item" data-anime="fade-right" data-delay="320">
-          <div class="timeline-dot" style="border-color:var(--brand-light);border-style:dashed;background:transparent;animation:pulse-ring 2s ease-in-out infinite;"></div>
-          <div>
-            <div class="timeline-date">→ Next</div>
-            <div class="timeline-title">Your chapter</div>
-            <div class="timeline-desc">We're building in public. Follow along, contribute, or just keep typing. Every keystroke helps.</div>
+          <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+            <a href="/app/onboarding.html" class="btn btn-primary btn-xl">Start Free →</a>
+            <a href="/feedback" class="btn btn-secondary btn-lg">Join Community</a>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ── CTA ──────────────────────────────────────────────── -->
-  <section class="about-cta">
-    <div class="container">
-      <div data-anime="fade-up" style="max-width:600px;margin:0 auto;">
-        <div style="font-size:3rem;margin-bottom:16px;">⌨️</div>
-        <h2 style="font-size:clamp(2rem,4vw,3.2rem);font-weight:800;letter-spacing:-0.025em;margin-bottom:16px;">
-          Ready to actually <span class="gradient-text-warm">improve?</span>
-        </h2>
-        <p style="color:var(--text-2);font-size:17px;line-height:1.7;margin-bottom:32px;">
-          Take the 5-minute onboarding. Get your Typing DNA. Start your first adaptive session, free forever.
-        </p>
-        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-          <a href="/app/onboarding.html" class="btn btn-primary btn-xl">Start Free →</a>
-          <a href="/feedback" class="btn btn-secondary btn-lg">Join Community</a>
+    <!-- Footer -->
+    <footer class="footer" style="padding:40px 0;border-top:1px solid var(--border-1);">
+      <div class="container">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+          <a href="/" class="navbar-logo">
+            <div class="navbar-logo-icon">⌨️</div>
+            <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
+          </a>
+          <nav style="display:flex;gap:20px;flex-wrap:wrap;" aria-label="Footer">
+            <a href="/features" style="font-size:13px;color:var(--text-4);">Features</a>
+            <a href="/blog" style="font-size:13px;color:var(--text-4);">Blog</a>
+            <a href="/feedback" style="font-size:13px;color:var(--text-4);">Community</a>
+            <a href="/privacy" style="font-size:13px;color:var(--text-4);">Privacy Policy</a>
+            <a href="/terms" style="font-size:13px;color:var(--text-4);">Terms of Service</a>
+            <a href="/security" style="font-size:13px;color:var(--text-4);">Security</a>
+          </nav>
+          <p style="font-size:12px;color:var(--text-4);">© 2026 TypeForge AI · Designed & Developed by <a
+              href="https://github.com/rotric04" target="_blank" class="creator-link">rotric04</a></p>
         </div>
       </div>
-    </div>
-  </section>
+    </footer>
+  </main>
 
-  <!-- Footer -->
-  <footer class="footer" style="padding:40px 0;border-top:1px solid var(--border-1);">
-    <div class="container">
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
-        <a href="/" class="navbar-logo">
-          <div class="navbar-logo-icon">⌨️</div>
-          <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
-        </a>
-        <nav style="display:flex;gap:20px;flex-wrap:wrap;" aria-label="Footer">
-          <a href="/features" style="font-size:13px;color:var(--text-4);">Features</a>
-          <a href="/blog" style="font-size:13px;color:var(--text-4);">Blog</a>
-          <a href="/feedback" style="font-size:13px;color:var(--text-4);">Community</a>
-          <a href="/privacy" style="font-size:13px;color:var(--text-4);">Privacy Policy</a>
-          <a href="/terms" style="font-size:13px;color:var(--text-4);">Terms of Service</a>
-          <a href="/security" style="font-size:13px;color:var(--text-4);">Security</a>
-        </nav>
-        <p style="font-size:12px;color:var(--text-4);">© 2026 TypeForge AI · Designed & Developed by <a href="https://github.com/rotric04" target="_blank" class="creator-link">rotric04</a></p>
-      </div>
-    </div>
-  </footer>
-</main>
+  <!-- Anime.js only -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
 
-<!-- Anime.js only -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+  <script type="module">
+    import { initNavbar, initReveal } from './js/common.js';
+    import Auth from './js/clerk.js';
+    import { initAccessibility } from './js/accessibility.js';
 
-<script type="module">
-import { initNavbar, initReveal } from './js/common.js';
-import Auth from './js/clerk.js';
-import { initAccessibility } from './js/accessibility.js';
+    // ── Navbar ──────────────────────────────────────────────
+    initNavbar();
+    initAccessibility();
 
-// ── Navbar ──────────────────────────────────────────────
-initNavbar();
-initAccessibility();
+    // ── Mobile drawer ───────────────────────────────────────
+    const hamburger = document.getElementById('nav-hamburger');
+    const drawer = document.getElementById('nav-drawer');
+    const backdrop = document.getElementById('nav-backdrop');
 
-// ── Mobile drawer ───────────────────────────────────────
-const hamburger = document.getElementById('nav-hamburger');
-const drawer    = document.getElementById('nav-drawer');
-const backdrop  = document.getElementById('nav-backdrop');
-
-function toggleDrawer(open) {
-  hamburger.classList.toggle('open', open);
-  drawer.classList.toggle('open', open);
-  backdrop.classList.toggle('visible', open);
-  hamburger.setAttribute('aria-expanded', open);
-}
-
-hamburger.addEventListener('click', () => toggleDrawer(!drawer.classList.contains('open')));
-backdrop.addEventListener('click', () => toggleDrawer(false));
-
-// ── Lightweight scroll parallax (no GSAP) ──────────────────────────
-const heroSection = document.querySelector('.about-hero');
-const parallaxKb  = document.querySelector('[data-parallax="0.25"]');
-const parallaxTxt = document.querySelector('.parallax-layer[data-speed="0.15"]');
-
-let ticking = false;
-window.addEventListener('scroll', () => {
-  if (!ticking) {
-    requestAnimationFrame(() => {
-      if (!heroSection) { ticking = false; return; }
-      const scrolled = window.scrollY;
-      const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-      if (scrolled <= heroBottom) {
-        if (parallaxKb)  parallaxKb.style.transform  = `translateY(${-scrolled * 0.25}px)`;
-        if (parallaxTxt) parallaxTxt.style.transform = `translateY(${-scrolled * 0.12}px)`;
-      }
-      ticking = false;
-    });
-    ticking = true;
-  }
-}, { passive: true });
-
-// ── Anime.js entry animations ───────────────────────────
-function animateEnter(el, delay = 0) {
-  const type = el.dataset.anime;
-  const d    = parseInt(el.dataset.delay || delay);
-  const base = { targets: el, easing: 'easeOutExpo', duration: 900, delay: d };
-
-  if (type === 'fade-up')    anime({ ...base, opacity: [0, 1], translateY: [30, 0] });
-  else if (type === 'fade-in') anime({ ...base, opacity: [0, 1] });
-  else if (type === 'scale-up') anime({ ...base, opacity: [0, 1], scale: [0.92, 1] });
-  else if (type === 'fade-right') anime({ ...base, opacity: [0, 1], translateX: [-24, 0] });
-
-  el.style.opacity = '0';
-}
-
-// Observer for scroll-triggered animation
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      animateEnter(e.target);
-      observer.unobserve(e.target);
+    function toggleDrawer(open) {
+      hamburger.classList.toggle('open', open);
+      drawer.classList.toggle('open', open);
+      backdrop.classList.toggle('visible', open);
+      hamburger.setAttribute('aria-expanded', open);
     }
-  });
-}, { threshold: 0.15 });
 
-document.querySelectorAll('[data-anime]').forEach(el => {
-  el.style.opacity = '0';
-  observer.observe(el);
-});
+    hamburger.addEventListener('click', () => toggleDrawer(!drawer.classList.contains('open')));
+    backdrop.addEventListener('click', () => toggleDrawer(false));
 
-// ── Number Counters ─────────────────────────────────────
-const counterObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      const el  = e.target;
-      const end = parseInt(el.dataset.counter);
-      const isLarge = end > 10000;
-      const isSuffix99 = el.dataset.counter === '99';
-      anime({
-        targets: el,
-        innerHTML: [0, end],
-        round: 1,
-        duration: 2000,
-        easing: 'easeOutExpo',
-        update() {
-          const v = parseInt(el.innerHTML) || 0;
-          if (isLarge) {
-            el.textContent = Math.floor(v / 1000) + 'k+';
-          } else if (isSuffix99) {
-            el.textContent = v + '%';
-          } else {
-            el.textContent = '+' + v + ' WPM';
+    // ── Lightweight scroll parallax (no GSAP) ──────────────────────────
+    const heroSection = document.querySelector('.about-hero');
+    const parallaxKb = document.querySelector('[data-parallax="0.25"]');
+    const parallaxTxt = document.querySelector('.parallax-layer[data-speed="0.15"]');
+
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          if (!heroSection) { ticking = false; return; }
+          const scrolled = window.scrollY;
+          const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+          if (scrolled <= heroBottom) {
+            if (parallaxKb) parallaxKb.style.transform = `translateY(${-scrolled * 0.25}px)`;
+            if (parallaxTxt) parallaxTxt.style.transform = `translateY(${-scrolled * 0.12}px)`;
           }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    // ── Anime.js entry animations ───────────────────────────
+    function animateEnter(el, delay = 0) {
+      const type = el.dataset.anime;
+      const d = parseInt(el.dataset.delay || delay);
+      const base = { targets: el, easing: 'easeOutExpo', duration: 900, delay: d };
+
+      if (type === 'fade-up') anime({ ...base, opacity: [0, 1], translateY: [30, 0] });
+      else if (type === 'fade-in') anime({ ...base, opacity: [0, 1] });
+      else if (type === 'scale-up') anime({ ...base, opacity: [0, 1], scale: [0.92, 1] });
+      else if (type === 'fade-right') anime({ ...base, opacity: [0, 1], translateX: [-24, 0] });
+
+      el.style.opacity = '0';
+    }
+
+    // Observer for scroll-triggered animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          animateEnter(e.target);
+          observer.unobserve(e.target);
         }
       });
-      counterObserver.unobserve(el);
-    }
-  });
-}, { threshold: 0.5 });
+    }, { threshold: 0.15 });
 
-// Fetch live database statistics before running animations
-(async () => {
-  try {
-    const res = await fetch('/api/v1/analytics/platform-stats');
-    if (res.ok) {
-      const stats = await res.json();
-      document.querySelectorAll('[data-counter]').forEach(el => {
-        const label = el.nextElementSibling?.textContent || '';
-        if (label.includes('Active Typists') && stats.db_connected !== false) {
-          el.dataset.counter = stats.active_typists ?? 0;
-        } else if (label.includes('Keystrokes Analyzed') && stats.db_connected !== false) {
-          el.dataset.counter = stats.keystrokes_analyzed ?? 0;
-        } else if (label.includes('Average Improvement') && stats.db_connected !== false) {
-          el.dataset.counter = stats.wpm_improvement ?? 0;
-        }
-      });
-    }
-  } catch (e) {
-    console.warn("Failed to load live database stats:", e);
-  }
-  document.querySelectorAll('[data-counter]').forEach(el => counterObserver.observe(el));
-})();
-
-// ── 3D Keyboard mouse tilt ──────────────────────────────
-const kb = document.getElementById('kb3d');
-if (kb) {
-  let kbRaf = null;
-  document.querySelector('.keyboard-scene').addEventListener('mousemove', (e) => {
-    if (kbRaf) return; // throttle
-    kbRaf = requestAnimationFrame(() => {
-      const rect = e.currentTarget?.getBoundingClientRect();
-      if (!rect) { kbRaf = null; return; }
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const dx = (e.clientX - cx) / rect.width;
-      const dy = (e.clientY - cy) / rect.height;
-      kb.style.transform = `rotateX(${20 - dy * 12}deg) rotateY(${-10 + dx * 14}deg) rotateZ(${dx * 2}deg)`;
-      kb.style.transition = 'transform 0.1s ease-out';
-      kbRaf = null;
+    document.querySelectorAll('[data-anime]').forEach(el => {
+      el.style.opacity = '0';
+      observer.observe(el);
     });
-  }, { passive: true });
-  document.querySelector('.keyboard-scene').addEventListener('mouseleave', () => {
-    kbRaf = null;
-    kb.style.transform = '';
-    kb.style.transition = 'transform 0.8s var(--ease-out)';
-  });
-}
 
-// ── Value cards 3D tilt ─────────────────────────────────
-document.querySelectorAll('.value-card').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const r = card.getBoundingClientRect();
-    const dx = (e.clientX - r.left) / r.width  - 0.5;
-    const dy = (e.clientY - r.top)  / r.height - 0.5;
-    card.style.transform = `translateY(-6px) rotateX(${-dy * 8}deg) rotateY(${dx * 8}deg)`;
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = '';
-  });
-});
-</script>
+    // ── Number Counters ─────────────────────────────────────
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const el = e.target;
+          const end = parseInt(el.dataset.counter);
+          const isLarge = end > 10000;
+          const isSuffix99 = el.dataset.counter === '99';
+          anime({
+            targets: el,
+            innerHTML: [0, end],
+            round: 1,
+            duration: 2000,
+            easing: 'easeOutExpo',
+            update() {
+              const v = parseInt(el.innerHTML) || 0;
+              if (isLarge) {
+                el.textContent = Math.floor(v / 1000) + 'k+';
+              } else if (isSuffix99) {
+                el.textContent = v + '%';
+              } else {
+                el.textContent = '+' + v + ' WPM';
+              }
+            }
+          });
+          counterObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    // Fetch live database statistics before running animations
+    (async () => {
+      try {
+        const res = await fetch('/api/v1/analytics/platform-stats');
+        if (res.ok) {
+          const stats = await res.json();
+          document.querySelectorAll('[data-counter]').forEach(el => {
+            const label = el.nextElementSibling?.textContent || '';
+            if (label.includes('Active Typists') && stats.db_connected !== false) {
+              el.dataset.counter = stats.active_typists ?? 0;
+            } else if (label.includes('Keystrokes Analyzed') && stats.db_connected !== false) {
+              el.dataset.counter = stats.keystrokes_analyzed ?? 0;
+            } else if (label.includes('Average Improvement') && stats.db_connected !== false) {
+              el.dataset.counter = stats.wpm_improvement ?? 0;
+            }
+          });
+        }
+      } catch (e) {
+        console.warn("Failed to load live database stats:", e);
+      }
+      document.querySelectorAll('[data-counter]').forEach(el => counterObserver.observe(el));
+    })();
+
+    // ── 3D Keyboard mouse tilt ──────────────────────────────
+    const kb = document.getElementById('kb3d');
+    if (kb) {
+      let kbRaf = null;
+      document.querySelector('.keyboard-scene').addEventListener('mousemove', (e) => {
+        if (kbRaf) return; // throttle
+        kbRaf = requestAnimationFrame(() => {
+          const rect = e.currentTarget?.getBoundingClientRect();
+          if (!rect) { kbRaf = null; return; }
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+          const dx = (e.clientX - cx) / rect.width;
+          const dy = (e.clientY - cy) / rect.height;
+          kb.style.transform = `rotateX(${20 - dy * 12}deg) rotateY(${-10 + dx * 14}deg) rotateZ(${dx * 2}deg)`;
+          kb.style.transition = 'transform 0.1s ease-out';
+          kbRaf = null;
+        });
+      }, { passive: true });
+      document.querySelector('.keyboard-scene').addEventListener('mouseleave', () => {
+        kbRaf = null;
+        kb.style.transform = '';
+        kb.style.transition = 'transform 0.8s var(--ease-out)';
+      });
+    }
+
+    // ── Value cards 3D tilt ─────────────────────────────────
+    document.querySelectorAll('.value-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const r = card.getBoundingClientRect();
+        const dx = (e.clientX - r.left) / r.width - 0.5;
+        const dy = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `translateY(-6px) rotateX(${-dy * 8}deg) rotateY(${dx * 8}deg)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+  </script>
 </body>
+
 </html>
