@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Achievements — TypeForge AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="../css/global.css"/>
+  <link rel="stylesheet" href="../css/animations.css"/>
+  <link rel="stylesheet" href="../css/components.css"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>"/>
+  <style>
+    body { background-color: var(--bg-base); }
+    .app-layout {
+      display: flex;
+      min-height: 100vh;
+      padding-top: 70px;
+    }
+    .app-main {
+      flex: 1;
+      margin-left: 68px;
+      padding: 40px;
+      max-width: 1200px;
+    }
+    .header-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .page-title { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+    .page-subtitle { color: var(--text-3); font-size: 14px; }
+    
+    /* Stats Card */
+    .achievements-stats {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-1);
+      border-radius: 20px;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      min-width: 300px;
+    }
+    .stats-progress-ring { width: 68px; height: 68px; flex-shrink: 0; }
+    .stats-text { font-size: 20px; font-weight: 800; font-family: var(--font-display); }
+    .stats-sub { font-size: 11px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.1em; }
+
+    /* Categories Tabs */
+    .filter-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 28px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-1);
+      padding: 4px;
+      border-radius: 12px;
+      width: fit-content;
+      flex-wrap: wrap;
+    }
+    .filter-tab {
+      padding: 8px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 8px;
+      border: none;
+      background: transparent;
+      color: var(--text-3);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-tab:hover { color: var(--text-2); }
+    .filter-tab.active {
+      background: var(--glass-bg);
+      border: 1px solid var(--border-2);
+      color: var(--text-1);
+    }
+
+    /* Grid */
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .achievement-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-1);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.2s var(--ease-out);
+    }
+    .achievement-card.locked {
+      opacity: 0.65;
+    }
+    .achievement-card:not(.locked):hover {
+      transform: translateY(-2px);
+      border-color: var(--border-brand);
+      box-shadow: var(--shadow-brand);
+    }
+    .achievement-icon-wrapper {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      background: var(--bg-elevated);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+      transition: transform 0.25s;
+    }
+    .achievement-card:not(.locked):hover .achievement-icon-wrapper {
+      transform: scale(1.1) rotate(5deg);
+    }
+    .achievement-card.locked .achievement-icon-wrapper {
+      filter: grayscale(1);
+      opacity: 0.4;
+    }
+    .achievement-info { display: flex; flex-direction: column; justify-content: center; }
+    .achievement-name { font-size: 15px; font-weight: 700; color: var(--text-1); margin-bottom: 4px; }
+    .achievement-card.locked .achievement-name { color: var(--text-3); }
+    .achievement-desc { font-size: 12px; color: var(--text-3); line-height: 1.4; }
+    
+    /* Rarity Badge */
+    .rarity-dot {
+      position: absolute;
+      top: 12px; right: 12px;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+    }
+    .rarity-common { background: var(--text-3); }
+    .rarity-rare { background: var(--sky); box-shadow: 0 0 6px var(--sky-glow); }
+    .rarity-epic { background: var(--violet); box-shadow: 0 0 8px rgba(139,92,246,0.5); }
+    .rarity-legendary { background: var(--gold); box-shadow: 0 0 10px var(--gold-glow); }
+
+    /* Locked overlay icon */
+    .lock-overlay {
+      position: absolute;
+      bottom: 12px; right: 12px;
+      font-size: 11px;
+      color: var(--text-4);
+    }
+  </style>
+</head>
+<body class="tf-authenticated">
+
+<!-- Navbar -->
+<nav class="navbar scrolled" id="main-nav">
+  <div class="navbar-inner">
+    <a href="../index.html" class="navbar-logo">
+      <div class="navbar-logo-icon">⌨️</div>
+      <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
+    </a>
+    <div class="navbar-actions">
+      <div class="nav-auth-signed-in" style="display:flex;">
+        <div class="nav-user-avatar" title="Profile" id="nav-avatar">U</div>
+        <button class="btn btn-ghost btn-sm" data-auth-signout>Sign Out</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="app-layout">
+  <!-- Sidebar -->
+  <aside class="app-sidebar" role="navigation" aria-label="App navigation">
+    <a href="../index.html" class="sidebar-logo" aria-label="TypeForge AI Home">⌨️</a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-item" onclick="location.href='typing.html'" title="Train" aria-label="Train">
+        <span class="sidebar-icon">⌨️</span>
+        <span class="sidebar-label">Train</span>
+      </div>
+      <div class="sidebar-item" onclick="location.href='dashboard.html'" title="Dashboard" aria-label="Dashboard">
+        <span class="sidebar-icon">📊</span>
+        <span class="sidebar-label">Dashboard</span>
+      </div>
+      <div class="sidebar-item active" onclick="location.href='achievements.html'" title="Achievements" aria-label="Achievements">
+        <span class="sidebar-icon">🏆</span>
+        <span class="sidebar-label">Achievements</span>
+      </div>
+      <div class="sidebar-item" onclick="location.href='history.html'" title="History" aria-label="History">
+        <span class="sidebar-icon">📜</span>
+        <span class="sidebar-label">History</span>
+      </div>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="sidebar-item" onclick="location.href='settings.html'" title="Settings" aria-label="Settings">
+        <span class="sidebar-icon">⚙️</span>
+        <span class="sidebar-label">Settings</span>
+      </div>
+      <div class="sidebar-item" title="Profile" aria-label="Profile" id="sidebar-profile">
+        <span class="sidebar-icon" id="nav-avatar">U</span>
+        <span class="sidebar-label" data-auth-name>Profile</span>
+      </div>
+      <div class="sidebar-item" title="Sign Out" aria-label="Sign Out" data-auth-signout>
+        <span class="sidebar-icon">🚪</span>
+        <span class="sidebar-label">Sign Out</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="app-main">
+    <div class="header-section">
+      <div>
+        <h1 class="page-title">Achievements</h1>
+        <p class="page-subtitle">Track your milestones and keyboard mastery badges.</p>
+      </div>
+      <div class="achievements-stats">
+        <svg class="stats-progress-ring" id="progress-svg" viewBox="0 0 60 60"></svg>
+        <div>
+          <div class="stats-text" id="unlocked-count">0 / 0</div>
+          <div class="stats-sub">Unlocked Badges</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-category="all">All</button>
+      <button class="filter-tab" data-category="speed">Speed</button>
+      <button class="filter-tab" data-category="accuracy">Accuracy</button>
+      <button class="filter-tab" data-category="streak">Streak</button>
+      <button class="filter-tab" data-category="special">Special</button>
+    </div>
+
+    <!-- Achievements Grid -->
+    <div class="achievements-grid" id="achievements-container">
+      <!-- Loaded dynamically -->
+    </div>
+  </main>
+</div>
+
+<script type="module">
+  import Auth from '../js/clerk.js';
+  import API from '../js/api.js';
+  import { drawRing } from '../js/common.js';
+
+  let achievementsData = [];
+
+  async function init() {
+    const user = await Auth.init();
+    if (!user && window.location.hostname !== 'localhost') {
+      window.location.href = '../login.html';
+      return;
+    }
+
+    try {
+      achievementsData = await API.getAchievements();
+      renderStats(achievementsData);
+      renderGrid('all');
+    } catch (e) {
+      console.error("Failed to load achievements", e);
+    }
+
+    // Bind filters
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        renderGrid(tab.dataset.category);
+      });
+    });
+  }
+
+  function renderStats(list) {
+    const total = list.length;
+    const unlocked = list.filter(a => a.is_unlocked).length;
+    const pct = total > 0 ? Math.round((unlocked / total) * 100) : 0;
+    
+    document.getElementById('unlocked-count').textContent = `${unlocked} / ${total}`;
+    const progressSvg = document.getElementById('progress-svg');
+    if (progressSvg) {
+      drawRing(progressSvg, pct, 'var(--brand)', 'rgba(255,255,255,0.06)');
+    }
+  }
+
+  function renderGrid(category) {
+    const container = document.getElementById('achievements-container');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const filtered = category === 'all' 
+      ? achievementsData 
+      : achievementsData.filter(a => a.category === category);
+
+    if (filtered.length === 0) {
+      container.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding: 40px; color:var(--text-3);">No achievements found in this category.</div>`;
+      return;
+    }
+
+    filtered.forEach(ach => {
+      const card = document.createElement('div');
+      card.className = `achievement-card ${ach.is_unlocked ? '' : 'locked'}`;
+      card.innerHTML = `
+        <div class="rarity-dot rarity-${ach.rarity}" title="${ach.rarity.toUpperCase()}"></div>
+        <div class="achievement-icon-wrapper">
+          ${ach.icon}
+        </div>
+        <div class="achievement-info">
+          <div class="achievement-name">${ach.name}</div>
+          <div class="achievement-desc">${ach.desc}</div>
+        </div>
+        ${ach.is_unlocked ? '' : '<div class="lock-overlay">🔒 Locked</div>'}
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  init();
+</script>
+</body>
+</html>

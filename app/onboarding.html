@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Get Started — TypeForge AI</title>
+  <meta name="description" content="Set up your personalized TypeForge AI profile in under 60 seconds."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="../css/global.css"/>
+  <link rel="stylesheet" href="../css/animations.css"/>
+  <link rel="stylesheet" href="../css/components.css"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>"/>
+  <style>
+    .onboarding-layout {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+    }
+    .onboarding-card {
+      width: 100%;
+      max-width: 580px;
+      background: rgba(11,11,34,0.85);
+      border: 1px solid var(--border-2);
+      border-radius: var(--r-3xl);
+      padding: 48px;
+      backdrop-filter: blur(32px);
+      -webkit-backdrop-filter: blur(32px);
+      box-shadow: var(--shadow-xl), var(--shadow-brand);
+      animation: scale-up 0.5s var(--ease-spring) both;
+    }
+    .ob-progress { display: flex; gap: 8px; margin-bottom: 40px; }
+    .ob-progress-step {
+      flex: 1; height: 4px; border-radius: 999px;
+      background: var(--border-2);
+      transition: background 0.5s var(--ease-out);
+    }
+    .ob-progress-step.active   { background: var(--brand); }
+    .ob-progress-step.done     { background: var(--mint); }
+    .ob-step { display: none; animation: fade-up 0.4s var(--ease-out) both; }
+    .ob-step.active { display: block; }
+    .ob-question {
+      font-family: var(--font-display);
+      font-size: 1.6rem; font-weight: 700;
+      margin-bottom: 8px;
+      line-height: var(--leading-snug);
+    }
+    .ob-sub { font-size: 14px; color: var(--text-3); margin-bottom: 28px; }
+    .ob-options { display: flex; flex-direction: column; gap: 10px; }
+    .ob-option {
+      display: flex; align-items: center; gap: 16px;
+      padding: 16px 20px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-2);
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.2s var(--ease-out);
+      user-select: none;
+    }
+    .ob-option:hover { border-color: var(--border-3); background: var(--bg-card-hover); transform: translateX(4px); }
+    .ob-option.selected { border-color: var(--brand); background: var(--brand-glow-sm); }
+    .ob-option input { display: none; }
+    .ob-option-icon { font-size: 1.6rem; width: 40px; text-align: center; flex-shrink: 0; }
+    .ob-option-info { flex: 1; }
+    .ob-option-title { font-size: 15px; font-weight: 600; color: var(--text-1); }
+    .ob-option-desc { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+    .ob-option-check {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      border: 2px solid var(--border-3);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-size: 12px;
+      transition: all 0.2s;
+    }
+    .ob-option.selected .ob-option-check { border-color: var(--brand); background: var(--brand); color: #fff; }
+
+    /* WPM Slider */
+    .wpm-slider-wrapper { margin: 32px 0; }
+    .wpm-display {
+      font-family: var(--font-display);
+      font-size: 5rem; font-weight: 700;
+      text-align: center;
+      background: linear-gradient(135deg, var(--brand-light), var(--coral));
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+      line-height: 1; margin-bottom: 8px;
+    }
+    .wpm-display-label { text-align: center; font-size: 12px; color: var(--text-4); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 24px; }
+    .wpm-range-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-4); margin-top: 8px; }
+    .wpm-zone {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 12px; font-weight: 600;
+      margin: 12px auto 0; display: flex; justify-content: center;
+    }
+
+    /* Goals grid */
+    .ob-goals { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .ob-goal {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      padding: 20px 16px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-2);
+      border-radius: 16px;
+      cursor: pointer; text-align: center;
+      transition: all 0.2s var(--ease-out);
+      user-select: none;
+    }
+    .ob-goal:hover { border-color: var(--border-3); transform: translateY(-2px); }
+    .ob-goal.selected { border-color: var(--brand); background: var(--brand-glow-sm); }
+    .ob-goal input { display: none; }
+    .ob-goal-icon { font-size: 2rem; }
+    .ob-goal-title { font-size: 13px; font-weight: 600; color: var(--text-1); }
+    .ob-goal-desc { font-size: 11px; color: var(--text-3); }
+
+    /* Navigation */
+    .ob-nav { display: flex; align-items: center; justify-content: space-between; margin-top: 32px; }
+    .ob-skip { font-size: 12px; color: var(--text-4); cursor: pointer; }
+    .ob-skip:hover { color: var(--text-2); }
+
+    /* Done screen */
+    .ob-done-icon {
+      width: 80px; height: 80px;
+      background: linear-gradient(135deg, var(--brand), var(--coral));
+      border-radius: var(--r-2xl);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+      margin: 0 auto 24px;
+      box-shadow: var(--shadow-brand-lg);
+      animation: bounce-in 0.6s var(--ease-spring) 0.2s both;
+    }
+    .loading-dots { display: flex; gap: 8px; justify-content: center; margin: 24px 0; }
+    .loading-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--brand);
+      animation: bounce 0.8s ease-in-out infinite;
+    }
+    .loading-dot:nth-child(2) { animation-delay: 0.15s; background: var(--coral); }
+    .loading-dot:nth-child(3) { animation-delay: 0.30s; background: var(--mint); }
+    .loading-status { font-size: 13px; color: var(--text-3); text-align: center; min-height: 20px; transition: opacity 0.3s; }
+  </style>
+</head>
+<body>
+<div class="aurora-container" aria-hidden="true">
+  <div class="aurora-blob aurora-blob-1"></div>
+  <div class="aurora-blob aurora-blob-2"></div>
+  <div class="aurora-blob aurora-blob-3"></div>
+</div>
+<div class="noise-overlay" aria-hidden="true"></div>
+
+<div class="onboarding-layout page-content">
+  <div class="onboarding-card">
+
+    <!-- Logo -->
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:36px;">
+      <a href="../index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+        <div class="navbar-logo-icon" style="width:32px;height:32px;font-size:15px;border-radius:10px;">⌨️</div>
+        <span style="font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--text-1);">Type<span style="color:var(--brand-light)">Forge</span> AI</span>
+      </a>
+      <span style="font-size:12px;color:var(--text-4);" id="ob-step-counter">Step 1 of 4</span>
+    </div>
+
+    <!-- Progress -->
+    <div class="ob-progress" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4" id="ob-progress">
+      <div class="ob-progress-step active" id="prog-1"></div>
+      <div class="ob-progress-step" id="prog-2"></div>
+      <div class="ob-progress-step" id="prog-3"></div>
+      <div class="ob-progress-step" id="prog-4"></div>
+    </div>
+
+    <!-- Step 1: What do you type? -->
+    <div class="ob-step active" id="step-1">
+      <div class="ob-question">What do you type most? ⌨️</div>
+      <div class="ob-sub">We'll tailor your training content to what matters to you.</div>
+      <div class="ob-options" id="step1-options">
+        <label class="ob-option">
+          <input type="radio" name="type" value="code"/>
+          <div class="ob-option-icon">💻</div>
+          <div class="ob-option-info">
+            <div class="ob-option-title">Code</div>
+            <div class="ob-option-desc">Python, JS, TypeScript, SQL, Bash and more</div>
+          </div>
+          <div class="ob-option-check">✓</div>
+        </label>
+        <label class="ob-option">
+          <input type="radio" name="type" value="essays"/>
+          <div class="ob-option-icon">📝</div>
+          <div class="ob-option-info">
+            <div class="ob-option-title">Essays & Writing</div>
+            <div class="ob-option-desc">Long-form content, academic, reports</div>
+          </div>
+          <div class="ob-option-check">✓</div>
+        </label>
+        <label class="ob-option">
+          <input type="radio" name="type" value="office"/>
+          <div class="ob-option-icon">💼</div>
+          <div class="ob-option-info">
+            <div class="ob-option-title">Office Work</div>
+            <div class="ob-option-desc">Emails, documents, Slack messages</div>
+          </div>
+          <div class="ob-option-check">✓</div>
+        </label>
+        <label class="ob-option">
+          <input type="radio" name="type" value="mixed"/>
+          <div class="ob-option-icon">⚡</div>
+          <div class="ob-option-info">
+            <div class="ob-option-title">Mixed / Everything</div>
+            <div class="ob-option-desc">A bit of all worlds</div>
+          </div>
+          <div class="ob-option-check">✓</div>
+        </label>
+      </div>
+      <div class="ob-nav">
+        <a href="../index.html" class="ob-skip">← Back home</a>
+        <button class="btn btn-primary" id="step1-next" disabled>Continue →</button>
+      </div>
+    </div>
+
+    <!-- Step 2: How fast? -->
+    <div class="ob-step" id="step-2">
+      <div class="ob-question">How fast do you type? 🚀</div>
+      <div class="ob-sub">Be honest — TypeForge will figure it out anyway after your first session.</div>
+      <div class="wpm-slider-wrapper">
+        <div class="wpm-display" id="wpm-display">60</div>
+        <div class="wpm-display-label">WPM (Words Per Minute)</div>
+        <input type="range" class="slider" id="wpm-slider" min="10" max="150" value="60" step="5"/>
+        <div class="wpm-range-labels"><span>10 WPM</span><span>80 WPM</span><span>150 WPM</span></div>
+        <div class="wpm-zone" id="wpm-zone">
+          <span id="wpm-zone-emoji">🌱</span>
+          <span id="wpm-zone-label">Beginner — Great starting point!</span>
+        </div>
+      </div>
+      <div class="ob-nav">
+        <button class="btn btn-ghost btn-sm" id="step2-back">← Back</button>
+        <button class="btn btn-primary" id="step2-next">Continue →</button>
+      </div>
+    </div>
+
+    <!-- Step 3: What's your goal? -->
+    <div class="ob-step" id="step-3">
+      <div class="ob-question">Choose your main goal 🎯</div>
+      <div class="ob-sub">TypeForge will weight your training toward this goal.</div>
+      <div class="ob-goals" id="step3-goals">
+        <label class="ob-goal">
+          <input type="radio" name="goal" value="speed"/>
+          <div class="ob-goal-icon">⚡</div>
+          <div class="ob-goal-title">Speed</div>
+          <div class="ob-goal-desc">Max WPM, fast thinking</div>
+        </label>
+        <label class="ob-goal">
+          <input type="radio" name="goal" value="accuracy"/>
+          <div class="ob-goal-icon">🎯</div>
+          <div class="ob-goal-title">Accuracy</div>
+          <div class="ob-goal-desc">Zero errors, clean output</div>
+        </label>
+        <label class="ob-goal">
+          <input type="radio" name="goal" value="coding"/>
+          <div class="ob-goal-icon">💻</div>
+          <div class="ob-goal-title">Coding</div>
+          <div class="ob-goal-desc">Dev syntax mastery</div>
+        </label>
+        <label class="ob-goal">
+          <input type="radio" name="goal" value="competitive"/>
+          <div class="ob-goal-icon">🏆</div>
+          <div class="ob-goal-title">Competitive</div>
+          <div class="ob-goal-desc">Leaderboards & tournaments</div>
+        </label>
+        <label class="ob-goal">
+          <input type="radio" name="goal" value="productivity"/>
+          <div class="ob-goal-icon">🚀</div>
+          <div class="ob-goal-title">Productivity</div>
+          <div class="ob-goal-desc">Daily work efficiency</div>
+        </label>
+        <label class="ob-goal">
+          <input type="radio" name="goal" value="consistency"/>
+          <div class="ob-goal-icon">📊</div>
+          <div class="ob-goal-title">Consistency</div>
+          <div class="ob-goal-desc">Rhythm and flow state</div>
+        </label>
+      </div>
+      <div class="ob-nav">
+        <button class="btn btn-ghost btn-sm" id="step3-back">← Back</button>
+        <button class="btn btn-primary" id="step3-next" disabled>Continue →</button>
+      </div>
+    </div>
+
+    <!-- Step 4: Experience Level -->
+    <div class="ob-step" id="step-4">
+      <div class="ob-question">Your typing experience? 🧠</div>
+      <div class="ob-sub">This calibrates how aggressively we push you from day one.</div>
+      <div class="ob-options" id="step4-options">
+        <label class="ob-option">
+          <input type="radio" name="experience" value="beginner"/>
+          <div class="ob-option-icon">🌱</div>
+          <div class="ob-option-info">
+            <div class="ob-option-title">Beginner</div>
+            <div class="ob-option-desc">Hunt and peck, still learning key positions</div>
+          </div>
+          <div class="ob-option-check">✓</div>
+        </label>
+        <label class="ob-option">
+          <input type="radio" name="experience" value="intermediate"/>
+          <div class="ob-option-icon">⚙️</div>
+          <div class="ob-option-info">
+            <div class="ob-option-title">Intermediate</div>
+            <div class="ob-option-desc">Touch typing, 40-70 WPM, occasional errors</div>
+          </div>
+          <div class="ob-option-check">✓</div>
+        </label>
+        <label class="ob-option">
+          <input type="radio" name="experience" value="advanced"/>
+          <div class="ob-option-icon">🔥</div>
+          <div class="ob-option-info">
+            <div class="ob-option-title">Advanced</div>
+            <div class="ob-option-desc">70-100 WPM, solid accuracy, consistent</div>
+          </div>
+          <div class="ob-option-check">✓</div>
+        </label>
+        <label class="ob-option">
+          <input type="radio" name="experience" value="expert"/>
+          <div class="ob-option-icon">👻</div>
+          <div class="ob-option-info">
+            <div class="ob-option-title">Expert</div>
+            <div class="ob-option-desc">100+ WPM, competing, or just here to sharpen</div>
+          </div>
+          <div class="ob-option-check">✓</div>
+        </label>
+      </div>
+      <div class="ob-nav">
+        <button class="btn btn-ghost btn-sm" id="step4-back">← Back</button>
+        <button class="btn btn-primary" id="step4-next" disabled>Build My Profile →</button>
+      </div>
+    </div>
+
+    <!-- Step 5: Loading / Done -->
+    <div class="ob-step" id="step-5">
+      <div style="text-align:center;padding:20px 0;">
+        <div class="ob-done-icon" id="ob-done-icon" style="display:none;">✓</div>
+        <div id="ob-loading-anim">
+          <div class="loading-dots">
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+            <div class="loading-dot"></div>
+          </div>
+        </div>
+        <h2 class="ob-question" style="font-size:1.8rem;" id="ob-loading-title">Building Your Profile</h2>
+        <div class="loading-status" id="loading-status">Analyzing your responses…</div>
+        <div id="ob-profile-preview" style="display:none;margin-top:32px;">
+          <div class="dna-archetype" style="display:inline-flex;margin-bottom:20px;" id="ob-archetype-display">
+            <span id="ob-archetype-icon">🎯</span>
+            <span id="ob-archetype-name">Typing Architect</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;text-align:left;margin-bottom:28px;" id="ob-summary-grid">
+            <div class="stat-card">
+              <div class="stat-label">Target Mode</div>
+              <div style="font-size:1.1rem;font-weight:700;color:var(--text-1);margin-top:4px;" id="ob-sum-mode">Classic</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Starting WPM Goal</div>
+              <div style="font-size:1.1rem;font-weight:700;color:var(--text-1);margin-top:4px;" id="ob-sum-wpm">+20 WPM</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Primary Focus</div>
+              <div style="font-size:1.1rem;font-weight:700;color:var(--text-1);margin-top:4px;" id="ob-sum-goal">Speed</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">First Session</div>
+              <div style="font-size:1.1rem;font-weight:700;color:var(--text-1);margin-top:4px;">60 Second Sprint</div>
+            </div>
+          </div>
+          <a href="typing.html" class="btn btn-gradient btn-xl btn-wide" id="start-training-btn">
+            🚀 Start Training
+          </a>
+          <p style="font-size:12px;color:var(--text-4);margin-top:12px;">Your first session will calibrate your exact baseline</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const steps = ['step-1','step-2','step-3','step-4','step-5'];
+let currentStep = 0;
+const profile = { type: null, wpm: 60, goal: null, experience: null };
+
+function goToStep(n) {
+  document.getElementById(steps[currentStep]).classList.remove('active');
+  document.getElementById(`prog-${currentStep+1}`)?.classList.remove('active');
+  document.getElementById(`prog-${currentStep+1}`)?.classList.add('done');
+  currentStep = n;
+  const stepEl = document.getElementById(steps[currentStep]);
+  stepEl.classList.add('active');
+  // Force re-animate
+  stepEl.style.animation = 'none';
+  stepEl.offsetHeight;
+  stepEl.style.animation = '';
+  document.getElementById(`prog-${currentStep+1}`)?.classList.add('active');
+  document.getElementById(`prog-${currentStep+1}`)?.classList.remove('done');
+  const counter = document.getElementById('ob-step-counter');
+  if (counter && n < 4) counter.textContent = `Step ${n+1} of 4`;
+  else if (counter) counter.textContent = 'Creating your profile…';
+}
+
+function goBack(n) {
+  document.getElementById(steps[currentStep]).classList.remove('active');
+  document.getElementById(`prog-${currentStep+1}`)?.classList.remove('active');
+  document.getElementById(`prog-${currentStep+1}`)?.classList.remove('done');
+  currentStep = n;
+  document.getElementById(steps[currentStep]).classList.add('active');
+  document.getElementById(`prog-${currentStep+1}`)?.classList.add('active');
+  document.getElementById('ob-step-counter').textContent = `Step ${n+1} of 4`;
+}
+
+// Step 1 — Option selection
+document.querySelectorAll('#step1-options .ob-option').forEach(opt => {
+  opt.addEventListener('click', () => {
+    document.querySelectorAll('#step1-options .ob-option').forEach(o => o.classList.remove('selected'));
+    opt.classList.add('selected');
+    profile.type = opt.querySelector('input').value;
+    document.getElementById('step1-next').disabled = false;
+  });
+});
+document.getElementById('step1-next').addEventListener('click', () => goToStep(1));
+
+// Step 2 — WPM Slider
+const slider = document.getElementById('wpm-slider');
+const wpmDisplay = document.getElementById('wpm-display');
+const zones = [
+  { max:30,  emoji:'🌱', label:'Beginner — Great starting point!' },
+  { max:50,  emoji:'⚙️', label:'Learning — Building the foundation' },
+  { max:70,  emoji:'🔥', label:'Intermediate — Steady progress!' },
+  { max:90,  emoji:'⚡', label:'Advanced — Really impressive!' },
+  { max:120, emoji:'🚀', label:'Expert — You\'re flying!' },
+  { max:999, emoji:'👻', label:'Ghost — Absolute legend!' },
+];
+slider.addEventListener('input', () => {
+  const v = parseInt(slider.value);
+  wpmDisplay.textContent = v;
+  profile.wpm = v;
+  const zone = zones.find(z => v <= z.max);
+  document.getElementById('wpm-zone-emoji').textContent = zone.emoji;
+  document.getElementById('wpm-zone-label').textContent = zone.label;
+});
+document.getElementById('step2-next').addEventListener('click', () => goToStep(2));
+document.getElementById('step2-back').addEventListener('click', () => goBack(0));
+
+// Step 3 — Goals
+document.querySelectorAll('#step3-goals .ob-goal').forEach(goal => {
+  goal.addEventListener('click', () => {
+    document.querySelectorAll('#step3-goals .ob-goal').forEach(g => g.classList.remove('selected'));
+    goal.classList.add('selected');
+    profile.goal = goal.querySelector('input').value;
+    document.getElementById('step3-next').disabled = false;
+  });
+});
+document.getElementById('step3-next').addEventListener('click', () => goToStep(3));
+document.getElementById('step3-back').addEventListener('click', () => goBack(1));
+
+// Step 4 — Experience
+document.querySelectorAll('#step4-options .ob-option').forEach(opt => {
+  opt.addEventListener('click', () => {
+    document.querySelectorAll('#step4-options .ob-option').forEach(o => o.classList.remove('selected'));
+    opt.classList.add('selected');
+    profile.experience = opt.querySelector('input').value;
+    document.getElementById('step4-next').disabled = false;
+  });
+});
+document.getElementById('step4-next').addEventListener('click', () => {
+  goToStep(4);
+  runProfileBuild();
+});
+document.getElementById('step4-back').addEventListener('click', () => goBack(2));
+
+function getArchetype(p) {
+  if (p.type === 'code' && p.goal === 'coding') return { icon:'🧘', name:'Code Monk', desc:'Deep focus, dev syntax mastery' };
+  if (p.goal === 'speed' && p.wpm >= 80)        return { icon:'⚡', name:'Velocity Crafter', desc:'Built for raw speed' };
+  if (p.goal === 'accuracy')                     return { icon:'🎯', name:'Precision Builder', desc:'Every keystroke intentional' };
+  if (p.goal === 'competitive')                  return { icon:'🏆', name:'Typing Phantom', desc:'Competing at the highest level' };
+  if (p.experience === 'expert')                 return { icon:'👻', name:'Ghost Fingers', desc:'Speed and precision incarnate' };
+  if (p.goal === 'consistency')                  return { icon:'🎵', name:'Rhythm Seeker', desc:'Steady, flowing cadence' };
+  if (p.type === 'code')                         return { icon:'🦅', name:'Syntax Hunter', desc:'Hunting for dev excellence' };
+  return { icon:'🏗️', name:'Typing Architect', desc:'Building speed brick by brick' };
+}
+
+function getModeLabel(p) {
+  if (p.type === 'code') return 'Developer Mode';
+  if (p.type === 'essays') return 'Student Mode';
+  return 'Classic Mode';
+}
+
+const loadingStatuses = [
+  'Analyzing your responses…',
+  'Building your Typing DNA…',
+  'Identifying optimal training path…',
+  'Generating personalized curriculum…',
+  'Creating your archetype profile…',
+  'Almost ready…',
+];
+
+function runProfileBuild() {
+  const statusEl = document.getElementById('loading-status');
+  let i = 0;
+  const interval = setInterval(() => {
+    if (statusEl && i < loadingStatuses.length) {
+      statusEl.style.opacity = 0;
+      setTimeout(() => {
+        statusEl.textContent = loadingStatuses[i];
+        statusEl.style.opacity = 1;
+        i++;
+      }, 200);
+    } else {
+      clearInterval(interval);
+      showResult();
+    }
+  }, 550);
+}
+
+function showResult() {
+  document.getElementById('ob-loading-anim').style.display = 'none';
+  document.getElementById('loading-status').style.display = 'none';
+  const titleEl = document.getElementById('ob-loading-title');
+  titleEl.textContent = 'Your Profile is Ready! 🎉';
+
+  const doneIcon = document.getElementById('ob-done-icon');
+  doneIcon.style.display = 'flex';
+
+  const arch = getArchetype(profile);
+  document.getElementById('ob-archetype-icon').textContent = arch.icon;
+  document.getElementById('ob-archetype-name').textContent = arch.name;
+  document.getElementById('ob-sum-mode').textContent = getModeLabel(profile);
+  document.getElementById('ob-sum-wpm').textContent = `+${Math.round(profile.wpm * 0.3)} WPM`;
+  document.getElementById('ob-sum-goal').textContent = profile.goal
+    ? profile.goal.charAt(0).toUpperCase() + profile.goal.slice(1)
+    : 'Mixed';
+
+  const preview = document.getElementById('ob-profile-preview');
+  preview.style.display = 'block';
+  preview.style.animation = 'fade-up 0.5s ease-out both';
+
+  // Save to localStorage
+  try {
+    localStorage.setItem('tf_profile', JSON.stringify({ ...profile, archetype: arch, completedOnboarding: true }));
+    localStorage.setItem('tf_level', '1');
+    localStorage.setItem('tf_xp', '0');
+  } catch(e) {}
+}
+</script>
+</body>
+</html>

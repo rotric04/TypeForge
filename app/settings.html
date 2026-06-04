@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Settings — TypeForge AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="../css/global.css"/>
+  <link rel="stylesheet" href="../css/animations.css"/>
+  <link rel="stylesheet" href="../css/components.css"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>"/>
+  <style>
+    body { background-color: var(--bg-base); }
+    .app-layout {
+      display: flex;
+      min-height: 100vh;
+      padding-top: 70px;
+    }
+    .app-main {
+      flex: 1;
+      margin-left: 68px;
+      padding: 40px;
+      max-width: 1200px;
+    }
+    .header-section {
+      margin-bottom: 32px;
+    }
+    .page-title { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+    .page-subtitle { color: var(--text-3); font-size: 14px; }
+
+    /* Settings Container */
+    #clerk-user-profile {
+      width: 100%;
+      min-height: 600px;
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body class="tf-authenticated">
+
+<!-- Navbar -->
+<nav class="navbar scrolled" id="main-nav">
+  <div class="navbar-inner">
+    <a href="../index.html" class="navbar-logo">
+      <div class="navbar-logo-icon">⌨️</div>
+      <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
+    </a>
+    <div class="navbar-actions">
+      <div class="nav-auth-signed-in" style="display:flex;">
+        <div class="nav-user-avatar" title="Profile" id="nav-avatar">U</div>
+        <button class="btn btn-ghost btn-sm" data-auth-signout>Sign Out</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="app-layout">
+  <!-- Sidebar -->
+  <aside class="app-sidebar" role="navigation" aria-label="App navigation">
+    <a href="../index.html" class="sidebar-logo" aria-label="TypeForge AI Home">⌨️</a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-item" onclick="location.href='typing.html'" title="Train" aria-label="Train">
+        <span class="sidebar-icon">⌨️</span>
+        <span class="sidebar-label">Train</span>
+      </div>
+      <div class="sidebar-item" onclick="location.href='dashboard.html'" title="Dashboard" aria-label="Dashboard">
+        <span class="sidebar-icon">📊</span>
+        <span class="sidebar-label">Dashboard</span>
+      </div>
+      <div class="sidebar-item" onclick="location.href='achievements.html'" title="Achievements" aria-label="Achievements">
+        <span class="sidebar-icon">🏆</span>
+        <span class="sidebar-label">Achievements</span>
+      </div>
+      <div class="sidebar-item" onclick="location.href='history.html'" title="History" aria-label="History">
+        <span class="sidebar-icon">📜</span>
+        <span class="sidebar-label">History</span>
+      </div>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="sidebar-item active" onclick="location.href='settings.html'" title="Settings" aria-label="Settings">
+        <span class="sidebar-icon">⚙️</span>
+        <span class="sidebar-label">Settings</span>
+      </div>
+      <div class="sidebar-item" title="Profile" aria-label="Profile" id="sidebar-profile">
+        <span class="sidebar-icon" id="nav-avatar">U</span>
+        <span class="sidebar-label" data-auth-name>Profile</span>
+      </div>
+      <div class="sidebar-item" title="Sign Out" aria-label="Sign Out" data-auth-signout>
+        <span class="sidebar-icon">🚪</span>
+        <span class="sidebar-label">Sign Out</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="app-main">
+    <div class="header-section">
+      <h1 class="page-title">Settings</h1>
+      <p class="page-subtitle">Manage your account credentials, security settings, and linked integrations.</p>
+    </div>
+
+    <!-- Clerk User Profile widget mounts here -->
+    <div id="clerk-user-profile"></div>
+  </main>
+</div>
+
+<script type="module">
+  import Auth from '../js/clerk.js';
+
+  async function init() {
+    const user = await Auth.init();
+    if (!user && window.location.hostname !== 'localhost') {
+      window.location.href = '../login.html';
+      return;
+    }
+
+    const clerk = Auth.getInstance();
+    const profileDiv = document.getElementById('clerk-user-profile');
+    if (clerk && profileDiv) {
+      clerk.mountUserProfile(profileDiv, {
+        appearance: {
+          variables: {
+            colorPrimary: '#e8734a',
+            colorBackground: '#0d0d1a', // var(--bg-surface)
+            colorText: '#f2f2f8', // var(--text-1)
+            colorTextSecondary: '#a8a8c4', // var(--text-2)
+            colorInputBackground: '#111120', // var(--bg-elevated)
+            colorInputText: '#f2f2f8',
+            borderRadius: '12px',
+          },
+          elements: {
+            card: {
+              backgroundColor: 'transparent',
+              boxShadow: 'none',
+              width: '100%',
+              maxWidth: '800px',
+            }
+          }
+        }
+      });
+    }
+  }
+
+  init();
+</script>
+</body>
+</html>

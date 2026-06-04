@@ -1,0 +1,273 @@
+/* ============================================================
+   TYPEFORGE AI — Dashboard Styles
+   ============================================================ */
+
+/* ── Dashboard Layout ── */
+.dashboard-page {
+  flex: 1;
+  padding: var(--sp-8);
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+.dashboard-greeting {
+  margin-bottom: var(--sp-8);
+}
+.dashboard-greeting h1 {
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  margin-bottom: var(--sp-2);
+}
+.dashboard-greeting p { font-size: var(--text-sm); color: var(--text-3); }
+
+/* ── Overview Stats Row ── */
+.overview-stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-8);
+}
+
+/* ── DNA Section ── */
+.dna-section {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--sp-6);
+  margin-bottom: var(--sp-8);
+}
+.dna-main-card {
+  padding: var(--sp-8);
+  background: linear-gradient(135deg, rgba(124,111,247,0.08), rgba(255,107,157,0.04));
+  border: 1px solid var(--border-brand);
+  border-radius: var(--r-2xl);
+  position: relative;
+  overflow: hidden;
+}
+.dna-main-card::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(124,111,247,0.15), transparent 70%);
+  pointer-events: none;
+}
+.dna-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: var(--sp-6); }
+.dna-title-row { display: flex; flex-direction: column; gap: var(--sp-2); }
+.dna-title-row .card-title { font-size: var(--text-2xl); }
+.dna-id { font-size: var(--text-xs); color: var(--text-4); font-family: var(--font-mono); }
+
+.dna-archetype-display {
+  display: flex; align-items: center; gap: var(--sp-4);
+  padding: var(--sp-4) var(--sp-5);
+  background: linear-gradient(135deg, var(--brand) 0%, var(--coral) 100%);
+  border-radius: var(--r-xl);
+  margin-bottom: var(--sp-6);
+  position: relative;
+  overflow: hidden;
+}
+.dna-archetype-display::after {
+  content: '';
+  position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+  animation: achievement-shine 3s ease-in-out infinite;
+}
+.dna-archetype-icon { font-size: 2rem; }
+.dna-archetype-info { flex: 1; }
+.dna-archetype-name { font-size: var(--text-xl); font-weight: 700; color: #fff; }
+.dna-archetype-desc { font-size: var(--text-xs); color: rgba(255,255,255,0.75); margin-top: 2px; }
+.dna-archetype-score { font-family: var(--font-display); font-size: var(--text-3xl); font-weight: 800; color: #fff; }
+
+.dna-scores-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-3);
+}
+.dna-score-item {
+  display: flex; flex-direction: column; align-items: center; gap: var(--sp-2);
+  padding: var(--sp-4);
+  background: var(--glass-bg-light);
+  border: 1px solid var(--border-1);
+  border-radius: var(--r-xl);
+  text-align: center;
+}
+.dna-score-ring { position: relative; width: 60px; height: 60px; }
+.dna-score-ring svg { transform: rotate(-90deg); width: 60px; height: 60px; }
+.dna-score-ring-val {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--text-1);
+}
+.dna-score-label { font-size: var(--text-xs); color: var(--text-3); font-weight: 500; }
+
+/* Daily Goals Card */
+.goals-card {
+  padding: var(--sp-6);
+  background: var(--bg-card);
+  border: 1px solid var(--border-1);
+  border-radius: var(--r-2xl);
+  display: flex; flex-direction: column; gap: var(--sp-5);
+}
+.goal-item {
+  display: flex; flex-direction: column; gap: var(--sp-2);
+}
+.goal-header { display: flex; justify-content: space-between; align-items: center; }
+.goal-name { font-size: var(--text-sm); font-weight: 500; color: var(--text-2); display: flex; align-items: center; gap: var(--sp-2); }
+.goal-icon { font-size: 0.9rem; }
+.goal-progress-text { font-size: var(--text-xs); color: var(--text-3); }
+.goal-progress-text strong { color: var(--text-1); }
+
+/* ── Charts Section ── */
+.charts-section {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--sp-6);
+  margin-bottom: var(--sp-8);
+}
+.chart-card {
+  padding: var(--sp-6);
+  background: var(--bg-card);
+  border: 1px solid var(--border-1);
+  border-radius: var(--r-2xl);
+}
+.chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-6); }
+.chart-title-row { display: flex; flex-direction: column; gap: var(--sp-1); }
+.chart-canvas-wrapper { position: relative; width: 100%; }
+.chart-canvas { width: 100% !important; border-radius: var(--r-lg); }
+.chart-legend { display: flex; gap: var(--sp-4); flex-wrap: wrap; margin-top: var(--sp-4); }
+.chart-legend-item { display: flex; align-items: center; gap: var(--sp-2); font-size: var(--text-xs); color: var(--text-3); }
+.chart-legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+/* Finger Heatmap */
+.finger-heatmap {
+  display: flex; flex-direction: column; gap: var(--sp-4);
+}
+.finger-bar-item {
+  display: grid;
+  grid-template-columns: 80px 1fr 40px;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.finger-name { font-size: var(--text-xs); color: var(--text-3); }
+.finger-bar-track { height: 8px; background: var(--border-1); border-radius: var(--r-full); overflow: hidden; }
+.finger-bar-fill { height: 100%; border-radius: var(--r-full); transition: width 1s var(--ease-out); }
+.finger-bar-fill.left  { background: linear-gradient(90deg, var(--brand), var(--violet)); }
+.finger-bar-fill.right { background: linear-gradient(90deg, var(--coral), var(--gold)); }
+.finger-pct { font-size: var(--text-xs); color: var(--text-2); text-align: right; font-family: var(--font-mono); }
+
+/* ── Achievements ── */
+.achievements-section {
+  margin-bottom: var(--sp-8);
+}
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--sp-4);
+}
+
+/* ── Training Recommendations ── */
+.training-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-6);
+  margin-bottom: var(--sp-8);
+}
+.training-card {
+  padding: var(--sp-6);
+  background: var(--bg-card);
+  border: 1px solid var(--border-1);
+  border-radius: var(--r-2xl);
+}
+.training-item {
+  display: flex; align-items: center; gap: var(--sp-4);
+  padding: var(--sp-4);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-1);
+  border-radius: var(--r-xl);
+  margin-bottom: var(--sp-3);
+  cursor: pointer;
+  transition: all var(--duration-base);
+}
+.training-item:last-child { margin-bottom: 0; }
+.training-item:hover { border-color: var(--border-2); background: var(--bg-card-hover); }
+.training-item-icon {
+  width: 40px; height: 40px;
+  border-radius: var(--r-md);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; flex-shrink: 0;
+}
+.training-item-info { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.training-item-name { font-size: var(--text-sm); font-weight: 600; color: var(--text-1); }
+.training-item-desc { font-size: var(--text-xs); color: var(--text-3); }
+.training-item-meta { display: flex; align-items: center; gap: var(--sp-2); flex-shrink: 0; }
+.difficulty-badge {
+  font-size: 10px; font-weight: 700; padding: 2px 6px;
+  border-radius: var(--r-full);
+}
+.diff-easy   { background: var(--success-bg); color: var(--success); }
+.diff-medium { background: var(--warning-bg); color: var(--warning); }
+.diff-hard   { background: var(--error-bg);   color: var(--error);   }
+
+/* ── Weak Patterns ── */
+.weak-patterns-grid {
+  display: flex; flex-wrap: wrap; gap: var(--sp-2);
+}
+.weak-pattern-chip {
+  display: flex; align-items: center; gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-lg);
+  cursor: pointer;
+  transition: all var(--duration-fast);
+}
+.weak-pattern-chip:hover { border-color: var(--error); background: var(--error-bg); }
+.weak-pattern-text { font-family: var(--font-mono); font-size: var(--text-sm); font-weight: 600; color: var(--text-1); }
+.weak-pattern-rate { font-size: var(--text-xs); color: var(--error); }
+
+/* ── History ── */
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.history-table th {
+  font-size: var(--text-xs); font-weight: 600; text-transform: uppercase;
+  letter-spacing: var(--tracking-wider); color: var(--text-4);
+  padding: var(--sp-3) var(--sp-4);
+  text-align: left;
+  border-bottom: 1px solid var(--border-1);
+}
+.history-table td {
+  padding: var(--sp-4);
+  font-size: var(--text-sm); color: var(--text-2);
+  border-bottom: 1px solid var(--border-1);
+}
+.history-table tr:last-child td { border-bottom: none; }
+.history-table tr:hover td { background: var(--glass-bg-light); }
+.history-wpm-cell { font-family: var(--font-display); font-size: var(--text-base); font-weight: 700; color: var(--brand-light); }
+.history-acc-cell { color: var(--mint); font-weight: 600; }
+.history-mode-badge {
+  padding: 2px 8px;
+  border-radius: var(--r-full);
+  font-size: 11px; font-weight: 600;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1200px) {
+  .overview-stats { grid-template-columns: repeat(3, 1fr); }
+  .achievements-grid { grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 1024px) {
+  .dna-section { grid-template-columns: 1fr; }
+  .charts-section { grid-template-columns: 1fr; }
+  .training-section { grid-template-columns: 1fr; }
+  .dna-scores-grid { grid-template-columns: repeat(2, 1fr); }
+  .achievements-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 768px) {
+  .dashboard-page { padding: var(--sp-4); }
+  .overview-stats { grid-template-columns: repeat(2, 1fr); }
+  .achievements-grid { grid-template-columns: repeat(2, 1fr); }
+}

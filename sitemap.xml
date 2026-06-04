@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://typeforge.ai/</loc><lastmod>2026-06-01</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://typeforge.ai/features</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://typeforge.ai/pricing</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://typeforge.ai/about</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://typeforge.ai/blog</loc><lastmod>2026-06-01</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://typeforge.ai/changelog</loc><lastmod>2026-06-01</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://typeforge.ai/roadmap</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://typeforge.ai/security</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://typeforge.ai/privacy</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://typeforge.ai/terms</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://typeforge.ai/contact</loc><lastmod>2026-06-01</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://typeforge.ai/status</loc><lastmod>2026-06-01</lastmod><changefreq>hourly</changefreq><priority>0.4</priority></url>
+</urlset>

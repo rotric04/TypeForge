@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TypeForge AI</title>
+  <meta name="description" content="TypeForge AI helps you improve your typing speed, accuracy, and coding skills by learning your typing habits."/>
+  <meta name="keywords" content="typing practice, typing speed, WPM, touch typing, adaptive learning, AI typing, typing test, keyboard training"/>
+  <meta name="author" content="TypeForge AI"/>
+  <link rel="canonical" href="https://typeforge.ai/"/>
+  <!-- Open Graph -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://typeforge.ai/"/>
+  <meta property="og:title" content="TypeForge AI"/>
+  <meta property="og:description" content="A personalized typing platform that learns how you type to help you get faster."/>
+  <meta property="og:image" content="https://typeforge.ai/assets/og-image.png"/>
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="TypeForge AI"/>
+  <meta name="twitter:description" content="Personalized typing training to help you type faster and better."/>
+  <!-- Schema -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"TypeForge AI","url":"https://typeforge.ai","description":"AI-powered adaptive typing training platform","applicationCategory":"EducationalApplication","operatingSystem":"Web"}
+  </script>
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/global.css"/>
+  <link rel="stylesheet" href="css/animations.css"/>
+  <link rel="stylesheet" href="css/components.css"/>
+  <link rel="stylesheet" href="css/landing.css"/>
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>"/>
+</head>
+<body>
+
+<!-- Aurora Background -->
+<div class="aurora-container" aria-hidden="true">
+  <div class="aurora-blob aurora-blob-1"></div>
+  <div class="aurora-blob aurora-blob-2"></div>
+  <div class="aurora-blob aurora-blob-3"></div>
+  <div class="aurora-blob aurora-blob-4"></div>
+</div>
+<div class="noise-overlay" aria-hidden="true"></div>
+
+<!-- Toast Container -->
+<div id="toast-container" class="toast-container" role="alert" aria-live="polite"></div>
+
+<!-- ═══════════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════════ -->
+<nav class="navbar" id="main-nav" role="navigation" aria-label="Main navigation">
+  <div class="navbar-inner">
+    <a href="/" class="navbar-logo" aria-label="TypeForge AI Home">
+      <div class="navbar-logo-icon" aria-hidden="true">⌨️</div>
+      <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
+    </a>
+    <ul class="navbar-links" role="list">
+      <li><a href="features.html">Features</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="feedback.html">Community</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <div class="nav-auth-signed-out">
+        <a href="login.html" class="btn btn-outline btn-sm">Sign In</a>
+        <a href="login.html" class="btn btn-primary btn-sm">Start Free</a>
+      </div>
+      <div class="nav-auth-signed-in">
+        <a href="app/dashboard.html" class="btn btn-ghost btn-sm">Dashboard</a>
+        <div class="nav-user-avatar" title="Profile">U</div>
+        <button class="btn btn-ghost btn-sm" data-auth-signout style="font-size:12px;">Sign Out</button>
+      </div>
+      <button class="nav-hamburger" aria-label="Toggle menu" aria-expanded="false" id="nav-hamburger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="nav-backdrop" id="nav-backdrop"></div>
+<nav class="nav-drawer" id="nav-drawer" role="dialog" aria-label="Mobile navigation">
+  <a href="features.html">✦ Features</a>
+  <a href="about.html">✦ About</a>
+  <a href="blog.html">✦ Blog</a>
+  <a href="feedback.html">✦ Community</a>
+  <div class="nav-drawer-divider"></div>
+  <a href="app/typing.html">⌨️ Open App</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<main class="page-content">
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-eyebrow">
+      <span>✦</span>
+      <span>Personalized Practice</span>
+      <span>✦</span>
+    </div>
+    <h1 class="hero-title">
+      Every Keystroke<br/>
+      Makes You <span class="gradient-text">Better</span>
+    </h1>
+    <p class="hero-subtitle">
+      TypeForge AI is your personal typing coach that learns your habits and helps you improve. No tests, just real practice.
+    </p>
+    <div class="hero-actions">
+      <a href="login.html" class="btn btn-gradient btn-xl" id="hero-cta-primary">
+        Start Training Free
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#demo" class="btn btn-secondary btn-xl" id="hero-cta-secondary">
+        Watch Demo
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
+      </a>
+    </div>
+    <div class="hero-social-proof">
+      <div class="hero-avatars" aria-label="User avatars">
+        <div class="avatar" style="background:linear-gradient(135deg,#7c6ff7,#ff6b9d)">A</div>
+        <div class="avatar" style="background:linear-gradient(135deg,#00e5c4,#38bdf8)">K</div>
+        <div class="avatar" style="background:linear-gradient(135deg,#ffd666,#ff9f43)">M</div>
+        <div class="avatar" style="background:linear-gradient(135deg,#a855f7,#7c6ff7)">R</div>
+        <div class="avatar" style="background:linear-gradient(135deg,#ff6b9d,#ff5e7a)">S</div>
+      </div>
+      <div>
+        <div style="display:flex;gap:2px;margin-bottom:3px;">
+          <span class="hero-star">★★★★★</span>
+        </div>
+        <p>Join a growing community of developers and typists</p>
+      </div>
+    </div>
+
+    <!-- Hero Mockup -->
+    <div class="hero-mockup" id="demo" aria-label="Typing interface preview">
+      <div class="mockup-window">
+        <div class="mockup-titlebar">
+          <div class="mockup-dots" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="mockup-title">TypeForge AI Classic Mode</div>
+          <div class="mockup-stats">
+            <div class="mockup-stat">
+              <span class="mockup-stat-val" id="demo-wpm">87</span>
+              <span class="mockup-stat-label">WPM</span>
+            </div>
+            <div class="mockup-stat">
+              <span class="mockup-stat-val" id="demo-acc">98</span>
+              <span class="mockup-stat-label">ACC%</span>
+            </div>
+            <div class="mockup-stat">
+              <span class="mockup-stat-val" id="demo-streak">42</span>
+              <span class="mockup-stat-label">STREAK</span>
+            </div>
+          </div>
+        </div>
+        <div class="mockup-body">
+          <div class="mockup-text-area" id="mockup-text" aria-live="polite"></div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px;">
+            <div style="display:flex;gap:8px;">
+              <span class="badge badge-brand">Classic</span>
+              <span class="badge badge-mint">AI Recommended</span>
+            </div>
+            <div style="display:flex;gap:16px;font-size:12px;color:var(--text-4);">
+              <span>ESC to reset</span>
+              <span>Tab + Enter to restart</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FEATURE FLAGS / TRUSTED BY
+═══════════════════════════════════════════ -->
+<section class="section-pad-sm" aria-label="Technologies">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:32px;">
+      <p class="text-3 text-sm font-600 tracking-wider" style="text-transform:uppercase;">Built with battle-tested technology</p>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:32px;opacity:0.5;">
+      <span style="font-size:14px;font-weight:600;color:var(--text-2);letter-spacing:1px;">PYTHON</span>
+      <span style="font-size:14px;font-weight:600;color:var(--text-2);letter-spacing:1px;">FASTAPI</span>
+      <span style="font-size:14px;font-weight:600;color:var(--text-2);letter-spacing:1px;">SUPABASE</span>
+      <span style="font-size:14px;font-weight:600;color:var(--text-2);letter-spacing:1px;">REDIS</span>
+      <span style="font-size:14px;font-weight:600;color:var(--text-2);letter-spacing:1px;">SCIKIT-LEARN</span>
+      <span style="font-size:14px;font-weight:600;color:var(--text-2);letter-spacing:1px;">XGBOOST</span>
+      <span style="font-size:14px;font-weight:600;color:var(--text-2);letter-spacing:1px;">CLERK</span>
+      <span style="font-size:14px;font-weight:600;color:var(--text-2);letter-spacing:1px;">CLOUDFLARE</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     TYPING DNA
+═══════════════════════════════════════════ -->
+<section class="section-pad" id="features" aria-label="Typing DNA feature">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:var(--sp-16);">
+      <div class="section-eyebrow reveal">Typing DNA</div>
+      <h2 class="section-title reveal delay-100">Your Unique Typing Identity</h2>
+      <p class="section-desc reveal delay-200" style="margin:16px auto 0;">
+        TypeForge AI profiles how you type and generates a snapshot that updates with every session to help you target your weak spots.
+      </p>
+    </div>
+    <div class="dna-card reveal">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;margin-bottom:32px;">
+        <div>
+          <h3 style="font-size:var(--text-2xl);margin-bottom:8px;">Meet Your Typing Persona</h3>
+          <p style="font-size:var(--text-sm);color:var(--text-3);">Generated after your first session. Updates every 10 minutes of practice.</p>
+        </div>
+        <div class="dna-archetype">
+          <span>🎯</span>
+          <span>Precision Builder</span>
+        </div>
+      </div>
+      <div class="dna-metrics">
+        <div class="dna-metric">
+          <div class="dna-metric-ring" id="dna-ring-focus">
+            <svg viewBox="0 0 60 60" width="70" height="70"></svg>
+            <div class="dna-metric-ring-val">87</div>
+          </div>
+          <div class="dna-metric-label">Focus Score</div>
+        </div>
+        <div class="dna-metric">
+          <div class="dna-metric-ring" id="dna-ring-consistency">
+            <svg viewBox="0 0 60 60" width="70" height="70"></svg>
+            <div class="dna-metric-ring-val">91</div>
+          </div>
+          <div class="dna-metric-label">Consistency</div>
+        </div>
+        <div class="dna-metric">
+          <div class="dna-metric-ring" id="dna-ring-confidence">
+            <svg viewBox="0 0 60 60" width="70" height="70"></svg>
+            <div class="dna-metric-ring-val">78</div>
+          </div>
+          <div class="dna-metric-label">Confidence</div>
+        </div>
+        <div class="dna-metric">
+          <div class="dna-metric-ring" id="dna-ring-improvement">
+            <svg viewBox="0 0 60 60" width="70" height="70"></svg>
+            <div class="dna-metric-ring-val">94</div>
+          </div>
+          <div class="dna-metric-label">Improvement Rate</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FEATURES
+═══════════════════════════════════════════ -->
+<section class="section-pad" aria-label="Features">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:var(--sp-16);">
+      <div class="section-eyebrow reveal">Core Features</div>
+      <h2 class="section-title reveal delay-100">Not a Test.<br/><span class="gradient-text">A Training System.</span></h2>
+      <p class="section-desc reveal delay-200" style="margin:16px auto 0;">
+        Every feature is designed to accelerate learning, not just measure it.
+      </p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-card-icon icon-brand"><span>🧠</span></div>
+        <h3>Adaptive AI Engine</h3>
+        <p>Our ML pipeline (K-Means, XGBoost, LightGBM) analyzes every keystroke and dynamically generates training personalized to your weak spots. No two users get the same exercises.</p>
+      </div>
+      <div class="feature-card reveal delay-100">
+        <div class="feature-card-icon icon-coral"><span>⚡</span></div>
+        <h3>Character-Level Tracking</h3>
+        <p>We capture reaction time, delay patterns, backspace frequency, and error recovery speed at the individual character level to build a hyper-accurate picture of how you type.</p>
+      </div>
+      <div class="feature-card reveal delay-200">
+        <div class="feature-card-icon icon-mint"><span>💻</span></div>
+        <h3>Developer Mode</h3>
+        <p>Train on real Python, JavaScript, TypeScript, SQL, Bash, JSON and more. Improve code typing speed with syntax-aware drills tailored to your primary language.</p>
+      </div>
+      <div class="feature-card reveal delay-300">
+        <div class="feature-card-icon icon-gold"><span>🎯</span></div>
+        <h3>Typing DNA System</h3>
+        <p>Your unique typing fingerprint (Focus, Consistency, Confidence and Improvement scores) is tracked over time with trend analysis and behavioral insights.</p>
+      </div>
+      <div class="feature-card reveal delay-400">
+        <div class="feature-card-icon icon-sky"><span>🏆</span></div>
+        <h3>Achievement Engine</h3>
+        <p>Ghost Fingers, Code Assassin, Night Owl, and 50+ other badges with XP, daily quests, weekly challenges, and monthly evolution reports keep you hooked on progress.</p>
+      </div>
+      <div class="feature-card reveal delay-500">
+        <div class="feature-card-icon icon-violet"><span>📊</span></div>
+        <h3>Analytics Dashboard</h3>
+        <p>WPM trends, error heatmaps, finger fatigue analysis, session heatmaps, weak bigram detection, and AI-powered improvement forecasts are all beautifully visualized.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     MODES
+═══════════════════════════════════════════ -->
+<section class="section-pad" aria-label="Training modes">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;" class="md:flex-col">
+      <div>
+        <div class="section-eyebrow reveal">Typing Modes</div>
+        <h2 class="section-title reveal delay-100" style="font-size:var(--text-4xl);">
+          Train for your actual <span class="gradient-text-mint">workflow</span>
+        </h2>
+        <p style="color:var(--text-2);margin:16px 0 32px;line-height:var(--leading-loose);font-size:var(--text-base);" class="reveal delay-200">
+          Whether you're a developer, student, or competitive typist, TypeForge has a mode purpose-built for how you actually use a keyboard.
+        </p>
+        <div style="display:flex;flex-direction:column;gap:12px;" class="reveal delay-300">
+          <div class="training-item" style="cursor:default;">
+            <div class="training-item-icon icon-brand" style="border-radius:var(--r-md)">⌨️</div>
+            <div class="training-item-info">
+              <div class="training-item-name">Classic Mode</div>
+              <div class="training-item-desc">Prose and sentences. Speed and accuracy fundamentals.</div>
+            </div>
+            <span class="badge badge-brand">Popular</span>
+          </div>
+          <div class="training-item" style="cursor:default;">
+            <div class="training-item-icon icon-mint" style="border-radius:var(--r-md)">💻</div>
+            <div class="training-item-info">
+              <div class="training-item-name">Developer Mode</div>
+              <div class="training-item-desc">10 programming languages with syntax highlighting.</div>
+            </div>
+            <span class="badge badge-mint">New</span>
+          </div>
+          <div class="training-item" style="cursor:default;">
+            <div class="training-item-icon icon-gold" style="border-radius:var(--r-md)">🎓</div>
+            <div class="training-item-info">
+              <div class="training-item-name">Student Mode</div>
+              <div class="training-item-desc">Essays, academic vocab, exam preparation.</div>
+            </div>
+          </div>
+          <div class="training-item" style="cursor:default;">
+            <div class="training-item-icon icon-coral" style="border-radius:var(--r-md)">🏅</div>
+            <div class="training-item-info">
+              <div class="training-item-name">Challenge Mode</div>
+              <div class="training-item-desc">Time pressure, leaderboards, weekly tournaments.</div>
+            </div>
+            <span class="badge badge-coral">🔥 Hot</span>
+          </div>
+          <div class="training-item" style="cursor:default;">
+            <div class="training-item-icon icon-sky" style="border-radius:var(--r-md)">🧘</div>
+            <div class="training-item-info">
+              <div class="training-item-name">Zen Mode</div>
+              <div class="training-item-desc">No timer. No pressure. Pure flow state training.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal reveal-right" style="display:flex;flex-direction:column;gap:16px;">
+        <div class="glass-card" style="padding:24px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+            <span class="badge badge-mint">Developer Mode · Python</span>
+            <span style="font-size:12px;color:var(--text-4);font-family:var(--font-mono);">snippet 3 of 12</span>
+          </div>
+          <div style="font-family:var(--font-mono);font-size:14px;line-height:2.2;background:rgba(0,0,0,0.3);padding:16px;border-radius:12px;overflow-x:auto;">
+            <span style="color:var(--violet)">def</span> <span style="color:var(--sky)">train_model</span><span style="color:var(--text-2)">(data, epochs=</span><span style="color:var(--coral)">100</span><span style="color:var(--text-2)">):</span><br/>
+            &nbsp;&nbsp;<span style="color:var(--text-2)">model = </span><span style="color:var(--sky)">XGBClassifier</span><span style="color:var(--text-2)">()</span><br/>
+            &nbsp;&nbsp;<span style="color:var(--text-4);font-style:italic"># Fit on user keystroke data</span><br/>
+            &nbsp;&nbsp;<span style="color:var(--text-2)">model.</span><span style="color:var(--sky)">fit</span><span style="color:var(--text-2)">(data.X, data.y)</span><br/>
+            &nbsp;&nbsp;<span style="color:var(--violet)">return</span> <span style="color:var(--text-2)">model</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px;">
+            <span style="font-size:11px;color:var(--text-4);">Weak key detected: <strong style="color:var(--gold)">x</strong>, <strong style="color:var(--gold)">b</strong></span>
+            <span style="font-size:11px;color:var(--success);">92 WPM · 97% ACC</span>
+          </div>
+        </div>
+        <div class="glass-card" style="padding:20px;display:flex;align-items:center;gap:16px;">
+          <div style="font-size:2rem;">🎯</div>
+          <div>
+            <div style="font-size:14px;font-weight:600;color:var(--text-1);margin-bottom:4px;">AI Training Suggestion</div>
+            <div style="font-size:12px;color:var(--text-3);">"Focus on bracket pairs <code style="color:var(--mint)">()</code> and <code style="color:var(--mint)">[]</code>, where you hesitate 340ms on average."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     USER ARCHETYPES
+═══════════════════════════════════════════ -->
+<section class="section-pad" aria-label="User archetypes">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:var(--sp-16);">
+      <div class="section-eyebrow reveal">Typing Personas</div>
+      <h2 class="section-title reveal delay-100">Which Archetype Are <span class="gradient-text">You?</span></h2>
+      <p class="section-desc reveal delay-200" style="margin:16px auto 0;">Generated automatically from your typing behavior. Everyone gets a unique identity.</p>
+    </div>
+    <div class="archetypes-grid">
+      <div class="archetype-card reveal">
+        <div class="archetype-emoji">👻</div>
+        <div class="archetype-name">Ghost Fingers</div>
+        <div class="archetype-desc">100+ WPM with 98%+ accuracy. You barely exist to the keyboard.</div>
+      </div>
+      <div class="archetype-card reveal delay-100">
+        <div class="archetype-emoji">🎵</div>
+        <div class="archetype-name">Rhythm Seeker</div>
+        <div class="archetype-desc">Incredibly consistent cadence. Your typing has a beautiful flow.</div>
+      </div>
+      <div class="archetype-card reveal delay-200">
+        <div class="archetype-emoji">🎯</div>
+        <div class="archetype-name">Precision Builder</div>
+        <div class="archetype-desc">Every keystroke is intentional. Accuracy is your superpower.</div>
+      </div>
+      <div class="archetype-card reveal delay-300">
+        <div class="archetype-emoji">⚡</div>
+        <div class="archetype-name">Velocity Crafter</div>
+        <div class="archetype-desc">Built for raw speed. You live in the fast lane of typing.</div>
+      </div>
+      <div class="archetype-card reveal delay-400">
+        <div class="archetype-emoji">🧘</div>
+        <div class="archetype-name">Code Monk</div>
+        <div class="archetype-desc">Deep focus, zero distractions. You type like you meditate.</div>
+      </div>
+      <div class="archetype-card reveal delay-500">
+        <div class="archetype-emoji">🦅</div>
+        <div class="archetype-name">Syntax Hunter</div>
+        <div class="archetype-desc">You hunt errors before they happen. A coder's coder.</div>
+      </div>
+      <div class="archetype-card reveal delay-600">
+        <div class="archetype-emoji">🏗️</div>
+        <div class="archetype-name">Typing Architect</div>
+        <div class="archetype-desc">Strategic, methodical. Building speed brick by brick.</div>
+      </div>
+      <div class="archetype-card reveal delay-700">
+        <div class="archetype-emoji">🗺️</div>
+        <div class="archetype-name">Keyboard Wanderer</div>
+        <div class="archetype-desc">Exploring the keyboard. Every session reveals something new.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     HOW IT WORKS
+═══════════════════════════════════════════ -->
+<section class="section-pad" aria-label="How TypeForge works">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:var(--sp-16);">
+      <div class="section-eyebrow reveal">How It Works</div>
+      <h2 class="section-title reveal delay-100">Your journey starts in<br/><span class="gradient-text-mint">60 seconds</span></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;">
+      <div class="timeline">
+        <div class="timeline-item reveal">
+          <div class="timeline-step">1</div>
+          <div class="timeline-content">
+            <h3>Quick Onboarding</h3>
+            <p>4 fast questions about your typing habits, goals, and experience level. No account needed to start.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal delay-200">
+          <div class="timeline-step">2</div>
+          <div class="timeline-content">
+            <h3>AI Baseline Assessment</h3>
+            <p>TypeForge profiles your speed, accuracy, weak keys, patterns and bigrams in your very first session.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal delay-400">
+          <div class="timeline-step">3</div>
+          <div class="timeline-content">
+            <h3>Get Your Typing DNA</h3>
+            <p>Receive your Typing Archetype, DNA scores, and a personalized training curriculum generated just for you.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal delay-600">
+          <div class="timeline-step">4</div>
+          <div class="timeline-content">
+            <h3>Adaptive Training</h3>
+            <p>Train with dynamically generated exercises that target exactly what you need. Never the same session twice.</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal delay-800">
+          <div class="timeline-step" style="background:linear-gradient(135deg,var(--mint),var(--sky));">✓</div>
+          <div class="timeline-content">
+            <h3>Track Real Progress</h3>
+            <p>Watch your WPM climb, errors drop, and DNA scores evolve. Monthly evolution reports show your journey.</p>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;" class="reveal reveal-right delay-200">
+        <!-- Onboarding Preview Card -->
+        <div class="glass-card" style="padding:28px;">
+          <div style="font-size:12px;color:var(--text-4);text-transform:uppercase;letter-spacing:2px;margin-bottom:16px;">Quick Setup</div>
+          <h4 style="font-size:18px;margin-bottom:20px;">What do you type most?</h4>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <label class="option-card">
+              <input type="radio" name="preview-type" value="code" checked/>
+              <span style="font-size:20px;">💻</span>
+              <div>
+                <div style="font-size:14px;font-weight:600;color:var(--text-1);">Code</div>
+                <div style="font-size:12px;color:var(--text-3);">Python, JS, TypeScript, etc.</div>
+              </div>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="preview-type" value="essays"/>
+              <span style="font-size:20px;">📝</span>
+              <div>
+                <div style="font-size:14px;font-weight:600;color:var(--text-1);">Essays & Writing</div>
+                <div style="font-size:12px;color:var(--text-3);">Long-form, academic content</div>
+              </div>
+            </label>
+            <label class="option-card">
+              <input type="radio" name="preview-type" value="mixed"/>
+              <span style="font-size:20px;">⚡</span>
+              <div>
+                <div style="font-size:14px;font-weight:600;color:var(--text-1);">Mixed / General</div>
+                <div style="font-size:12px;color:var(--text-3);">A bit of everything</div>
+              </div>
+            </label>
+          </div>
+          <a href="app/onboarding.html" class="btn btn-primary btn-wide" style="margin-top:20px;" id="timeline-cta">Continue →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     BADGES
+═══════════════════════════════════════════ -->
+<section class="section-pad" aria-label="Achievements and badges">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:var(--sp-16);">
+      <div class="section-eyebrow reveal">Achievement System</div>
+      <h2 class="section-title reveal delay-100">Earn <span class="gradient-text">Legendary</span> Badges</h2>
+      <p class="section-desc reveal delay-200" style="margin:16px auto 0;">50+ unique achievements tracking every dimension of your progress. Unlock them. Flex them.</p>
+    </div>
+    <div class="badges-showcase reveal">
+      <div class="achievement-badge">
+        <div class="achievement-icon">👻</div>
+        <div class="achievement-name">Ghost Fingers</div>
+        <div class="achievement-desc">100 WPM · 98% ACC</div>
+      </div>
+      <div class="achievement-badge">
+        <div class="achievement-icon">💀</div>
+        <div class="achievement-name">Code Assassin</div>
+        <div class="achievement-desc">100 Coding Sessions</div>
+      </div>
+      <div class="achievement-badge">
+        <div class="achievement-icon">⚡</div>
+        <div class="achievement-name">Speed Demon</div>
+        <div class="achievement-desc">120+ WPM Sustained</div>
+      </div>
+      <div class="achievement-badge">
+        <div class="achievement-icon">🦺</div>
+        <div class="achievement-name">The Survivor</div>
+        <div class="achievement-desc">Finished with 20+ Errors</div>
+      </div>
+      <div class="achievement-badge">
+        <div class="achievement-icon">🥷</div>
+        <div class="achievement-name">Punctuation Slayer</div>
+        <div class="achievement-desc">98% Punctuation Accuracy</div>
+      </div>
+      <div class="achievement-badge">
+        <div class="achievement-icon">🦉</div>
+        <div class="achievement-name">Night Owl</div>
+        <div class="achievement-desc">30 Midnight Sessions</div>
+      </div>
+      <div class="achievement-badge achievement-locked">
+        <div class="achievement-icon">🔐</div>
+        <div class="achievement-name">???</div>
+        <div class="achievement-desc">Keep training to unlock</div>
+      </div>
+      <div class="achievement-badge achievement-locked">
+        <div class="achievement-icon">🔐</div>
+        <div class="achievement-name">???</div>
+        <div class="achievement-desc">Keep training to unlock</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     TESTIMONIALS
+═══════════════════════════════════════════ -->
+<section class="section-pad" aria-label="User testimonials">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:var(--sp-16);">
+      <div class="section-eyebrow reveal">Testimonials</div>
+      <h2 class="section-title reveal delay-100">Typists <span class="gradient-text">love</span> it</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"I went from 58 WPM to 94 WPM in 6 weeks. The AI figured out I was slow on bracket pairs and built an entire curriculum around it. Nothing else comes close."</p>
+        <div class="testimonial-author">
+          <div class="avatar" style="background:linear-gradient(135deg,#e8734a,#f05c6e)">A</div>
+          <div class="testimonial-info">
+            <div class="testimonial-name">Alex C.</div>
+            <div class="testimonial-role">Software Developer</div>
+          </div>
+          <div class="testimonial-wpm">
+            <div class="testimonial-wpm-val">94</div>
+            <div class="testimonial-wpm-label">WPM</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal delay-100">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"Developer Mode changed everything for me. I can type TypeScript fluently now. The syntax-aware training is something no other platform offers."</p>
+        <div class="testimonial-author">
+          <div class="avatar" style="background:linear-gradient(135deg,#00e5c4,#38bdf8)">K</div>
+          <div class="testimonial-info">
+            <div class="testimonial-name">Kira P.</div>
+            <div class="testimonial-role">Web Developer</div>
+          </div>
+          <div class="testimonial-wpm">
+            <div class="testimonial-wpm-val">112</div>
+            <div class="testimonial-wpm-label">WPM</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal delay-200">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">"The Typing DNA is addictive. Watching my Consistency score go from 62 to 89 over a month is more satisfying than any leaderboard ranking."</p>
+        <div class="testimonial-author">
+          <div class="avatar" style="background:linear-gradient(135deg,#ffd666,#ff9f43)">M</div>
+          <div class="testimonial-info">
+            <div class="testimonial-name">Marcus L.</div>
+            <div class="testimonial-role">Student</div>
+          </div>
+          <div class="testimonial-wpm">
+            <div class="testimonial-wpm-val">78</div>
+            <div class="testimonial-wpm-label">WPM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     CTA
+═══════════════════════════════════════════ -->
+<section class="cta-section" aria-label="Call to action">
+  <div class="container">
+    <div class="cta-bg reveal">
+      <div class="section-eyebrow" style="justify-content:center;">Your Training Awaits</div>
+      <h2 class="section-title" style="font-size:clamp(2.5rem,5vw,4rem);margin-top:16px;">
+        Stop measuring.<br/><span class="gradient-text">Start improving.</span>
+      </h2>
+      <p style="font-size:var(--text-lg);color:var(--text-2);margin:24px auto;max-width:520px;line-height:var(--leading-loose);">
+        Join developers and typists from around the world who use TypeForge AI as their daily training partner. Free forever. No credit card.
+      </p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:32px;">
+        <a href="app/onboarding.html" class="btn btn-gradient btn-xl" id="footer-cta-btn">
+          Forge Your Typing 🔥
+        </a>
+        <a href="features.html" class="btn btn-secondary btn-xl">Explore Features</a>
+      </div>
+      <div style="margin-top:24px;display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap;">
+        <span style="font-size:13px;color:var(--text-4);display:flex;align-items:center;gap:6px;"><span style="color:var(--mint)">✓</span> Free forever plan</span>
+        <span style="font-size:13px;color:var(--text-4);display:flex;align-items:center;gap:6px;"><span style="color:var(--mint)">✓</span> No credit card</span>
+        <span style="font-size:13px;color:var(--text-4);display:flex;align-items:center;gap:6px;"><span style="color:var(--mint)">✓</span> Cancel anytime</span>
+        <span style="font-size:13px;color:var(--text-4);display:flex;align-items:center;gap:6px;"><span style="color:var(--mint)">✓</span> GDPR compliant</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="navbar-logo" style="margin-bottom:16px;display:inline-flex;">
+          <div class="navbar-logo-icon">⌨️</div>
+          <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
+        </a>
+        <p>The world's most personalized typing training platform. Powered by adaptive AI. Built for humans.</p>
+        <div class="footer-social" style="margin-top:20px;">
+          <a href="#" aria-label="Twitter">𝕏</a>
+          <a href="#" aria-label="GitHub">GH</a>
+          <a href="#" aria-label="Discord">DC</a>
+          <a href="#" aria-label="YouTube">YT</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Product</div>
+        <div class="footer-links">
+          <a href="features.html">Features</a>
+          <a href="blog.html">Blog</a>
+          <a href="feedback.html">Community</a>
+          <a href="changelog.html">Changelog</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Resources</div>
+        <div class="footer-links">
+          <a href="about.html">About</a>
+          <a href="feedback.html">Contact</a>
+          <a href="security.html">Security</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <div class="footer-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 TypeForge AI. Designed & Developed by <a href="https://github.com/rotric04" target="_blank" class="creator-link">rotric04</a></p>
+      <p style="color:var(--text-4);font-size:12px;">Made with ⌨️ for typists everywhere</p>
+    </div>
+  </div>
+</footer>
+</main>
+
+<script type="module">
+import { initNavbar, initReveal, drawRing } from './js/common.js';
+import Auth from './js/clerk.js';
+import { initAccessibility } from './js/accessibility.js';
+
+// ── Init
+initNavbar();
+initReveal();
+initAccessibility();
+
+// ── Navbar hamburger
+const hamburger = document.getElementById('nav-hamburger');
+const drawer = document.getElementById('nav-drawer');
+const backdrop = document.getElementById('nav-backdrop');
+
+function toggleDrawer(open) {
+  hamburger.classList.toggle('open', open);
+  drawer.classList.toggle('open', open);
+  if(backdrop) backdrop.classList.toggle('visible', open);
+  hamburger.setAttribute('aria-expanded', open);
+}
+
+if (hamburger && drawer) {
+  hamburger.addEventListener('click', () => toggleDrawer(!drawer.classList.contains('open')));
+  if(backdrop) backdrop.addEventListener('click', () => toggleDrawer(false));
+}
+
+// ── DNA Rings
+function drawDnaRing(containerId, pct, color) {
+  const wrapper = document.getElementById(containerId);
+  if (!wrapper) return;
+  const svg = wrapper.querySelector('svg');
+  if (!svg) return;
+  const r = 22;
+  const circ = 2 * Math.PI * r;
+  const dash = ((pct / 100) * circ).toFixed(2);
+  svg.setAttribute('viewBox', '0 0 60 60');
+  svg.innerHTML = `
+    <circle cx="30" cy="30" r="${r}" stroke="rgba(255,255,255,0.06)" stroke-width="4" fill="none"/>
+    <circle cx="30" cy="30" r="${r}" stroke="${color}" stroke-width="4" fill="none"
+      stroke-linecap="round"
+      stroke-dasharray="0 ${circ}"
+      style="transition: stroke-dasharray 1.5s cubic-bezier(0.16,1,0.3,1)"/>
+  `;
+  setTimeout(() => {
+    svg.querySelectorAll('circle')[1].setAttribute('stroke-dasharray', `${dash} ${circ}`);
+  }, 300);
+}
+
+// Observe DNA section for ring animation
+const dnaObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      drawDnaRing('dna-ring-focus',       87, 'var(--brand)');
+      drawDnaRing('dna-ring-consistency', 91, 'var(--teal)');
+      drawDnaRing('dna-ring-confidence',  78, 'var(--coral)');
+      drawDnaRing('dna-ring-improvement', 94, 'var(--gold)');
+      dnaObs.disconnect();
+    }
+  });
+}, { threshold: 0.3 });
+const dnaSection = document.querySelector('.dna-card');
+if (dnaSection) dnaObs.observe(dnaSection);
+
+// ── Typing Demo Animation
+const demoText = "TypeForge AI learns from every keystroke and builds a unique training path for you. The faster you type, the smarter it gets.";
+const mockupEl = document.getElementById('mockup-text');
+let charIndex = 0;
+let wpm = 42;
+let acc = 97;
+let streak = 0;
+
+function animateMockup() {
+  if (!mockupEl) return;
+  if (charIndex === 0) {
+    mockupEl.innerHTML = '';
+    // Build spans
+    demoText.split('').forEach((ch, i) => {
+      const span = document.createElement('span');
+      span.className = 'mockup-char-pending';
+      span.textContent = ch;
+      span.id = `mc-${i}`;
+      mockupEl.appendChild(span);
+    });
+  }
+
+  if (charIndex < demoText.length) {
+    const prev = document.getElementById(`mc-${charIndex - 1}`);
+    const curr = document.getElementById(`mc-${charIndex}`);
+    const next = document.getElementById(`mc-${charIndex + 1}`);
+
+    if (prev) prev.className = 'mockup-char-done';
+    if (curr) curr.className = 'mockup-char-current';
+    if (next) next.className = 'mockup-char-pending';
+
+    charIndex++;
+    wpm = Math.min(120, wpm + (Math.random() > 0.7 ? 1 : 0));
+    acc = Math.max(95, acc - (Math.random() > 0.9 ? 1 : 0));
+    streak++;
+
+    document.getElementById('demo-wpm').textContent = wpm;
+    document.getElementById('demo-acc').textContent = acc;
+    document.getElementById('demo-streak').textContent = streak;
+
+    const delay = 40 + Math.random() * 60;
+    setTimeout(animateMockup, delay);
+  } else {
+    // Reset after pause
+    charIndex = 0;
+    wpm = 42; acc = 97; streak = 0;
+    setTimeout(animateMockup, 2000);
+  }
+}
+
+// Start mockup after hero is visible
+setTimeout(animateMockup, 800);
+
+// ── Smooth scroll for hash links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
+</body>
+</html>

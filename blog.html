@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blog — TypeForge AI</title>
+  <meta name="description" content="Research, typing tips, and updates from the TypeForge team."/>
+  <link rel="canonical" href="https://typeforge.ai/blog"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="css/global.css"/>
+  <link rel="stylesheet" href="css/animations.css"/>
+  <link rel="stylesheet" href="css/components.css"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>"/>
+  <style>
+    /* ── Blog Styles ───────────────────────────────────────── */
+    .blog-hero {
+      padding: 160px 0 80px;
+      position: relative;
+      text-align: center;
+    }
+    
+    .blog-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: rgba(0,201,167,0.1);
+      border: 1px solid rgba(0,201,167,0.25);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--teal);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .blog-heading {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
+    }
+
+    .blog-sub {
+      font-size: 18px;
+      color: var(--text-2);
+      max-width: 560px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+
+    /* Filters */
+    .blog-filters {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 64px;
+    }
+    .filter-btn {
+      padding: 8px 20px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text-2);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { background: rgba(255,255,255,0.08); color: var(--text-1); }
+    .filter-btn.active {
+      background: rgba(232,115,74,0.15);
+      border-color: rgba(232,115,74,0.3);
+      color: var(--brand);
+    }
+
+    /* Grid */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 32px;
+      padding-bottom: 100px;
+    }
+
+    /* Featured Article (spans 2 cols on large screens) */
+    .article-card.featured {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 40px;
+      align-items: center;
+      background: linear-gradient(135deg, rgba(20,20,35,0.8), rgba(15,15,25,0.9));
+    }
+    
+    .article-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-1);
+      border-radius: 24px;
+      overflow: hidden;
+      transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out), border-color 0.3s;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .article-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--border-2);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    }
+
+    .article-img-wrap {
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      position: relative;
+      background: var(--bg-surface);
+    }
+    .article-card.featured .article-img-wrap { aspect-ratio: 4/3; height: 100%; border-radius: 24px 0 0 24px; }
+    
+    /* Gradient mesh images instead of real photos for now */
+    .img-placeholder {
+      width: 100%; height: 100%;
+      position: absolute; inset: 0;
+      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .article-card:hover .img-placeholder { transform: scale(1.05); }
+
+    .mesh-1 { background: linear-gradient(135deg, #e8734a, #00c9a7); opacity: 0.8; }
+    .mesh-2 { background: linear-gradient(135deg, #f05c6e, #f59e0b); opacity: 0.8; }
+    .mesh-3 { background: linear-gradient(135deg, #00c9a7, #38bdf8); opacity: 0.8; }
+    .mesh-4 { background: linear-gradient(135deg, #8b5cf6, #f05c6e); opacity: 0.8; }
+
+    .article-content {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      color: var(--text-3);
+      margin-bottom: 16px;
+    }
+    .article-tag {
+      color: var(--brand);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .article-title {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 12px;
+      color: var(--text-1);
+    }
+    .article-card.featured .article-title { font-size: clamp(24px, 3vw, 36px); }
+
+    .article-excerpt {
+      font-size: 15px;
+      color: var(--text-2);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      flex: 1;
+    }
+
+    .article-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: auto;
+    }
+    .author-avatar {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--border-2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+    }
+    .author-name { font-size: 14px; font-weight: 500; color: var(--text-1); }
+
+    @media (max-width: 900px) {
+      .article-card.featured {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      .article-card.featured .article-img-wrap {
+        aspect-ratio: 16/9;
+        border-radius: 24px 24px 0 0;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar" id="main-nav">
+  <div class="navbar-inner">
+    <a href="index.html" class="navbar-logo">
+      <div class="navbar-logo-icon">⌨️</div>
+      <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
+    </a>
+    <ul class="navbar-links">
+      <li><a href="features.html">Features</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><a href="feedback.html">Community</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <div class="nav-auth-signed-out">
+        <button class="btn btn-ghost btn-sm" data-auth-signin>Sign In</button>
+        <a href="app/onboarding.html" class="btn btn-primary btn-sm">Start Free</a>
+      </div>
+      <div class="nav-auth-signed-in">
+        <a href="app/dashboard.html" class="btn btn-ghost btn-sm">Dashboard</a>
+        <div class="nav-user-avatar" title="Profile">U</div>
+        <button class="btn btn-ghost btn-sm" data-auth-signout style="font-size:12px;">Sign Out</button>
+      </div>
+      <button class="nav-hamburger" id="nav-hamburger">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main class="page-content">
+  <section class="blog-hero">
+    <div class="container">
+      <div class="blog-badge" data-anime="fade-up">TypeForge Journal</div>
+      <h1 class="blog-heading" data-anime="fade-up" data-delay="80">
+        Notes on <span class="gradient-text-warm">Mastery</span>
+      </h1>
+      <p class="blog-sub" data-anime="fade-up" data-delay="160">
+        Deep dives into the science of typing, product updates, and how we're building the future of keyboard interfaces.
+      </p>
+
+      <div class="blog-filters" data-anime="fade-in" data-delay="240">
+        <button class="filter-btn active">All Posts</button>
+        <button class="filter-btn">Engineering</button>
+        <button class="filter-btn">Science of Typing</button>
+        <button class="filter-btn">Product</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="blog-grid">
+      <!-- Featured Post -->
+      <article class="article-card featured" data-anime="fade-up" data-delay="0">
+        <div class="article-img-wrap">
+          <div class="img-placeholder mesh-1">
+            <div style="position:absolute;inset:0;background:url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.3%22/%3E%3C/svg%3E');mix-blend-mode:overlay;"></div>
+          </div>
+        </div>
+        <div class="article-content">
+          <div class="article-meta">
+            <span class="article-tag">Engineering</span>
+            <span>·</span>
+            <span>Oct 24, 2026</span>
+          </div>
+          <h2 class="article-title">Open Sourcing the TypeForge ML Pipeline</h2>
+          <p class="article-excerpt">
+            Today we're open-sourcing our core adaptive learning engine. Learn how we use K-Means clustering and real-time inference in the browser to generate personalized typing paths.
+          </p>
+          <div class="article-author">
+            <div class="author-avatar" style="background:var(--brand);color:#fff;">A</div>
+            <div class="author-name">Assud K.</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Standard Post 1 -->
+      <article class="article-card" data-anime="fade-up" data-delay="100">
+        <div class="article-img-wrap">
+          <div class="img-placeholder mesh-2"></div>
+        </div>
+        <div class="article-content">
+          <div class="article-meta">
+            <span class="article-tag" style="color:var(--teal);">Science</span>
+            <span>·</span>
+            <span>Sep 18, 2026</span>
+          </div>
+          <h2 class="article-title">The Myth of 120 WPM</h2>
+          <p class="article-excerpt">
+            Why optimizing for raw speed creates fragile typists, and why focusing on rhythm and flow leads to higher functional speed in the real world.
+          </p>
+          <div class="article-author">
+            <div class="author-avatar" style="background:var(--teal);color:#fff;">T</div>
+            <div class="author-name">The Team</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Standard Post 2 -->
+      <article class="article-card" data-anime="fade-up" data-delay="200">
+        <div class="article-img-wrap">
+          <div class="img-placeholder mesh-3"></div>
+        </div>
+        <div class="article-content">
+          <div class="article-meta">
+            <span class="article-tag" style="color:var(--gold);">Product</span>
+            <span>·</span>
+            <span>Aug 02, 2026</span>
+          </div>
+          <h2 class="article-title">Introducing Typing DNA</h2>
+          <p class="article-excerpt">
+            A look at our new feature that visualizes your unique typing patterns, finger biases, and fatigue curves.
+          </p>
+          <div class="article-author">
+            <div class="author-avatar" style="background:var(--brand);color:#fff;">A</div>
+            <div class="author-name">Assud K.</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Standard Post 3 -->
+      <article class="article-card" data-anime="fade-up" data-delay="300">
+        <div class="article-img-wrap">
+          <div class="img-placeholder mesh-4"></div>
+        </div>
+        <div class="article-content">
+          <div class="article-meta">
+            <span class="article-tag" style="color:var(--teal);">Science</span>
+            <span>·</span>
+            <span>Jul 14, 2026</span>
+          </div>
+          <h2 class="article-title">Keyboard Layouts: QWERTY vs Colemak</h2>
+          <p class="article-excerpt">
+            We analyzed 2 million keystrokes to see if switching to an alternative layout actually reduces finger travel distance. The results surprised us.
+          </p>
+          <div class="article-author">
+            <div class="author-avatar" style="background:var(--teal);color:#fff;">T</div>
+            <div class="author-name">The Team</div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer class="footer" style="padding:40px 0;border-top:1px solid var(--border-1);">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+      <a href="index.html" class="navbar-logo">
+        <div class="navbar-logo-icon">⌨️</div>
+        <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
+      </a>
+      <nav style="display:flex;gap:20px;flex-wrap:wrap;">
+        <a href="features.html" style="font-size:13px;color:var(--text-4);">Features</a>
+        <a href="blog.html" style="font-size:13px;color:var(--text-4);">Blog</a>
+        <a href="feedback.html" style="font-size:13px;color:var(--text-4);">Community</a>
+      </nav>
+      <p style="font-size:12px;color:var(--text-4);">© 2026 TypeForge AI · Designed & Developed by <a href="https://github.com/rotric04" target="_blank" class="creator-link">rotric04</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+<script type="module">
+import { initNavbar } from './js/common.js';
+import Auth from './js/clerk.js';
+import { initAccessibility } from './js/accessibility.js';
+
+initNavbar();
+initAccessibility();
+
+// Filter buttons interaction
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    // Animate cards out and in to simulate filtering
+    anime({
+      targets: '.article-card',
+      opacity: [1, 0],
+      scale: [1, 0.95],
+      duration: 300,
+      easing: 'easeInQuad',
+      complete: () => {
+        anime({
+          targets: '.article-card',
+          opacity: [0, 1],
+          scale: [0.95, 1],
+          duration: 400,
+          delay: anime.stagger(100),
+          easing: 'easeOutExpo'
+        });
+      }
+    });
+  });
+});
+
+// Animations on load
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const el = e.target;
+      const type = el.dataset.anime;
+      const d = parseInt(el.dataset.delay || 0);
+      const base = { targets: el, easing: 'easeOutExpo', duration: 900, delay: d };
+      
+      if (type === 'fade-up') anime({ ...base, opacity: [0, 1], translateY: [30, 0] });
+      else if (type === 'fade-in') anime({ ...base, opacity: [0, 1] });
+      
+      el.style.opacity = '1';
+      observer.unobserve(el);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('[data-anime]').forEach(el => {
+  el.style.opacity = '0';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>

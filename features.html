@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Features — TypeForge AI</title>
+  <meta name="description" content="Explore every feature of TypeForge AI — adaptive learning, character-level tracking, developer mode, Typing DNA, achievement engine, and more."/>
+  <link rel="canonical" href="https://typeforge.ai/features"/>
+  <meta property="og:title" content="Features — TypeForge AI"/>
+  <meta property="og:description" content="Every feature of the world's most personalized typing training platform."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="css/global.css"/>
+  <link rel="stylesheet" href="css/animations.css"/>
+  <link rel="stylesheet" href="css/components.css"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>"/>
+  <style>
+    .features-hero { padding: 160px 0 80px; text-align: center; }
+    .features-hero h1 { font-size: clamp(2.5rem,6vw,4.5rem); margin-bottom: 20px; }
+    .features-list { display: flex; flex-direction: column; gap: 80px; padding: 40px 0 120px; }
+    .feature-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .feature-row.reverse { direction: rtl; }
+    .feature-row.reverse > * { direction: ltr; }
+    .feature-text { display: flex; flex-direction: column; gap: 16px; }
+    .feature-eyebrow { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--brand-light); }
+    .feature-title { font-size: clamp(1.8rem,3vw,2.5rem); font-weight: 700; line-height: 1.2; }
+    .feature-desc { font-size: 15px; color: var(--text-2); line-height: 1.8; }
+    .feature-bullets { display: flex; flex-direction: column; gap: 10px; }
+    .feature-bullet { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-2); }
+    .feature-bullet-check { color: var(--mint); flex-shrink: 0; margin-top: 2px; }
+    .feature-visual {
+      background: var(--bg-card);
+      border: 1px solid var(--border-2);
+      border-radius: var(--r-2xl);
+      padding: 32px;
+      min-height: 280px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .feature-visual::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(124,111,247,0.06), transparent);
+    }
+    @media (max-width: 900px) {
+      .feature-row { grid-template-columns: 1fr; }
+      .feature-row.reverse { direction: ltr; }
+    }
+  </style>
+</head>
+<body>
+<div class="aurora-container" aria-hidden="true">
+  <div class="aurora-blob aurora-blob-1"></div>
+  <div class="aurora-blob aurora-blob-2"></div>
+  <div class="aurora-blob aurora-blob-3"></div>
+</div>
+<div class="noise-overlay" aria-hidden="true"></div>
+
+<nav class="navbar" role="navigation">
+  <div class="container">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-logo"><div class="navbar-logo-icon">⌨️</div><span class="navbar-logo-text">Type<span>Forge</span> AI</span></a>
+      <ul class="navbar-links"><li><a href="features.html" class="active">Features</a></li><li><a href="about.html">About</a></li><li><a href="blog.html">Blog</a></li></ul>
+      <div class="navbar-actions">
+        <a href="login.html" class="btn btn-outline btn-sm">Sign In</a>
+        <a href="login.html" class="btn btn-primary btn-sm">Start Free</a>
+        <button class="nav-hamburger" id="nav-hamburger"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="nav-drawer" id="nav-drawer">
+  <a href="features.html">Features</a><a href="about.html">About</a><a href="blog.html">Blog</a>
+  <a href="app/onboarding.html" class="btn btn-primary btn-sm" style="margin-top:8px;width:100%;justify-content:center;">Start Free</a>
+</div>
+
+<main class="page-content">
+  <section class="features-hero">
+    <div class="container">
+      <div class="section-eyebrow reveal" style="justify-content:center;">Platform Features</div>
+      <h1 class="reveal delay-100">Built for <span class="gradient-text">real improvement</span></h1>
+      <p class="section-desc reveal delay-200" style="margin:0 auto;">Every feature exists for one reason: to make you a better typist, faster.</p>
+    </div>
+  </section>
+
+  <section style="padding: 0 0 80px;">
+    <div class="container">
+      <div class="features-list">
+
+        <!-- Feature 1: Adaptive AI -->
+        <div class="feature-row reveal">
+          <div class="feature-text">
+            <div class="feature-eyebrow">Core Intelligence</div>
+            <h2 class="feature-title">Adaptive AI Engine that <span class="gradient-text">never repeats itself</span></h2>
+            <p class="feature-desc">Our machine learning pipeline (K-Means clustering, XGBoost prediction, LightGBM ranking) continuously analyzes your typing behavior and generates completely unique training experiences for every session.</p>
+            <div class="feature-bullets">
+              <div class="feature-bullet"><span class="feature-bullet-check">✓</span>K-Means clustering profiles your typing archetype</div>
+              <div class="feature-bullet"><span class="feature-bullet-check">✓</span>XGBoost predicts your next performance level</div>
+              <div class="feature-bullet"><span class="feature-bullet-check">✓</span>LightGBM ranks which exercises will help most</div>
+              <div class="feature-bullet"><span class="feature-bullet-check">✓</span>Random Forest detects subtle error patterns</div>
+              <div class="feature-bullet"><span class="feature-bullet-check">✓</span>Isolation Forest spots unusual fatigue signals</div>
+            </div>
+          </div>
+          <div class="feature-visual">
+            <div style="text-align:center;">
+              <div style="font-size:3rem;margin-bottom:16px;animation:float 5s ease-in-out infinite;">🧠</div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;text-align:left;">
+                <div class="stat-card" style="padding:12px;"><div class="stat-label">Clustering</div><div style="color:var(--brand-light);font-weight:700;font-size:18px;">K-Means</div></div>
+                <div class="stat-card" style="padding:12px;"><div class="stat-label">Prediction</div><div style="color:var(--mint);font-weight:700;font-size:18px;">XGBoost</div></div>
+                <div class="stat-card" style="padding:12px;"><div class="stat-label">Ranking</div><div style="color:var(--coral);font-weight:700;font-size:18px;">LightGBM</div></div>
+                <div class="stat-card" style="padding:12px;"><div class="stat-label">Detection</div><div style="color:var(--gold);font-weight:700;font-size:18px;">Isolation</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 2: Character Tracking -->
+        <div class="feature-row reverse reveal">
+          <div class="feature-visual">
+            <div style="width:100%;font-family:var(--font-mono);font-size:13px;line-height:2.2;">
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:rgba(0,229,196,0.08);border:1px solid rgba(0,229,196,0.2);border-radius:8px;">
+                  <span style="color:var(--text-3);">char 'e'</span>
+                  <span style="color:var(--mint);">142ms reaction</span>
+                  <span class="badge badge-mint">fast</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:rgba(255,214,102,0.08);border:1px solid rgba(255,214,102,0.2);border-radius:8px;">
+                  <span style="color:var(--text-3);">char 'x'</span>
+                  <span style="color:var(--gold);">380ms reaction</span>
+                  <span class="badge badge-gold">slow</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:rgba(255,94,122,0.08);border:1px solid rgba(255,94,122,0.2);border-radius:8px;">
+                  <span style="color:var(--text-3);">char '{'</span>
+                  <span style="color:var(--error);">520ms + error</span>
+                  <span class="badge badge-error">weak</span>
+                </div>
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:rgba(124,111,247,0.08);border:1px solid rgba(124,111,247,0.2);border-radius:8px;">
+                  <span style="color:var(--text-3);">backspace</span>
+                  <span style="color:var(--brand-light);">3 uses</span>
+                  <span class="badge badge-brand">tracked</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="feature-text">
+            <div class="feature-eyebrow">Deep Analysis</div>
+            <h2 class="feature-title">Character-level tracking that <span class="gradient-text-mint">sees everything</span></h2>
+            <p class="feature-desc">We don't just measure WPM. We track every single character, including reaction time, delay patterns, error frequency, backspace usage, and correction speed, to build an incredibly accurate picture of your typing.</p>
+            <div class="feature-bullets">
+              <div class="feature-bullet"><span class="feature-bullet-check">✓</span>Per-character reaction time in milliseconds</div>
+              <div class="feature-bullet"><span class="feature-bullet-check">✓</span>Bigram and trigram pattern analysis</div>
+              <div class="feature-bullet"><span class="feature-bullet-check">✓</span>Backspace frequency and correction speed</div>
+              <div class="feature-bullet"><span class="feature-bullet-check">✓</span>Left/right hand balance and finger fatigue</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 3: Dev Mode -->
+        <div class="feature-row reveal">
+          <div class="feature-text">
+            <div class="feature-eyebrow">For Developers</div>
+            <h2 class="feature-title">Developer Mode with <span class="gradient-text">10 languages</span></h2>
+            <p class="feature-desc">Train on real-world code snippets in Python, JavaScript, TypeScript, SQL, Bash, JSON, HTML, CSS, Markdown, and YAML. Syntax-aware training that targets the exact patterns you use at work.</p>
+            <div class="feature-bullets">
+              <div class="feature-bullet"><span class="feature-bullet-check">✓</span>Real code snippets from production codebases</div>
+              <div class="feature-bullet"><span class="feature-bullet-check">✓</span>Bracket, parentheses, and special character training</div>
+              <div class="feature-bullet"><span class="feature-bullet-check">✓</span>Language-specific weak pattern detection</div>
+              <div class="feature-bullet"><span class="feature-bullet-check">✓</span>Syntax highlighting in the typing display</div>
+            </div>
+          </div>
+          <div class="feature-visual">
+            <div style="font-family:var(--font-mono);font-size:13px;line-height:2;width:100%;">
+              <div style="color:var(--text-4);margin-bottom:4px;font-size:11px;">🐍 Python · snippet 4 of 12</div>
+              <span style="color:var(--violet)">def</span> <span style="color:var(--sky)">analyze</span><span style="color:var(--text-2)">(df: pd.DataFrame) -> dict:</span><br/>
+              &nbsp;&nbsp;<span style="color:var(--violet)">return</span> <span style="color:var(--text-2)">{</span><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--mint)">"wpm"</span><span style="color:var(--text-2)">: df[</span><span style="color:var(--mint)">"wpm"</span><span style="color:var(--text-2)">].mean(),</span><br/>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:var(--mint)">"p95"</span><span style="color:var(--text-2)">: df[</span><span style="color:var(--mint)">"wpm"</span><span style="color:var(--text-2)">].quantile(</span><span style="color:var(--coral)">0.95</span><span style="color:var(--text-2)">)</span><br/>
+              &nbsp;&nbsp;<span style="color:var(--text-2)">}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature 4: Typing DNA -->
+        <div class="feature-row reverse reveal">
+          <div class="feature-visual">
+            <div style="text-align:center;width:100%;">
+              <div style="font-size:2rem;margin-bottom:8px;">🎯</div>
+              <div style="font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--text-1);margin-bottom:4px;">Precision Builder</div>
+              <div style="font-size:12px;color:var(--text-4);margin-bottom:20px;">TF-DNA-A8F2E1C9</div>
+              <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;">
+                <div style="padding:12px;background:var(--glass-bg-light);border:1px solid var(--border-1);border-radius:12px;text-align:center;">
+                  <div style="font-size:24px;font-weight:700;color:var(--brand-light);">87</div>
+                  <div style="font-size:11px;color:var(--text-4);">Focus</div>
+                </div>
+                <div style="padding:12px;background:var(--glass-bg-light);border:1px solid var(--border-1);border-radius:12px;text-align:center;">
+                  <div style="font-size:24px;font-weight:700;color:var(--mint);">91</div>
+                  <div style="font-size:11px;color:var(--text-4);">Consistency</div>
+                </div>
+                <div style="padding:12px;background:var(--glass-bg-light);border:1px solid var(--border-1);border-radius:12px;text-align:center;">
+                  <div style="font-size:24px;font-weight:700;color:var(--coral);">78</div>
+                  <div style="font-size:11px;color:var(--text-4);">Confidence</div>
+                </div>
+                <div style="padding:12px;background:var(--glass-bg-light);border:1px solid var(--border-1);border-radius:12px;text-align:center;">
+                  <div style="font-size:24px;font-weight:700;color:var(--gold);">94</div>
+                  <div style="font-size:11px;color:var(--text-4);">Improvement</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="feature-text">
+            <div class="feature-eyebrow">Identity System</div>
+            <h2 class="feature-title">Your unique <span class="gradient-text">Typing DNA</span></h2>
+            <p class="feature-desc">Every user gets a living Typing DNA, a fingerprint of how they type, what they're good at, where they struggle, and how they're improving. It updates every session.</p>
+            <div class="feature-bullets">
+              <div class="feature-bullet"><span class="feature-bullet-check">✓</span>8 distinct typing archetypes, auto-assigned</div>
+              <div class="feature-bullet"><span class="feature-bullet-check">✓</span>Focus, Consistency, Confidence, Improvement scores</div>
+              <div class="feature-bullet"><span class="feature-bullet-check">✓</span>Unique DNA ID you can share</div>
+              <div class="feature-bullet"><span class="feature-bullet-check">✓</span>Monthly evolution reports</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding: 0 0 120px;">
+    <div class="container">
+      <div class="cta-bg" style="text-align:center;padding:80px 40px;">
+        <h2 style="font-size:clamp(2rem,4vw,3rem);font-weight:700;margin-bottom:16px;">Ready to forge your typing?</h2>
+        <p style="color:var(--text-2);margin-bottom:32px;">Join typists from around the world training smarter every day.</p>
+        <a href="app/onboarding.html" class="btn btn-gradient btn-xl">Start Free →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
+        <a href="index.html" class="navbar-logo"><div class="navbar-logo-icon">⌨️</div><span class="navbar-logo-text">Type<span>Forge</span> AI</span></a>
+        <p style="font-size:13px;color:var(--text-4);">© 2026 TypeForge AI. Designed & Developed by <a href="https://github.com/rotric04" target="_blank" class="creator-link">rotric04</a></p>
+      </div>
+    </div>
+  </footer>
+</main>
+
+<script type="module">
+import { initNavbar, initReveal } from './js/common.js';
+initNavbar(); initReveal();
+document.getElementById('nav-hamburger').addEventListener('click', function() {
+  this.classList.toggle('open');
+  document.getElementById('nav-drawer').classList.toggle('open');
+});
+</script>
+</body>
+</html>

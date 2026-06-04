@@ -1,0 +1,35 @@
+# Environment variables (Secrets)
+backend/.env
+backend/.env.local
+.env
+.env.local
+
+# Python caches and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+dist/
+build/
+
+# Operating System Metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE Settings
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

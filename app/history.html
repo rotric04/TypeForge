@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Session History — TypeForge AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="../css/global.css"/>
+  <link rel="stylesheet" href="../css/animations.css"/>
+  <link rel="stylesheet" href="../css/components.css"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>"/>
+  <style>
+    body { background-color: var(--bg-base); }
+    .app-layout {
+      display: flex;
+      min-height: 100vh;
+      padding-top: 70px;
+    }
+    .app-main {
+      flex: 1;
+      margin-left: 68px;
+      padding: 40px;
+      max-width: 1200px;
+    }
+    .header-section {
+      margin-bottom: 32px;
+    }
+    .page-title { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+    .page-subtitle { color: var(--text-3); font-size: 14px; }
+
+    /* Table Container */
+    .history-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-1);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      overflow-x: auto;
+    }
+    .history-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    .history-table th {
+      padding: 14px 16px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-4);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-bottom: 1px solid var(--border-1);
+    }
+    .history-table td {
+      padding: 16px;
+      font-size: 14px;
+      color: var(--text-2);
+      border-bottom: 1px solid var(--border-1);
+    }
+    .history-table tr:last-child td {
+      border-bottom: none;
+    }
+    .history-table tr:hover td {
+      color: var(--text-1);
+      background: rgba(255,255,255,0.01);
+    }
+    .wpm-badge {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--text-1);
+    }
+    .trend-up { color: var(--success); }
+    .mode-pill {
+      padding: 3px 10px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-2);
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-3);
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body class="tf-authenticated">
+
+<!-- Navbar -->
+<nav class="navbar scrolled" id="main-nav">
+  <div class="navbar-inner">
+    <a href="../index.html" class="navbar-logo">
+      <div class="navbar-logo-icon">⌨️</div>
+      <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
+    </a>
+    <div class="navbar-actions">
+      <div class="nav-auth-signed-in" style="display:flex;">
+        <div class="nav-user-avatar" title="Profile" id="nav-avatar">U</div>
+        <button class="btn btn-ghost btn-sm" data-auth-signout>Sign Out</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="app-layout">
+  <!-- Sidebar -->
+  <aside class="app-sidebar" role="navigation" aria-label="App navigation">
+    <a href="../index.html" class="sidebar-logo" aria-label="TypeForge AI Home">⌨️</a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-item" onclick="location.href='typing.html'" title="Train" aria-label="Train">
+        <span class="sidebar-icon">⌨️</span>
+        <span class="sidebar-label">Train</span>
+      </div>
+      <div class="sidebar-item" onclick="location.href='dashboard.html'" title="Dashboard" aria-label="Dashboard">
+        <span class="sidebar-icon">📊</span>
+        <span class="sidebar-label">Dashboard</span>
+      </div>
+      <div class="sidebar-item" onclick="location.href='achievements.html'" title="Achievements" aria-label="Achievements">
+        <span class="sidebar-icon">🏆</span>
+        <span class="sidebar-label">Achievements</span>
+      </div>
+      <div class="sidebar-item active" onclick="location.href='history.html'" title="History" aria-label="History">
+        <span class="sidebar-icon">📜</span>
+        <span class="sidebar-label">History</span>
+      </div>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="sidebar-item" onclick="location.href='settings.html'" title="Settings" aria-label="Settings">
+        <span class="sidebar-icon">⚙️</span>
+        <span class="sidebar-label">Settings</span>
+      </div>
+      <div class="sidebar-item" title="Profile" aria-label="Profile" id="sidebar-profile">
+        <span class="sidebar-icon" id="nav-avatar">U</span>
+        <span class="sidebar-label" data-auth-name>Profile</span>
+      </div>
+      <div class="sidebar-item" title="Sign Out" aria-label="Sign Out" data-auth-signout>
+        <span class="sidebar-icon">🚪</span>
+        <span class="sidebar-label">Sign Out</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="app-main">
+    <div class="header-section">
+      <h1 class="page-title">Session History</h1>
+      <p class="page-subtitle">A chronological record of your typing telemetry.</p>
+    </div>
+
+    <!-- History Table -->
+    <div class="history-card">
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>Date & Time</th>
+            <th>Mode</th>
+            <th>Language</th>
+            <th>Duration</th>
+            <th>WPM</th>
+            <th>Accuracy</th>
+            <th>Consistency</th>
+            <th>XP Earned</th>
+          </tr>
+        </thead>
+        <tbody id="history-container">
+          <tr>
+            <td colspan="8" style="text-align:center; padding: 40px; color:var(--text-3);">Loading session records...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<script type="module">
+  import Auth from '../js/clerk.js';
+  import API from '../js/api.js';
+
+  async function init() {
+    const user = await Auth.init();
+    if (!user && window.location.hostname !== 'localhost') {
+      window.location.href = '../login.html';
+      return;
+    }
+
+    try {
+      const history = await API.getHistory(50, 0); // Get last 50 sessions
+      renderHistory(history);
+    } catch (e) {
+      console.error("Failed to load history", e);
+      document.getElementById('history-container').innerHTML = `
+        <tr><td colspan="8" style="text-align:center; padding: 40px; color:var(--error);">Failed to connect to API server.</td></tr>
+      `;
+    }
+  }
+
+  function renderHistory(list) {
+    const container = document.getElementById('history-container');
+    if (!container) return;
+    container.innerHTML = '';
+
+    if (list.length === 0) {
+      container.innerHTML = `
+        <tr><td colspan="8" style="text-align:center; padding: 40px; color:var(--text-3);">You haven't completed any sessions yet!</td></tr>
+      `;
+      return;
+    }
+
+    list.forEach(sess => {
+      const date = new Date(sess.created_at).toLocaleString(undefined, {
+        month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'
+      });
+      
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${date}</td>
+        <td><span class="mode-pill">${sess.mode}</span></td>
+        <td style="text-transform: capitalize;">${sess.language || 'English'}</td>
+        <td>${sess.duration_secs}s</td>
+        <td><span class="wpm-badge">${sess.wpm}</span> <span style="font-size:10px; color:var(--text-3);">raw: ${sess.raw_wpm || sess.wpm}</span></td>
+        <td style="font-weight:600; color:${sess.accuracy >= 97 ? 'var(--teal)' : sess.accuracy >= 94 ? 'var(--gold)' : 'var(--text-2)'}">${sess.accuracy}%</td>
+        <td>${sess.consistency}%</td>
+        <td style="font-weight:700; color:var(--gold);">+${sess.xp_earned} XP</td>
+      `;
+      container.appendChild(tr);
+    });
+  }
+
+  init();
+</script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign In - TypeForge AI</title>
+  <link rel="stylesheet" href="css/global.css"/>
+  <link rel="stylesheet" href="css/animations.css"/>
+  <link rel="stylesheet" href="css/components.css"/>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      background: var(--bg-base);
+      color: var(--text-1);
+      font-family: var(--font-body);
+      overflow: hidden;
+    }
+    
+    .auth-split {
+      display: flex;
+      width: 100%;
+      height: 100%;
+    }
+
+    .auth-left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      position: relative;
+      background: var(--bg-base);
+    }
+
+    .auth-right {
+      flex: 1;
+      background: var(--bg-surface);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px;
+      border-left: 1px solid var(--border-1);
+      position: relative;
+    }
+
+    /* Animated background for the branding side */
+    .auth-right::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(232,115,74,0.06), transparent 60%);
+      pointer-events: none;
+    }
+
+    .brand-logo {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--text-1);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      font-family: var(--font-display);
+    }
+    
+    .brand-logo span {
+      color: var(--brand);
+    }
+
+    .brand-tagline {
+      font-size: 48px;
+      font-weight: 900;
+      line-height: 1.1;
+      text-align: center;
+      background: linear-gradient(135deg, var(--text-1) 0%, var(--text-3) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 24px;
+      max-width: 500px;
+      font-family: var(--font-display);
+    }
+
+    .brand-subtext {
+      font-size: 16px;
+      color: var(--text-2);
+      text-align: center;
+      max-width: 400px;
+      line-height: 1.6;
+    }
+
+    #clerk-sign-in {
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .back-btn {
+      position: absolute;
+      top: 40px;
+      left: 40px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-3);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .back-btn:hover {
+      color: var(--text-1);
+    }
+
+    @media (max-width: 900px) {
+      .auth-right {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-split">
+    <!-- Interactive Authentication Side -->
+    <div class="auth-left">
+      <a href="index.html" class="back-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Home
+      </a>
+      
+      <a href="index.html" class="brand-logo" style="margin-bottom: 40px; font-size: 24px;">
+        <div>⌨️</div>
+        <span>Type<span>Forge</span> AI</span>
+      </a>
+
+      <div id="clerk-sign-in"></div>
+    </div>
+
+    <!-- Branding Side -->
+    <div class="auth-right">
+      <h1 class="brand-tagline">Every Keystroke Makes You Better.</h1>
+      <p class="brand-subtext">Sign in to access your personalized typing DNA, track your progress, and continue your training.</p>
+    </div>
+  </div>
+
+  <script type="module">
+    import Auth from './js/clerk.js';
+    
+    async function initLogin() {
+      const user = await Auth.init();
+      if (user) {
+        window.location.href = 'app/dashboard.html';
+        return;
+      }
+      
+      const clerk = Auth.getInstance();
+      const signInDiv = document.getElementById('clerk-sign-in');
+      
+      if (clerk && signInDiv) {
+        clerk.mountSignIn(signInDiv, {
+          redirectUrl: window.location.origin + '/app/dashboard.html',
+          afterSignInUrl: window.location.origin + '/app/dashboard.html',
+          afterSignUpUrl: window.location.origin + '/app/dashboard.html',
+          appearance: {
+            variables: {
+              colorPrimary: '#e8734a',
+              colorBackground: '#0d0d1a', // var(--bg-surface)
+              colorText: '#f2f2f8', // var(--text-1)
+              colorTextSecondary: '#a8a8c4', // var(--text-2)
+              colorInputBackground: '#111120', // var(--bg-elevated)
+              colorInputText: '#f2f2f8', // var(--text-1)
+              borderRadius: '12px',
+            },
+            elements: {
+              card: {
+                backgroundColor: 'transparent',
+                boxShadow: 'none',
+              },
+              headerTitle: {
+                color: '#f2f2f8',
+                fontSize: '24px',
+              },
+              headerSubtitle: {
+                color: '#a8a8c4',
+              },
+              formButtonPrimary: {
+                backgroundColor: '#e8734a',
+                color: '#ffffff',
+                '&:hover': {
+                  backgroundColor: '#c55a34',
+                }
+              }
+            }
+          },
+          layout: {
+            logoPlacement: 'inside',
+            socialButtonsPlacement: 'top',
+          }
+        });
+      }
+    }
+
+    initLogin();
+  </script>
+</body>
+</html>

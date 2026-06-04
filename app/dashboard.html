@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard — TypeForge AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link rel="stylesheet" href="../css/global.css"/>
+  <link rel="stylesheet" href="../css/animations.css"/>
+  <link rel="stylesheet" href="../css/components.css"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>"/>
+  <style>
+    /* ── App Layout ────────────────────────────────────────── */
+    body { background-color: var(--bg-base); }
+    .app-layout {
+      display: flex;
+      min-height: 100vh;
+      padding-top: 70px; /* space for navbar */
+    }
+
+    /* Main Content */
+    .app-main {
+      flex: 1;
+      margin-left: 68px;
+      padding: 40px;
+      max-width: 1400px;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 32px;
+    }
+    .greeting { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+    .subtitle { color: var(--text-3); font-size: 14px; }
+
+    /* ── Bento Grid ────────────────────────────────────────── */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: minmax(140px, auto);
+      gap: 24px;
+    }
+
+    .bento-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-1);
+      border-radius: 24px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+
+    /* Span utilities */
+    .span-12 { grid-column: span 12; }
+    .span-8  { grid-column: span 8; }
+    .span-6  { grid-column: span 6; }
+    .span-4  { grid-column: span 4; }
+    .span-3  { grid-column: span 3; }
+    .row-2   { grid-row: span 2; }
+
+    .bento-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    /* ── Metric Cards ── */
+    .metric-value {
+      font-family: var(--font-display);
+      font-size: 40px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .metric-trend {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 999px;
+    }
+    .trend-up { background: var(--success-bg); color: var(--success); }
+    .trend-down { background: var(--error-bg); color: var(--error); }
+    
+    /* ── Chart Card ── */
+    .chart-container {
+      flex: 1;
+      position: relative;
+      min-height: 200px;
+      margin-top: 16px;
+    }
+    /* SVG Chart styles */
+    .line-chart { width: 100%; height: 100%; overflow: visible; }
+    .line-path {
+      fill: none;
+      stroke: var(--brand);
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 8px 8px rgba(232,115,74,0.4));
+    }
+    .area-path {
+      fill: url(#chartGradient);
+      opacity: 0.5;
+    }
+    .chart-grid line { stroke: var(--border-1); stroke-dasharray: 4 4; }
+    .chart-labels text { fill: var(--text-4); font-size: 11px; font-family: var(--font-mono); }
+
+    /* ── Heatmap ── */
+    .heatmap-grid {
+      display: grid;
+      grid-template-columns: repeat(20, 1fr);
+      gap: 4px;
+      margin-top: auto;
+    }
+    .heatmap-cell {
+      aspect-ratio: 1;
+      border-radius: 3px;
+      background: var(--border-1);
+    }
+    .heatmap-cell[data-level="1"] { background: rgba(0,201,167,0.2); }
+    .heatmap-cell[data-level="2"] { background: rgba(0,201,167,0.5); }
+    .heatmap-cell[data-level="3"] { background: rgba(0,201,167,0.8); }
+    .heatmap-cell[data-level="4"] { background: var(--teal); box-shadow: 0 0 10px var(--teal-glow); }
+
+    /* ── DNA Ring ── */
+    .dna-ring-container {
+      position: relative;
+      width: 140px; height: 140px;
+      margin: 0 auto;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .dna-ring {
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      border: 2px dashed rgba(255,255,255,0.1);
+      animation: spin 30s linear infinite;
+    }
+    .dna-ring::before {
+      content: ''; position: absolute; inset: -4px;
+      border-radius: 50%; border: 1px solid var(--brand-glow);
+      border-left-color: transparent; border-right-color: transparent;
+      animation: spin 15s linear infinite reverse;
+    }
+    .dna-score { font-size: 32px; font-weight: 800; font-family: var(--font-display); }
+    .dna-label { font-size: 11px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.1em; position: absolute; bottom: -30px; white-space: nowrap; }
+
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .bento-grid { grid-template-columns: repeat(8, 1fr); }
+      .span-12 { grid-column: span 8; }
+      .span-4 { grid-column: span 4; }
+      .span-3 { grid-column: span 4; }
+    }
+    @media (max-width: 900px) {
+      .app-sidebar {
+        width: 100%; height: 60px;
+        flex-direction: row; justify-content: center;
+        top: auto; bottom: 0; padding: 0; z-index: 100;
+        border-right: none; border-top: 1px solid var(--border-1);
+      }
+      .sidebar-nav { flex-direction: row; justify-content: center; gap: 8px; }
+      .sidebar-link::after { display: none; }
+      .app-main { margin-left: 0; margin-bottom: 60px; padding: 24px; }
+    }
+    @media (max-width: 600px) {
+      .bento-grid { grid-template-columns: 1fr; }
+      .span-12, .span-8, .span-6, .span-4, .span-3 { grid-column: 1 / -1; }
+      .row-2 { grid-row: auto; min-height: 300px; }
+      .heatmap-grid { grid-template-columns: repeat(14, 1fr); }
+    }
+  </style>
+</head>
+<body class="tf-authenticated">
+<!-- Navbar -->
+<nav class="navbar scrolled" id="main-nav">
+  <div class="navbar-inner">
+    <a href="../index.html" class="navbar-logo">
+      <div class="navbar-logo-icon">⌨️</div>
+      <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
+    </a>
+    <div class="navbar-actions">
+      <div class="nav-auth-signed-in" style="display:flex;">
+        <div class="nav-user-avatar" title="Profile" id="nav-avatar">U</div>
+        <button class="btn btn-ghost btn-sm" data-auth-signout>Sign Out</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="app-layout">
+  <!-- Sidebar -->
+  <aside class="app-sidebar" role="navigation" aria-label="App navigation">
+    <a href="../index.html" class="sidebar-logo" aria-label="TypeForge AI Home">⌨️</a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-item" onclick="location.href='typing.html'" title="Train" aria-label="Train">
+        <span class="sidebar-icon">⌨️</span>
+        <span class="sidebar-label">Train</span>
+      </div>
+      <div class="sidebar-item active" onclick="location.href='dashboard.html'" title="Dashboard" aria-label="Dashboard">
+        <span class="sidebar-icon">📊</span>
+        <span class="sidebar-label">Dashboard</span>
+      </div>
+      <div class="sidebar-item" onclick="location.href='achievements.html'" title="Achievements" aria-label="Achievements">
+        <span class="sidebar-icon">🏆</span>
+        <span class="sidebar-label">Achievements</span>
+      </div>
+      <div class="sidebar-item" onclick="location.href='history.html'" title="History" aria-label="History">
+        <span class="sidebar-icon">📜</span>
+        <span class="sidebar-label">History</span>
+      </div>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="sidebar-item" onclick="location.href='settings.html'" title="Settings" aria-label="Settings">
+        <span class="sidebar-icon">⚙️</span>
+        <span class="sidebar-label">Settings</span>
+      </div>
+      <div class="sidebar-item" title="Profile" aria-label="Profile" id="sidebar-profile">
+        <span class="sidebar-icon" id="nav-avatar">U</span>
+        <span class="sidebar-label" data-auth-name>Profile</span>
+      </div>
+      <div class="sidebar-item" title="Sign Out" aria-label="Sign Out" data-auth-signout>
+        <span class="sidebar-icon">🚪</span>
+        <span class="sidebar-label">Sign Out</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="app-main">
+    <div class="dashboard-header">
+      <div>
+        <h1 class="greeting">Welcome back, <span data-auth-name>Typist</span>.</h1>
+        <p class="subtitle">Here's your typing telemetry for the last 30 days.</p>
+      </div>
+      <a href="typing.html" class="btn btn-primary">Start Session</a>
+    </div>
+
+    <div class="bento-grid">
+      <!-- WPM Chart (Spans 8 cols, 2 rows) -->
+      <div class="bento-item span-8 row-2">
+        <div class="bento-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+          Speed Trend (WPM)
+        </div>
+        <div style="display:flex; align-items:baseline; gap:12px; margin-bottom: 8px;">
+          <div class="metric-value" data-counter="94">0</div>
+          <div class="metric-trend trend-up">↑ +4 WPM</div>
+        </div>
+        <div class="chart-container">
+          <svg class="line-chart" viewBox="0 0 600 200" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="rgba(232,115,74,0.4)"/>
+                <stop offset="100%" stop-color="rgba(232,115,74,0)"/>
+              </linearGradient>
+            </defs>
+            <g class="chart-grid">
+              <line x1="0" y1="50" x2="600" y2="50"/>
+              <line x1="0" y1="100" x2="600" y2="100"/>
+              <line x1="0" y1="150" x2="600" y2="150"/>
+            </g>
+            <path class="area-path" d="M0,180 L50,150 L100,160 L150,120 L200,130 L250,90 L300,110 L350,70 L400,80 L450,50 L500,60 L550,30 L600,40 L600,200 L0,200 Z" />
+            <path class="line-path" d="M0,180 L50,150 L100,160 L150,120 L200,130 L250,90 L300,110 L350,70 L400,80 L450,50 L500,60 L550,30 L600,40" />
+            <g class="chart-labels">
+              <text x="0" y="195">Oct 1</text>
+              <text x="560" y="195">Today</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Accuracy -->
+      <div class="bento-item span-4">
+        <div class="bento-title">🎯 Accuracy</div>
+        <div class="metric-value" style="color:var(--teal);" data-counter="98" data-suffix="%">0%</div>
+        <div class="metric-trend trend-up">↑ 1.2%</div>
+        <!-- Progress bar -->
+        <div style="width:100%;height:6px;background:var(--border-1);border-radius:3px;margin-top:auto;">
+          <div style="width:98%;height:100%;background:var(--teal);border-radius:3px;box-shadow:0 0 10px var(--teal-glow);"></div>
+        </div>
+      </div>
+
+      <!-- Typing DNA -->
+      <div class="bento-item span-4" style="align-items:center;text-align:center;">
+        <div class="bento-title" style="align-self:flex-start;">🧬 Consistency Score</div>
+        <div class="dna-ring-container">
+          <div class="dna-ring"></div>
+          <div class="dna-score" data-counter="87">0</div>
+          <div class="dna-label">Steady Rhythm</div>
+        </div>
+      </div>
+
+      <!-- Heatmap (Spans 6) -->
+      <div class="bento-item span-6">
+        <div class="bento-title">🔥 Activity Map</div>
+        <div style="font-size:12px;color:var(--text-3);margin-bottom:12px;">342 sessions in the last year</div>
+        <div class="heatmap-grid" id="heatmap">
+          <!-- JS will populate cells -->
+        </div>
+      </div>
+
+      <!-- Weak Keys -->
+      <div class="bento-item span-6">
+        <div class="bento-title">⚠️ Target Areas</div>
+        <p style="font-size:13px;color:var(--text-3);margin-bottom:16px;">Keys that slow down your rhythm.</p>
+        <div style="display:flex;gap:12px;">
+          <div style="flex:1;background:rgba(240,92,110,0.1);border:1px solid rgba(240,92,110,0.2);border-radius:12px;padding:12px;text-align:center;">
+            <div style="font-family:var(--font-mono);font-size:24px;color:var(--error);font-weight:700;">P</div>
+            <div style="font-size:11px;color:var(--text-3);margin-top:4px;">-12% speed</div>
+          </div>
+          <div style="flex:1;background:rgba(245,200,66,0.1);border:1px solid rgba(245,200,66,0.2);border-radius:12px;padding:12px;text-align:center;">
+            <div style="font-family:var(--font-mono);font-size:24px;color:var(--warning);font-weight:700;">;</div>
+            <div style="font-size:11px;color:var(--text-3);margin-top:4px;">-8% speed</div>
+          </div>
+          <div style="flex:1;background:rgba(245,200,66,0.1);border:1px solid rgba(245,200,66,0.2);border-radius:12px;padding:12px;text-align:center;">
+            <div style="font-family:var(--font-mono);font-size:24px;color:var(--warning);font-weight:700;">Z</div>
+            <div style="font-size:11px;color:var(--text-3);margin-top:4px;">High errors</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+<script type="module">
+import Auth from '../js/clerk.js';
+
+// Init auth to protect page
+(async () => {
+  const user = await Auth.init();
+  if (!user && window.location.hostname !== 'localhost') {
+    window.location.href = '../login.html';
+  }
+})();
+
+// Draw line chart path animation
+const path = document.querySelector('.line-path');
+if (path) {
+  const length = path.getTotalLength();
+  path.style.strokeDasharray = length;
+  path.style.strokeDashoffset = length;
+  anime({
+    targets: path,
+    strokeDashoffset: [length, 0],
+    duration: 2000,
+    easing: 'easeInOutQuart',
+    delay: 300
+  });
+}
+
+// Fade in area chart
+anime({
+  targets: '.area-path',
+  opacity: [0, 0.5],
+  duration: 2000,
+  easing: 'linear',
+  delay: 800
+});
+
+// Counter animations
+document.querySelectorAll('[data-counter]').forEach(el => {
+  const end = parseInt(el.dataset.counter);
+  const suffix = el.dataset.suffix || '';
+  anime({
+    targets: el,
+    innerHTML: [0, end],
+    round: 1,
+    duration: 2000,
+    easing: 'easeOutExpo',
+    update: function() { el.innerHTML = el.innerHTML + suffix; }
+  });
+});
+
+// Generate dummy heatmap
+const heatmap = document.getElementById('heatmap');
+if (heatmap) {
+  for (let i = 0; i < 60; i++) { // 3 rows of 20 approx
+    const cell = document.createElement('div');
+    cell.className = 'heatmap-cell';
+    // Random activity level 0-4
+    if (Math.random() > 0.4) {
+      const level = Math.floor(Math.random() * 4) + 1;
+      cell.setAttribute('data-level', level);
+    }
+    // Animate in
+    cell.style.opacity = 0;
+    heatmap.appendChild(cell);
+  }
+  
+  anime({
+    targets: '.heatmap-cell',
+    opacity: [0, 1],
+    scale: [0.5, 1],
+    delay: anime.stagger(15, {grid: [20, 3], from: 'first'}),
+    easing: 'easeOutBack'
+  });
+}
+
+// Bento card stagger in
+anime({
+  targets: '.bento-item',
+  translateY: [20, 0],
+  opacity: [0, 1],
+  delay: anime.stagger(100),
+  easing: 'easeOutExpo',
+  duration: 800
+});
+</script>
+</body>
+</html>
