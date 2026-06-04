@@ -31,6 +31,7 @@ async def init_db():
                 # Supabase pooler in session mode (port 5432) or direct connections
                 # are used to support prepared statements. statement_cache_size is set to 0.
                 statement_cache_size=0,
+                ssl="require"
             )
             logger.info("✅ PostgreSQL pool created")
         except Exception as e:
