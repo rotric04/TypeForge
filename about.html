@@ -219,7 +219,7 @@
 
     /* ── Story Section ───────────────────────────────── */
     .story-section {
-      padding: 120px 0;
+      padding: 60px 0;
       position: relative;
     }
 
@@ -282,7 +282,7 @@
     }
 
     /* ── Values Grid ─────────────────────────────────── */
-    .values-section { padding: 100px 0; }
+    .values-section { padding: 50px 0; }
     .values-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -336,7 +336,7 @@
     }
 
     /* ── Team ────────────────────────────────────────── */
-    .team-section { padding: 100px 0; }
+    .team-section { padding: 50px 0; }
     .team-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -377,7 +377,7 @@
     .team-bio  { font-size: 12px; color: var(--text-4); line-height: 1.6; }
 
     /* ── Timeline ────────────────────────────────────── */
-    .timeline-section { padding: 100px 0; }
+    .timeline-section { padding: 50px 0; }
     .timeline {
       position: relative;
       max-width: 720px;
@@ -453,7 +453,7 @@
 
     /* ── CTA ──────────────────────────────────────────── */
     .about-cta {
-      padding: 120px 0;
+      padding: 60px 0;
       text-align: center;
     }
 
@@ -970,7 +970,28 @@ const counterObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.5 });
 
-document.querySelectorAll('[data-counter]').forEach(el => counterObserver.observe(el));
+// Fetch live database statistics before running animations
+(async () => {
+  try {
+    const res = await fetch('/api/v1/analytics/platform-stats');
+    if (res.ok) {
+      const stats = await res.json();
+      document.querySelectorAll('[data-counter]').forEach(el => {
+        const label = el.nextElementSibling?.textContent || '';
+        if (label.includes('Active Typists')) {
+          el.dataset.counter = stats.active_typists;
+        } else if (label.includes('Keystrokes Analyzed')) {
+          el.dataset.counter = stats.keystrokes_analyzed;
+        } else if (label.includes('Average Improvement')) {
+          el.dataset.counter = stats.wpm_improvement;
+        }
+      });
+    }
+  } catch (e) {
+    console.warn("Failed to load live database stats:", e);
+  }
+  document.querySelectorAll('[data-counter]').forEach(el => counterObserver.observe(el));
+})();
 
 // ── 3D Keyboard mouse tilt ──────────────────────────────
 const kb = document.getElementById('kb3d');

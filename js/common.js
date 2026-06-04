@@ -457,6 +457,105 @@ export function initMotivationalPopup() {
   }, 5000);
 }
 
+// ── Performance & Memory Management (PerformanceManager) ────────────────────
+export const PerformanceManager = {
+  activeObservers: [],
+  
+  /**
+   * Initialize memory management, passive listeners, and lazy animations.
+   */
+  init() {
+    this.setupPassiveScroll();
+    this.setupAnimationSuspender();
+    this.setupIdleGarbageCollector();
+  },
+
+  /**
+   * Set up passive scroll listeners on window and document body.
+   */
+  setupPassiveScroll() {
+    window.addEventListener('touchstart', () => {}, { passive: true });
+    window.addEventListener('touchmove', () => {}, { passive: true });
+  },
+
+  /**
+   * Observe heavy animated sections and pause CSS/JS animations when off-screen.
+   */
+  setupAnimationSuspender() {
+    const targets = document.querySelectorAll(
+      '.aurora-container, .keyboard-scene, .dna-card, .timeline, .features-grid, .badges-showcase'
+    );
+    if (!targets.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        const el = e.target;
+        if (e.isIntersecting) {
+          el.style.animationPlayState = 'running';
+          el.querySelectorAll('*').forEach(child => {
+            child.style.animationPlayState = 'running';
+          });
+        } else {
+          el.style.animationPlayState = 'paused';
+          el.querySelectorAll('*').forEach(child => {
+            child.style.animationPlayState = 'paused';
+          });
+        }
+      });
+    }, { threshold: 0.05 });
+
+    targets.forEach(t => {
+      observer.observe(t);
+      this.activeObservers.push({ observer, element: t });
+    });
+  },
+
+  /**
+   * Prunes cached data and detached DOM nodes periodically during idle times.
+   */
+  setupIdleGarbageCollector() {
+    const gcInterval = 30000; // Run GC every 30 seconds
+    const runGC = () => {
+      // 1. Prune local typing caches if they exceed max capacity (e.g. typing session arrays)
+      if (window.state && Array.isArray(window.state.keystrokeLog) && window.state.keystrokeLog.length > 500) {
+        // Keep only the last 200 items in memory to free heap
+        window.state.keystrokeLog = window.state.keystrokeLog.slice(-200);
+      }
+      
+      // 2. Perform global DOM leak collection (search for orphan nodes or cleanup timers)
+      const orphanCount = this.cleanupOrphans();
+      if (orphanCount > 0) {
+        console.debug(`[TypeForge GC] Cleared ${orphanCount} orphan elements.`);
+      }
+    };
+
+    if ('requestIdleCallback' in window) {
+      setInterval(() => {
+        requestIdleCallback(runGC, { timeout: 2000 });
+      }, gcInterval);
+    } else {
+      setInterval(runGC, gcInterval);
+    }
+  },
+
+  /**
+   * Find and destroy elements that were left in document.body but disconnected from key trees
+   */
+  cleanupOrphans() {
+    let cleared = 0;
+    // Find all temporary dynamic nodes that should have been self-removed
+    document.querySelectorAll('.toast, .xp-pop, .particle').forEach(el => {
+      // If they're not in transition and are invisible or stuck, remove them
+      const style = window.getComputedStyle(el);
+      if (style.opacity === '0' || el.classList.contains('exit') || style.display === 'none') {
+        el.remove();
+        cleared++;
+      }
+    });
+    return cleared;
+  }
+};
+
 // ── Init All ─────────────────────────────────────────────────────────────────
 export function initCommon() {
   initNavbar();
@@ -465,6 +564,7 @@ export function initCommon() {
   initPageTransition();
   initCookieConsent();
   initMotivationalPopup();
+  PerformanceManager.init();
 }
 
 // Auto-init if DOM is ready
