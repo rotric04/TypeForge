@@ -63,21 +63,34 @@ class Settings(BaseSettings):
         "http://127.0.0.1:8000",
         "http://localhost:3000",
         "http://localhost:8080",
+        "http://localhost:8001",
         "https://typeforge.ai",
         "https://www.typeforge.ai",
         "https://app.typeforge.ai",
         "https://typeforge.fun",
         "https://www.typeforge.fun",
         "https://typeforge2.vercel.app",
+        # Render backend self-origin (needed for health-check proxying)
+        "https://typeforge-tkw8.onrender.com",
     ]
+    # TrustedHostMiddleware — MUST include every hostname the service is reached at.
+    # Missing an entry here causes a 400 on EVERY request in production.
     ALLOWED_HOSTS: List[str] = [
+        # Production domains
+        "typeforge.fun",
+        "www.typeforge.fun",
+        "api.typeforge.fun",
         "typeforge.ai",
         "api.typeforge.ai",
+        # Vercel preview / main deployment
+        "typeforge2.vercel.app",
+        # Render backend public URL — critical: must match Host header Render sends
+        "typeforge-tkw8.onrender.com",
+        # Wildcard catches any future Render re-deploys under onrender.com
+        "*.onrender.com",
+        # Local development
         "localhost",
         "127.0.0.1",
-        "typeforge.fun",
-        "api.typeforge.fun",
-        "typeforge2.vercel.app",
     ]
 
     # ── Rate Limiting ─────────────────────────────────
