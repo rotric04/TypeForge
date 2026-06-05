@@ -462,8 +462,8 @@
     const totalSess = list.length;
     const avgWpm    = Math.round(list.reduce((s, r) => s + (r.wpm || 0), 0) / totalSess);
     const bestWpm   = Math.max(...list.map(r => r.wpm || 0));
-    const avgAcc    = (list.reduce((s, r) => s + (r.accuracy || 0), 0) / totalSess).toFixed(1);
-    const avgCons   = (list.reduce((s, r) => s + (r.consistency || 0), 0) / totalSess).toFixed(1);
+    const avgAcc    = (list.reduce((s, r) => s + (typeof r.accuracy === 'number' ? r.accuracy : parseFloat(r.accuracy || 0)), 0) / totalSess).toFixed(1);
+    const avgCons   = (list.reduce((s, r) => s + (typeof r.consistency === 'number' ? r.consistency : parseFloat(r.consistency || 0)), 0) / totalSess).toFixed(1);
     const totalXp   = list.reduce((s, r) => s + (r.xp_earned || 0), 0);
     const totalMins = Math.round(list.reduce((s, r) => s + (r.duration_secs || 0), 0) / 60);
 
@@ -503,8 +503,8 @@
       const timeStr  = d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
       const mode     = sess.mode || 'classic';
       const wpm      = sess.wpm || 0;
-      const acc      = typeof sess.accuracy === 'number' ? sess.accuracy : 0;
-      const cons     = typeof sess.consistency === 'number' ? Math.round(sess.consistency) : 0;
+      const acc      = typeof sess.accuracy === 'number' ? sess.accuracy : parseFloat(sess.accuracy || 0);
+      const cons     = typeof sess.consistency === 'number' ? Math.round(sess.consistency) : Math.round(parseFloat(sess.consistency || 0));
       const xpEarned = sess.xp_earned || 0;
       const dur      = sess.duration_secs || 0;
 

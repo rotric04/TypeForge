@@ -418,7 +418,7 @@ import { initScrollReveal, animateCounters, animateChartLine, staggerHeatmap } f
 
     if (history.length > 0) {
       latestWpm = history[0].wpm || 0;
-      avgAccuracy = Math.round(history.reduce((s, x) => s + (x.accuracy || 0), 0) / history.length);
+      avgAccuracy = Math.round(history.reduce((s, x) => s + (typeof x.accuracy === 'number' ? x.accuracy : parseFloat(x.accuracy || 0)), 0) / history.length);
       
       // Calculate inter-session consistency fallback if not returned by analytics
       if (!avgConsistency) {
@@ -431,7 +431,9 @@ import { initScrollReveal, animateCounters, animateChartLine, staggerHeatmap } f
       if (history.length >= 2) {
         const diff = (history[0].wpm || 0) - (history[1].wpm || 0);
         wpmChangeText = diff >= 0 ? `↑ +${diff} WPM vs last` : `↓ ${Math.abs(diff)} WPM vs last`;
-        const accDiff = (history[0].accuracy || 0) - (history[1].accuracy || 0);
+        const acc0 = typeof history[0].accuracy === 'number' ? history[0].accuracy : parseFloat(history[0].accuracy || 0);
+        const acc1 = typeof history[1].accuracy === 'number' ? history[1].accuracy : parseFloat(history[1].accuracy || 0);
+        const accDiff = acc0 - acc1;
         accChangeText = accDiff >= 0 ? `↑ +${accDiff.toFixed(1)}%` : `↓ ${Math.abs(accDiff).toFixed(1)}%`;
       } else {
         wpmChangeText = 'Great start. Keep going!';

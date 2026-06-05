@@ -743,7 +743,15 @@ typingArea.addEventListener('keydown', (e) => {
 });
 
 typingInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') { resetSession(); return; }
+  if (e.key === 'Escape') {
+    if (focusMode) {
+      toggleFocusMode();
+      e.preventDefault();
+      return;
+    }
+    resetSession();
+    return;
+  }
   if (e.key === 'Tab') { e.preventDefault(); return; }
 });
 
@@ -920,6 +928,9 @@ function endSession() {
     wpm_history: state.wpmHistory
   };
 
+  // Render local results immediately to prevent perceived lag/buffering
+  showResults(finalWPM, finalAcc, consistency, xpEarned);
+
   API.saveSession(payload)
     .then(data => {
       // Save locally as cache/history backup
@@ -929,6 +940,7 @@ function endSession() {
         localStorage.setItem('tf_session_history', JSON.stringify(sessions.slice(0, 100)));
       } catch (e) {}
 
+      // Overlay server values (like finalized XP or achievements)
       showResults(data.wpm, data.accuracy, data.consistency, data.xp_earned);
       if (data.badges_earned?.length) {
         showBadgeUnlocks(data.badges_earned);
@@ -970,7 +982,6 @@ function endSession() {
           type: "warning"
         });
       }
-      showResults(finalWPM, finalAcc, consistency, xpEarned);
     });
 }
 
@@ -1139,7 +1150,14 @@ document.getElementById('new-text-btn').addEventListener('click', () => {
 document.addEventListener('keydown', (e) => {
   if (e.key === 'F1') { e.preventDefault(); toggleFocusMode(); }
   if (e.key === 'Tab' && !e.shiftKey) { e.preventDefault(); }
-  if (e.key === 'Escape') { document.getElementById('results-overlay').classList.add('hidden'); document.body.style.overflow = ''; }
+  if (e.key === 'Escape') {
+    if (focusMode) {
+      toggleFocusMode();
+    } else {
+      document.getElementById('results-overlay').classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+  }
 });
 
 document.getElementById('results-again-btn').addEventListener('click', () => {

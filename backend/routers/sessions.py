@@ -164,7 +164,7 @@ async def get_session_history(
     user_id = user.id
     if mode:
         query = """
-            SELECT id, mode, language, duration_secs, wpm, raw_wpm, accuracy, correct_chars, error_chars, total_chars, errors, consistency, max_streak, xp_earned, created_at
+            SELECT id, mode, language, duration_secs, wpm, raw_wpm, accuracy::float AS accuracy, correct_chars, error_chars, total_chars, errors, consistency::float AS consistency, max_streak, xp_earned, created_at
             FROM sessions
             WHERE user_id = $1::uuid AND mode = $2
             ORDER BY created_at DESC
@@ -173,7 +173,7 @@ async def get_session_history(
         records = await DB.fetchall(query, user_id, mode, limit, offset)
     else:
         query = """
-            SELECT id, mode, language, duration_secs, wpm, raw_wpm, accuracy, correct_chars, error_chars, total_chars, errors, consistency, max_streak, xp_earned, created_at
+            SELECT id, mode, language, duration_secs, wpm, raw_wpm, accuracy::float AS accuracy, correct_chars, error_chars, total_chars, errors, consistency::float AS consistency, max_streak, xp_earned, created_at
             FROM sessions
             WHERE user_id = $1::uuid
             ORDER BY created_at DESC

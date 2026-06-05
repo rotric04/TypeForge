@@ -74,7 +74,7 @@ async def get_dashboard_analytics(user: UserProfile = Depends(get_current_user))
     """Per-user dashboard series from stored sessions."""
     records = await DB.fetchall(
         """
-        SELECT wpm, accuracy, consistency, created_at
+        SELECT wpm, accuracy::float AS accuracy, consistency::float AS consistency, created_at
         FROM sessions
         WHERE user_id = $1::uuid
         ORDER BY created_at ASC
@@ -111,7 +111,7 @@ async def get_typing_dna(user: UserProfile = Depends(get_current_user)):
     """Typing DNA derived from session history and stored weak keys."""
     records = await DB.fetchall(
         """
-        SELECT wpm, accuracy, consistency, errors, created_at
+        SELECT wpm, accuracy::float AS accuracy, consistency::float AS consistency, errors, created_at
         FROM sessions
         WHERE user_id = $1::uuid
         ORDER BY created_at ASC
@@ -161,7 +161,7 @@ async def get_performance_prediction(user: UserProfile = Depends(get_current_use
     """WPM forecast from session history."""
     records = await DB.fetchall(
         """
-        SELECT wpm, accuracy, consistency, errors, created_at
+        SELECT wpm, accuracy::float AS accuracy, consistency::float AS consistency, errors, created_at
         FROM sessions
         WHERE user_id = $1::uuid
         ORDER BY created_at ASC
