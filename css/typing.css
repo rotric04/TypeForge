@@ -22,9 +22,7 @@
   display: flex; align-items: center; justify-content: space-between;
   padding: var(--sp-4) var(--sp-8);
   border-bottom: 1px solid var(--border-1);
-  background: rgba(7,7,26,0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: var(--bg-surface);
   position: sticky; top: 0; z-index: var(--z-10);
 }
 .app-header-title { font-family: var(--font-display); font-size: var(--text-base); font-weight: 600; color: var(--text-1); }
@@ -162,21 +160,19 @@
 }
 .typing-area {
   width: 100%;
-  background: rgba(11, 11, 34, 0.7);
+  background: var(--bg-card);
   border: 1px solid var(--border-2);
-  border-radius: var(--r-2xl);
+  border-radius: var(--r-md);
   padding: var(--sp-8);
   position: relative;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: border-color var(--duration-base), box-shadow var(--duration-base);
+  transition: border-color var(--duration-base);
   min-height: 160px;
   cursor: text;
   overflow: hidden;
 }
-.typing-area.active { border-color: var(--brand); box-shadow: 0 0 0 1px rgba(124,111,247,0.2), var(--shadow-brand); }
-.typing-area.error  { border-color: var(--error);  box-shadow: 0 0 0 1px rgba(255,94,122,0.2); animation: shake 0.4s var(--ease-inout); }
-.typing-area.complete { border-color: var(--mint); box-shadow: 0 0 0 1px rgba(0,229,196,0.2), var(--shadow-mint); }
+.typing-area.active   { border-color: var(--brand); }
+.typing-area.error    { border-color: var(--error); animation: shake 0.4s var(--ease-inout); }
+.typing-area.complete { border-color: var(--mint); }
 
 .typing-text {
   font-family: var(--font-mono);
@@ -217,9 +213,8 @@
 .typing-area-overlay {
   position: absolute;
   inset: 0;
-  border-radius: var(--r-2xl);
-  background: rgba(7, 7, 26, 0.7);
-  backdrop-filter: blur(4px);
+  border-radius: var(--r-md);
+  background: rgba(9, 9, 11, 0.82);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -313,11 +308,8 @@
   font-weight: 700;
   letter-spacing: var(--tracking-tight);
   line-height: 1;
-  background: linear-gradient(135deg, var(--brand-light), var(--coral), var(--gold));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: scale-up 0.6s var(--ease-spring) both;
+  color: var(--text-1);
+  animation: scale-up 0.5s var(--ease-out) both;
 }
 .results-stats-grid {
   display: grid;
