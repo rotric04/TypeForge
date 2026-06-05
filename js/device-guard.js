@@ -29,6 +29,9 @@
 
 (function () {
 
+  // Skip if we are on the feedback page
+  if (window.location.pathname.endsWith('feedback.html') || window.location.pathname.includes('/feedback')) return;
+
   // Skip if already shown this session
   const SESSION_KEY = 'tf_env_checked';
   if (sessionStorage.getItem(SESSION_KEY) === '1') return;
@@ -191,6 +194,29 @@
       animation: ec-fade-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       transition: opacity 0.4s ease;
       overflow-y: auto;
+
+      /* Responsive Font Scale variables */
+      --ec-fs-tab: 11px;
+      --ec-fs-heading: 10px;
+      --ec-fs-label: 12px;
+      --ec-fs-detail: 11px;
+      --ec-fs-joke: 11px;
+      --ec-fs-message: 11.5px;
+      --ec-fs-button: 12px;
+      --ec-fs-footer: 9px;
+    }
+    @media (max-width: 480px) {
+      #tf-envcheck {
+        --ec-fs-tab: 12px;
+        --ec-fs-heading: 12px;
+        --ec-fs-label: 14px;
+        --ec-fs-detail: 13px;
+        --ec-fs-joke: 13px;
+        --ec-fs-message: 13.5px;
+        --ec-fs-button: 14px;
+        --ec-fs-footer: 11px;
+        padding: 12px;
+      }
     }
     #tf-envcheck.fade-out { opacity: 0; pointer-events: none; }
 
@@ -222,7 +248,7 @@
     .ec-dot.y { background: #febc2e; }
     .ec-dot.g { background: #28c840; }
     .ec-tab {
-      font-size: 11px;
+      font-size: var(--ec-fs-tab);
       color: #52525b;
       margin-left: 8px;
       letter-spacing: 0.04em;
@@ -231,7 +257,7 @@
     .ec-body { padding: 24px 20px 20px; }
 
     .ec-heading {
-      font-size: 10px;
+      font-size: var(--ec-fs-heading);
       font-weight: 700;
       color: #52525b;
       text-transform: uppercase;
@@ -275,12 +301,12 @@
 
     .ec-label {
       flex: 1;
-      font-size: 12px;
+      font-size: var(--ec-fs-label);
       color: #a1a1aa;
       min-width: 0;
     }
     .ec-detail {
-      font-size: 11px;
+      font-size: var(--ec-fs-detail);
       color: #52525b;
       text-align: right;
       white-space: nowrap;
@@ -324,45 +350,69 @@
       margin-bottom: 16px;
     }
     .ec-joke-tag {
-      font-size: 9px;
+      font-size: calc(var(--ec-fs-joke) - 2px);
       color: #3f3f46;
       text-transform: uppercase;
       letter-spacing: 0.12em;
       margin-bottom: 6px;
     }
     .ec-joke-text {
-      font-size: 11px;
+      font-size: var(--ec-fs-joke);
       color: #a1a1aa;
       line-height: 1.7;
     }
     .ec-joke-text em { font-style: normal; color: #f59e0b; }
 
     .ec-message {
-      font-size: 11px;
+      font-size: var(--ec-fs-message);
       color: #71717a;
       line-height: 1.7;
       margin-bottom: 16px;
     }
     .ec-message strong { color: #f4f4f5; font-weight: 700; }
 
+    .ec-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    @media (min-width: 400px) {
+      .ec-actions {
+        flex-direction: row;
+        gap: 12px;
+      }
+    }
     .ec-cta {
-      width: 100%;
-      padding: 10px 16px;
-      background: #f4f4f5;
-      color: #09090b;
-      border: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 1;
+      padding: 12px 18px;
       border-radius: 5px;
       font-family: inherit;
-      font-size: 11px;
+      font-size: var(--ec-fs-button);
       font-weight: 700;
       letter-spacing: 0.04em;
+      text-decoration: none;
       cursor: pointer;
-      transition: opacity 0.15s;
+      transition: opacity 0.15s, background-color 0.15s;
+      text-align: center;
+    }
+    .ec-cta.primary-cta {
+      background: #f4f4f5;
+      color: #09090b;
+      border: 1px solid #f4f4f5;
+    }
+    .ec-cta.secondary-cta {
+      background: #18181b;
+      color: #a1a1aa;
+      border: 1px solid #27272a;
     }
     .ec-cta:hover { opacity: 0.85; }
 
     .ec-footer {
-      font-size: 9px;
+      font-size: var(--ec-fs-footer);
       color: #3f3f46;
       text-align: center;
       margin-top: 10px;
@@ -397,6 +447,9 @@
     </div>
   `).join('');
 
+  const isSubdir = window.location.pathname.includes('/app/');
+  const feedbackUrl = isSubdir ? '../feedback.html' : 'feedback.html';
+
   const overlay = document.createElement('div');
   overlay.id = 'tf-envcheck';
   overlay.setAttribute('role', 'status');
@@ -424,10 +477,13 @@
             <div class="ec-joke-text">${joke.text}</div>
           </div>
           <div class="ec-message">
-            TypeForge works best with a <strong>physical keyboard</strong>. To get the real experience of measuring your keystrokes, timing, and building muscle memory, try it once on your <strong>laptop or desktop</strong>.<br><br>
-            You can still browse around here, but the typing sessions need real keys.
+            TypeForge requires a <strong>physical keyboard</strong> to analyze typing speed, key transition times, and muscle memory rhythm. Connect a physical keyboard or visit on a laptop/desktop to unlock the training interface.<br><br>
+            Connect with the creator on LinkedIn or leave your feedback below:
           </div>
-          <button class="ec-cta" id="ec-dismiss">Got it, let me look around</button>
+          <div class="ec-actions">
+            <a href="https://www.linkedin.com/in/mohit-assudani-" target="_blank" class="ec-cta primary-cta">LinkedIn Profile</a>
+            <a href="${feedbackUrl}" class="ec-cta secondary-cta">Leave Feedback</a>
+          </div>
           <div class="ec-footer">typeforge.fun &nbsp;&middot;&nbsp; best on desktop</div>
         </div>
       </div>
@@ -443,7 +499,7 @@
     document.documentElement.appendChild(overlay);
 
     const total = checks.length;
-    const perRow = 1400 / total; // ~1.4s total for all rows
+    const perRow = 3200 / total; // ~3.2s total reveal duration
     const progress = document.getElementById('ec-progress');
     let hasFailure = false;
 
@@ -497,24 +553,17 @@
         detail.textContent = c.detail;
       }
     });
-
-    // Dismiss button
-    document.getElementById('ec-dismiss')?.addEventListener('click', () => {
-      overlay.classList.add('fade-out');
-      setTimeout(() => overlay.remove(), 420);
-    });
   }
 
   function finalize(hasCriticalFail) {
-    // Always set session flag so it only shows once per visit
-    sessionStorage.setItem(SESSION_KEY, '1');
-
     if (isIncompatible || hasCriticalFail) {
-      // Show guidance popup (not a blocker — user can dismiss and browse)
+      // Incompatible device: show blocker, but DO NOT set sessionStorage key.
+      // They will remain blocked if they try to refresh or visit other pages.
       const blocker = document.getElementById('ec-blocker');
       if (blocker) blocker.classList.add('active');
     } else {
-      // All good — auto dismiss
+      // Compatible device: set session key so check runs only once per visit
+      sessionStorage.setItem(SESSION_KEY, '1');
       setTimeout(() => {
         overlay.classList.add('fade-out');
         setTimeout(() => overlay.remove(), 420);
