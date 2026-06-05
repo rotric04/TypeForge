@@ -271,8 +271,9 @@ async function syncProfileToDatabase(clerkUser) {
     const username = clerkUser.username || '';
     // Only sync if we have something meaningful to save
     if (!firstName && !lastName && !username && !email) return;
-    const { API } = await import('./api.js');
-    await API.syncProfile({ firstName, lastName, email, username });
+    const apiModule = await import('./api.js');
+    const api = apiModule.default || apiModule.API;
+    await api.syncProfile({ firstName, lastName, email, username });
   } catch (e) {
     // Non-critical — fail silently, name will still show from Clerk object
     console.warn('TF Auth: Could not sync profile to DB', e?.message || e);
@@ -304,7 +305,8 @@ async function syncLocalSessions() {
     console.log(`TF Auth: Found ${offlineSessions.length} offline session(s) to sync to the server.`);
 
     // Import API dynamically to avoid circular dependency
-    const { API } = await import('./api.js');
+    const apiModule = await import('./api.js');
+    const api = apiModule.default || apiModule.API;
 
     // Send sessions in chronological order (oldest first)
     const sessionsToSync = [...offlineSessions].reverse();
@@ -331,7 +333,7 @@ async function syncLocalSessions() {
           key_stats: session.keyStats || session.key_stats || {},
           wpm_history: session.wpmHistory || session.wpm_history || []
         };
-        await API.saveSession(payload);
+        await api.saveSession(payload);
         synced++;
       } catch (err) {
         console.error('TF Auth: Failed to sync local session', err);
