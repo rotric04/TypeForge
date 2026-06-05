@@ -8,7 +8,7 @@
 
 Transform typing practice into a personalized learning experience through real-time behavioral analysis, predictive analytics, and adaptive training generation.
 
-[Live Demo](https://typeforge.fun) • [Documentation](SYSTEM.md) • [Features](#features) • [Contributing](#contributing)
+[Live Demo](https://typeforge.fun) • [Documentation](docs/SYSTEM.md) • [Features](#features) • [Contributing](#contributing)
 
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Python](https://img.shields.io/badge/Python-FastAPI-green)
@@ -176,7 +176,7 @@ TypeForge/
 └── index.html & static files     <-- Marketing pages (about, blog, features, etc.)
 ```
 
-Detailed structure and architectural details are available in the [docs/SYSTEM.md](SYSTEM.md) report.
+Detailed structure and architectural details are available in the [docs/SYSTEM.md](docs/SYSTEM.md) report.
 
 ---
 
