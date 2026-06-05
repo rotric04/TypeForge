@@ -64,6 +64,14 @@
       "destination": "/security.txt"
     },
     {
+      "source": "/sign-in",
+      "destination": "/login.html"
+    },
+    {
+      "source": "/sign-up",
+      "destination": "/login.html"
+    },
+    {
       "source": "/api/v1/:path*",
       "destination": "https://typeforge-tkw8.onrender.com/api/v1/:path*"
     }

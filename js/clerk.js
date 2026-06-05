@@ -115,14 +115,22 @@ export const Auth = {
           // Listen to session state changes to keep the tf_authenticated cookie in sync.
           // This ensures that when a user logs in (or out), the cookie is updated instantly,
           // avoiding redirect loops and flickering when navigating to the dashboard.
-          Clerk.addListener(({ session, user }) => {
+          Clerk.addListener(async ({ session, user }) => {
             if (session && user) {
               document.cookie = "tf_authenticated=true; path=/; max-age=31536000; SameSite=Lax; Secure";
             } else {
-              if (isAuthInitialized && document.cookie.includes('tf_authenticated=true')) {
-                Auth.triggerEmergencyLogout("Session expired. Redirecting to homepage...");
-              } else {
-                document.cookie = "tf_authenticated=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=Lax; Secure";
+              // Only act if auth initialization has completed. During init, we don't want to clear the cookie prematurely.
+              if (isAuthInitialized) {
+                // Wait 1 second to see if this is just a transient loading state or token refresh
+                await new Promise(r => setTimeout(r, 1000));
+                // Double check if session/user is still missing before acting
+                if (!clerkInstance?.session || !clerkInstance?.user) {
+                  if (document.cookie.includes('tf_authenticated=true')) {
+                    Auth.triggerEmergencyLogout("Session expired. Redirecting to homepage...");
+                  } else {
+                    document.cookie = "tf_authenticated=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=Lax; Secure";
+                  }
+                }
               }
             }
           });
@@ -162,9 +170,6 @@ export const Auth = {
       } catch (e) {
         console.error('TF Auth: Clerk Init Failed', e);
         authInitPromise = null; // allow retry if failed
-        if (document.cookie.includes('tf_authenticated=true') && window.location.hostname !== 'localhost') {
-          Auth.triggerEmergencyLogout("Authentication initialization failed.");
-        }
         return null;
       }
     })();
@@ -406,17 +411,37 @@ document.addEventListener('DOMContentLoaded', () => {
 // Global JS Error Handler
 window.addEventListener("error", (event) => {
   if (!isAuthInitialized) return;
+  // Ignore cross-origin third-party script errors
   if (event.filename && !event.filename.includes(window.location.hostname) && !event.filename.includes('clerk')) {
     return;
   }
-  Auth.triggerEmergencyLogout("An unexpected error occurred.");
+  // Only trigger emergency logout for critical auth/core file exceptions or specific auth messages
+  const isAuthOrCore = event.filename && (event.filename.includes('clerk.js') || event.filename.includes('api.js'));
+  const isAuthMessage = event.message && (event.message.includes('Clerk') || event.message.includes('Auth') || event.message.includes('Unauthorized') || event.message.includes('401'));
+  
+  if (isAuthOrCore || isAuthMessage) {
+    Auth.triggerEmergencyLogout("An unexpected authentication error occurred.");
+  }
 });
 
 window.addEventListener("unhandledrejection", (event) => {
   if (!isAuthInitialized) return;
   const reason = event.reason?.stack || String(event.reason || '');
+  const message = event.reason?.message || String(event.reason || '');
+  
+  // Ignore harmless connection/network/timeout errors
+  if (message.includes('Network Error') || message.includes('timeout') || message.includes('Failed to fetch') || message.includes('HTTP 5')) {
+    return;
+  }
+  
   if (reason.includes('clerk') || reason.includes('api.js') || reason.includes('app-data.js')) {
-    Auth.triggerEmergencyLogout("A critical app request failed.");
+    // Only trigger emergency logout for actual auth failures or TypeError/ReferenceError in core modules
+    const isAuthFailure = reason.includes('Unauthorized') || reason.includes('401') || reason.includes('token') || reason.includes('JWT') || reason.includes('signature') || reason.includes('User profile not found');
+    const isCriticalCrash = reason.includes('TypeError') || reason.includes('ReferenceError');
+    
+    if (isAuthFailure || isCriticalCrash) {
+      Auth.triggerEmergencyLogout("A critical app request failed.");
+    }
   }
 });
 

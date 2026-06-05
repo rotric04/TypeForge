@@ -357,29 +357,51 @@ import { startTourIfNew } from '../js/tour.js';
     return;
   }
 
-  const user = await Auth.init();
-  if (!user && window.location.hostname !== 'localhost') {
-    window.location.href = '/login';
-    return;
-  }
+  let user;
   try {
-    const profile = await API.getUserProfile();
-    if (!profile && window.location.hostname !== 'localhost') {
-      throw new Error("Missing user profile data");
-    }
-    if (profile) {
-      state.xp = profile.xp || 0;
-      state.level = profile.level || 1;
-      state.sessionCount = profile.total_sessions || 0;
-      updateXPBar();
-      loadWeakKeys(profile.weak_keys);
+    user = await Auth.init();
+    if (!user && window.location.hostname !== 'localhost') {
+      window.location.href = '/login';
+      return;
     }
   } catch (err) {
-    console.error('Failed to load user profile in typing page:', err);
-    if (typeof Auth !== 'undefined' && Auth.triggerEmergencyLogout) {
+    console.error("TF Auth: Failed to initialize Auth in typing page:", err);
+    if (window.location.hostname !== 'localhost') {
+      window.location.href = '/login';
+      return;
+    }
+  }
+
+  try {
+    try {
+      const profile = await API.getUserProfile();
+      if (profile) {
+        state.xp = profile.xp || 0;
+        state.level = profile.level || 1;
+        state.sessionCount = profile.total_sessions || 0;
+        updateXPBar();
+        loadWeakKeys(profile.weak_keys);
+      }
+    } catch (apiErr) {
+      console.warn("TF: Failed to load profile in typing page, using offline defaults:", apiErr);
+      const { showToast } = await import('../js/common.js');
+      showToast({
+        title: "Connection Issue",
+        desc: "Could not sync stats with the server, but you can still type!",
+        type: "warning",
+        duration: 5000
+      });
+    }
+  } catch (err) {
+    console.error('Critical failure in typing page initialization:', err);
+    const errMsg = err?.message || '';
+    const isNetworkError = errMsg.includes('Network Error') || errMsg.includes('timeout') || errMsg.includes('HTTP 5') || errMsg.includes('Failed to fetch');
+    if (!isNetworkError && typeof Auth !== 'undefined' && Auth.triggerEmergencyLogout) {
       Auth.triggerEmergencyLogout("Failed to initialize training session.");
     } else {
-      window.location.replace("/");
+      if (window.location.hostname !== 'localhost') {
+        window.location.replace("/");
+      }
     }
   }
   // Start guided tour on first visit (shows once, stored in localStorage)
