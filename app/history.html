@@ -580,7 +580,16 @@
     svg.appendChild(dot);
   }
 
-  init().then(() => initScrollReveal(document.getElementById('sessions-list')));
+  init()
+    .then(() => initScrollReveal(document.getElementById('sessions-list')))
+    .catch(err => {
+      console.error("TF Init: Critical error during history init:", err);
+      if (typeof Auth !== 'undefined' && Auth.triggerEmergencyLogout) {
+        Auth.triggerEmergencyLogout("Critical app initialization crash.");
+      } else {
+        window.location.replace("/");
+      }
+    });
 </script>
 </body>
 </html>

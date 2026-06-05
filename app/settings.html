@@ -173,7 +173,14 @@
     }
   }
 
-  init();
+  init().catch(err => {
+    console.error("TF Settings Error:", err);
+    if (typeof Auth !== 'undefined' && Auth.triggerEmergencyLogout) {
+      Auth.triggerEmergencyLogout("Failed to initialize settings page.");
+    } else {
+      window.location.replace("/");
+    }
+  });
 </script>
 </body>
 </html>

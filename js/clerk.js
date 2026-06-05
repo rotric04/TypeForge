@@ -78,6 +78,21 @@ function mapClerkUser(clerkUser) {
   };
 }
 
+// Validate Clerk session
+async function validateSession() {
+  try {
+    if (!clerkInstance) return false;
+    const session = clerkInstance.session;
+    if (!session) return false;
+    if (!clerkInstance.user) return false;
+    const token = await session.getToken();
+    if (!token) return false;
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 export const Auth = {
   /**
    * Initialize Auth. Call this on page load. Guaranteed to be safe to call concurrently.
@@ -103,9 +118,23 @@ export const Auth = {
             if (session && user) {
               document.cookie = "tf_authenticated=true; path=/; max-age=31536000; SameSite=Lax; Secure";
             } else {
-              document.cookie = "tf_authenticated=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=Lax; Secure";
+              if (document.cookie.includes('tf_authenticated=true')) {
+                Auth.triggerEmergencyLogout("Session expired. Redirecting to homepage...");
+              } else {
+                document.cookie = "tf_authenticated=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=Lax; Secure";
+              }
             }
           });
+
+          // Heartbeat validator every 60 seconds
+          setInterval(async () => {
+            if (currentUser && window.location.hostname !== 'localhost') {
+              const ok = await validateSession();
+              if (!ok) {
+                Auth.triggerEmergencyLogout("Session authentication failed.");
+              }
+            }
+          }, 60000);
         }
 
         if (Clerk && Clerk.user) {
@@ -131,6 +160,9 @@ export const Auth = {
       } catch (e) {
         console.error('TF Auth: Clerk Init Failed', e);
         authInitPromise = null; // allow retry if failed
+        if (document.cookie.includes('tf_authenticated=true') && window.location.hostname !== 'localhost') {
+          Auth.triggerEmergencyLogout("Authentication initialization failed.");
+        }
         return null;
       }
     })();
@@ -153,6 +185,46 @@ export const Auth = {
   async getToken() {
     if (!clerkInstance || !clerkInstance.session) return null;
     return await clerkInstance.session.getToken();
+  },
+
+  emergencyTriggered: false,
+
+  async triggerEmergencyLogout(message = "Session expired. Redirecting to homepage...") {
+    if (Auth.emergencyTriggered) return;
+    Auth.emergencyTriggered = true;
+    console.warn("TF Fail Safe: Triggered emergency sign out. Reason:", message);
+
+    try {
+      const { showToast } = await import('./common.js');
+      showToast({
+        title: "Session Expired",
+        desc: message,
+        type: "warning",
+        duration: 3000
+      });
+    } catch (e) {
+      console.warn("TF Fail Safe: Could not show toast notification.", e);
+    }
+
+    setTimeout(async () => {
+      await Auth.emergencyLogout();
+    }, 2000);
+  },
+
+  async emergencyLogout() {
+    try {
+      if (clerkInstance) {
+        await clerkInstance.signOut();
+      }
+    } catch (e) {}
+
+    sessionStorage.clear();
+    localStorage.clear();
+
+    // Clear authenticated routing cookie
+    document.cookie = "tf_authenticated=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=Lax; Secure";
+
+    window.location.replace("/");
   },
 
   /**
@@ -325,6 +397,21 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('[data-auth-signout]').forEach(el => {
     el.addEventListener('click', (e) => { e.preventDefault(); Auth.signOut(); });
   });
+});
+
+// Global JS Error Handler
+window.addEventListener("error", (event) => {
+  if (event.filename && !event.filename.includes(window.location.hostname) && !event.filename.includes('clerk')) {
+    return;
+  }
+  Auth.triggerEmergencyLogout("An unexpected error occurred.");
+});
+
+window.addEventListener("unhandledrejection", (event) => {
+  const reason = event.reason?.stack || String(event.reason || '');
+  if (reason.includes('clerk') || reason.includes('api.js') || reason.includes('app-data.js')) {
+    Auth.triggerEmergencyLogout("A critical app request failed.");
+  }
 });
 
 export default Auth;

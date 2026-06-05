@@ -91,9 +91,9 @@ apiClient.interceptors.response.use((response) => {
     // Log detailed error info to console for easier debugging
     console.error(`[TF API] ${config?.method?.toUpperCase()} ${config?.url} → ${status}:`, detail);
     // 401 Unauthorized globally handled
-    if (status === 401 && window.location.pathname !== '/login.html') {
-      console.warn("API 401: Unauthorized. Redirecting to login...");
-      Auth.signOut(); // This will redirect
+    if (status === 401 && window.location.pathname !== '/login.html' && window.location.pathname !== '/login') {
+      console.warn("API 401: Unauthorized. Triggering emergency logout...");
+      Auth.triggerEmergencyLogout("Session expired. Redirecting to homepage...");
     }
     return Promise.reject(new Error(typeof detail === 'string' ? detail : JSON.stringify(detail)));
   }

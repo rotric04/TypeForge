@@ -364,6 +364,9 @@ import { startTourIfNew } from '../js/tour.js';
   }
   try {
     const profile = await API.getUserProfile();
+    if (!profile && window.location.hostname !== 'localhost') {
+      throw new Error("Missing user profile data");
+    }
     if (profile) {
       state.xp = profile.xp || 0;
       state.level = profile.level || 1;
@@ -373,6 +376,11 @@ import { startTourIfNew } from '../js/tour.js';
     }
   } catch (err) {
     console.error('Failed to load user profile in typing page:', err);
+    if (typeof Auth !== 'undefined' && Auth.triggerEmergencyLogout) {
+      Auth.triggerEmergencyLogout("Failed to initialize training session.");
+    } else {
+      window.location.replace("/");
+    }
   }
   // Start guided tour on first visit (shows once, stored in localStorage)
   startTourIfNew();

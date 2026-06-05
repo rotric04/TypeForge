@@ -249,12 +249,18 @@
         API.getAchievements()
       ]);
 
-      userProfile = profileRes.value || {
-        xp: 0,
-        level: 1,
-        total_sessions: 0,
-        best_wpm: 0
-      };
+      userProfile = profileRes.status === 'fulfilled' ? profileRes.value : null;
+      if (!userProfile && window.location.hostname !== 'localhost') {
+        throw new Error("Missing user profile data");
+      }
+      if (!userProfile) {
+        userProfile = {
+          xp: 0,
+          level: 1,
+          total_sessions: 0,
+          best_wpm: 0
+        };
+      }
       
       sessionHistory = historyRes.value || JSON.parse(localStorage.getItem('tf_session_history') || '[]');
       const achList = achRes.value || [];
@@ -304,9 +310,11 @@
 
     } catch (err) {
       console.error('Failed to load achievements:', err);
-      achievementsData = ALL_ACHIEVEMENTS.map(ach => ({ ...ach, is_unlocked: false, progress: 0 }));
-      renderGrid('all');
-      setupFilters();
+      if (typeof Auth !== 'undefined' && Auth.triggerEmergencyLogout) {
+        Auth.triggerEmergencyLogout("Failed to initialize achievements.");
+      } else {
+        window.location.replace("/");
+      }
     }
   }
 

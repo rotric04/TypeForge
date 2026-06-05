@@ -390,13 +390,19 @@ import { initScrollReveal, animateCounters, animateChartLine, staggerHeatmap } f
       API.getDashboardAnalytics()
     ]);
 
-    const profile = profileRes.status === 'fulfilled' ? profileRes.value : {
-      xp: 0,
-      level: 1,
-      total_sessions: 0,
-      best_wpm: 0,
-      weak_keys: [],
-    };
+    let profile = profileRes.status === 'fulfilled' ? profileRes.value : null;
+    if (!profile && window.location.hostname !== 'localhost') {
+      throw new Error("Missing user profile data");
+    }
+    if (!profile) {
+      profile = {
+        xp: 0,
+        level: 1,
+        total_sessions: 0,
+        best_wpm: 0,
+        weak_keys: [],
+      };
+    }
     const history = historyRes.status === 'fulfilled' && historyRes.value ? historyRes.value : [];
     const analytics = analyticsRes.status === 'fulfilled' ? analyticsRes.value : null;
 
@@ -568,6 +574,11 @@ import { initScrollReveal, animateCounters, animateChartLine, staggerHeatmap } f
 
   } catch (err) {
     console.error('Failed to load dashboard metrics:', err);
+    if (typeof Auth !== 'undefined' && Auth.triggerEmergencyLogout) {
+      Auth.triggerEmergencyLogout("Failed to initialize dashboard.");
+    } else {
+      window.location.replace("/");
+    }
   }
 
   initScrollReveal();
