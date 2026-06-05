@@ -1076,7 +1076,7 @@ body.tf-authenticated .nav-auth-signed-in  { display: flex; }
   font-weight: 600;
   color: var(--text-3);
   cursor: default;
-  transition: all var(--duration-base);
+  transition: background var(--duration-base), border-color var(--duration-base), color var(--duration-base);
   position: relative;
 }
 .key-wide  { min-width: 50px; }

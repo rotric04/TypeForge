@@ -130,6 +130,9 @@
           <button class="mode-tab" data-mode="student" role="tab" aria-selected="false">
             Student
           </button>
+          <button class="mode-tab" data-mode="personalized" role="tab" aria-selected="false">
+            Targeted (AI)
+          </button>
           <button class="mode-tab" data-mode="custom" role="tab" aria-selected="false">
             Custom
           </button>
@@ -707,6 +710,21 @@ const TEXT_POOLS = {
     "every master was once a beginner and every expert was once a novice the journey of a thousand miles begins with a single keystroke",
     "artificial intelligence is transforming how we work learn and communicate and the ability to type quickly becomes ever more important",
     "the difference between ordinary and extraordinary is that little extra and in typing that extra comes from thousands of focused repetitions",
+    "wisdom is not a product of schooling but of the lifelong attempt to acquire it and apply it to make the world a slightly better place for everyone",
+    "the only way to do great work is to love what you do if you have not found it yet keep looking and do not settle for anything less",
+    "success is not final failure is not fatal it is the courage to continue that counts and the willingness to learn from every setback",
+    "it is during our darkest moments that we must focus to see the light and find the inner strength to overcome the challenges in front of us",
+    "do not go where the path may lead go instead where there is no path and leave a trail for others to follow on their own journeys",
+    "be yourself everyone else is already taken and trying to live someone else's life is a waste of the unique person you are meant to be",
+    "you must be the change you wish to see in the world starting with small daily actions that align with your deepest values and beliefs",
+    "life is what happens when you are busy making other plans and finding the balance between future goals and present moments is the ultimate challenge",
+    "spread love everywhere you go let no one ever come to you without leaving happier and carrying a small spark of warmth in their heart",
+    "the future belongs to those who believe in the beauty of their dreams and have the courage to take the first steps toward making them real",
+    "tell me and i forget teach me and i may remember involve me and i learn because true understanding comes from active participation and practice",
+    "learn from yesterday live for today hope for tomorrow the important thing is not to stop questioning and to maintain a sense of wonder",
+    "the only limit to our realization of tomorrow will be our doubts of today so let us move forward with strong and active faith in our potential",
+    "what you get by achieving your goals is not as important as what you become by achieving your goals and the character you build along the way",
+    "we are what we repeatedly do excellence then is not an act but a habit that is cultivated through daily discipline and focused repetition"
   ],
   student: [
     "photosynthesis is the process by which plants use sunlight water and carbon dioxide to produce oxygen and energy in the form of glucose",
@@ -714,6 +732,16 @@ const TEXT_POOLS = {
     "democracy is a system of government by the whole population or all the eligible members of a state typically through elected representatives",
     "the french revolution began in seventeen eighty nine and fundamentally transformed french society by abolishing the feudal system and the monarchy",
     "gravity is the force of attraction between any two objects with mass and it was first mathematically described by isaac newton in sixteen eighty seven",
+    "the scientific method is an empirical method of acquiring knowledge that has characterized the development of science since at least the seventeenth century",
+    "global warming is the long term heating of earths climate system observed since the pre industrial period due to human activities",
+    "the universal declaration of human rights is a historic document that was adopted by the united nations general assembly in nineteen forty eight",
+    "economics is the social science that studies the production distribution and consumption of goods and services in an economy",
+    "calculus is the mathematical study of continuous change in the same way that geometry is the study of shape and algebra is the study of operations",
+    "the industrial revolution was the transition to new manufacturing processes in Great Britain continental Europe and the United States",
+    "quantum mechanics is a fundamental theory in physics that provides a description of the physical properties of nature at the atomic scale",
+    "cell division is the process by which a parent cell divides into two or more daughter cells reproducing genetic material",
+    "a neural network is a network or circuit of biological neurons or in a modern sense an artificial neural network composed of nodes",
+    "the theory of relativity usually encompasses two interrelated theories by Albert Einstein special relativity and general relativity"
   ],
   dev: {
     python: [
@@ -722,6 +750,11 @@ const TEXT_POOLS = {
       "import pandas as pd; df = pd.read_csv('data.csv'); df.dropna(inplace=True); print(df.head())",
       "with open('config.json', 'r') as f: config = json.load(f); return config.get('api_key', '')",
       "model = XGBClassifier(n_estimators=100, max_depth=6, learning_rate=0.1); model.fit(X_train, y_train)",
+      "sorted_data = sorted(raw_data, key=lambda x: x.get('score', 0), reverse=True)",
+      "import asyncio; async def main(): tasks = [fetch_url(url) for url in urls]; return await asyncio.gather(*tasks)",
+      "try: response = requests.get(url, timeout=5); response.raise_for_status() except requests.RequestException as e: log.error(e)",
+      "class CustomDataset(Dataset): def __init__(self, x, y): self.x = x; self.y = y; def __len__(self): return len(self.x)",
+      "decorators allow you to wrap another function in order to extend the behavior of the wrapped function without permanently modifying it"
     ],
     javascript: [
       "const fetchUser = async (id) => { const res = await fetch(`/api/users/${id}`); return res.json(); };",
@@ -729,23 +762,36 @@ const TEXT_POOLS = {
       "document.querySelectorAll('.btn').forEach(btn => btn.addEventListener('click', (e) => e.target.classList.toggle('active')));",
       "const { data, error } = await supabase.from('sessions').select('*').order('created_at', { ascending: false }).limit(10);",
       "const memoize = (fn) => { const cache = new Map(); return (...args) => { const key = JSON.stringify(args); return cache.has(key) ? cache.get(key) : cache.set(key, fn(...args)).get(key); }; };",
+      "const pipeline = (...fns) => (x) => fns.reduce((v, f) => f(v), x);",
+      "const uniqueArray = [...new Set(arr.filter(Boolean))];",
+      "const proxy = new Proxy(target, { get: (obj, prop) => prop in obj ? obj[prop] : 'default' });",
+      "const eventEmitter = { events: {}, on(event, listener) { (this.events[event] || (this.events[event] = [])).push(listener); } };"
     ],
     typescript: [
       "interface TypingSession { id: string; wpm: number; accuracy: number; duration: number; userId: string; createdAt: Date; }",
       "type Theme = 'dark' | 'light'; const useTheme = (): [Theme, () => void] => { const [theme, setTheme] = useState<Theme>('dark'); return [theme, () => setTheme(t => t === 'dark' ? 'light' : 'dark')]; };",
       "const analyzeSession = async (session: TypingSession): Promise<Analysis> => { const weakKeys = findWeakKeys(session); return { weakKeys, recommendations: generateRec(weakKeys) }; };",
+      "type DeepPartial<T> = { [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P] };",
+      "export class Singleton { private static instance: Singleton; private constructor() {} static getInstance(): Singleton { return this.instance || (this.instance = new Singleton()); } }",
+      "type Exclude<T, U> = T extends U ? never : T; type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;"
     ],
     sql: [
       "SELECT u.username, AVG(s.wpm) as avg_wpm, COUNT(s.id) as sessions FROM users u JOIN sessions s ON u.id = s.user_id GROUP BY u.id ORDER BY avg_wpm DESC LIMIT 10;",
       "CREATE TABLE typing_sessions (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), user_id UUID REFERENCES users(id), wpm INTEGER, accuracy DECIMAL(5,2), duration INTEGER, created_at TIMESTAMPTZ DEFAULT NOW());",
       "WITH ranked_users AS (SELECT user_id, wpm, ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY created_at DESC) as rn FROM sessions) SELECT * FROM ranked_users WHERE rn <= 10;",
+      "SELECT category, SUM(revenue) OVER(PARTITION BY category ORDER BY sale_date) FROM sales_data;",
+      "INSERT INTO audit_log (user_id, action, performed_at) VALUES (CURRENT_USER, 'DELETE_RECORD', NOW());",
+      "UPDATE users SET status = 'inactive' WHERE last_login < NOW() - INTERVAL '90 days' AND status = 'active';"
     ],
     bash: [
       "#!/bin/bash; set -euo pipefail; echo 'Starting deployment...'; docker build -t typeforge:latest . && docker push typeforge:latest",
       "for file in *.py; do echo \"Processing $file\"; python -m py_compile \"$file\" && echo \"$file OK\" || echo \"$file FAILED\"; done",
       "git log --oneline --graph --decorate --all | head -20; git status --short; git diff --stat HEAD~1",
-    ],
-  },
+      'find . -name "*.log" -type f -mtime +7 -exec rm -f {} \\;',
+      'curl -s -I "https://api.github.com" | grep -i "status" || echo "API is offline"',
+      'tar -czf backup_$(date +%F).tar.gz /var/www/html/ && echo "Backup completed!"'
+    ]
+  }
 };
 
 // ═══════════════════════════════════════════════════════
@@ -780,50 +826,153 @@ const state = {
 };
 
 // ═══════════════════════════════════════════════════════
+// DYNAMIC PRACTICE WORD DICTIONARY & CACHES
+// ═══════════════════════════════════════════════════════
+const keyElements = new Map();
+let charSpans = [];
+
+const usedTextCache = {
+  classic: [],
+  student: [],
+  dev_python: [],
+  dev_javascript: [],
+  dev_typescript: [],
+  dev_sql: [],
+  dev_bash: []
+};
+
+const COMMON_WORDS = [
+  "the", "name", "of", "to", "and", "a", "in", "is", "it", "you", "that", "he", "was", "for", "on", "are", "as", "with", "his", "they",
+  "i", "at", "be", "this", "have", "from", "or", "one", "had", "by", "word", "but", "not", "what", "all", "were", "we", "when", "your",
+  "can", "said", "there", "use", "an", "each", "which", "she", "do", "how", "their", "if", "will", "up", "other", "about", "out", "many",
+  "then", "them", "these", "so", "some", "her", "would", "make", "like", "him", "into", "time", "has", "look", "two", "more", "write",
+  "go", "see", "number", "no", "way", "could", "people", "my", "than", "first", "water", "been", "call", "who", "oil", "its", "now",
+  "find", "long", "down", "day", "did", "get", "come", "made", "may", "part", "python", "javascript", "code", "programming", "typing",
+  "keyboard", "accuracy", "speed", "rhythm", "practice", "engine", "system", "learning", "adapt", "personalize", "insights", "telemetry",
+  "performance", "efficiency", "focus", "discipline", "consistency", "repetition", "mastery", "beginner", "expert", "progress",
+  "challenge", "feedback", "telemetry", "developer", "student", "classic", "custom", "session", "victory", "champion"
+];
+
+function getWeakKeysForPersonalization(n = 5) {
+  try {
+    const saved = JSON.parse(localStorage.getItem('tf_key_stats') || '{}');
+    const weak = Object.entries(saved)
+      .filter(([k, v]) => (v.misses || 0) > 0 && String(k).trim().length === 1)
+      .sort((a, b) => {
+        const rateA = (a[1].misses || 0) / ((a[1].hits || 0) + (a[1].misses || 0) + 0.01);
+        const rateB = (b[1].misses || 0) / ((b[1].hits || 0) + (b[1].misses || 0) + 0.01);
+        return rateB - rateA;
+      })
+      .slice(0, n)
+      .map(([k]) => k);
+    return weak;
+  } catch (e) {
+    return [];
+  }
+}
+
+function generatePersonalizedText(weakKeys) {
+  if (!weakKeys || weakKeys.length === 0) {
+    return "practice makes perfect focus on accuracy and speed will naturally follow with consistent repetition";
+  }
+
+  // Filter words that contain at least one of the weak keys
+  const targetWords = COMMON_WORDS.filter(word => 
+    weakKeys.some(key => word.toLowerCase().includes(key.toLowerCase()))
+  );
+
+  // Use the target words pool if we have enough, otherwise fall back to common words
+  const pool = targetWords.length >= 8 ? targetWords : COMMON_WORDS;
+
+  // Build a randomized list of 15 words heavily weighted toward words containing the weak keys
+  const sentenceWords = [];
+  const targetLength = 15;
+  for (let i = 0; i < targetLength; i++) {
+    let chosenWord;
+    if (Math.random() < 0.75 && targetWords.length > 0) {
+      chosenWord = targetWords[Math.floor(Math.random() * targetWords.length)];
+    } else {
+      chosenWord = pool[Math.floor(Math.random() * pool.length)];
+    }
+    sentenceWords.push(chosenWord);
+  }
+
+  return sentenceWords.join(' ');
+}
+
+// ═══════════════════════════════════════════════════════
 // TEXT GENERATION
 // ═══════════════════════════════════════════════════════
 function getRandomText() {
+  if (state.mode === 'personalized') {
+    const weakKeys = getWeakKeysForPersonalization(5);
+    return generatePersonalizedText(weakKeys.length > 0 ? weakKeys : ['q', 'z', 'x', 'p', 'b']);
+  }
+  
+  let pool = [];
+  let cacheKey = state.mode;
   if (state.mode === 'dev') {
-    const pool = TEXT_POOLS.dev[state.lang] || TEXT_POOLS.dev.python;
-    return pool[Math.floor(Math.random() * pool.length)];
+    pool = TEXT_POOLS.dev[state.lang] || TEXT_POOLS.dev.python;
+    cacheKey = `dev_${state.lang}`;
+  } else if (state.mode === 'student') {
+    pool = TEXT_POOLS.student;
+    cacheKey = 'student';
+  } else {
+    pool = TEXT_POOLS.classic;
+    cacheKey = 'classic';
   }
-  if (state.mode === 'student') {
-    const pool = TEXT_POOLS.student;
-    return pool[Math.floor(Math.random() * pool.length)];
+  
+  if (!usedTextCache[cacheKey]) {
+    usedTextCache[cacheKey] = [];
   }
-  const pool = TEXT_POOLS.classic;
-  return pool[Math.floor(Math.random() * pool.length)];
+  
+  let availableIndices = pool.map((_, idx) => idx).filter(idx => !usedTextCache[cacheKey].includes(idx));
+  
+  if (availableIndices.length === 0) {
+    usedTextCache[cacheKey] = [];
+    availableIndices = pool.map((_, idx) => idx);
+  }
+  
+  const chosenIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+  usedTextCache[cacheKey].push(chosenIndex);
+  
+  return pool[chosenIndex];
 }
 
 function adaptText(text) {
-  // Weight weak keys higher in generated text
-  // For now, return as-is. In prod, ML engine would modify this.
   return text;
 }
 
 // ═══════════════════════════════════════════════════════
-// RENDER TYPING TEXT
+// RENDER TYPING TEXT (Optimized O(1) Updates)
 // ═══════════════════════════════════════════════════════
 const display = document.getElementById('typing-display');
 
-function renderText(text, currentIdx, errorSet = new Set()) {
+function renderText(text) {
   display.innerHTML = '';
+  charSpans = [];
+  const fragment = document.createDocumentFragment();
   for (let i = 0; i < text.length; i++) {
     const span = document.createElement('span');
-    span.className = 'typing-char';
+    span.className = 'typing-char' + (i === 0 ? ' current' : '');
     span.textContent = text[i];
     span.dataset.idx = i;
-    if (i < currentIdx) {
-      span.className = 'typing-char ' + (errorSet.has(i) ? 'wrong' : 'done');
-    } else if (i === currentIdx) {
-      span.className = 'typing-char current';
-    }
-    display.appendChild(span);
+    fragment.appendChild(span);
+    charSpans.push(span);
   }
-  // Scroll current char into view
-  const currentEl = display.querySelector('.current');
-  if (currentEl) {
-    currentEl.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  display.appendChild(fragment);
+  if (charSpans[0]) {
+    charSpans[0].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }
+}
+
+function updateTextDisplay(prevIndex, currentIndex, errorSet) {
+  if (charSpans[prevIndex]) {
+    charSpans[prevIndex].className = 'typing-char ' + (errorSet.has(prevIndex) ? 'wrong' : 'done');
+  }
+  if (charSpans[currentIndex]) {
+    charSpans[currentIndex].className = 'typing-char current';
+    charSpans[currentIndex].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }
 }
 
@@ -855,7 +1004,7 @@ function initSession() {
 
   updateTimerDisplay();
   resetRing();
-  renderText(state.currentText, 0, errorSet);
+  renderText(state.currentText);
   updateStats();
 
   // Show overlay
@@ -867,7 +1016,7 @@ function initSession() {
   document.body.style.overflow = '';
 
   // Update header mode label
-  const modeLabels = { classic:'Classic Mode', dev:'Developer Mode', student:'Student Mode', custom:'Custom Mode', zen:'Zen Mode' };
+  const modeLabels = { classic:'Classic Mode', dev:'Developer Mode', student:'Student Mode', custom:'Custom Mode', zen:'Zen Mode', personalized:'Targeted (AI) Mode' };
   document.getElementById('header-mode-label').textContent = modeLabels[state.mode] || 'Classic Mode';
 
   // Show lang select for dev mode
@@ -957,13 +1106,8 @@ function focusInput() {
 }
 typingArea.addEventListener('click', () => {
   focusInput();
-  // We do NOT call startSession() here to allow touch/hybrid users to focus
-  // without triggering a false "keyboard required" block.
-  // The session will start automatically on the first keystroke (keydown or input event).
 });
-typingArea.addEventListener('keydown', (e) => {
-  if (!state.started && !state.finished) startSession();
-});
+// Keydown event on typingArea is handled by the document level keydown event listener below.
 
 typingInput.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
@@ -1027,7 +1171,7 @@ typingInput.addEventListener('input', (e) => {
   state.currentIndex++;
   typingInput.value = '';
 
-  renderText(state.currentText, state.currentIndex, errorSet);
+  updateTextDisplay(state.currentIndex - 1, state.currentIndex, errorSet);
   updateStats();
   updateKeyboardHeatmap(expectedChar, isCorrect);
 
@@ -1047,7 +1191,7 @@ typingInput.addEventListener('input', (e) => {
       state.currentIndex = 0;
       errorSet.clear();
       state.currentText = adaptText(getRandomText());
-      renderText(state.currentText, 0, errorSet);
+      renderText(state.currentText);
     } else {
       endSession();
     }
@@ -1163,6 +1307,9 @@ function endSession() {
         localStorage.setItem('tf_session_history', JSON.stringify(sessions.slice(0, 100)));
       } catch (e) {}
 
+      // Aggregate key stats locally
+      aggregateLocalKeyStats(payload.key_stats);
+
       // Overlay server values (like finalized XP or achievements)
       showResults(data.wpm, data.accuracy, data.consistency, data.xp_earned);
       if (data.badges_earned?.length) {
@@ -1220,6 +1367,22 @@ function calcXP(wpm, acc, consistency) {
   return Math.max(10, Math.round(xp));
 }
 
+function aggregateLocalKeyStats(sessionKeyStats) {
+  if (!sessionKeyStats) return;
+  try {
+    const aggregatedStats = JSON.parse(localStorage.getItem('tf_key_stats') || '{}');
+    Object.entries(sessionKeyStats).forEach(([key, stats]) => {
+      if (!aggregatedStats[key]) {
+        aggregatedStats[key] = { hits: 0, misses: 0, totalDelay: 0 };
+      }
+      aggregatedStats[key].hits += stats.hits || 0;
+      aggregatedStats[key].misses += stats.misses || 0;
+      aggregatedStats[key].totalDelay += stats.totalDelay || 0;
+    });
+    localStorage.setItem('tf_key_stats', JSON.stringify(aggregatedStats));
+  } catch (e) {}
+}
+
 function saveSession(localSession) {
   try {
     // Append session strictly to offline unsynced sessions queue
@@ -1227,6 +1390,9 @@ function saveSession(localSession) {
     sessions.unshift(localSession);
     localStorage.setItem('tf_session_history', JSON.stringify(sessions.slice(0, 100)));
     
+    // Aggregate key stats locally
+    aggregateLocalKeyStats(localSession.key_stats);
+
     // Update in-memory state so UI reflects it immediately
     state.sessionCount++;
     state.xp += localSession.xp_earned;
@@ -1526,6 +1692,7 @@ function buildKeyboard() {
   const container = document.getElementById('keyboard-viz');
   if (!container) return;
   container.innerHTML = '';
+  keyElements.clear();
   KEYBOARD_LAYOUT.forEach((row, ri) => {
     const rowEl = document.createElement('div');
     rowEl.className = 'keyboard-row';
@@ -1540,6 +1707,7 @@ function buildKeyboard() {
       keyEl.dataset.heat = '0';
       keyEl.textContent = key.length === 1 ? key.toUpperCase() : key;
       rowEl.appendChild(keyEl);
+      keyElements.set(key, keyEl);
     });
     container.appendChild(rowEl);
   });
@@ -1554,12 +1722,13 @@ function buildKeyboard() {
   spaceKey.textContent = 'SPACE';
   spaceRow.appendChild(spaceKey);
   container.appendChild(spaceRow);
+  keyElements.set(' ', spaceKey);
 }
 
 function resetKeyboardHeatmap() {
   Object.keys(sessionKeyHits).forEach(k => delete sessionKeyHits[k]);
   Object.keys(sessionKeyErrors).forEach(k => delete sessionKeyErrors[k]);
-  document.querySelectorAll('.key[data-heat]').forEach(el => { el.dataset.heat = '0'; });
+  keyElements.forEach(el => { el.dataset.heat = '0'; });
 }
 
 function updateKeyboardHeatmap(char, correct) {
@@ -1570,7 +1739,7 @@ function updateKeyboardHeatmap(char, correct) {
   } else {
     sessionKeyErrors[key] = (sessionKeyErrors[key] || 0) + 1;
   }
-  const keyEl = document.querySelector(`.key[data-key="${CSS.escape(key)}"]`);
+  const keyEl = keyElements.get(key);
   if (!keyEl) return;
   const hits   = sessionKeyHits[key] || 0;
   const errors = sessionKeyErrors[key] || 0;
@@ -1613,11 +1782,15 @@ buildKeyboard();
 initSession();
 updateXPBar();
 
-// Focus input on keyboard shortcut
+// Focus input on keyboard shortcut and start session
 document.addEventListener('keydown', (e) => {
   if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
     if (!state.started && !state.finished && document.activeElement !== typingInput) {
       startSession();
+      if (state.started) {
+        typingInput.value = e.key;
+        typingInput.dispatchEvent(new Event('input'));
+      }
     }
   }
 });

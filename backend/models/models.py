@@ -17,6 +17,7 @@ class TypingMode(str, Enum):
     CHALLENGE  = "challenge"
     INTERVIEW  = "interview"
     FOCUS      = "focus"
+    PERSONALIZED = "personalized"
 
 class ProgrammingLanguage(str, Enum):
     PYTHON     = "python"
