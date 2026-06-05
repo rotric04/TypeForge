@@ -62,12 +62,14 @@ async def verify_clerk_token(token: str) -> dict:
                 token, 
                 settings.CLERK_JWT_KEY, 
                 algorithms=["RS256"],
-                options={"verify_aud": False}
+                options={"verify_aud": False},
+                leeway=120
             )
             return payload
             
         jwks = await get_clerk_jwks()
         if not jwks:
+            logger.error("TF Auth: JWKS is empty or failed to load.")
             raise HTTPException(status_code=500, detail="Could not retrieve JWKS")
 
         unverified_header = jwt.get_unverified_header(token)
@@ -89,13 +91,16 @@ async def verify_clerk_token(token: str) -> dict:
                 rsa_key,
                 algorithms=["RS256"],
                 options={"verify_aud": False},
-                issuer=None # Typically clerk sets azp and iss, configure as needed
+                issuer=None, # Typically clerk sets azp and iss, configure as needed
+                leeway=120
             )
             return payload
         else:
+            logger.warning(f"TF Auth: No matching RSA key found in JWKS for kid: {unverified_header.get('kid')}")
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token signature")
             
     except JWTError as e:
+        logger.error(f"TF Auth: JWT verification failed: {e}")
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail=f"Could not validate credentials: {str(e)}",
