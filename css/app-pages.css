@@ -76,14 +76,14 @@
 .next-badge-card {
   display: flex;
   align-items: center;
-  gap: 14px;
-  min-width: 240px;
+  gap: 12px;
+  min-width: 0;
 }
 
 .next-badge-icon {
-  font-size: 24px;
-  width: 52px;
-  height: 52px;
+  font-size: clamp(0.65rem, 1.2vw, 0.85rem);
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -91,6 +91,12 @@
   background: var(--bg-elevated);
   border: 1px solid var(--border-2);
   color: var(--text-1);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  overflow-wrap: anywhere;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .live-pill {

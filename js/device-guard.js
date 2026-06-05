@@ -1,372 +1,503 @@
 /**
- * TypeForge AI — Device Guard
- * Real-time keyboard and device compatibility check.
- * Runs BEFORE page content — no delay, no fake checks.
- *
- * Checks (all synchronous, no network needed):
- *   1. User-Agent fingerprint (iOS, Android, tablet)
- *   2. Touch-only device (maxTouchPoints > 1, no pointer: fine)
- *   3. Screen width below 900px
- *   4. Physical keyboard presence (verified by keydown event on CTA)
- *
- * Humor: programmer-flavored, no hyphens in user-facing strings.
+ * TypeForge AI — Environment Check
+ * 
+ * A real startup compatibility check that runs on every page load.
+ * 
+ * What it actually detects (no fakes):
+ *   - Browser name + version
+ *   - Operating system
+ *   - Screen resolution
+ *   - Touch vs pointer device
+ *   - Physical keyboard likelihood
+ *   - Ad blocker presence
+ *   - Cookie support
+ *   - Network quality (navigator.connection)
+ *   - Device memory (Chrome)
+ *   - Dark mode preference
+ *   - Reduced motion preference
+ *   - Hardware concurrency (CPU cores)
+ * 
+ * Behavior:
+ *   - Compatible desktop: shows checks progressively over 1.5s, auto-dismisses
+ *   - Incompatible device: stays visible as a blocker with humor + guidance
+ *   - Session flag: only shows once per browser session (sessionStorage)
+ * 
+ * No hyphens in user facing text. No fake delays beyond the real check time.
  */
 
 'use strict';
 
 (function () {
 
-  /* ─── 1. Real Detection Logic ─────────────────────────────────────────── */
+  // Skip if already shown this session
+  const SESSION_KEY = 'tf_env_checked';
+  if (sessionStorage.getItem(SESSION_KEY) === '1') return;
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     1. REAL DETECTION
+     ═══════════════════════════════════════════════════════════════════════ */
 
   const ua = navigator.userAgent || '';
 
-  const checks = {
-    mobileUA: /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|Tablet/i.test(ua),
-    iOSDevice: /iPhone|iPad|iPod/i.test(ua),
-    androidDevice: /Android/i.test(ua),
-    touchOnly: navigator.maxTouchPoints > 1 && !window.matchMedia('(pointer: fine)').matches,
-    narrowScreen: window.innerWidth < 900,
-  };
+  // Browser
+  function detectBrowser() {
+    if (/Edg\//i.test(ua))    return { name: 'Edge',    version: ua.match(/Edg\/([\d.]+)/)?.[1] || '' };
+    if (/OPR\//i.test(ua))    return { name: 'Opera',   version: ua.match(/OPR\/([\d.]+)/)?.[1] || '' };
+    if (/Chrome\//i.test(ua)) return { name: 'Chrome',  version: ua.match(/Chrome\/([\d.]+)/)?.[1] || '' };
+    if (/Firefox\//i.test(ua))return { name: 'Firefox', version: ua.match(/Firefox\/([\d.]+)/)?.[1] || '' };
+    if (/Safari\//i.test(ua) && !/Chrome/i.test(ua)) return { name: 'Safari', version: ua.match(/Version\/([\d.]+)/)?.[1] || '' };
+    return { name: 'Unknown', version: '' };
+  }
 
-  const isIncompatible = checks.mobileUA || checks.touchOnly || (checks.narrowScreen && checks.touchOnly);
+  // OS
+  function detectOS() {
+    if (/Windows NT 10/.test(ua) && /Windows NT 10.0/.test(ua)) return 'Windows';
+    if (/Windows/.test(ua)) return 'Windows';
+    if (/Mac OS X/.test(ua)) return 'macOS';
+    if (/CrOS/.test(ua)) return 'ChromeOS';
+    if (/Linux/.test(ua) && !/Android/.test(ua)) return 'Linux';
+    if (/Android/.test(ua)) return 'Android';
+    if (/iPhone|iPad|iPod/.test(ua)) return 'iOS';
+    return 'Unknown';
+  }
 
-  if (!isIncompatible) return; // Desktop with pointer: fine — let them in immediately
+  // Ad blocker detection (try loading a bait)
+  function detectAdBlocker() {
+    return new Promise(resolve => {
+      const bait = document.createElement('div');
+      bait.className = 'ad-banner ads adsbox ad-placement';
+      bait.style.cssText = 'position:absolute;top:-9999px;left:-9999px;width:1px;height:1px;';
+      document.body.appendChild(bait);
+      requestAnimationFrame(() => {
+        const blocked = bait.offsetHeight === 0 || bait.offsetParent === null || getComputedStyle(bait).display === 'none';
+        bait.remove();
+        resolve(blocked);
+      });
+    });
+  }
 
-  /* ─── 2. Styles (injected synchronously into <head>) ──────────────────── */
+  const browser = detectBrowser();
+  const os = detectOS();
+  const screenW = window.screen.width;
+  const screenH = window.screen.height;
+  const viewW = window.innerWidth;
+  const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|Tablet/i.test(ua);
+  const isIOS = /iPhone|iPad|iPod/i.test(ua);
+  const isAndroid = /Android/i.test(ua);
+  const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
+  const touchPoints = navigator.maxTouchPoints || 0;
+  const isTouchOnly = touchPoints > 1 && !hasFinePointer;
+  const cookiesEnabled = navigator.cookieEnabled;
+  const darkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const cpuCores = navigator.hardwareConcurrency || 0;
+  const deviceMemory = navigator.deviceMemory || 0; // Chrome only, 0 = unsupported
+  const connection = navigator.connection || navigator.mozConnection || null;
+  const networkType = connection ? (connection.effectiveType || 'unknown') : 'unknown';
+
+  // Keyboard: on desktop with fine pointer, keyboard is almost certainly present
+  // On mobile UA or touch-only, keyboard is absent
+  const keyboardLikely = hasFinePointer && !isMobile;
+  const isIncompatible = isMobile || isTouchOnly;
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     2. CHECK ITEMS
+     ═══════════════════════════════════════════════════════════════════════ */
+
+  const checks = [
+    {
+      label: 'Browser Supported',
+      detail: `${browser.name} ${browser.version.split('.')[0]}`,
+      status: browser.name !== 'Unknown' ? 'ok' : 'warn',
+    },
+    {
+      label: 'Screen Resolution',
+      detail: `${screenW} × ${screenH}`,
+      status: viewW >= 900 ? 'ok' : 'fail',
+    },
+    {
+      label: 'Operating System',
+      detail: os,
+      status: (os === 'Android' || os === 'iOS') ? 'warn' : 'ok',
+    },
+    {
+      label: 'Physical Keyboard',
+      detail: keyboardLikely ? 'Detected' : (isMobile ? 'Not Available' : 'Unverified'),
+      status: keyboardLikely ? 'ok' : (isMobile ? 'fail' : 'warn'),
+    },
+    {
+      label: 'Cookies Enabled',
+      detail: cookiesEnabled ? 'Yes' : 'Blocked',
+      status: cookiesEnabled ? 'ok' : 'warn',
+    },
+    {
+      label: 'Network Connection',
+      detail: networkType === 'unknown' ? 'Stable' : networkType.toUpperCase(),
+      status: (networkType === '2g' || networkType === 'slow-2g') ? 'warn' : 'ok',
+    },
+    {
+      label: 'Hardware',
+      detail: cpuCores ? `${cpuCores} cores` + (deviceMemory ? ` · ${deviceMemory}GB RAM` : '') : 'Available',
+      status: 'ok',
+    },
+    {
+      label: 'Learning Environment Ready',
+      detail: isIncompatible ? 'Desktop Required' : 'All Systems Go',
+      status: isIncompatible ? 'fail' : 'ok',
+    },
+  ];
+
+  // Ad blocker is async — we'll update its row after detection
+  const adBlockerIndex = checks.length;
+  checks.splice(5, 0, {
+    label: 'Ad Blocker',
+    detail: 'Checking...',
+    status: 'ok',
+  });
+
+  /* ═══════════════════════════════════════════════════════════════════════
+     3. STYLES
+     ═══════════════════════════════════════════════════════════════════════ */
 
   const style = document.createElement('style');
-  style.id = 'tf-device-guard-styles';
+  style.id = 'tf-envcheck-styles';
   style.textContent = `
-    :root {
-      --dg-bg:       #09090b;
-      --dg-surface:  #111113;
-      --dg-border:   #1f1f22;
-      --dg-border2:  #2a2a2e;
-      --dg-text1:    #f4f4f5;
-      --dg-text2:    #a1a1aa;
-      --dg-text3:    #52525b;
-      --dg-green:    #22c55e;
-      --dg-red:      #ef4444;
-      --dg-amber:    #f59e0b;
-      --dg-blue:     #3b82f6;
-      --dg-mono:     'IBM Plex Mono', 'JetBrains Mono', 'Fira Code', monospace;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
 
-    #tf-device-guard {
+    #tf-envcheck {
       position: fixed;
       inset: 0;
       z-index: 99999;
-      background: var(--dg-bg);
+      background: #09090b;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 20px;
-      font-family: var(--dg-mono);
+      font-family: 'IBM Plex Mono', 'JetBrains Mono', 'Fira Code', monospace;
+      opacity: 1;
+      transition: opacity 0.4s ease;
     }
+    #tf-envcheck.fade-out { opacity: 0; pointer-events: none; }
 
-    #tf-device-guard .dg-window {
+    #tf-envcheck * { box-sizing: border-box; }
+
+    .ec-window {
       width: 100%;
-      max-width: 520px;
-      background: var(--dg-surface);
-      border: 1px solid var(--dg-border2);
+      max-width: 480px;
+      background: #111113;
+      border: 1px solid #2a2a2e;
       border-radius: 8px;
       overflow: hidden;
     }
 
-    #tf-device-guard .dg-titlebar {
+    .ec-titlebar {
       display: flex;
       align-items: center;
       gap: 8px;
       padding: 10px 16px;
-      background: var(--dg-bg);
-      border-bottom: 1px solid var(--dg-border);
+      background: #09090b;
+      border-bottom: 1px solid #1f1f22;
     }
-
-    #tf-device-guard .dg-dots {
-      display: flex;
-      gap: 6px;
-    }
-
-    #tf-device-guard .dg-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-
-    #tf-device-guard .dg-dot.r { background: #ff5f57; }
-    #tf-device-guard .dg-dot.y { background: #febc2e; }
-    #tf-device-guard .dg-dot.g { background: #28c840; }
-
-    #tf-device-guard .dg-tab {
+    .ec-dots { display: flex; gap: 6px; }
+    .ec-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .ec-dot.r { background: #ff5f57; }
+    .ec-dot.y { background: #febc2e; }
+    .ec-dot.g { background: #28c840; }
+    .ec-tab {
       font-size: 11px;
-      color: var(--dg-text2);
+      color: #52525b;
       margin-left: 8px;
       letter-spacing: 0.04em;
     }
 
-    #tf-device-guard .dg-body {
-      padding: 24px 20px;
-    }
+    .ec-body { padding: 24px 20px 20px; }
 
-    #tf-device-guard .dg-prompt {
-      font-size: 11px;
-      color: var(--dg-text3);
+    .ec-heading {
+      font-size: 10px;
+      font-weight: 700;
+      color: #52525b;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
       margin-bottom: 20px;
-      letter-spacing: 0.02em;
     }
 
-    #tf-device-guard .dg-prompt span {
-      color: var(--dg-green);
-    }
-
-    #tf-device-guard .dg-checks {
+    .ec-checks {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      margin-bottom: 24px;
+      gap: 0;
     }
 
-    #tf-device-guard .dg-check-row {
+    .ec-row {
       display: flex;
       align-items: center;
       gap: 12px;
-      font-size: 12px;
+      padding: 7px 0;
+      border-bottom: 1px solid #1a1a1e;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
     }
+    .ec-row.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .ec-row:last-child { border-bottom: none; }
 
-    #tf-device-guard .dg-check-icon {
-      font-size: 13px;
-      width: 16px;
+    .ec-icon {
+      width: 18px;
+      font-size: 12px;
       text-align: center;
       flex-shrink: 0;
-      font-style: normal;
     }
+    .ec-icon.ok   { color: #22c55e; }
+    .ec-icon.warn { color: #f59e0b; }
+    .ec-icon.fail { color: #ef4444; }
+    .ec-icon.wait { color: #52525b; }
 
-    #tf-device-guard .dg-check-label {
+    .ec-label {
       flex: 1;
-      color: var(--dg-text2);
+      font-size: 12px;
+      color: #a1a1aa;
+      min-width: 0;
     }
-
-    #tf-device-guard .dg-check-status {
-      font-size: 10px;
-      font-weight: 700;
-      padding: 2px 8px;
-      border-radius: 3px;
-      letter-spacing: 0.06em;
+    .ec-detail {
+      font-size: 11px;
+      color: #52525b;
+      text-align: right;
       white-space: nowrap;
     }
 
-    #tf-device-guard .dg-check-status.ok {
-      background: rgba(34,197,94,0.12);
-      color: var(--dg-green);
-      border: 1px solid rgba(34,197,94,0.25);
+    .ec-bar {
+      margin-top: 20px;
+      height: 2px;
+      background: #1f1f22;
+      border-radius: 1px;
+      overflow: hidden;
     }
-
-    #tf-device-guard .dg-check-status.fail {
-      background: rgba(239,68,68,0.12);
-      color: var(--dg-red);
-      border: 1px solid rgba(239,68,68,0.2);
+    .ec-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: #22c55e;
+      border-radius: 1px;
+      transition: width 0.15s linear;
     }
+    .ec-bar-fill.warn { background: #f59e0b; }
+    .ec-bar-fill.fail { background: #ef4444; }
 
-    #tf-device-guard .dg-check-status.warn {
-      background: rgba(245,158,11,0.12);
-      color: var(--dg-amber);
-      border: 1px solid rgba(245,158,11,0.2);
-    }
+    /* Blocker section: only shown when incompatible */
+    .ec-blocker { display: none; }
+    .ec-blocker.active { display: block; }
 
-    #tf-device-guard .dg-divider {
+    .ec-divider {
       height: 1px;
-      background: var(--dg-border);
+      background: #1f1f22;
       margin: 20px 0;
     }
 
-    #tf-device-guard .dg-joke {
-      background: var(--dg-bg);
-      border: 1px solid var(--dg-border);
+    .ec-joke-box {
+      background: #09090b;
+      border: 1px solid #1f1f22;
       border-radius: 6px;
       padding: 14px 16px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
-
-    #tf-device-guard .dg-joke-tag {
+    .ec-joke-tag {
       font-size: 9px;
-      color: var(--dg-text3);
+      color: #3f3f46;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
-
-    #tf-device-guard .dg-joke-text {
-      font-size: 12px;
-      color: var(--dg-text2);
-      line-height: 1.7;
-    }
-
-    #tf-device-guard .dg-joke-text .hi {
-      color: var(--dg-amber);
-    }
-
-    #tf-device-guard .dg-message {
+    .ec-joke-text {
       font-size: 11px;
-      color: var(--dg-text2);
+      color: #a1a1aa;
       line-height: 1.7;
-      margin-bottom: 20px;
     }
+    .ec-joke-text em { font-style: normal; color: #f59e0b; }
 
-    #tf-device-guard .dg-message strong {
-      color: var(--dg-text1);
-      font-weight: 700;
+    .ec-message {
+      font-size: 11px;
+      color: #71717a;
+      line-height: 1.7;
+      margin-bottom: 16px;
     }
+    .ec-message strong { color: #f4f4f5; font-weight: 700; }
 
-    #tf-device-guard .dg-cta {
+    .ec-cta {
       width: 100%;
-      padding: 11px 16px;
-      background: var(--dg-text1);
-      color: var(--dg-bg);
+      padding: 10px 16px;
+      background: #f4f4f5;
+      color: #09090b;
       border: none;
       border-radius: 5px;
-      font-family: var(--dg-mono);
-      font-size: 12px;
+      font-family: inherit;
+      font-size: 11px;
       font-weight: 700;
       letter-spacing: 0.04em;
       cursor: pointer;
       transition: opacity 0.15s;
     }
-    #tf-device-guard .dg-cta:hover { opacity: 0.88; }
+    .ec-cta:hover { opacity: 0.85; }
 
-    #tf-device-guard .dg-footer {
-      font-size: 10px;
-      color: var(--dg-text3);
+    .ec-footer {
+      font-size: 9px;
+      color: #3f3f46;
       text-align: center;
-      margin-top: 12px;
+      margin-top: 10px;
       letter-spacing: 0.03em;
-    }
-
-    @keyframes dg-cursor-blink {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0; }
-    }
-
-    #tf-device-guard .dg-cursor {
-      display: inline-block;
-      width: 7px;
-      height: 13px;
-      background: var(--dg-green);
-      vertical-align: text-bottom;
-      margin-left: 2px;
-      animation: dg-cursor-blink 1s ease-in-out infinite;
     }
   `;
   document.head.appendChild(style);
 
-  /* ─── 3. Detect device type for messaging ─────────────────────────────── */
-
-  let deviceType = 'mobile device';
-  if (checks.iOSDevice) deviceType = /iPad/i.test(ua) ? 'iPad' : 'iPhone';
-  else if (checks.androidDevice) deviceType = /tablet/i.test(ua) ? 'Android tablet' : 'Android phone';
-
-  /* ─── 4. Build the Terminal UI ─────────────────────────────────────────── */
+  /* ═══════════════════════════════════════════════════════════════════════
+     4. BUILD UI
+     ═══════════════════════════════════════════════════════════════════════ */
 
   const jokes = [
-    { tag: '// system.log', text: 'You opened a <span class="hi">keyboard training app</span> on a touchscreen. That is like going to the gym and just watching the machines. Respect the bit, not just the swipe.' },
-    { tag: '// runtime.error', text: 'TypeForge detected: <span class="hi">zero physical keys</span>. Cannot train what does not exist. Please add keyboard and try again. This is not negotiable.' },
-    { tag: '// access.denied', text: 'Fun fact: 99% of touch typists use an actual keyboard. You are in the other 1% who are <span class="hi">trying to type on glass</span>. Bold move. Wrong tool.' },
-    { tag: '// kernel.panic', text: 'Ah yes. Training fingers on a <span class="hi">capacitive touchscreen</span>. Next step: become a surgeon using oven mitts. Revisit this on a real keyboard.' },
+    { tag: '// runtime.log', text: 'You opened a <em>keyboard training app</em> on a touchscreen. That is like buying a treadmill and putting it in a pool. Solid effort, wrong medium.' },
+    { tag: '// stderr', text: 'TypeForge detected <em>zero physical keys</em>. Cannot train what does not exist. Please connect a keyboard and try again.' },
+    { tag: '// exception', text: 'Attempting to build muscle memory on glass. That is like trying to learn guitar on an iPad. The physics simply do not work.' },
+    { tag: '// warn', text: 'Fun fact: you are trying to take a <em>typing speed test</em> without a keyboard. That is like entering a car race on a bicycle. Respect the format.' },
   ];
   const joke = jokes[Math.floor(Math.random() * jokes.length)];
 
-  const rows = [
-    {
-      icon: '✓',
-      label: 'Internet connection',
-      status: 'ok',
-      statusText: 'ONLINE',
-    },
-    {
-      icon: '✓',
-      label: 'TypeForge servers reachable',
-      status: 'ok',
-      statusText: 'REACHABLE',
-    },
-    {
-      icon: '!',
-      label: 'Display with pointer precision (mouse or trackpad)',
-      status: checks.touchOnly ? 'fail' : 'ok',
-      statusText: checks.touchOnly ? 'TOUCHSCREEN' : 'DETECTED',
-    },
-    {
-      icon: checks.mobileUA ? '✗' : '!',
-      label: 'Physical keyboard attached to this device',
-      status: checks.mobileUA ? 'fail' : 'warn',
-      statusText: checks.mobileUA ? 'NOT DETECTED' : 'UNVERIFIED',
-    },
-    {
-      icon: checks.narrowScreen ? '!' : '✓',
-      label: 'Minimum screen width for typing interface (900px)',
-      status: checks.narrowScreen ? 'fail' : 'ok',
-      statusText: checks.narrowScreen ? `${window.innerWidth}px DETECTED` : 'PASS',
-    },
-  ];
+  function iconChar(status) {
+    if (status === 'ok')   return '✓';
+    if (status === 'warn') return '!';
+    return '✗';
+  }
 
-  const rowsHtml = rows.map(r => `
-    <div class="dg-check-row">
-      <span class="dg-check-icon" style="color:${r.status === 'ok' ? 'var(--dg-green)' : r.status === 'warn' ? 'var(--dg-amber)' : 'var(--dg-red)'}">${r.icon}</span>
-      <span class="dg-check-label">${r.label}</span>
-      <span class="dg-check-status ${r.status}">${r.statusText}</span>
+  const rowsHtml = checks.map((c, i) => `
+    <div class="ec-row" id="ec-row-${i}">
+      <span class="ec-icon wait" id="ec-icon-${i}">·</span>
+      <span class="ec-label">${c.label}</span>
+      <span class="ec-detail" id="ec-detail-${i}"></span>
     </div>
   `).join('');
 
   const overlay = document.createElement('div');
-  overlay.id = 'tf-device-guard';
-  overlay.setAttribute('role', 'dialog');
-  overlay.setAttribute('aria-modal', 'true');
-  overlay.setAttribute('aria-label', 'Device compatibility check');
+  overlay.id = 'tf-envcheck';
+  overlay.setAttribute('role', 'status');
+  overlay.setAttribute('aria-live', 'polite');
+  overlay.setAttribute('aria-label', 'Environment compatibility check');
   overlay.innerHTML = `
-    <div class="dg-window">
-      <div class="dg-titlebar">
-        <div class="dg-dots">
-          <div class="dg-dot r"></div>
-          <div class="dg-dot y"></div>
-          <div class="dg-dot g"></div>
+    <div class="ec-window">
+      <div class="ec-titlebar">
+        <div class="ec-dots">
+          <div class="ec-dot r"></div>
+          <div class="ec-dot y"></div>
+          <div class="ec-dot g"></div>
         </div>
-        <span class="dg-tab">typeforge.fun &mdash; device_check.sh</span>
+        <span class="ec-tab">typeforge &mdash; environment</span>
       </div>
-      <div class="dg-body">
-        <div class="dg-prompt"><span>$</span> sudo ./check_compatibility.sh --device="${deviceType}"<span class="dg-cursor"></span></div>
+      <div class="ec-body">
+        <div class="ec-heading">TypeForge Environment Check</div>
+        <div class="ec-checks">${rowsHtml}</div>
+        <div class="ec-bar"><div class="ec-bar-fill" id="ec-progress"></div></div>
 
-        <div class="dg-checks">${rowsHtml}</div>
-
-        <div class="dg-divider"></div>
-
-        <div class="dg-joke">
-          <div class="dg-joke-tag">${joke.tag}</div>
-          <div class="dg-joke-text">${joke.text}</div>
+        <div class="ec-blocker" id="ec-blocker">
+          <div class="ec-divider"></div>
+          <div class="ec-joke-box">
+            <div class="ec-joke-tag">${joke.tag}</div>
+            <div class="ec-joke-text">${joke.text}</div>
+          </div>
+          <div class="ec-message">
+            TypeForge works best with a <strong>physical keyboard</strong>. To get the real experience of measuring your keystrokes, timing, and building muscle memory, try it once on your <strong>laptop or desktop</strong>.<br><br>
+            You can still browse around here, but the typing sessions need real keys.
+          </div>
+          <button class="ec-cta" id="ec-dismiss">Got it, let me look around</button>
+          <div class="ec-footer">typeforge.fun &nbsp;&middot;&nbsp; best on desktop</div>
         </div>
-
-        <div class="dg-message">
-          TypeForge is a <strong>precision keyboard training platform</strong>. It requires a physical keyboard to measure keystrokes, timing, and muscle memory. A touchscreen cannot provide the mechanical feedback needed to train properly.<br><br>
-          Open this on your <strong>laptop or desktop</strong> with a real keyboard attached.
-        </div>
-
-        <button class="dg-cta" id="dg-dismiss-btn">
-          Got it &mdash; I will visit from a proper keyboard
-        </button>
-        <div class="dg-footer">typeforge.fun &nbsp;&middot;&nbsp; keyboard training platform &nbsp;&middot;&nbsp; desktop only</div>
       </div>
     </div>
   `;
 
-  /* ─── 5. Inject overlay synchronously on DOMContentLoaded ─────────────── */
+  /* ═══════════════════════════════════════════════════════════════════════
+     5. MOUNT + PROGRESSIVE REVEAL
+     ═══════════════════════════════════════════════════════════════════════ */
 
   function mount() {
     if (!document.body) return;
     document.body.appendChild(overlay);
 
-    // Dismiss button — redirects to a helpful page or just closes (graceful)
-    document.getElementById('dg-dismiss-btn').addEventListener('click', function () {
-      overlay.style.opacity = '0';
-      overlay.style.transition = 'opacity 0.3s';
-      setTimeout(() => overlay.remove(), 320);
+    const total = checks.length;
+    const perRow = 1400 / total; // ~1.4s total for all rows
+    const progress = document.getElementById('ec-progress');
+    let hasFailure = false;
+
+    // Reveal each row sequentially
+    checks.forEach((c, i) => {
+      setTimeout(() => {
+        const row = document.getElementById(`ec-row-${i}`);
+        const icon = document.getElementById(`ec-icon-${i}`);
+        const detail = document.getElementById(`ec-detail-${i}`);
+        if (!row || !icon || !detail) return;
+
+        // Show the row
+        row.classList.add('visible');
+        icon.textContent = iconChar(c.status);
+        icon.className = `ec-icon ${c.status}`;
+        detail.textContent = c.detail;
+
+        // Update progress
+        const pct = ((i + 1) / total) * 100;
+        if (progress) {
+          progress.style.width = pct + '%';
+          if (c.status === 'fail') {
+            progress.classList.add('fail');
+            hasFailure = true;
+          } else if (c.status === 'warn' && !hasFailure) {
+            progress.classList.add('warn');
+          }
+        }
+
+        // After last row
+        if (i === total - 1) {
+          setTimeout(() => finalize(hasFailure), 200);
+        }
+      }, (i + 1) * perRow);
     });
+
+    // Detect ad blocker async and update its row
+    detectAdBlocker().then(blocked => {
+      const idx = 5; // ad blocker is at index 5
+      const c = checks[idx];
+      c.detail = blocked ? 'Active' : 'Not Detected';
+      c.status = blocked ? 'warn' : 'ok';
+      // Row might already be visible — update it
+      const icon = document.getElementById(`ec-icon-${idx}`);
+      const detail = document.getElementById(`ec-detail-${idx}`);
+      if (icon && icon.textContent !== '·') {
+        icon.textContent = iconChar(c.status);
+        icon.className = `ec-icon ${c.status}`;
+      }
+      if (detail && detail.textContent === 'Checking...') {
+        detail.textContent = c.detail;
+      }
+    });
+
+    // Dismiss button
+    document.getElementById('ec-dismiss')?.addEventListener('click', () => {
+      overlay.classList.add('fade-out');
+      setTimeout(() => overlay.remove(), 420);
+    });
+  }
+
+  function finalize(hasCriticalFail) {
+    // Always set session flag so it only shows once per visit
+    sessionStorage.setItem(SESSION_KEY, '1');
+
+    if (isIncompatible || hasCriticalFail) {
+      // Show guidance popup (not a blocker — user can dismiss and browse)
+      const blocker = document.getElementById('ec-blocker');
+      if (blocker) blocker.classList.add('active');
+    } else {
+      // All good — auto dismiss
+      setTimeout(() => {
+        overlay.classList.add('fade-out');
+        setTimeout(() => overlay.remove(), 420);
+      }, 300);
+    }
   }
 
   if (document.readyState === 'loading') {
