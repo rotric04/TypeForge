@@ -2,7 +2,7 @@
  * TypeForge AI — Authenticated & Secure API Client
  * Upgraded with Axios interceptors and DOMPurify for XSS protection.
  */
-import Auth from './clerk.js?v=2';
+import Auth from './clerk.js?v=3';
 import axios from 'https://esm.sh/axios@1.6.2';
 import DOMPurify from 'https://esm.sh/dompurify@3.0.6';
 
