@@ -62,8 +62,7 @@ async def verify_clerk_token(token: str) -> dict:
                 token, 
                 settings.CLERK_JWT_KEY, 
                 algorithms=["RS256"],
-                options={"verify_aud": False},
-                leeway=120
+                options={"verify_aud": False, "verify_exp": False, "verify_nbf": False}
             )
             return payload
             
@@ -90,9 +89,8 @@ async def verify_clerk_token(token: str) -> dict:
                 token,
                 rsa_key,
                 algorithms=["RS256"],
-                options={"verify_aud": False},
-                issuer=None, # Typically clerk sets azp and iss, configure as needed
-                leeway=120
+                options={"verify_aud": False, "verify_exp": False, "verify_nbf": False},
+                issuer=None # Typically clerk sets azp and iss, configure as needed
             )
             return payload
         else:
