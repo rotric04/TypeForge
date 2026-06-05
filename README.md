@@ -185,7 +185,6 @@ TypeForge/
 ├── css/                          <-- Global theme variables, components, and animations
 ├── js/                           <-- Common layout scripts, Clerk auth, onboarding tours
 ├── docs/                         <-- Project documentation
-│   ├── README.md                 <-- General project overview
 │   └── SYSTEM.md                 <-- Comprehensive technical report and system architecture
 └── index.html & static files     <-- Marketing pages (about, blog, features, etc.)
 ```
