@@ -20,6 +20,20 @@ Transform typing practice into a personalized learning experience through real-t
 
 ---
 
+## 📚 Documentation
+
+- 📖 [System Architecture](./SYSTEM.md) — Comprehensive technical report, SWOT/TOWS analysis, and the 4+1 Architectural Views model.
+- 🚀 [Getting Started Guide](#🚀-getting-started) — Setup instructions for the frontend and backend local development.
+
+### 📁 Quick Access
+
+| Document | Purpose | File Path |
+| :--- | :--- | :--- |
+| **System Architecture** | Technical Architecture, 4+1 views, SWOT | [docs/SYSTEM.md](./SYSTEM.md) |
+| **Main Overview** | High-level features, roadmap, setup | [README.md](../README.md) |
+
+---
+
 ## 🚀 What Is TypeForge?
 
 Most typing platforms only measure speed.
