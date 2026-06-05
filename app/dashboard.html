@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y8JE6RY1D"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     gtag('config', 'G-0Y8JE6RY1D');
   </script>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard | TypeForge AI</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link rel="preconnect" href="https://esm.sh" crossorigin/>
-  <link rel="stylesheet" href="../css/global.css"/>
-  <link rel="stylesheet" href="../css/animations.css"/>
-  <link rel="stylesheet" href="../css/components.css"/>
-  <link rel="stylesheet" href="../css/dashboard.css"/>
-  <link rel="stylesheet" href="../css/app-pages.css"/>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23f4f4f5' stroke-width='8'><rect x='10' y='20' width='80' height='60' rx='8'/><path d='M25 40h10M45 40h10M65 40h10M25 60h50'/></svg>"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://esm.sh" crossorigin />
+  <link rel="stylesheet" href="../css/global.css" />
+  <link rel="stylesheet" href="../css/animations.css" />
+  <link rel="stylesheet" href="../css/components.css" />
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/app-pages.css" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23f4f4f5' stroke-width='8'><rect x='10' y='20' width='80' height='60' rx='8'/><path d='M25 40h10M45 40h10M65 40h10M25 60h50'/></svg>" />
   <!-- Vercel Web Analytics -->
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -29,11 +31,15 @@
   <script defer src="/_vercel/insights/script.js"></script>
   <style>
     /* ── App Layout ────────────────────────────────────────── */
-    body { background-color: var(--bg-base); }
+    body {
+      background-color: var(--bg-base);
+    }
+
     .app-layout {
       display: flex;
       min-height: 100vh;
-      padding-top: 20px; /* offset for top space */
+      padding-top: 20px;
+      /* offset for top space */
     }
 
     /* Main Content */
@@ -50,8 +56,17 @@
       align-items: flex-end;
       margin-bottom: 32px;
     }
-    .greeting { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
-    .subtitle { color: var(--text-3); font-size: 14px; }
+
+    .greeting {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: var(--text-3);
+      font-size: 14px;
+    }
 
     /* ── Bento Grid ────────────────────────────────────────── */
     .bento-grid {
@@ -70,16 +85,33 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     }
 
     /* Span utilities */
-    .span-12 { grid-column: span 12; }
-    .span-8  { grid-column: span 8; }
-    .span-6  { grid-column: span 6; }
-    .span-4  { grid-column: span 4; }
-    .span-3  { grid-column: span 3; }
-    .row-2   { grid-row: span 2; }
+    .span-12 {
+      grid-column: span 12;
+    }
+
+    .span-8 {
+      grid-column: span 8;
+    }
+
+    .span-6 {
+      grid-column: span 6;
+    }
+
+    .span-4 {
+      grid-column: span 4;
+    }
+
+    .span-3 {
+      grid-column: span 3;
+    }
+
+    .row-2 {
+      grid-row: span 2;
+    }
 
     .bento-title {
       font-size: 13px;
@@ -88,7 +120,9 @@
       text-transform: uppercase;
       letter-spacing: 0.05em;
       margin-bottom: 16px;
-      display: flex; align-items: center; gap: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     /* ── Metric Cards ── */
@@ -99,6 +133,7 @@
       line-height: 1;
       margin-bottom: 8px;
     }
+
     .metric-trend {
       display: inline-flex;
       align-items: center;
@@ -108,9 +143,17 @@
       padding: 4px 8px;
       border-radius: 999px;
     }
-    .trend-up { background: var(--success-bg); color: var(--success); }
-    .trend-down { background: var(--error-bg); color: var(--error); }
-    
+
+    .trend-up {
+      background: var(--success-bg);
+      color: var(--success);
+    }
+
+    .trend-down {
+      background: var(--error-bg);
+      color: var(--error);
+    }
+
     /* ── Chart Card ── */
     .chart-container {
       flex: 1;
@@ -118,22 +161,38 @@
       min-height: 200px;
       margin-top: 16px;
     }
+
     /* SVG Chart styles */
-    .line-chart { width: 100%; height: 100%; overflow: visible; }
+    .line-chart {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
     .line-path {
       fill: none;
       stroke: var(--brand);
       stroke-width: 3;
       stroke-linecap: round;
       stroke-linejoin: round;
-      filter: drop-shadow(0 8px 8px rgba(232,115,74,0.4));
+      filter: drop-shadow(0 8px 8px rgba(232, 115, 74, 0.4));
     }
+
     .area-path {
       fill: url(#chartGradient);
       opacity: 0.5;
     }
-    .chart-grid line { stroke: var(--border-1); stroke-dasharray: 4 4; }
-    .chart-labels text { fill: var(--text-4); font-size: 11px; font-family: var(--font-mono); }
+
+    .chart-grid line {
+      stroke: var(--border-1);
+      stroke-dasharray: 4 4;
+    }
+
+    .chart-labels text {
+      fill: var(--text-4);
+      font-size: 11px;
+      font-family: var(--font-mono);
+    }
 
     /* ── Heatmap ── */
     .heatmap-grid {
@@ -142,514 +201,666 @@
       gap: 4px;
       margin-top: auto;
     }
+
     .heatmap-cell {
       aspect-ratio: 1;
       border-radius: 3px;
       background: var(--border-1);
     }
-    .heatmap-cell[data-level="1"] { background: rgba(0,201,167,0.2); }
-    .heatmap-cell[data-level="2"] { background: rgba(0,201,167,0.5); }
-    .heatmap-cell[data-level="3"] { background: rgba(0,201,167,0.8); }
-    .heatmap-cell[data-level="4"] { background: var(--teal); box-shadow: 0 0 10px var(--teal-glow); }
+
+    .heatmap-cell[data-level="1"] {
+      background: rgba(0, 201, 167, 0.2);
+    }
+
+    .heatmap-cell[data-level="2"] {
+      background: rgba(0, 201, 167, 0.5);
+    }
+
+    .heatmap-cell[data-level="3"] {
+      background: rgba(0, 201, 167, 0.8);
+    }
+
+    .heatmap-cell[data-level="4"] {
+      background: var(--teal);
+      box-shadow: 0 0 10px var(--teal-glow);
+    }
 
     /* ── DNA Ring ── */
     .dna-ring-container {
       position: relative;
-      width: 140px; height: 140px;
+      width: 140px;
+      height: 140px;
       margin: 0 auto;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+
     .dna-ring {
-      position: absolute; inset: 0;
+      position: absolute;
+      inset: 0;
       border-radius: 50%;
-      border: 2px dashed rgba(255,255,255,0.1);
+      border: 2px dashed rgba(255, 255, 255, 0.1);
       animation: spin 30s linear infinite;
     }
+
     .dna-ring::before {
-      content: ''; position: absolute; inset: -4px;
-      border-radius: 50%; border: 1px solid var(--brand-glow);
-      border-left-color: transparent; border-right-color: transparent;
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1px solid var(--brand-glow);
+      border-left-color: transparent;
+      border-right-color: transparent;
       animation: spin 15s linear infinite reverse;
     }
-    .dna-score { font-size: 32px; font-weight: 800; font-family: var(--font-display); }
-    .dna-label { font-size: 11px; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.1em; position: absolute; bottom: -30px; white-space: nowrap; }
 
-    @keyframes spin { 100% { transform: rotate(360deg); } }
+    .dna-score {
+      font-size: 32px;
+      font-weight: 800;
+      font-family: var(--font-display);
+    }
+
+    .dna-label {
+      font-size: 11px;
+      color: var(--text-3);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      position: absolute;
+      bottom: -30px;
+      white-space: nowrap;
+    }
+
+    @keyframes spin {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
 
     /* Responsive */
     @media (max-width: 1200px) {
-      .bento-grid { grid-template-columns: repeat(8, 1fr); }
-      .span-12 { grid-column: span 8; }
-      .span-4 { grid-column: span 4; }
-      .span-3 { grid-column: span 4; }
+      .bento-grid {
+        grid-template-columns: repeat(8, 1fr);
+      }
+
+      .span-12 {
+        grid-column: span 8;
+      }
+
+      .span-4 {
+        grid-column: span 4;
+      }
+
+      .span-3 {
+        grid-column: span 4;
+      }
     }
+
     @media (max-width: 768px) {
+
       /* Bottom nav handled by components.css — just clear margin-left */
       .app-main {
         margin-left: 0;
         padding: 20px 16px calc(80px + env(safe-area-inset-bottom));
       }
-      .dashboard-header { flex-direction: column; align-items: flex-start; gap: 12px; }
-      .greeting { font-size: 22px; }
-      .bento-grid { gap: 12px; }
+
+      .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .greeting {
+        font-size: 22px;
+      }
+
+      .bento-grid {
+        gap: 12px;
+      }
     }
+
     @media (max-width: 600px) {
-      .bento-grid { grid-template-columns: 1fr; gap: 12px; }
-      .span-12, .span-8, .span-6, .span-4, .span-3 { grid-column: 1 / -1; }
-      .row-2 { grid-row: auto; min-height: 220px; }
-      .heatmap-grid { grid-template-columns: repeat(14, 1fr); }
-      .metric-value { font-size: 32px; }
-      .dna-ring-container { width: 110px; height: 110px; }
+      .bento-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .span-12,
+      .span-8,
+      .span-6,
+      .span-4,
+      .span-3 {
+        grid-column: 1 / -1;
+      }
+
+      .row-2 {
+        grid-row: auto;
+        min-height: 220px;
+      }
+
+      .heatmap-grid {
+        grid-template-columns: repeat(14, 1fr);
+      }
+
+      .metric-value {
+        font-size: 32px;
+      }
+
+      .dna-ring-container {
+        width: 110px;
+        height: 110px;
+      }
     }
   </style>
 </head>
+
 <body class="tf-authenticated">
 
-<div class="app-layout">
-  <!-- Sidebar -->
-  <aside class="app-sidebar" role="navigation" aria-label="App navigation">
-    <a href="/" class="sidebar-logo" aria-label="TypeForge AI Home">
-      <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
-    </a>
-    <nav class="sidebar-nav">
-      <div class="sidebar-item" onclick="location.href='typing.html'" title="Train" aria-label="Train">
-        <span class="sidebar-icon">
-          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
-        </span>
-        <span class="sidebar-label">Train</span>
-      </div>
-      <div class="sidebar-item active" onclick="location.href='dashboard.html'" title="Dashboard" aria-label="Dashboard">
-        <span class="sidebar-icon">
-          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-        </span>
-        <span class="sidebar-label">Dashboard</span>
-      </div>
-      <div class="sidebar-item" onclick="location.href='achievements.html'" title="Achievements" aria-label="Achievements">
-        <span class="sidebar-icon">
-          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34M12 2a5 5 0 0 0-5 5v3c0 2.76 2.24 5 5 5s5-2.24 5-5V7a5 5 0 0 0-5-5z"/></svg>
-        </span>
-        <span class="sidebar-label">Achievements</span>
-      </div>
-      <div class="sidebar-item" onclick="location.href='history.html'" title="History" aria-label="History">
-        <span class="sidebar-icon">
-          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </span>
-        <span class="sidebar-label">History</span>
-      </div>
-    </nav>
-    <div class="sidebar-bottom">
-      <div class="sidebar-item" onclick="location.href='settings.html'" title="Settings" aria-label="Settings">
-        <span class="sidebar-icon">
-          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-        </span>
-        <span class="sidebar-label">Settings</span>
-      </div>
-      <div class="sidebar-item" title="Profile" aria-label="Profile" id="sidebar-profile">
-        <span class="sidebar-icon" id="nav-avatar">U</span>
-        <span class="sidebar-label" data-auth-name>Profile</span>
-      </div>
-      <div class="sidebar-item" title="Sign Out" aria-label="Sign Out" data-auth-signout>
-        <span class="sidebar-icon">
-          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
-        </span>
-        <span class="sidebar-label">Sign Out</span>
-      </div>
-    </div>
-  </aside>
-
-  <!-- Main Content -->
-  <main class="app-main">
-    <div class="dashboard-header">
-      <div>
-        <h1 class="greeting">Welcome back, <span data-auth-name>Typist</span>.</h1>
-        <p class="subtitle">Your live typing stats from the last 30 days.</p>
-      </div>
-      <a href="typing.html" class="btn btn-primary btn-lg">Start Session</a>
-    </div>
-
-    <div id="welcome-hero" class="welcome-hero" style="display:none;"></div>
-    <div id="xp-strip" class="xp-strip" style="display:none;"></div>
-
-    <div class="bento-grid">
-      <!-- WPM Chart (Spans 8 cols, 2 rows) -->
-      <div class="bento-item span-8 row-2">
-        <div class="bento-title">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-          Speed Trend (WPM)
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="app-sidebar" role="navigation" aria-label="App navigation">
+      <a href="/" class="sidebar-logo" aria-label="TypeForge AI Home">
+        <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="2" />
+          <path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10" />
+        </svg>
+      </a>
+      <nav class="sidebar-nav">
+        <div class="sidebar-item" onclick="location.href='typing.html'" title="Train" aria-label="Train">
+          <span class="sidebar-icon">
+            <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10" />
+            </svg>
+          </span>
+          <span class="sidebar-label">Train</span>
         </div>
-        <div style="display:flex; align-items:baseline; gap:12px; margin-bottom: 8px;">
-          <div class="metric-value" id="metric-wpm" data-counter="0">0</div>
-          <div class="metric-trend" id="metric-wpm-trend">Start your first session</div>
+        <div class="sidebar-item active" onclick="location.href='dashboard.html'" title="Dashboard"
+          aria-label="Dashboard">
+          <span class="sidebar-icon">
+            <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10" />
+              <line x1="12" y1="20" x2="12" y2="4" />
+              <line x1="6" y1="20" x2="6" y2="14" />
+            </svg>
+          </span>
+          <span class="sidebar-label">Dashboard</span>
         </div>
-        <div class="chart-container" id="chart-container">
-          <div class="chart-empty-msg" id="chart-empty-msg">Your speed chart appears after your first session. One minute is all it takes.</div>
-          <svg class="line-chart" viewBox="0 0 600 200" preserveAspectRatio="none" id="wpm-chart" style="display:none;">
-            <defs>
-              <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stop-color="rgba(232,115,74,0.4)"/>
-                <stop offset="100%" stop-color="rgba(232,115,74,0)"/>
-              </linearGradient>
-            </defs>
-            <g class="chart-grid">
-              <line x1="0" y1="50" x2="600" y2="50"/>
-              <line x1="0" y1="100" x2="600" y2="100"/>
-              <line x1="0" y1="150" x2="600" y2="150"/>
-            </g>
-            <path class="area-path" d="M0,180 L50,150 L100,160 L150,120 L200,130 L250,90 L300,110 L350,70 L400,80 L450,50 L500,60 L550,30 L600,40 L600,200 L0,200 Z" />
-            <path class="line-path" d="M0,180 L50,150 L100,160 L150,120 L200,130 L250,90 L300,110 L350,70 L400,80 L450,50 L500,60 L550,30 L600,40" />
-            <g class="chart-labels">
-              <text x="0" y="195">Oct 1</text>
-              <text x="560" y="195">Today</text>
-            </g>
-          </svg>
+        <div class="sidebar-item" onclick="location.href='achievements.html'" title="Achievements"
+          aria-label="Achievements">
+          <span class="sidebar-icon">
+            <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34M12 2a5 5 0 0 0-5 5v3c0 2.76 2.24 5 5 5s5-2.24 5-5V7a5 5 0 0 0-5-5z" />
+            </svg>
+          </span>
+          <span class="sidebar-label">Achievements</span>
         </div>
+        <div class="sidebar-item" onclick="location.href='history.html'" title="History" aria-label="History">
+          <span class="sidebar-icon">
+            <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+          </span>
+          <span class="sidebar-label">History</span>
+        </div>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-item" onclick="location.href='settings.html'" title="Settings" aria-label="Settings">
+          <span class="sidebar-icon">
+            <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+            </svg>
+          </span>
+          <span class="sidebar-label">Settings</span>
+        </div>
+        <div class="sidebar-item" title="Profile" aria-label="Profile" id="sidebar-profile">
+          <span class="sidebar-icon" id="nav-avatar">U</span>
+          <span class="sidebar-label" data-auth-name>Profile</span>
+        </div>
+        <div class="sidebar-item" title="Sign Out" aria-label="Sign Out" data-auth-signout>
+          <span class="sidebar-icon">
+            <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
+            </svg>
+          </span>
+          <span class="sidebar-label">Sign Out</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="app-main">
+      <div class="dashboard-header">
+        <div>
+          <h1 class="greeting">Welcome back, <span data-auth-name>Typist</span>.</h1>
+          <p class="subtitle">Your live typing stats from the last 30 days.</p>
+        </div>
+        <a href="typing.html" class="btn btn-primary btn-lg">Start Session</a>
       </div>
 
-      <!-- Accuracy -->
-      <div class="bento-item span-4" id="accuracy-card">
-        <div class="bento-title">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px;"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-          Accuracy
-        </div>
-        <div class="metric-value" id="metric-accuracy" style="color:var(--teal);" data-counter="0" data-suffix="%">0%</div>
-        <div class="metric-trend" id="metric-acc-trend">Track your precision here</div>
-        <!-- Progress bar -->
-        <div style="width:100%;height:6px;background:var(--border-1);border-radius:3px;margin-top:auto;">
-          <div id="metric-acc-bar" style="width:0%;height:100%;background:var(--teal);border-radius:3px;box-shadow:0 0 10px var(--teal-glow);"></div>
-        </div>
-      </div>
+      <div id="welcome-hero" class="welcome-hero" style="display:none;"></div>
+      <div id="xp-strip" class="xp-strip" style="display:none;"></div>
 
-      <!-- Typing DNA -->
-      <div class="bento-item span-4" style="align-items:center;text-align:center;">
-        <div class="bento-title" style="align-self:flex-start;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px;"><path d="M12 2v20M17 5v14M22 9v6M7 7v10M2 10v4"/></svg>
-          Consistency Score
-        </div>
-        <div class="dna-ring-container">
-          <div class="dna-ring"></div>
-          <div class="dna-score" id="metric-consistency" data-counter="0">0</div>
-          <div class="dna-label">Steady Rhythm</div>
-        </div>
-      </div>
-
-      <!-- Heatmap (Spans 6) -->
-      <div class="bento-item span-6">
-        <div class="bento-title">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          Activity Map
-        </div>
-        <div style="font-size:12px;color:var(--text-3);margin-bottom:12px;">0 sessions in the last 60 days</div>
-        <div class="heatmap-grid" id="heatmap">
-          <!-- JS will populate cells -->
-        </div>
-      </div>
-
-      <!-- Weak Keys -->
-      <div class="bento-item span-6">
-        <div class="bento-title">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          Target Areas
-        </div>
-        <p style="font-size:13px;color:var(--text-3);margin-bottom:16px;">Keys that slow down your rhythm.</p>
-        <div id="weak-keys-target" style="display:flex;gap:12px;">
-          <div style="flex:1;padding:16px;text-align:center;color:var(--text-4);font-size:13px;border:1px dashed var(--border-1);border-radius:12px;">
-            Complete a session to see your target keys.
+      <div class="bento-grid">
+        <!-- WPM Chart (Spans 8 cols, 2 rows) -->
+        <div class="bento-item span-8 row-2">
+          <div class="bento-title">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+            </svg>
+            Speed Trend (WPM)
+          </div>
+          <div style="display:flex; align-items:baseline; gap:12px; margin-bottom: 8px;">
+            <div class="metric-value" id="metric-wpm" data-counter="0">0</div>
+            <div class="metric-trend" id="metric-wpm-trend">Start your first session</div>
+          </div>
+          <div class="chart-container" id="chart-container">
+            <div class="chart-empty-msg" id="chart-empty-msg">Your speed chart appears after your first session. One
+              minute is all it takes.</div>
+            <svg class="line-chart" viewBox="0 0 600 200" preserveAspectRatio="none" id="wpm-chart"
+              style="display:none;">
+              <defs>
+                <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="rgba(232,115,74,0.4)" />
+                  <stop offset="100%" stop-color="rgba(232,115,74,0)" />
+                </linearGradient>
+              </defs>
+              <g class="chart-grid">
+                <line x1="0" y1="50" x2="600" y2="50" />
+                <line x1="0" y1="100" x2="600" y2="100" />
+                <line x1="0" y1="150" x2="600" y2="150" />
+              </g>
+              <path class="area-path"
+                d="M0,180 L50,150 L100,160 L150,120 L200,130 L250,90 L300,110 L350,70 L400,80 L450,50 L500,60 L550,30 L600,40 L600,200 L0,200 Z" />
+              <path class="line-path"
+                d="M0,180 L50,150 L100,160 L150,120 L200,130 L250,90 L300,110 L350,70 L400,80 L450,50 L500,60 L550,30 L600,40" />
+              <g class="chart-labels">
+                <text x="0" y="195">Oct 1</text>
+                <text x="560" y="195">Today</text>
+              </g>
+            </svg>
           </div>
         </div>
+
+        <!-- Accuracy -->
+        <div class="bento-item span-4" id="accuracy-card">
+          <div class="bento-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              style="vertical-align:middle;margin-right:4px;">
+              <circle cx="12" cy="12" r="10" />
+              <circle cx="12" cy="12" r="6" />
+              <circle cx="12" cy="12" r="2" />
+            </svg>
+            Accuracy
+          </div>
+          <div class="metric-value" id="metric-accuracy" style="color:var(--teal);" data-counter="0" data-suffix="%">0%
+          </div>
+          <div class="metric-trend" id="metric-acc-trend">Track your precision here</div>
+          <!-- Progress bar -->
+          <div style="width:100%;height:6px;background:var(--border-1);border-radius:3px;margin-top:auto;">
+            <div id="metric-acc-bar"
+              style="width:0%;height:100%;background:var(--teal);border-radius:3px;box-shadow:0 0 10px var(--teal-glow);">
+            </div>
+          </div>
+        </div>
+
+        <!-- Typing DNA -->
+        <div class="bento-item span-4" style="align-items:center;text-align:center;">
+          <div class="bento-title" style="align-self:flex-start;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              style="vertical-align:middle;margin-right:4px;">
+              <path d="M12 2v20M17 5v14M22 9v6M7 7v10M2 10v4" />
+            </svg>
+            Consistency Score
+          </div>
+          <div class="dna-ring-container">
+            <div class="dna-ring"></div>
+            <div class="dna-score" id="metric-consistency" data-counter="0">0</div>
+            <div class="dna-label">Steady Rhythm</div>
+          </div>
+        </div>
+
+        <!-- Heatmap (Spans 6) -->
+        <div class="bento-item span-6">
+          <div class="bento-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              style="vertical-align:middle;margin-right:4px;">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg>
+            Activity Map
+          </div>
+          <div style="font-size:12px;color:var(--text-3);margin-bottom:12px;">0 sessions in the last 60 days</div>
+          <div class="heatmap-grid" id="heatmap">
+            <!-- JS will populate cells -->
+          </div>
+        </div>
+
+        <!-- Weak Keys -->
+        <div class="bento-item span-6">
+          <div class="bento-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              style="vertical-align:middle;margin-right:4px;">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+            Target Areas
+          </div>
+          <p style="font-size:13px;color:var(--text-3);margin-bottom:16px;">Keys that slow down your rhythm.</p>
+          <div id="weak-keys-target" style="display:flex;gap:12px;">
+            <div
+              style="flex:1;padding:16px;text-align:center;color:var(--text-4);font-size:13px;border:1px dashed var(--border-1);border-radius:12px;">
+              Complete a session to see your target keys.
+            </div>
+          </div>
+        </div>
+
       </div>
+    </main>
+  </div>
 
-    </div>
-  </main>
-</div>
+  <script type="module">
+    import Auth from '../js/clerk.js?v=3';
+    import API from '../js/api.js';
+    import { loadProfileAndHistory, loadDashboardAnalytics, displayName, xpToNextLevel, NEXT_BADGE_HINTS, calculateInterSessionConsistency } from '../js/app-data.js';
+    import { initScrollReveal, animateCounters, animateChartLine, staggerHeatmap } from '../js/motion.js';
 
-<script type="module">
-import Auth from '../js/clerk.js?v=3';
-import API from '../js/api.js';
-import { loadProfileAndHistory, loadDashboardAnalytics, displayName, xpToNextLevel, NEXT_BADGE_HINTS, calculateInterSessionConsistency } from '../js/app-data.js';
-import { initScrollReveal, animateCounters, animateChartLine, staggerHeatmap } from '../js/motion.js';
-
-(async () => {
-  // 1. Instant Cached UI Render (avoiding flash of "Typist" or Clerk ID)
-  try {
-    const cached = localStorage.getItem('tf_cached_profile');
-    if (cached) {
-      const cachedUser = JSON.parse(cached);
-      const name = displayName(cachedUser, null);
-      document.querySelectorAll('[data-auth-name]').forEach((el) => { el.textContent = name; });
-      const avatar = document.getElementById('nav-avatar');
-      if (avatar) {
-        avatar.textContent = name.charAt(0).toUpperCase();
-        if (cachedUser.avatarUrl) {
-          avatar.innerHTML = `<img src="${cachedUser.avatarUrl}" alt="${name}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"/>`;
+    (async () => {
+      // 1. Instant Cached UI Render (avoiding flash of "Typist" or Clerk ID)
+      try {
+        const cached = localStorage.getItem('tf_cached_profile');
+        if (cached) {
+          const cachedUser = JSON.parse(cached);
+          const name = displayName(cachedUser, null);
+          document.querySelectorAll('[data-auth-name]').forEach((el) => { el.textContent = name; });
+          const avatar = document.getElementById('nav-avatar');
+          if (avatar) {
+            avatar.textContent = name.charAt(0).toUpperCase();
+            if (cachedUser.avatarUrl) {
+              avatar.innerHTML = `<img src="${cachedUser.avatarUrl}" alt="${name}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"/>`;
+            }
+          }
         }
-      }
-    }
-  } catch (e) {}
+      } catch (e) { }
 
-  // Instant Cookie-based Auth Guard
-  const getCookie = (name) => {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-  };
-  if (getCookie('tf_authenticated') !== 'true' && window.location.hostname !== 'localhost') {
-    window.location.href = '/login';
-    return;
-  }
-
-  let user;
-  try {
-    user = await Auth.init();
-    if (!user && window.location.hostname !== 'localhost') {
-      window.location.href = '/login';
-      return;
-    }
-  } catch (err) {
-    console.error("TF Auth: Failed to initialize Auth in dashboard:", err);
-    if (window.location.hostname !== 'localhost') {
-      window.location.href = '/login';
-      return;
-    }
-  }
-
-  // Update cached profile values if clerk returns something fresh
-  if (user) {
-    localStorage.setItem('tf_cached_profile', JSON.stringify(user));
-    const cachedName = displayName(user, null);
-    document.querySelectorAll('[data-auth-name]').forEach((el) => { el.textContent = cachedName; });
-  }
-
-  try {
-    // 2. Fetch all dashboard data concurrently
-    const [profileRes, historyRes, analyticsRes] = await Promise.allSettled([
-      API.getUserProfile(),
-      API.getHistory(60, 0),
-      API.getDashboardAnalytics()
-    ]);
-
-    let profile = profileRes.status === 'fulfilled' ? profileRes.value : null;
-    if (!profile && window.location.hostname !== 'localhost') {
-      const reasonMsg = profileRes.reason?.message || '';
-      const isNetworkError = reasonMsg.includes('Network Error') || reasonMsg.includes('timeout') || reasonMsg.includes('HTTP 5') || reasonMsg.includes('Failed to fetch');
-      if (isNetworkError) {
-        console.warn("TF: Profile request failed due to network/timeout. Keeping user session.");
-        const { showToast } = await import('../js/common.js');
-        showToast({
-          title: "Connection Issue",
-          desc: "The servers are taking longer to respond. Showing cached data.",
-          type: "warning",
-          duration: 5000
-        });
-      } else {
-        throw new Error("Missing user profile data");
-      }
-    }
-    if (!profile) {
-      profile = {
-        xp: 0,
-        level: 1,
-        total_sessions: 0,
-        best_wpm: 0,
-        weak_keys: [],
+      // Instant Cookie-based Auth Guard
+      const getCookie = (name) => {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
       };
-    }
-    const history = historyRes.status === 'fulfilled' && historyRes.value ? historyRes.value : [];
-    const analytics = analyticsRes.status === 'fulfilled' ? analyticsRes.value : null;
-
-    if (!profile.best_wpm && history.length) {
-      profile.best_wpm = Math.max(...history.map((s) => s.wpm || 0));
-    }
-
-    const display = displayName(user, profile);
-    document.querySelectorAll('[data-auth-name]').forEach((el) => { el.textContent = display; });
-
-    renderWelcome(display, profile, history);
-    renderXpStrip(profile, history);
-
-    let latestWpm = 0;
-    let avgAccuracy = 0;
-    let avgConsistency = analytics?.consistency_score ?? 0;
-    let wpmChangeText = 'Start your first session';
-    let accChangeText = 'Track your precision here';
-
-    if (history.length > 0) {
-      latestWpm = history[0].wpm || 0;
-      avgAccuracy = Math.round(history.reduce((s, x) => s + (typeof x.accuracy === 'number' ? x.accuracy : parseFloat(x.accuracy || 0)), 0) / history.length);
-      
-      // Calculate inter-session consistency fallback if not returned by analytics
-      if (!avgConsistency) {
-        avgConsistency = calculateInterSessionConsistency(history);
+      if (getCookie('tf_authenticated') !== 'true' && window.location.hostname !== 'localhost') {
+        window.location.href = '/login';
+        return;
       }
-      
-      if (analytics?.average_wpm) latestWpm = Math.round(analytics.average_wpm) || latestWpm;
-      if (analytics?.average_accuracy) avgAccuracy = Math.round(analytics.average_accuracy) || avgAccuracy;
 
-      if (history.length >= 2) {
-        const diff = (history[0].wpm || 0) - (history[1].wpm || 0);
-        wpmChangeText = diff >= 0 ? `↑ +${diff} WPM vs last` : `↓ ${Math.abs(diff)} WPM vs last`;
-        const acc0 = typeof history[0].accuracy === 'number' ? history[0].accuracy : parseFloat(history[0].accuracy || 0);
-        const acc1 = typeof history[1].accuracy === 'number' ? history[1].accuracy : parseFloat(history[1].accuracy || 0);
-        const accDiff = acc0 - acc1;
-        accChangeText = accDiff >= 0 ? `↑ +${accDiff.toFixed(1)}%` : `↓ ${Math.abs(accDiff).toFixed(1)}%`;
-      } else {
-        wpmChangeText = 'Great start. Keep going!';
-        accChangeText = `${avgAccuracy}% average`;
-      }
-    }
-
-    const wpmEl = document.getElementById('metric-wpm');
-    const wpmTrendEl = document.getElementById('metric-wpm-trend');
-    if (wpmEl) { wpmEl.dataset.counter = latestWpm; wpmEl.textContent = latestWpm; }
-    if (wpmTrendEl) {
-      wpmTrendEl.textContent = analytics?.insight?.slice(0, 48) || wpmChangeText;
-      wpmTrendEl.className = `metric-trend ${wpmChangeText.includes('↓') ? 'trend-down' : 'trend-up'}`;
-    }
-
-    const accEl = document.getElementById('metric-accuracy');
-    const accTrendEl = document.getElementById('metric-acc-trend');
-    const accBar = document.getElementById('metric-acc-bar');
-    if (accEl) { accEl.dataset.counter = avgAccuracy; accEl.textContent = avgAccuracy + '%'; }
-    if (accTrendEl) {
-      accTrendEl.textContent = accChangeText;
-      accTrendEl.className = `metric-trend ${accChangeText.includes('↓') ? 'trend-down' : 'trend-up'}`;
-    }
-    if (accBar) accBar.style.width = `${avgAccuracy}%`;
-
-    const consEl = document.getElementById('metric-consistency');
-    if (consEl) { consEl.dataset.counter = avgConsistency; consEl.textContent = avgConsistency; }
-
-    // Activity map
-    const counts = {};
-    history.forEach(session => {
-      const dateStr = new Date(session.created_at || session.timestamp).toDateString();
-      counts[dateStr] = (counts[dateStr] || 0) + 1;
-    });
-
-    const heatmap = document.getElementById('heatmap');
-    if (heatmap) {
-      heatmap.innerHTML = '';
-      const now = new Date();
-      for (let i = 59; i >= 0; i--) {
-        const d = new Date();
-        d.setDate(now.getDate() - i);
-        const dateStr = d.toDateString();
-        const count = counts[dateStr] || 0;
-        
-        const cell = document.createElement('div');
-        cell.className = 'heatmap-cell';
-        cell.title = `${dateStr}: ${count} session${count !== 1 ? 's' : ''}`;
-        
-        let level = 0;
-        if (count > 0) {
-          if (count === 1) level = 1;
-          else if (count <= 3) level = 2;
-          else if (count <= 5) level = 3;
-          else level = 4;
+      let user;
+      try {
+        user = await Auth.init();
+        if (!user && window.location.hostname !== 'localhost') {
+          window.location.href = '/login';
+          return;
         }
-        if (level > 0) {
-          cell.setAttribute('data-level', level);
+      } catch (err) {
+        console.error("TF Auth: Failed to initialize Auth in dashboard:", err);
+        if (window.location.hostname !== 'localhost') {
+          window.location.href = '/login';
+          return;
         }
-        heatmap.appendChild(cell);
       }
-      
-      const totalIn60Days = history.filter(s => {
-        const diff = now - new Date(s.created_at || s.timestamp);
-        return diff <= 60 * 24 * 60 * 60 * 1000;
-      }).length;
-      const descEl = heatmap.previousElementSibling;
-      if (descEl) {
-        descEl.textContent = `${totalIn60Days} sessions in the last 60 days`;
-      }
-    }
 
-    const chartSvg = document.getElementById('wpm-chart');
-    const chartEmpty = document.getElementById('chart-empty-msg');
-    const linePath = document.querySelector('.line-path');
-    const areaPath = document.querySelector('.area-path');
-    if (linePath && areaPath && history.length >= 2) {
-      if (chartSvg) chartSvg.style.display = 'block';
-      if (chartEmpty) chartEmpty.style.display = 'none';
-      const historyCopy = [...history].reverse(); // oldest first
-      const minWpm = Math.min(...historyCopy.map(s => s.wpm || 0));
-      const maxWpm = Math.max(...historyCopy.map(s => s.wpm || 0));
-      const range = maxWpm - minWpm || 10;
-      
-      const width = 600;
-      const height = 200;
-      const points = [];
-      
-      historyCopy.forEach((s, idx) => {
-        const x = (idx / (historyCopy.length - 1)) * (width - 40) + 20;
-        const normalizedY = ((s.wpm || 0) - minWpm) / range;
-        const y = height - (normalizedY * (height - 60) + 30);
-        points.push(`${x.toFixed(1)},${y.toFixed(1)}`);
-      });
-      
-      const lineD = 'M' + points.join(' L');
-      const areaD = `${lineD} L${points[points.length - 1].split(',')[0]},180 L${points[0].split(',')[0]},180 Z`;
-      
-      linePath.setAttribute('d', lineD);
-      areaPath.setAttribute('d', areaD);
-      
-      // Update chart labels
-      const startText = document.querySelector('.chart-labels text:first-of-type');
-      if (startText) {
-        startText.textContent = new Date(historyCopy[0].created_at || historyCopy[0].timestamp).toLocaleDateString(undefined, {month: 'short', day: 'numeric'});
+      // Update cached profile values if clerk returns something fresh
+      if (user) {
+        localStorage.setItem('tf_cached_profile', JSON.stringify(user));
+        const cachedName = displayName(user, null);
+        document.querySelectorAll('[data-auth-name]').forEach((el) => { el.textContent = cachedName; });
       }
-    }
 
-    // 4. Update Target Areas (Weak Keys)
-    const weakKeysContainer = document.getElementById('weak-keys-target');
-    if (weakKeysContainer) {
-      const keys = (profile.weak_keys || []).slice(0, 3);
-      if (keys.length > 0) {
-        weakKeysContainer.innerHTML = '';
-        keys.forEach(k => {
-          const card = document.createElement('div');
-          card.style.cssText = 'flex:1;background:rgba(240,92,110,0.1);border:1px solid rgba(240,92,110,0.2);border-radius:12px;padding:12px;text-align:center;';
-          card.innerHTML = `
+      try {
+        // 2. Fetch all dashboard data concurrently
+        const [profileRes, historyRes, analyticsRes] = await Promise.allSettled([
+          API.getUserProfile(),
+          API.getHistory(60, 0),
+          API.getDashboardAnalytics()
+        ]);
+
+        let profile = profileRes.status === 'fulfilled' ? profileRes.value : null;
+        if (!profile && window.location.hostname !== 'localhost') {
+          const reasonMsg = profileRes.reason?.message || '';
+          const isNetworkError = reasonMsg.includes('Network Error') || reasonMsg.includes('timeout') || reasonMsg.includes('HTTP 5') || reasonMsg.includes('Failed to fetch');
+          if (isNetworkError) {
+            console.warn("TF: Profile request failed due to network/timeout. Keeping user session.");
+            const { showToast } = await import('../js/common.js');
+            showToast({
+              title: "Connection Issue",
+              desc: "The servers are taking longer to respond. Showing cached data.",
+              type: "warning",
+              duration: 5000
+            });
+          } else {
+            throw new Error("Missing user profile data");
+          }
+        }
+        if (!profile) {
+          profile = {
+            xp: 0,
+            level: 1,
+            total_sessions: 0,
+            best_wpm: 0,
+            weak_keys: [],
+          };
+        }
+        const history = historyRes.status === 'fulfilled' && historyRes.value ? historyRes.value : [];
+        const analytics = analyticsRes.status === 'fulfilled' ? analyticsRes.value : null;
+
+        if (!profile.best_wpm && history.length) {
+          profile.best_wpm = Math.max(...history.map((s) => s.wpm || 0));
+        }
+
+        const display = displayName(user, profile);
+        document.querySelectorAll('[data-auth-name]').forEach((el) => { el.textContent = display; });
+
+        renderWelcome(display, profile, history);
+        renderXpStrip(profile, history);
+
+        let latestWpm = 0;
+        let avgAccuracy = 0;
+        let avgConsistency = analytics?.consistency_score ?? 0;
+        let wpmChangeText = 'Start your first session';
+        let accChangeText = 'Track your precision here';
+
+        if (history.length > 0) {
+          latestWpm = history[0].wpm || 0;
+          avgAccuracy = Math.round(history.reduce((s, x) => s + (typeof x.accuracy === 'number' ? x.accuracy : parseFloat(x.accuracy || 0)), 0) / history.length);
+
+          // Calculate inter-session consistency fallback if not returned by analytics
+          if (!avgConsistency) {
+            avgConsistency = calculateInterSessionConsistency(history);
+          }
+
+          if (analytics?.average_wpm) latestWpm = Math.round(analytics.average_wpm) || latestWpm;
+          if (analytics?.average_accuracy) avgAccuracy = Math.round(analytics.average_accuracy) || avgAccuracy;
+
+          if (history.length >= 2) {
+            const diff = (history[0].wpm || 0) - (history[1].wpm || 0);
+            wpmChangeText = diff >= 0 ? `↑ +${diff} WPM vs last` : `↓ ${Math.abs(diff)} WPM vs last`;
+            const acc0 = typeof history[0].accuracy === 'number' ? history[0].accuracy : parseFloat(history[0].accuracy || 0);
+            const acc1 = typeof history[1].accuracy === 'number' ? history[1].accuracy : parseFloat(history[1].accuracy || 0);
+            const accDiff = acc0 - acc1;
+            accChangeText = accDiff >= 0 ? `↑ +${accDiff.toFixed(1)}%` : `↓ ${Math.abs(accDiff).toFixed(1)}%`;
+          } else {
+            wpmChangeText = 'Great start. Keep going!';
+            accChangeText = `${avgAccuracy}% average`;
+          }
+        }
+
+        const wpmEl = document.getElementById('metric-wpm');
+        const wpmTrendEl = document.getElementById('metric-wpm-trend');
+        if (wpmEl) { wpmEl.dataset.counter = latestWpm; wpmEl.textContent = latestWpm; }
+        if (wpmTrendEl) {
+          wpmTrendEl.textContent = analytics?.insight?.slice(0, 48) || wpmChangeText;
+          wpmTrendEl.className = `metric-trend ${wpmChangeText.includes('↓') ? 'trend-down' : 'trend-up'}`;
+        }
+
+        const accEl = document.getElementById('metric-accuracy');
+        const accTrendEl = document.getElementById('metric-acc-trend');
+        const accBar = document.getElementById('metric-acc-bar');
+        if (accEl) { accEl.dataset.counter = avgAccuracy; accEl.textContent = avgAccuracy + '%'; }
+        if (accTrendEl) {
+          accTrendEl.textContent = accChangeText;
+          accTrendEl.className = `metric-trend ${accChangeText.includes('↓') ? 'trend-down' : 'trend-up'}`;
+        }
+        if (accBar) accBar.style.width = `${avgAccuracy}%`;
+
+        const consEl = document.getElementById('metric-consistency');
+        if (consEl) { consEl.dataset.counter = avgConsistency; consEl.textContent = avgConsistency; }
+
+        // Activity map
+        const counts = {};
+        history.forEach(session => {
+          const dateStr = new Date(session.created_at || session.timestamp).toDateString();
+          counts[dateStr] = (counts[dateStr] || 0) + 1;
+        });
+
+        const heatmap = document.getElementById('heatmap');
+        if (heatmap) {
+          heatmap.innerHTML = '';
+          const now = new Date();
+          for (let i = 59; i >= 0; i--) {
+            const d = new Date();
+            d.setDate(now.getDate() - i);
+            const dateStr = d.toDateString();
+            const count = counts[dateStr] || 0;
+
+            const cell = document.createElement('div');
+            cell.className = 'heatmap-cell';
+            cell.title = `${dateStr}: ${count} session${count !== 1 ? 's' : ''}`;
+
+            let level = 0;
+            if (count > 0) {
+              if (count === 1) level = 1;
+              else if (count <= 3) level = 2;
+              else if (count <= 5) level = 3;
+              else level = 4;
+            }
+            if (level > 0) {
+              cell.setAttribute('data-level', level);
+            }
+            heatmap.appendChild(cell);
+          }
+
+          const totalIn60Days = history.filter(s => {
+            const diff = now - new Date(s.created_at || s.timestamp);
+            return diff <= 60 * 24 * 60 * 60 * 1000;
+          }).length;
+          const descEl = heatmap.previousElementSibling;
+          if (descEl) {
+            descEl.textContent = `${totalIn60Days} sessions in the last 60 days`;
+          }
+        }
+
+        const chartSvg = document.getElementById('wpm-chart');
+        const chartEmpty = document.getElementById('chart-empty-msg');
+        const linePath = document.querySelector('.line-path');
+        const areaPath = document.querySelector('.area-path');
+        if (linePath && areaPath && history.length >= 2) {
+          if (chartSvg) chartSvg.style.display = 'block';
+          if (chartEmpty) chartEmpty.style.display = 'none';
+          const historyCopy = [...history].reverse(); // oldest first
+          const minWpm = Math.min(...historyCopy.map(s => s.wpm || 0));
+          const maxWpm = Math.max(...historyCopy.map(s => s.wpm || 0));
+          const range = maxWpm - minWpm || 10;
+
+          const width = 600;
+          const height = 200;
+          const points = [];
+
+          historyCopy.forEach((s, idx) => {
+            const x = (idx / (historyCopy.length - 1)) * (width - 40) + 20;
+            const normalizedY = ((s.wpm || 0) - minWpm) / range;
+            const y = height - (normalizedY * (height - 60) + 30);
+            points.push(`${x.toFixed(1)},${y.toFixed(1)}`);
+          });
+
+          const lineD = 'M' + points.join(' L');
+          const areaD = `${lineD} L${points[points.length - 1].split(',')[0]},180 L${points[0].split(',')[0]},180 Z`;
+
+          linePath.setAttribute('d', lineD);
+          areaPath.setAttribute('d', areaD);
+
+          // Update chart labels
+          const startText = document.querySelector('.chart-labels text:first-of-type');
+          if (startText) {
+            startText.textContent = new Date(historyCopy[0].created_at || historyCopy[0].timestamp).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+          }
+        }
+
+        // 4. Update Target Areas (Weak Keys)
+        const weakKeysContainer = document.getElementById('weak-keys-target');
+        if (weakKeysContainer) {
+          const keys = (profile.weak_keys || []).slice(0, 3);
+          if (keys.length > 0) {
+            weakKeysContainer.innerHTML = '';
+            keys.forEach(k => {
+              const card = document.createElement('div');
+              card.style.cssText = 'flex:1;background:rgba(240,92,110,0.1);border:1px solid rgba(240,92,110,0.2);border-radius:12px;padding:12px;text-align:center;';
+              card.innerHTML = `
             <div style="font-family:var(--font-mono);font-size:24px;color:var(--error);font-weight:700;">${k.toUpperCase()}</div>
             <div style="font-size:11px;color:var(--text-3);margin-top:4px;">Slow reaction</div>
           `;
-          weakKeysContainer.appendChild(card);
-        });
-      } else {
-        weakKeysContainer.innerHTML = `
+              weakKeysContainer.appendChild(card);
+            });
+          } else {
+            weakKeysContainer.innerHTML = `
           <div style="flex:1;padding:16px;text-align:center;color:var(--text-4);font-size:13px;border:1px dashed var(--border-1);border-radius:12px;">
             No weak keys detected yet. Start training to compile target keys!
           </div>
         `;
+          }
+        }
+
+      } catch (err) {
+        console.error('Failed to load dashboard metrics:', err);
+        const errMsg = err?.message || '';
+        const isNetworkError = errMsg.includes('Network Error') || errMsg.includes('timeout') || errMsg.includes('HTTP 5') || errMsg.includes('Failed to fetch');
+        if (!isNetworkError && typeof Auth !== 'undefined' && Auth.triggerEmergencyLogout) {
+          Auth.triggerEmergencyLogout("Failed to initialize dashboard.");
+        } else {
+          if (window.location.hostname !== 'localhost') {
+            window.location.replace("/");
+          }
+        }
       }
-    }
 
-  } catch (err) {
-    console.error('Failed to load dashboard metrics:', err);
-    const errMsg = err?.message || '';
-    const isNetworkError = errMsg.includes('Network Error') || errMsg.includes('timeout') || errMsg.includes('HTTP 5') || errMsg.includes('Failed to fetch');
-    if (!isNetworkError && typeof Auth !== 'undefined' && Auth.triggerEmergencyLogout) {
-      Auth.triggerEmergencyLogout("Failed to initialize dashboard.");
-    } else {
-      if (window.location.hostname !== 'localhost') {
-        window.location.replace("/");
+      initScrollReveal();
+      await animateCounters('[data-counter]');
+      await animateChartLine('.line-path');
+      await staggerHeatmap('.heatmap-cell');
+    })();
+
+    function renderWelcome(name, profile, history) {
+      const el = document.getElementById('welcome-hero');
+      if (!el) return;
+      if (history.length > 0) {
+        el.style.display = 'none';
+        return;
       }
-    }
-  }
-
-  initScrollReveal();
-  await animateCounters('[data-counter]');
-  await animateChartLine('.line-path');
-  await staggerHeatmap('.heatmap-cell');
-})();
-
-function renderWelcome(name, profile, history) {
-  const el = document.getElementById('welcome-hero');
-  if (!el) return;
-  if (history.length > 0) {
-    el.style.display = 'none';
-    return;
-  }
-  el.style.display = 'flex';
-  el.innerHTML = `
+      el.style.display = 'flex';
+      el.innerHTML = `
     <div class="welcome-emoji">
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
     </div>
@@ -660,26 +871,28 @@ function renderWelcome(name, profile, history) {
     </div>
     <a href="typing.html" class="btn btn-primary btn-lg">Start Session</a>
   `;
-}
+    }
 
-function renderXpStrip(profile, history) {
-  const el = document.getElementById('xp-strip');
-  if (!el) return;
-  const xp = profile.xp || 0;
-  const level = profile.level || 1;
-  const { cap, inLevel, pct } = xpToNextLevel(level, xp);
-  const sessions = profile.total_sessions || history.length || 0;
-  const next = NEXT_BADGE_HINTS.find((b) => sessions < 1 && b.id === 'first_session') || NEXT_BADGE_HINTS[1];
+    function renderXpStrip(profile, history) {
+      const el = document.getElementById('xp-strip');
+      if (!el) return;
+      const xp = profile.xp || 0;
+      const level = profile.level || 1;
+      const { cap, inLevel, pct } = xpToNextLevel(level, xp);
+      const sessions = profile.total_sessions || history.length || 0;
+      const next = NEXT_BADGE_HINTS.find((b) => sessions < 1 && b.id === 'first_session') || NEXT_BADGE_HINTS[1];
 
-  el.style.display = 'flex';
-  el.innerHTML = `
+      el.style.display = 'flex';
+      el.innerHTML = `
     <div class="xp-strip-card">
       <div class="xp-strip-label">Level ${level} · ${xp.toLocaleString()} XP</div>
       <div class="xp-bar-track"><div class="xp-bar-fill" style="width:${pct}%"></div></div>
       <div style="font-size:12px;color:var(--text-3);margin-top:8px;">${inLevel} / ${cap} XP to level ${level + 1}</div>
     </div>
     <div class="xp-strip-card next-badge-card">
-      <div class="next-badge-icon">${next.icon}</div>
+      <div class="next-badge-icon">
+        <span> class="badge value">${next.icon}</span>${next.icon}
+      </div>
       <div>
         <div style="font-weight:700;font-size:14px;">Next up: ${next.name}</div>
         <div style="font-size:12px;color:var(--text-3);">${next.hint}</div>
@@ -687,7 +900,8 @@ function renderXpStrip(profile, history) {
     </div>
     <a href="achievements.html" class="btn btn-secondary" style="align-self:center;">View Badges</a>
   `;
-}
-</script>
+    }
+  </script>
 </body>
+
 </html>
