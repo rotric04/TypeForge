@@ -164,18 +164,33 @@
   style.textContent = `
     @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
 
+    @keyframes ec-fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes ec-scale-in {
+      from { opacity: 0; transform: scale(0.96) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    @keyframes ec-slide-up {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     #tf-envcheck {
       position: fixed;
       inset: 0;
       z-index: 99999;
       background: #09090b;
       display: flex;
-      align-items: center;
-      justify-content: center;
+      align-items: stretch;
+      justify-content: stretch;
       padding: 20px;
       font-family: 'IBM Plex Mono', 'JetBrains Mono', 'Fira Code', monospace;
-      opacity: 1;
+      opacity: 0;
+      animation: ec-fade-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       transition: opacity 0.4s ease;
+      overflow-y: auto;
     }
     #tf-envcheck.fade-out { opacity: 0; pointer-events: none; }
 
@@ -188,6 +203,9 @@
       border: 1px solid #2a2a2e;
       border-radius: 8px;
       overflow: hidden;
+      opacity: 0;
+      animation: ec-scale-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+      margin: auto;
     }
 
     .ec-titlebar {
@@ -235,7 +253,7 @@
       border-bottom: 1px solid #1a1a1e;
       opacity: 0;
       transform: translateY(4px);
-      transition: opacity 0.25s ease, transform 0.25s ease;
+      transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .ec-row.visible {
       opacity: 1;
@@ -248,10 +266,11 @@
       font-size: 12px;
       text-align: center;
       flex-shrink: 0;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    .ec-icon.ok   { color: #22c55e; }
-    .ec-icon.warn { color: #f59e0b; }
-    .ec-icon.fail { color: #ef4444; }
+    .ec-icon.ok   { color: #22c55e; transform: scale(1.15); }
+    .ec-icon.warn { color: #f59e0b; transform: scale(1.15); }
+    .ec-icon.fail { color: #ef4444; transform: scale(1.15); }
     .ec-icon.wait { color: #52525b; }
 
     .ec-label {
@@ -285,8 +304,11 @@
     .ec-bar-fill.fail { background: #ef4444; }
 
     /* Blocker section: only shown when incompatible */
-    .ec-blocker { display: none; }
-    .ec-blocker.active { display: block; }
+    .ec-blocker { display: none; opacity: 0; }
+    .ec-blocker.active {
+      display: block;
+      animation: ec-slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
 
     .ec-divider {
       height: 1px;
@@ -418,7 +440,7 @@
 
   function mount() {
     if (!document.body) return;
-    document.body.appendChild(overlay);
+    document.documentElement.appendChild(overlay);
 
     const total = checks.length;
     const perRow = 1400 / total; // ~1.4s total for all rows
