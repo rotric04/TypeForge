@@ -53,7 +53,7 @@
   <link rel="stylesheet" href="css/landing.css" />
   <!-- Favicon -->
   <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>" />
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23f4f4f5' stroke-width='8'><rect x='10' y='20' width='80' height='60' rx='8'/><path d='M25 40h10M45 40h10M65 40h10M25 60h50'/></svg>" />
   <!-- Vercel Web Analytics -->
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -63,13 +63,7 @@
 
 <body>
 
-  <!-- Aurora Background -->
-  <div class="aurora-container" aria-hidden="true">
-    <div class="aurora-blob aurora-blob-1"></div>
-    <div class="aurora-blob aurora-blob-2"></div>
-    <div class="aurora-blob aurora-blob-3"></div>
-    <div class="aurora-blob aurora-blob-4"></div>
-  </div>
+  
   <div class="noise-overlay" aria-hidden="true"></div>
 
   <!-- Toast Container -->
@@ -81,7 +75,9 @@
   <nav class="navbar" id="main-nav" role="navigation" aria-label="Main navigation">
     <div class="navbar-inner">
       <a href="/" class="navbar-logo" aria-label="TypeForge AI Home">
-        <div class="navbar-logo-icon" aria-hidden="true">⌨️</div>
+        <div class="navbar-logo-icon" style="width:32px;height:32px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);border:1px solid var(--border-2);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-1);"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
+        </div>
         <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
       </a>
       <ul class="navbar-links" role="list">
@@ -113,7 +109,7 @@
     <a href="/blog">✦ Blog</a>
     <a href="/feedback">✦ Community</a>
     <div class="nav-drawer-divider"></div>
-    <a href="/app/typing.html">⌨️ Open App</a>
+    <a href="/app/typing.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;vertical-align:middle;"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg> Open App</a>
   </nav>
 
   <!-- ═══════════════════════════════════════════
@@ -250,9 +246,9 @@
               <p style="font-size:var(--text-sm);color:var(--text-3);">Generated after your first session. Updates every
                 10 minutes of practice.</p>
             </div>
-            <div class="dna-archetype">
-              <span>🎯</span>
-              <span>Precision Builder</span>
+            <div class="dna-archetype" style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:var(--r-sm);background:var(--bg-elevated);border:1px solid var(--border-2);box-shadow:none;">
+              <span style="font-family:var(--font-mono);font-weight:700;font-size:12px;color:var(--brand-light)">PRC.BUILD</span>
+              <span style="font-size:13px;font-weight:600;color:var(--text-1);">Precision Builder</span>
             </div>
           </div>
           <div class="dna-metrics">
@@ -304,37 +300,37 @@
         </div>
         <div class="features-grid">
           <div class="feature-card reveal">
-            <div class="feature-card-icon icon-brand"><span>🧠</span></div>
+            <div class="feature-card-icon icon-brand"><span style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--brand-light)">AI.01</span></div>
             <h3>Adaptive AI Engine</h3>
             <p>Our ML pipeline (K-Means, XGBoost, LightGBM) analyzes every keystroke and dynamically generates training
               personalized to your weak spots. No two users get the same exercises.</p>
           </div>
           <div class="feature-card reveal delay-100">
-            <div class="feature-card-icon icon-coral"><span>⚡</span></div>
+            <div class="feature-card-icon icon-coral"><span style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--peach)">TRK.1</span></div>
             <h3>Character-Level Tracking</h3>
             <p>We capture reaction time, delay patterns, backspace frequency, and error recovery speed at the individual
               character level to build a hyper-accurate picture of how you type.</p>
           </div>
           <div class="feature-card reveal delay-200">
-            <div class="feature-card-icon icon-mint"><span>💻</span></div>
+            <div class="feature-card-icon icon-mint"><span style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--mint)">DEV.2</span></div>
             <h3>Developer Mode</h3>
             <p>Train on real Python, JavaScript, TypeScript, SQL, Bash, JSON and more. Improve code typing speed with
               syntax-aware drills tailored to your primary language.</p>
           </div>
           <div class="feature-card reveal delay-300">
-            <div class="feature-card-icon icon-gold"><span>🎯</span></div>
+            <div class="feature-card-icon icon-gold"><span style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--gold)">DNA.3</span></div>
             <h3>Typing DNA System</h3>
             <p>Your unique typing fingerprint (Focus, Consistency, Confidence and Improvement scores) is tracked over
               time with trend analysis and behavioral insights.</p>
           </div>
           <div class="feature-card reveal delay-400">
-            <div class="feature-card-icon icon-sky"><span>🏆</span></div>
+            <div class="feature-card-icon icon-sky"><span style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--sky)">ACH.4</span></div>
             <h3>Achievement Engine</h3>
             <p>Ghost Fingers, Code Assassin, Night Owl, and 50+ other badges with XP, daily quests, weekly challenges,
               and monthly evolution reports keep you hooked on progress.</p>
           </div>
           <div class="feature-card reveal delay-500">
-            <div class="feature-card-icon icon-violet"><span>📊</span></div>
+            <div class="feature-card-icon icon-violet"><span style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--violet)">ANL.5</span></div>
             <h3>Analytics Dashboard</h3>
             <p>WPM trends, error heatmaps, finger fatigue analysis, session heatmaps, weak bigram detection, and
               AI-powered improvement forecasts are all beautifully visualized.</p>
@@ -361,7 +357,7 @@
             </p>
             <div style="display:flex;flex-direction:column;gap:12px;" class="reveal delay-300">
               <div class="training-item" style="cursor:default;">
-                <div class="training-item-icon icon-brand" style="border-radius:var(--r-md)">⌨️</div>
+                <div class="training-item-icon icon-brand" style="border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-1);"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg></div>
                 <div class="training-item-info">
                   <div class="training-item-name">Classic Mode</div>
                   <div class="training-item-desc">Prose and sentences. Speed and accuracy fundamentals.</div>
@@ -369,7 +365,7 @@
                 <span class="badge badge-brand">Popular</span>
               </div>
               <div class="training-item" style="cursor:default;">
-                <div class="training-item-icon icon-mint" style="border-radius:var(--r-md)">💻</div>
+                <div class="training-item-icon icon-mint" style="border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--mint);"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
                 <div class="training-item-info">
                   <div class="training-item-name">Developer Mode</div>
                   <div class="training-item-desc">10 programming languages with syntax highlighting.</div>
@@ -377,22 +373,22 @@
                 <span class="badge badge-mint">New</span>
               </div>
               <div class="training-item" style="cursor:default;">
-                <div class="training-item-icon icon-gold" style="border-radius:var(--r-md)">🎓</div>
+                <div class="training-item-icon icon-gold" style="border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--gold);"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg></div>
                 <div class="training-item-info">
                   <div class="training-item-name">Student Mode</div>
                   <div class="training-item-desc">Essays, academic vocab, exam preparation.</div>
                 </div>
               </div>
               <div class="training-item" style="cursor:default;">
-                <div class="training-item-icon icon-coral" style="border-radius:var(--r-md)">🏅</div>
+                <div class="training-item-icon icon-coral" style="border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--coral);"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div>
                 <div class="training-item-info">
                   <div class="training-item-name">Challenge Mode</div>
                   <div class="training-item-desc">Time pressure, leaderboards, weekly tournaments.</div>
                 </div>
-                <span class="badge badge-coral">🔥 Hot</span>
+                <span class="badge badge-coral">Hot</span>
               </div>
               <div class="training-item" style="cursor:default;">
-                <div class="training-item-icon icon-sky" style="border-radius:var(--r-md)">🧘</div>
+                <div class="training-item-icon icon-sky" style="border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--sky);"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg></div>
                 <div class="training-item-info">
                   <div class="training-item-name">Zen Mode</div>
                   <div class="training-item-desc">No timer. No pressure. Pure flow state training.</div>
@@ -427,7 +423,9 @@
               </div>
             </div>
             <div class="glass-card" style="padding:20px;display:flex;align-items:center;gap:16px;">
-              <div style="font-size:2rem;">🎯</div>
+              <div style="color:var(--gold);display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:var(--r-sm);background:var(--bg-elevated);border:1px solid var(--border-2);flex-shrink:0;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a7 7 0 1 0 10 10"/><path d="M12 6a4 4 0 1 0 4 4"/><circle cx="12" cy="12" r="1"/></svg>
+              </div>
               <div>
                 <div style="font-size:14px;font-weight:600;color:var(--text-1);margin-bottom:4px;">AI Training
                   Suggestion</div>
@@ -454,42 +452,42 @@
         </div>
         <div class="archetypes-grid">
           <div class="archetype-card reveal">
-            <div class="archetype-emoji">👻</div>
+            <div class="archetype-emoji" style="font-family:var(--font-mono);font-size:14px;font-weight:700;color:var(--brand-light);margin-bottom:12px;">GHST.FING</div>
             <div class="archetype-name">Ghost Fingers</div>
             <div class="archetype-desc">100+ WPM with 98%+ accuracy. You barely exist to the keyboard.</div>
           </div>
           <div class="archetype-card reveal delay-100">
-            <div class="archetype-emoji">🎵</div>
+            <div class="archetype-emoji" style="font-family:var(--font-mono);font-size:14px;font-weight:700;color:var(--violet);margin-bottom:12px;">RHY.SEEK</div>
             <div class="archetype-name">Rhythm Seeker</div>
             <div class="archetype-desc">Incredibly consistent cadence. Your typing has a beautiful flow.</div>
           </div>
           <div class="archetype-card reveal delay-200">
-            <div class="archetype-emoji">🎯</div>
+            <div class="archetype-emoji" style="font-family:var(--font-mono);font-size:14px;font-weight:700;color:var(--gold);margin-bottom:12px;">PRC.BUILD</div>
             <div class="archetype-name">Precision Builder</div>
             <div class="archetype-desc">Every keystroke is intentional. Accuracy is your superpower.</div>
           </div>
           <div class="archetype-card reveal delay-300">
-            <div class="archetype-emoji">⚡</div>
+            <div class="archetype-emoji" style="font-family:var(--font-mono);font-size:14px;font-weight:700;color:var(--peach);margin-bottom:12px;">SPD.CRAFT</div>
             <div class="archetype-name">Velocity Crafter</div>
             <div class="archetype-desc">Built for raw speed. You live in the fast lane of typing.</div>
           </div>
           <div class="archetype-card reveal delay-400">
-            <div class="archetype-emoji">🧘</div>
+            <div class="archetype-emoji" style="font-family:var(--font-mono);font-size:14px;font-weight:700;color:var(--mint);margin-bottom:12px;">CODE.MONK</div>
             <div class="archetype-name">Code Monk</div>
             <div class="archetype-desc">Deep focus, zero distractions. You type like you meditate.</div>
           </div>
           <div class="archetype-card reveal delay-500">
-            <div class="archetype-emoji">🦅</div>
+            <div class="archetype-emoji" style="font-family:var(--font-mono);font-size:14px;font-weight:700;color:var(--sky);margin-bottom:12px;">SYNT.HNT</div>
             <div class="archetype-name">Syntax Hunter</div>
             <div class="archetype-desc">You hunt errors before they happen. A coder's coder.</div>
           </div>
           <div class="archetype-card reveal delay-600">
-            <div class="archetype-emoji">🏗️</div>
+            <div class="archetype-emoji" style="font-family:var(--font-mono);font-size:14px;font-weight:700;color:var(--text-2);margin-bottom:12px;">TYP.ARCH</div>
             <div class="archetype-name">Typing Architect</div>
             <div class="archetype-desc">Strategic, methodical. Building speed brick by brick.</div>
           </div>
           <div class="archetype-card reveal delay-700">
-            <div class="archetype-emoji">🗺️</div>
+            <div class="archetype-emoji" style="font-family:var(--font-mono);font-size:14px;font-weight:700;color:var(--text-3);margin-bottom:12px;">KB.WAND</div>
             <div class="archetype-name">Keyboard Wanderer</div>
             <div class="archetype-desc">Exploring the keyboard. Every session reveals something new.</div>
           </div>
@@ -542,7 +540,7 @@
               </div>
             </div>
             <div class="timeline-item reveal delay-800">
-              <div class="timeline-step" style="background:linear-gradient(135deg,var(--mint),var(--sky));">✓</div>
+              <div class="timeline-step" style="background:var(--bg-elevated);border:1px solid var(--border-2);">✓</div>
               <div class="timeline-content">
                 <h3>Track Real Progress</h3>
                 <p>Watch your WPM climb, errors drop, and DNA scores evolve. Monthly evolution reports show your
@@ -560,15 +558,15 @@
               <div style="display:flex;flex-direction:column;gap:8px;">
                 <label class="option-card">
                   <input type="radio" name="preview-type" value="code" checked />
-                  <span style="font-size:20px;">💻</span>
+                  <span style="display:flex;align-items:center;color:var(--text-2);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></span>
                   <div>
-                    <div style="font-size:14px;font-weight:600;color:var(--text-1);">Code</div>
+                    <div style="font-size:14px;font-weight:600;color:var(--text-1);;">Code</div>
                     <div style="font-size:12px;color:var(--text-3);">Python, JS, TypeScript, etc.</div>
                   </div>
                 </label>
                 <label class="option-card">
                   <input type="radio" name="preview-type" value="essays" />
-                  <span style="font-size:20px;">📝</span>
+                  <span style="display:flex;align-items:center;color:var(--text-2);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span>
                   <div>
                     <div style="font-size:14px;font-weight:600;color:var(--text-1);">Essays & Writing</div>
                     <div style="font-size:12px;color:var(--text-3);">Long-form, academic content</div>
@@ -576,7 +574,7 @@
                 </label>
                 <label class="option-card">
                   <input type="radio" name="preview-type" value="mixed" />
-                  <span style="font-size:20px;">⚡</span>
+                  <span style="display:flex;align-items:center;color:var(--text-2);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
                   <div>
                     <div style="font-size:14px;font-weight:600;color:var(--text-1);">Mixed / General</div>
                     <div style="font-size:12px;color:var(--text-3);">A bit of everything</div>
@@ -604,42 +602,42 @@
         </div>
         <div class="badges-showcase reveal">
           <div class="achievement-badge">
-            <div class="achievement-icon">👻</div>
+            <div class="achievement-icon" style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--brand-light)">WPM.100</div>
             <div class="achievement-name">Ghost Fingers</div>
             <div class="achievement-desc">100 WPM · 98% ACC</div>
           </div>
           <div class="achievement-badge">
-            <div class="achievement-icon">💀</div>
+            <div class="achievement-icon" style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--peach)">RUN.100</div>
             <div class="achievement-name">Code Assassin</div>
             <div class="achievement-desc">100 Coding Sessions</div>
           </div>
           <div class="achievement-badge">
-            <div class="achievement-icon">⚡</div>
+            <div class="achievement-icon" style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--coral)">WPM.120</div>
             <div class="achievement-name">Speed Demon</div>
             <div class="achievement-desc">120+ WPM Sustained</div>
           </div>
           <div class="achievement-badge">
-            <div class="achievement-icon">🦺</div>
+            <div class="achievement-icon" style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--gold)">ERR.20</div>
             <div class="achievement-name">The Survivor</div>
             <div class="achievement-desc">Finished with 20+ Errors</div>
           </div>
           <div class="achievement-badge">
-            <div class="achievement-icon">🥷</div>
+            <div class="achievement-icon" style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--sky)">PNC.98</div>
             <div class="achievement-name">Punctuation Slayer</div>
             <div class="achievement-desc">98% Punctuation Accuracy</div>
           </div>
           <div class="achievement-badge">
-            <div class="achievement-icon">🦉</div>
+            <div class="achievement-icon" style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--violet)">OWL.30</div>
             <div class="achievement-name">Night Owl</div>
             <div class="achievement-desc">30 Midnight Sessions</div>
           </div>
           <div class="achievement-badge achievement-locked">
-            <div class="achievement-icon">🔐</div>
+            <div class="achievement-icon" style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--text-4)">LOCK</div>
             <div class="achievement-name">???</div>
             <div class="achievement-desc">Keep training to unlock</div>
           </div>
           <div class="achievement-badge achievement-locked">
-            <div class="achievement-icon">🔐</div>
+            <div class="achievement-icon" style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--text-4)">LOCK</div>
             <div class="achievement-name">???</div>
             <div class="achievement-desc">Keep training to unlock</div>
           </div>
@@ -662,7 +660,7 @@
             <p class="testimonial-text">"I went from 58 WPM to 94 WPM in 6 weeks. The AI figured out I was slow on
               bracket pairs and built an entire curriculum around it. Nothing else comes close."</p>
             <div class="testimonial-author">
-              <div class="avatar" style="background:linear-gradient(135deg,#e8734a,#f05c6e)">A</div>
+              <div class="avatar" style="background:var(--bg-elevated);border:1px solid var(--border-2);">A</div>
               <div class="testimonial-info">
                 <div class="testimonial-name">Alex C.</div>
                 <div class="testimonial-role">Software Developer</div>
@@ -678,7 +676,7 @@
             <p class="testimonial-text">"Developer Mode changed everything for me. I can type TypeScript fluently now.
               The syntax-aware training is something no other platform offers."</p>
             <div class="testimonial-author">
-              <div class="avatar" style="background:linear-gradient(135deg,#00e5c4,#38bdf8)">K</div>
+              <div class="avatar" style="background:var(--bg-elevated);border:1px solid var(--border-2);">K</div>
               <div class="testimonial-info">
                 <div class="testimonial-name">Kira P.</div>
                 <div class="testimonial-role">Web Developer</div>
@@ -694,7 +692,7 @@
             <p class="testimonial-text">"The Typing DNA is addictive. Watching my Consistency score go from 62 to 89
               over a month is more satisfying than any leaderboard ranking."</p>
             <div class="testimonial-author">
-              <div class="avatar" style="background:linear-gradient(135deg,#ffd666,#ff9f43)">M</div>
+              <div class="avatar" style="background:var(--bg-elevated);border:1px solid var(--border-2);">M</div>
               <div class="testimonial-info">
                 <div class="testimonial-name">Marcus L.</div>
                 <div class="testimonial-role">Student</div>
@@ -726,8 +724,8 @@
             forever. No credit card.
           </p>
           <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:32px;">
-            <a href="/app/onboarding.html" class="btn btn-gradient btn-xl" id="footer-cta-btn">
-              Forge Your Typing 🔥
+            <a href="/app/onboarding.html" class="btn btn-primary btn-xl" id="footer-cta-btn">
+              Forge Your Typing
             </a>
             <a href="/features" class="btn btn-secondary btn-xl">Explore Features</a>
           </div>
@@ -753,7 +751,9 @@
         <div class="footer-grid">
           <div class="footer-brand">
             <a href="/" class="navbar-logo" style="margin-bottom:16px;display:inline-flex;">
-              <div class="navbar-logo-icon">⌨️</div>
+              <div class="navbar-logo-icon" style="width:32px;height:32px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);border:1px solid var(--border-2);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-1);"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
+              </div>
               <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
             </a>
             <p>The world's most personalized typing training platform. Powered by adaptive AI. Built for humans.</p>
@@ -792,7 +792,7 @@
         <div class="footer-bottom">
           <p>© 2026 TypeForge AI. Designed & Developed by <a href="https://github.com/rotric04" target="_blank"
               class="creator-link">rotric04</a></p>
-          <p style="color:var(--text-4);font-size:12px;">Made with ⌨️ for typists everywhere</p>
+          <p style="color:var(--text-4);font-size:12px;">Made with precision for typists everywhere</p>
         </div>
       </div>
     </footer>
@@ -922,6 +922,62 @@
         if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
       });
     });
+  </script>
+
+  <!-- Polite Device Warning Modal -->
+  <div class="modal-overlay hidden" id="device-polite-warning-modal" role="dialog" aria-modal="true" aria-label="Device optimization warning" style="z-index: 9999;">
+    <div class="modal text-center" style="max-width: 460px; border-color: var(--border-2); border-radius: var(--r-md);">
+      <div style="display:flex; justify-content:center; margin-bottom: var(--sp-4); color: var(--text-3);">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+      </div>
+      <h3 style="margin-bottom: var(--sp-4); font-size: 1.5rem; font-family: var(--font-display); font-weight: 700; color: var(--text-1);">
+        Optimized for Physical Keyboards
+      </h3>
+      <p style="font-size: 14px; color: var(--text-2); line-height: var(--leading-loose); margin-bottom: var(--sp-6); text-align: left;">
+        TypeForge AI is designed around physical keyboard telemetry.<br><br>
+        To analyze your typing rhythm, key transitions, and consistency, the platform requires a physical keyboard.<br><br>
+        For the intended experience, please visit us on a laptop or desktop computer running Windows, macOS, or Linux.
+      </p>
+      <div style="display: flex; gap: var(--sp-3); justify-content: center;">
+        <button class="btn btn-primary" id="polite-warning-close-btn" style="flex: 1;">Understood</button>
+        <a href="/about.html" class="btn btn-secondary" style="flex: 1; display: inline-flex; align-items: center; justify-content: center;">Learn More</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (() => {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+      const isIPad = (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) || /iPad/i.test(userAgent);
+      const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+      const isTablet = isIPad || (/Android/i.test(userAgent) && !/Mobile/i.test(userAgent));
+      const isMobileOrTablet = isMobileDevice || isIPad || isTablet || window.innerWidth < 1024;
+
+      if (isMobileOrTablet && localStorage.getItem('tf_polite_warning_acknowledged') !== 'true') {
+        const showModal = () => {
+          const modal = document.getElementById('device-polite-warning-modal');
+          if (modal) {
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+
+            const closeBtn = document.getElementById('polite-warning-close-btn');
+            if (closeBtn) {
+              closeBtn.addEventListener('click', () => {
+                localStorage.setItem('tf_polite_warning_acknowledged', 'true');
+                modal.classList.add('hidden');
+                document.body.style.overflow = '';
+              });
+            }
+          }
+        };
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', showModal);
+        } else {
+          showModal();
+        }
+      }
+    })();
   </script>
 </body>
 

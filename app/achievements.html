@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="../css/components.css"/>
   <link rel="stylesheet" href="../css/app-pages.css"/>
   <link rel="stylesheet" href="../css/achievements.css"/>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23f4f4f5' stroke-width='8'><rect x='10' y='20' width='80' height='60' rx='8'/><path d='M25 40h10M45 40h10M65 40h10M25 60h50'/></svg>"/>
   <!-- Vercel Web Analytics -->
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -71,31 +71,51 @@
 <div class="app-layout">
   <!-- Sidebar -->
   <aside class="app-sidebar" role="navigation" aria-label="App navigation">
-    <a href="/" class="sidebar-logo" aria-label="TypeForge AI Home">⌨️</a>
+    <a href="/" class="sidebar-logo" aria-label="TypeForge AI Home">
+      <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
+    </a>
     <nav class="sidebar-nav">
       <div class="sidebar-item" onclick="location.href='typing.html'" title="Train" aria-label="Train">
-        <span class="sidebar-icon">⌨️</span><span class="sidebar-label">Train</span>
+        <span class="sidebar-icon">
+          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
+        </span>
+        <span class="sidebar-label">Train</span>
       </div>
       <div class="sidebar-item" onclick="location.href='dashboard.html'" title="Dashboard" aria-label="Dashboard">
-        <span class="sidebar-icon">📊</span><span class="sidebar-label">Dashboard</span>
+        <span class="sidebar-icon">
+          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </span>
+        <span class="sidebar-label">Dashboard</span>
       </div>
       <div class="sidebar-item active" onclick="location.href='achievements.html'" title="Achievements" aria-label="Achievements">
-        <span class="sidebar-icon">🏆</span><span class="sidebar-label">Achievements</span>
+        <span class="sidebar-icon">
+          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34M12 2a5 5 0 0 0-5 5v3c0 2.76 2.24 5 5 5s5-2.24 5-5V7a5 5 0 0 0-5-5z"/></svg>
+        </span>
+        <span class="sidebar-label">Achievements</span>
       </div>
       <div class="sidebar-item" onclick="location.href='history.html'" title="History" aria-label="History">
-        <span class="sidebar-icon">📜</span><span class="sidebar-label">History</span>
+        <span class="sidebar-icon">
+          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </span>
+        <span class="sidebar-label">History</span>
       </div>
     </nav>
     <div class="sidebar-bottom">
       <div class="sidebar-item" onclick="location.href='settings.html'" title="Settings" aria-label="Settings">
-        <span class="sidebar-icon">⚙️</span><span class="sidebar-label">Settings</span>
+        <span class="sidebar-icon">
+          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </span>
+        <span class="sidebar-label">Settings</span>
       </div>
       <div class="sidebar-item" title="Profile" aria-label="Profile" id="sidebar-profile">
         <span class="sidebar-icon" id="nav-avatar">U</span>
         <span class="sidebar-label" data-auth-name>Profile</span>
       </div>
       <div class="sidebar-item" title="Sign Out" aria-label="Sign Out" data-auth-signout>
-        <span class="sidebar-icon">🚪</span><span class="sidebar-label">Sign Out</span>
+        <span class="sidebar-icon">
+          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+        </span>
+        <span class="sidebar-label">Sign Out</span>
       </div>
     </div>
   </aside>
@@ -141,10 +161,10 @@
     <!-- Category Filters -->
     <div class="ach-filters" id="filter-tabs">
       <button class="ach-filter-btn active" data-category="all">All Badges</button>
-      <button class="ach-filter-btn" data-category="speed">⚡ Speed</button>
-      <button class="ach-filter-btn" data-category="accuracy">🎯 Accuracy</button>
-      <button class="ach-filter-btn" data-category="streak">📅 Consistency</button>
-      <button class="ach-filter-btn" data-category="milestone">🚀 Milestones</button>
+      <button class="ach-filter-btn" data-category="speed">Speed</button>
+      <button class="ach-filter-btn" data-category="accuracy">Accuracy</button>
+      <button class="ach-filter-btn" data-category="streak">Consistency</button>
+      <button class="ach-filter-btn" data-category="milestone">Milestones</button>
     </div>
 
     <!-- Achievements Grid -->
@@ -156,7 +176,9 @@
 
 <!-- Unlock Toast -->
 <div id="ach-toast">
-  <div class="toast-icon" id="toast-icon">🏆</div>
+  <div class="toast-icon" id="toast-icon">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34M12 2a5 5 0 0 0-5 5v3c0 2.76 2.24 5 5 5s5-2.24 5-5V7a5 5 0 0 0-5-5z"/></svg>
+  </div>
   <div class="toast-body">
     <div class="toast-title" id="toast-title">Achievement Unlocked!</div>
     <div class="toast-msg" id="toast-msg">You earned a new badge.</div>
@@ -169,27 +191,27 @@
   import { displayName, personalizeBadge, xpToNextLevel } from '../js/app-data.js';
 
   const ALL_ACHIEVEMENTS = [
-    { id:"first_session", name:"Launched",  icon:"🚀", desc:"Complete your very first session",  category:"milestone", rarity:"common",    goal:1,  metric:"sessions" },
-    { id:"sessions_5",  name:"Finding Rhythm", icon:"🎵", desc:"Complete 5 sessions", category:"streak", rarity:"common", goal:5, metric:"sessions" },
-    { id:"sessions_10",  name:"Getting Started",  icon:"🌱", desc:"Complete 10 sessions",   category:"streak", rarity:"common",    goal:10,  metric:"sessions" },
-    { id:"sessions_50",  name:"Dedicated",        icon:"📅", desc:"Complete 50 sessions",   category:"streak", rarity:"rare",      goal:50,  metric:"sessions" },
-    { id:"sessions_100", name:"Century Typist",   icon:"💯", desc:"Complete 100 sessions",  category:"streak", rarity:"epic",      goal:100, metric:"sessions" },
-    { id:"sessions_500", name:"Legendary Typist", icon:"👑", desc:"Complete 500 sessions",  category:"streak", rarity:"legendary", goal:500, metric:"sessions" },
+    { id:"first_session", name:"Launched",  icon:"RUN.1", desc:"Complete your very first session",  category:"milestone", rarity:"common",    goal:1,  metric:"sessions" },
+    { id:"sessions_5",  name:"Finding Rhythm", icon:"RUN.5", desc:"Complete 5 sessions", category:"streak", rarity:"common", goal:5, metric:"sessions" },
+    { id:"sessions_10",  name:"Getting Started",  icon:"RUN.10", desc:"Complete 10 sessions",   category:"streak", rarity:"common",    goal:10,  metric:"sessions" },
+    { id:"sessions_50",  name:"Dedicated",        icon:"RUN.50", desc:"Complete 50 sessions",   category:"streak", rarity:"rare",      goal:50,  metric:"sessions" },
+    { id:"sessions_100", name:"Century Typist",   icon:"RUN.100", desc:"Complete 100 sessions",  category:"streak", rarity:"epic",      goal:100, metric:"sessions" },
+    { id:"sessions_500", name:"Legendary Typist", icon:"RUN.500", desc:"Complete 500 sessions",  category:"streak", rarity:"legendary", goal:500, metric:"sessions" },
     
-    { id:"wpm_40",  name:"Warming Up",      icon:"☕", desc:"Reach 40 WPM in a session",  category:"speed",    rarity:"common",    goal:40,  metric:"wpm" },
-    { id:"wpm_50",  name:"Half Century",    icon:"🔥", desc:"Reach 50 WPM in a session",  category:"speed",    rarity:"common",    goal:50,  metric:"wpm" },
-    { id:"wpm_80",  name:"Fast Fingers",    icon:"⚡", desc:"Reach 80 WPM in a session",  category:"speed",    rarity:"common",    goal:80,  metric:"wpm" },
-    { id:"wpm_100", name:"Century Club",    icon:"💯", desc:"Reach 100 WPM in a session", category:"speed",    rarity:"rare",      goal:100, metric:"wpm" },
-    { id:"wpm_120", name:"Speed Demon",     icon:"🏎️", desc:"Reach 120 WPM in a session", category:"speed",    rarity:"epic",      goal:120, metric:"wpm" },
-    { id:"wpm_150", name:"Ghost Fingers",   icon:"👻", desc:"Reach 150 WPM in a session", category:"speed",    rarity:"legendary", goal:150, metric:"wpm" },
+    { id:"wpm_40",  name:"Warming Up",      icon:"WPM.40", desc:"Reach 40 WPM in a session",  category:"speed",    rarity:"common",    goal:40,  metric:"wpm" },
+    { id:"wpm_50",  name:"Half Century",    icon:"WPM.50", desc:"Reach 50 WPM in a session",  category:"speed",    rarity:"common",    goal:50,  metric:"wpm" },
+    { id:"wpm_80",  name:"Fast Fingers",    icon:"WPM.80", desc:"Reach 80 WPM in a session",  category:"speed",    rarity:"common",    goal:80,  metric:"wpm" },
+    { id:"wpm_100", name:"Century Club",    icon:"WPM.100", desc:"Reach 100 WPM in a session", category:"speed",    rarity:"rare",      goal:100, metric:"wpm" },
+    { id:"wpm_120", name:"Speed Demon",     icon:"WPM.120", desc:"Reach 120 WPM in a session", category:"speed",    rarity:"epic",      goal:120, metric:"wpm" },
+    { id:"wpm_150", name:"Ghost Fingers",   icon:"WPM.150", desc:"Reach 150 WPM in a session", category:"speed",    rarity:"legendary", goal:150, metric:"wpm" },
     
-    { id:"acc_95",  name:"Sharp Eyes",      icon:"👁️", desc:"95%+ accuracy in a session", category:"accuracy", rarity:"common",    goal:95,  metric:"accuracy" },
-    { id:"acc_99",  name:"Perfect Aim",     icon:"🎯", desc:"99%+ accuracy in a session", category:"accuracy", rarity:"rare",      goal:99,  metric:"accuracy" },
-    { id:"acc_100", name:"Flawless",        icon:"💎", desc:"100% accuracy — no errors",  category:"accuracy", rarity:"epic",      goal:100, metric:"accuracy" },
+    { id:"acc_95",  name:"Sharp Eyes",      icon:"ACC.95", desc:"95%+ accuracy in a session", category:"accuracy", rarity:"common",    goal:95,  metric:"accuracy" },
+    { id:"acc_99",  name:"Perfect Aim",     icon:"ACC.99", desc:"99%+ accuracy in a session", category:"accuracy", rarity:"rare",      goal:99,  metric:"accuracy" },
+    { id:"acc_100", name:"Flawless",        icon:"ACC.100", desc:"100% accuracy — no errors",  category:"accuracy", rarity:"epic",      goal:100, metric:"accuracy" },
     
-    { id:"xp_500",  name:"XP Surge", icon:"🌟", desc:"Earn 500 total XP", category:"milestone", rarity:"common", goal:500, metric:"xp" },
-    { id:"level_5", name:"Rising Star", icon:"⭐", desc:"Reach level 5", category:"milestone", rarity:"rare", goal:5, metric:"level" },
-    { id:"no_errors",name:"Zero Error",     icon:"🧊", desc:"Complete a session with 0 errors",   category:"accuracy",  rarity:"rare",    goal:0,   metric:"errors" },
+    { id:"xp_500",  name:"XP Surge", icon:"XP.500", desc:"Earn 500 total XP", category:"milestone", rarity:"common", goal:500, metric:"xp" },
+    { id:"level_5", name:"Rising Star", icon:"LVL.5", desc:"Reach level 5", category:"milestone", rarity:"rare", goal:5, metric:"level" },
+    { id:"no_errors",name:"Zero Error",     icon:"ERR.0", desc:"Complete a session with 0 errors",   category:"accuracy",  rarity:"rare",    goal:0,   metric:"errors" },
   ];
 
   let achievementsData = [];

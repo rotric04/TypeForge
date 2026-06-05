@@ -1,29 +1,12 @@
 /* TypeForge — App pages (dashboard, history, achievements) */
 
-.app-main .btn-primary,
-.app-main a.btn-primary,
-.state-box .btn-primary,
-.state-box a.btn-primary {
-  background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
-  color: #fff !important;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 4px 20px var(--brand-glow);
-}
-
-.app-main .btn-primary:hover,
-.state-box a.btn-primary:hover {
-  color: #fff !important;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 28px var(--brand-glow);
-}
-
 /* Welcome / empty states */
 .welcome-hero {
   grid-column: 1 / -1;
-  padding: 28px 32px;
-  border-radius: 24px;
-  border: 1px solid var(--border-brand);
-  background: linear-gradient(135deg, rgba(232, 115, 74, 0.12), rgba(0, 201, 167, 0.06));
+  padding: 24px var(--sp-6);
+  border-radius: var(--r-md);
+  border: 1px solid var(--border-2);
+  background: var(--bg-surface);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -48,7 +31,7 @@
 .welcome-emoji {
   font-size: 48px;
   line-height: 1;
-  filter: drop-shadow(0 8px 16px rgba(232, 115, 74, 0.35));
+  color: var(--brand-light);
 }
 
 .xp-strip {
@@ -63,7 +46,7 @@
   flex: 1;
   min-width: 200px;
   padding: 16px 20px;
-  border-radius: 16px;
+  border-radius: var(--r-md);
   background: var(--bg-elevated);
   border: 1px solid var(--border-1);
 }
@@ -79,14 +62,14 @@
 .xp-bar-track {
   height: 8px;
   background: var(--border-1);
-  border-radius: 999px;
+  border-radius: var(--r-sm);
   overflow: hidden;
 }
 
 .xp-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--brand), var(--teal));
-  border-radius: 999px;
+  background: var(--brand-light);
+  border-radius: var(--r-sm);
   transition: width 0.8s var(--ease-out);
 }
 
@@ -98,15 +81,16 @@
 }
 
 .next-badge-icon {
-  font-size: 32px;
+  font-size: 24px;
   width: 52px;
   height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 14px;
-  background: rgba(245, 200, 66, 0.12);
-  border: 1px solid rgba(245, 200, 66, 0.25);
+  border-radius: var(--r-sm);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-2);
+  color: var(--text-1);
 }
 
 .live-pill {

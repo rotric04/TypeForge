@@ -10,55 +10,55 @@ logger = logging.getLogger("typeforge.achievements")
 
 ALL_ACHIEVEMENTS = [
     # Speed
-    {"id": "wpm_40",   "name": "Warming Up",      "icon": "☕", "desc": "Reach 40 WPM",            "category": "speed",     "rarity": "common"},
-    {"id": "wpm_50",   "name": "Half Century",    "icon": "🔥", "desc": "Reach 50 WPM",            "category": "speed",     "rarity": "common"},
-    {"id": "wpm_80",   "name": "Fast Fingers",    "icon": "⚡", "desc": "Reach 80 WPM",            "category": "speed",     "rarity": "common"},
-    {"id": "wpm_100",  "name": "Century Club",    "icon": "💯", "desc": "Reach 100 WPM",           "category": "speed",     "rarity": "rare"},
-    {"id": "wpm_120",  "name": "Speed Demon",     "icon": "🏎️", "desc": "Reach 120 WPM",           "category": "speed",     "rarity": "epic"},
-    {"id": "wpm_150",  "name": "Ghost Fingers",   "icon": "👻", "desc": "Reach 150 WPM",           "category": "speed",     "rarity": "legendary"},
+    {"id": "wpm_40",   "name": "Warming Up",      "icon": "WPM.40", "desc": "Reach 40 WPM",            "category": "speed",     "rarity": "common"},
+    {"id": "wpm_50",   "name": "Half Century",    "icon": "WPM.50", "desc": "Reach 50 WPM",            "category": "speed",     "rarity": "common"},
+    {"id": "wpm_80",   "name": "Fast Fingers",    "icon": "WPM.80", "desc": "Reach 80 WPM",            "category": "speed",     "rarity": "common"},
+    {"id": "wpm_100",  "name": "Century Club",    "icon": "WPM.100", "desc": "Reach 100 WPM",           "category": "speed",     "rarity": "rare"},
+    {"id": "wpm_120",  "name": "Speed Demon",     "icon": "WPM.120", "desc": "Reach 120 WPM",           "category": "speed",     "rarity": "epic"},
+    {"id": "wpm_150",  "name": "Ghost Fingers",   "icon": "WPM.150", "desc": "Reach 150 WPM",           "category": "speed",     "rarity": "legendary"},
 
     # Accuracy
-    {"id": "acc_90",   "name": "Steady Hands",    "icon": "✋", "desc": "90% accuracy in a session", "category": "accuracy",  "rarity": "common"},
-    {"id": "acc_95",   "name": "Sharp Eyes",      "icon": "👁️", "desc": "95% accuracy in a session", "category": "accuracy",  "rarity": "common"},
-    {"id": "acc_99",   "name": "Perfect Aim",     "icon": "🎯", "desc": "99% accuracy in a session", "category": "accuracy",  "rarity": "rare"},
-    {"id": "acc_100",  "name": "Flawless",        "icon": "💎", "desc": "100% accuracy session",   "category": "accuracy",  "rarity": "epic"},
+    {"id": "acc_90",   "name": "Steady Hands",    "icon": "ACC.90", "desc": "90% accuracy in a session", "category": "accuracy",  "rarity": "common"},
+    {"id": "acc_95",   "name": "Sharp Eyes",      "icon": "ACC.95", "desc": "95% accuracy in a session", "category": "accuracy",  "rarity": "common"},
+    {"id": "acc_99",   "name": "Perfect Aim",     "icon": "ACC.99", "desc": "99% accuracy in a session", "category": "accuracy",  "rarity": "rare"},
+    {"id": "acc_100",  "name": "Flawless",        "icon": "ACC.100", "desc": "100% accuracy session",   "category": "accuracy",  "rarity": "epic"},
 
     # Special
-    {"id": "no_errors", "name": "Zero Error",     "icon": "🧊", "desc": "Complete with 0 errors",  "category": "special",   "rarity": "rare"},
-    {"id": "survivor",  "name": "The Survivor",   "icon": "🦺", "desc": "Finish with 20+ errors",  "category": "special",   "rarity": "common"},
-    {"id": "on_fire",   "name": "On Fire",        "icon": "🔥", "desc": "50-key error-free streak", "category": "special",  "rarity": "rare"},
-    {"id": "comeback",  "name": "Comeback Kid",   "icon": "💪", "desc": "Improve WPM by 15+ vs last session", "category": "special", "rarity": "rare"},
+    {"id": "no_errors", "name": "Zero Error",     "icon": "ERR.0", "desc": "Complete with 0 errors",  "category": "special",   "rarity": "rare"},
+    {"id": "survivor",  "name": "The Survivor",   "icon": "ERR.20", "desc": "Finish with 20+ errors",  "category": "special",   "rarity": "common"},
+    {"id": "on_fire",   "name": "On Fire",        "icon": "STRK.50", "desc": "50-key error-free streak", "category": "special",  "rarity": "rare"},
+    {"id": "comeback",  "name": "Comeback Kid",   "icon": "CB.15", "desc": "Improve WPM by 15+ vs last session", "category": "special", "rarity": "rare"},
 
     # Sessions / habit
-    {"id": "first_session", "name": "Launched",    "icon": "🚀", "desc": "Complete first session",  "category": "milestone", "rarity": "common"},
-    {"id": "sessions_5",    "name": "Finding Rhythm", "icon": "🎵", "desc": "5 sessions",           "category": "streak",    "rarity": "common"},
-    {"id": "sessions_10",   "name": "Getting Started", "icon": "🌱", "desc": "10 sessions",         "category": "streak",    "rarity": "common"},
-    {"id": "sessions_50",   "name": "Dedicated",   "icon": "📅", "desc": "50 sessions",             "category": "streak",    "rarity": "rare"},
-    {"id": "sessions_100",  "name": "Century Typist", "icon": "💯", "desc": "100 sessions",         "category": "streak",    "rarity": "epic"},
-    {"id": "sessions_500",  "name": "Legendary Typist", "icon": "👑", "desc": "500 sessions",       "category": "streak",    "rarity": "legendary"},
+    {"id": "first_session", "name": "Launched",    "icon": "RUN.1", "desc": "Complete first session",  "category": "milestone", "rarity": "common"},
+    {"id": "sessions_5",    "name": "Finding Rhythm", "icon": "RUN.5", "desc": "5 sessions",           "category": "streak",    "rarity": "common"},
+    {"id": "sessions_10",   "name": "Getting Started", "icon": "RUN.10", "desc": "10 sessions",         "category": "streak",    "rarity": "common"},
+    {"id": "sessions_50",   "name": "Dedicated",   "icon": "RUN.50", "desc": "50 sessions",             "category": "streak",    "rarity": "rare"},
+    {"id": "sessions_100",  "name": "Century Typist", "icon": "RUN.100", "desc": "100 sessions",         "category": "streak",    "rarity": "epic"},
+    {"id": "sessions_500",  "name": "Legendary Typist", "icon": "RUN.500", "desc": "500 sessions",       "category": "streak",    "rarity": "legendary"},
 
     # XP & levels
-    {"id": "xp_200",   "name": "XP Spark",        "icon": "✨", "desc": "Earn 200 total XP",       "category": "xp",        "rarity": "common"},
-    {"id": "xp_500",   "name": "XP Surge",        "icon": "🌟", "desc": "Earn 500 total XP",       "category": "xp",        "rarity": "common"},
-    {"id": "xp_2000",  "name": "XP Machine",      "icon": "⚙️", "desc": "Earn 2,000 total XP",     "category": "xp",        "rarity": "rare"},
-    {"id": "xp_10000", "name": "XP Legend",       "icon": "🏆", "desc": "Earn 10,000 total XP",    "category": "xp",        "rarity": "legendary"},
-    {"id": "level_3",  "name": "Level 3 Crew",    "icon": "🥉", "desc": "Reach level 3",           "category": "xp",        "rarity": "common"},
-    {"id": "level_5",  "name": "Rising Star",     "icon": "⭐", "desc": "Reach level 5",           "category": "xp",        "rarity": "rare"},
-    {"id": "level_10", "name": "Typing Titan",    "icon": "🦾", "desc": "Reach level 10",          "category": "xp",        "rarity": "epic"},
+    {"id": "xp_200",   "name": "XP Spark",        "icon": "XP.200", "desc": "Earn 200 total XP",       "category": "xp",        "rarity": "common"},
+    {"id": "xp_500",   "name": "XP Surge",        "icon": "XP.500", "desc": "Earn 500 total XP",       "category": "xp",        "rarity": "common"},
+    {"id": "xp_2000",  "name": "XP Machine",      "icon": "XP.2K", "desc": "Earn 2,000 total XP",     "category": "xp",        "rarity": "rare"},
+    {"id": "xp_10000", "name": "XP Legend",       "icon": "XP.10K", "desc": "Earn 10,000 total XP",    "category": "xp",        "rarity": "legendary"},
+    {"id": "level_3",  "name": "Level 3 Crew",    "icon": "LVL.3", "desc": "Reach level 3",           "category": "xp",        "rarity": "common"},
+    {"id": "level_5",  "name": "Rising Star",     "icon": "LVL.5", "desc": "Reach level 5",           "category": "xp",        "rarity": "rare"},
+    {"id": "level_10", "name": "Typing Titan",    "icon": "LVL.10", "desc": "Reach level 10",          "category": "xp",        "rarity": "epic"},
 
     # Developer
-    {"id": "dev_1",    "name": "Hello World",     "icon": "👋", "desc": "First developer session", "category": "dev",       "rarity": "common"},
-    {"id": "dev_10",   "name": "Code Curious",    "icon": "💻", "desc": "10 developer sessions",   "category": "dev",       "rarity": "common"},
-    {"id": "dev_100",  "name": "Code Assassin",   "icon": "💀", "desc": "100 developer sessions",  "category": "dev",       "rarity": "legendary"},
+    {"id": "dev_1",    "name": "Hello World",     "icon": "DEV.1", "desc": "First developer session", "category": "dev",       "rarity": "common"},
+    {"id": "dev_10",   "name": "Code Curious",    "icon": "DEV.10", "desc": "10 developer sessions",   "category": "dev",       "rarity": "common"},
+    {"id": "dev_100",  "name": "Code Assassin",   "icon": "DEV.100", "desc": "100 developer sessions",  "category": "dev",       "rarity": "legendary"},
 
     # Time
-    {"id": "night_owl",  "name": "Night Owl",     "icon": "🦉", "desc": "Session after midnight",  "category": "time",      "rarity": "rare"},
-    {"id": "early_bird", "name": "Early Bird",    "icon": "🐦", "desc": "Session before 7am",      "category": "time",      "rarity": "common"},
+    {"id": "night_owl",  "name": "Night Owl",     "icon": "OWL.PM", "desc": "Session after midnight",  "category": "time",      "rarity": "rare"},
+    {"id": "early_bird", "name": "Early Bird",    "icon": "BRD.AM", "desc": "Session before 7am",      "category": "time",      "rarity": "common"},
 
     # Best WPM milestones
-    {"id": "best_80",  "name": "Personal Best 80", "icon": "📈", "desc": "Best WPM reaches 80",  "category": "milestone", "rarity": "common"},
-    {"id": "best_100", "name": "Centurion",       "icon": "🏅", "desc": "Best WPM reaches 100",   "category": "milestone", "rarity": "rare"},
-    {"id": "best_120", "name": "Elite",           "icon": "🎖️", "desc": "Best WPM reaches 120",   "category": "milestone", "rarity": "epic"},
+    {"id": "best_80",  "name": "Personal Best 80", "icon": "BST.80", "desc": "Best WPM reaches 80",  "category": "milestone", "rarity": "common"},
+    {"id": "best_100", "name": "Centurion",       "icon": "BST.100", "desc": "Best WPM reaches 100",   "category": "milestone", "rarity": "rare"},
+    {"id": "best_120", "name": "Elite",           "icon": "BST.120", "desc": "Best WPM reaches 120",   "category": "milestone", "rarity": "epic"},
 ]
 
 ACHIEVEMENT_MAP = {a["id"]: a for a in ALL_ACHIEVEMENTS}

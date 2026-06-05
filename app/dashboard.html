@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="../css/components.css"/>
   <link rel="stylesheet" href="../css/dashboard.css"/>
   <link rel="stylesheet" href="../css/app-pages.css"/>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23f4f4f5' stroke-width='8'><rect x='10' y='20' width='80' height='60' rx='8'/><path d='M25 40h10M45 40h10M65 40h10M25 60h50'/></svg>"/>
   <!-- Vercel Web Analytics -->
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -208,28 +208,40 @@
 <div class="app-layout">
   <!-- Sidebar -->
   <aside class="app-sidebar" role="navigation" aria-label="App navigation">
-    <a href="/" class="sidebar-logo" aria-label="TypeForge AI Home">⌨️</a>
+    <a href="/" class="sidebar-logo" aria-label="TypeForge AI Home">
+      <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
+    </a>
     <nav class="sidebar-nav">
       <div class="sidebar-item" onclick="location.href='typing.html'" title="Train" aria-label="Train">
-        <span class="sidebar-icon">⌨️</span>
+        <span class="sidebar-icon">
+          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
+        </span>
         <span class="sidebar-label">Train</span>
       </div>
       <div class="sidebar-item active" onclick="location.href='dashboard.html'" title="Dashboard" aria-label="Dashboard">
-        <span class="sidebar-icon">📊</span>
+        <span class="sidebar-icon">
+          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </span>
         <span class="sidebar-label">Dashboard</span>
       </div>
       <div class="sidebar-item" onclick="location.href='achievements.html'" title="Achievements" aria-label="Achievements">
-        <span class="sidebar-icon">🏆</span>
+        <span class="sidebar-icon">
+          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34M12 2a5 5 0 0 0-5 5v3c0 2.76 2.24 5 5 5s5-2.24 5-5V7a5 5 0 0 0-5-5z"/></svg>
+        </span>
         <span class="sidebar-label">Achievements</span>
       </div>
       <div class="sidebar-item" onclick="location.href='history.html'" title="History" aria-label="History">
-        <span class="sidebar-icon">📜</span>
+        <span class="sidebar-icon">
+          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </span>
         <span class="sidebar-label">History</span>
       </div>
     </nav>
     <div class="sidebar-bottom">
       <div class="sidebar-item" onclick="location.href='settings.html'" title="Settings" aria-label="Settings">
-        <span class="sidebar-icon">⚙️</span>
+        <span class="sidebar-icon">
+          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </span>
         <span class="sidebar-label">Settings</span>
       </div>
       <div class="sidebar-item" title="Profile" aria-label="Profile" id="sidebar-profile">
@@ -237,7 +249,9 @@
         <span class="sidebar-label" data-auth-name>Profile</span>
       </div>
       <div class="sidebar-item" title="Sign Out" aria-label="Sign Out" data-auth-signout>
-        <span class="sidebar-icon">🚪</span>
+        <span class="sidebar-icon">
+          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+        </span>
         <span class="sidebar-label">Sign Out</span>
       </div>
     </div>
@@ -293,7 +307,10 @@
 
       <!-- Accuracy -->
       <div class="bento-item span-4" id="accuracy-card">
-        <div class="bento-title">🎯 Accuracy</div>
+        <div class="bento-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px;"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          Accuracy
+        </div>
         <div class="metric-value" id="metric-accuracy" style="color:var(--teal);" data-counter="0" data-suffix="%">0%</div>
         <div class="metric-trend" id="metric-acc-trend">Track your precision here</div>
         <!-- Progress bar -->
@@ -304,7 +321,10 @@
 
       <!-- Typing DNA -->
       <div class="bento-item span-4" style="align-items:center;text-align:center;">
-        <div class="bento-title" style="align-self:flex-start;">🧬 Consistency Score</div>
+        <div class="bento-title" style="align-self:flex-start;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px;"><path d="M12 2v20M17 5v14M22 9v6M7 7v10M2 10v4"/></svg>
+          Consistency Score
+        </div>
         <div class="dna-ring-container">
           <div class="dna-ring"></div>
           <div class="dna-score" id="metric-consistency" data-counter="0">0</div>
@@ -314,7 +334,10 @@
 
       <!-- Heatmap (Spans 6) -->
       <div class="bento-item span-6">
-        <div class="bento-title">🔥 Activity Map</div>
+        <div class="bento-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Activity Map
+        </div>
         <div style="font-size:12px;color:var(--text-3);margin-bottom:12px;">0 sessions in the last 60 days</div>
         <div class="heatmap-grid" id="heatmap">
           <!-- JS will populate cells -->
@@ -323,7 +346,10 @@
 
       <!-- Weak Keys -->
       <div class="bento-item span-6">
-        <div class="bento-title">⚠️ Target Areas</div>
+        <div class="bento-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:middle;margin-right:4px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Target Areas
+        </div>
         <p style="font-size:13px;color:var(--text-3);margin-bottom:16px;">Keys that slow down your rhythm.</p>
         <div id="weak-keys-target" style="display:flex;gap:12px;">
           <div style="flex:1;padding:16px;text-align:center;color:var(--text-4);font-size:13px;border:1px dashed var(--border-1);border-radius:12px;">
@@ -624,7 +650,9 @@ function renderWelcome(name, profile, history) {
   }
   el.style.display = 'flex';
   el.innerHTML = `
-    <div class="welcome-emoji">👋</div>
+    <div class="welcome-emoji">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
+    </div>
     <div style="flex:1;">
       <div class="live-pill">Live training</div>
       <h2>Hey ${name}, ready for your first session?</h2>

@@ -22,7 +22,7 @@
   <link rel="stylesheet" href="../css/components.css"/>
   <link rel="stylesheet" href="../css/app-pages.css"/>
   <link rel="stylesheet" href="../css/typing.css"/>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23f4f4f5' stroke-width='8'><rect x='10' y='20' width='80' height='60' rx='8'/><path d='M25 40h10M45 40h10M65 40h10M25 60h50'/></svg>"/>
   <!-- Vercel Web Analytics -->
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -30,10 +30,7 @@
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
-<div class="aurora-container" aria-hidden="true">
-  <div class="aurora-blob aurora-blob-1" style="opacity:0.08;"></div>
-  <div class="aurora-blob aurora-blob-3" style="opacity:0.06;"></div>
-</div>
+
 <div class="noise-overlay" aria-hidden="true"></div>
 <div id="toast-container" class="toast-container" role="alert" aria-live="polite"></div>
 
@@ -43,28 +40,40 @@
 <div class="app-layout page-content">
   <!-- Sidebar -->
   <aside class="app-sidebar" role="navigation" aria-label="App navigation">
-    <a href="/" class="sidebar-logo" aria-label="TypeForge AI Home">⌨️</a>
+    <a href="/" class="sidebar-logo" aria-label="TypeForge AI Home">
+      <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
+    </a>
     <nav class="sidebar-nav">
       <div class="sidebar-item active" onclick="location.href='typing.html'" title="Train" aria-label="Train">
-        <span class="sidebar-icon">⌨️</span>
+        <span class="sidebar-icon">
+          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
+        </span>
         <span class="sidebar-label">Train</span>
       </div>
       <div class="sidebar-item" onclick="location.href='dashboard.html'" title="Dashboard" aria-label="Dashboard">
-        <span class="sidebar-icon">📊</span>
+        <span class="sidebar-icon">
+          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </span>
         <span class="sidebar-label">Dashboard</span>
       </div>
       <div class="sidebar-item" onclick="location.href='achievements.html'" title="Achievements" aria-label="Achievements">
-        <span class="sidebar-icon">🏆</span>
+        <span class="sidebar-icon">
+          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34M12 2a5 5 0 0 0-5 5v3c0 2.76 2.24 5 5 5s5-2.24 5-5V7a5 5 0 0 0-5-5z"/></svg>
+        </span>
         <span class="sidebar-label">Achievements</span>
       </div>
       <div class="sidebar-item" onclick="location.href='history.html'" title="History" aria-label="History">
-        <span class="sidebar-icon">📜</span>
+        <span class="sidebar-icon">
+          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </span>
         <span class="sidebar-label">History</span>
       </div>
     </nav>
     <div class="sidebar-bottom">
       <div class="sidebar-item" onclick="location.href='settings.html'" title="Settings" aria-label="Settings">
-        <span class="sidebar-icon">⚙️</span>
+        <span class="sidebar-icon">
+          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </span>
         <span class="sidebar-label">Settings</span>
       </div>
       <div class="sidebar-item" title="Profile" aria-label="Profile" id="sidebar-profile">
@@ -72,7 +81,9 @@
         <span class="sidebar-label" data-auth-name>Profile</span>
       </div>
       <div class="sidebar-item" title="Sign Out" aria-label="Sign Out" data-auth-signout>
-        <span class="sidebar-icon">🚪</span>
+        <span class="sidebar-icon">
+          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+        </span>
         <span class="sidebar-label">Sign Out</span>
       </div>
     </div>
@@ -96,9 +107,9 @@
           </div>
         </div>
         <button class="btn btn-ghost btn-icon btn-sm" id="focus-mode-btn" title="Focus Mode" aria-label="Toggle Focus Mode">
-          🎯
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
         </button>
-        <a href="dashboard.html" class="btn btn-secondary btn-sm">Dashboard →</a>
+        <a href="dashboard.html" class="btn btn-secondary btn-sm">Dashboard</a>
       </div>
     </header>
 
@@ -109,19 +120,19 @@
         <!-- Mode Tabs -->
         <div class="mode-tabs" role="tablist" aria-label="Typing modes">
           <button class="mode-tab active" data-mode="classic" role="tab" aria-selected="true">
-            <span class="mode-tab-icon">⌨️</span> Classic
+            Classic
           </button>
           <button class="mode-tab" data-mode="dev" role="tab" aria-selected="false">
-            <span class="mode-tab-icon">💻</span> Developer
+            Developer
           </button>
           <button class="mode-tab" data-mode="student" role="tab" aria-selected="false">
-            <span class="mode-tab-icon">🎓</span> Student
+            Student
           </button>
           <button class="mode-tab" data-mode="custom" role="tab" aria-selected="false">
-            <span class="mode-tab-icon">✏️</span> Custom
+            Custom
           </button>
           <button class="mode-tab" data-mode="zen" role="tab" aria-selected="false">
-            <span class="mode-tab-icon">🧘</span> Zen
+            Zen
           </button>
         </div>
 
@@ -129,16 +140,16 @@
         <div class="typing-settings">
           <!-- Lang select (dev mode only) -->
           <select class="lang-select" id="lang-select" aria-label="Programming language" style="display:none;">
-            <option value="python">🐍 Python</option>
-            <option value="javascript">🟡 JavaScript</option>
-            <option value="typescript">🔷 TypeScript</option>
-            <option value="sql">🗃️ SQL</option>
-            <option value="bash">💻 Bash</option>
-            <option value="json">📋 JSON</option>
-            <option value="html">🌐 HTML</option>
-            <option value="css">🎨 CSS</option>
-            <option value="markdown">📝 Markdown</option>
-            <option value="yaml">⚙️ YAML</option>
+            <option value="python">Python</option>
+            <option value="javascript">JavaScript</option>
+            <option value="typescript">TypeScript</option>
+            <option value="sql">SQL</option>
+            <option value="bash">Bash</option>
+            <option value="json">JSON</option>
+            <option value="html">HTML</option>
+            <option value="css">CSS</option>
+            <option value="markdown">Markdown</option>
+            <option value="yaml">YAML</option>
           </select>
           <!-- Timer -->
           <div class="timer-selector" role="group" aria-label="Session duration">
@@ -160,9 +171,12 @@
 
       <!-- Weak Keys Alert -->
       <div class="weak-keys-bar" id="weak-keys-bar" style="display:none;">
-        <span class="label">⚡ Weak keys:</span>
+        <span class="label">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:middle;margin-right:4px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Target keys:
+        </span>
         <div id="weak-keys-chips"></div>
-        <span style="margin-left:auto;font-size:11px;color:var(--text-4);">AI training these today</span>
+        <span style="margin-left:auto;font-size:11px;color:var(--text-4);">Telemetry-optimized targets</span>
       </div>
 
       <!-- Live Stats -->
@@ -205,7 +219,9 @@
         <div class="typing-area" id="typing-area" role="textbox" aria-label="Typing practice area" aria-readonly="false" tabindex="0">
           <!-- Overlay when not started -->
           <div class="typing-area-overlay" id="typing-overlay">
-            <div class="typing-area-overlay-icon animate-float-sm">⌨️</div>
+            <div class="typing-area-overlay-icon" style="color:var(--brand-light);margin-bottom:8px;">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
+            </div>
             <div class="typing-area-overlay-text">Click here or press any key to start</div>
             <div style="font-size:11px;color:var(--text-4);margin-top:4px;">Timer starts on first keystroke</div>
           </div>
@@ -337,12 +353,194 @@
   </div>
 </div>
 
+<!-- Desktop Only Modal (Phones Blocked Completely) -->
+<div class="modal-overlay hidden" id="desktop-only-modal" role="dialog" aria-modal="true" aria-label="Desktop required">
+  <div class="modal text-center" style="max-width:460px; border-color:var(--error);">
+    <svg class="animate-pulse" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto var(--sp-4); color: var(--text-3);"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+    <h3 style="margin-bottom:var(--sp-4); font-size:1.5rem; font-family:var(--font-display); font-weight:700; color:var(--text-1);">
+      Physical Keyboard Required
+    </h3>
+    <p style="font-size:14px; color:var(--text-2); line-height:var(--leading-loose); margin-bottom:var(--sp-6); text-align:left;">
+      TypeForge AI is optimized for laptops and desktop computers.<br><br>
+      The platform analyzes typing patterns, key transitions, rhythm, and consistency. These insights require a physical keyboard for accurate results.<br><br>
+      Please continue on a Windows, macOS, or Linux device for the intended experience.
+    </p>
+    <div style="display:flex; gap:var(--sp-3); justify-content:center;">
+      <button class="btn btn-outline" id="desktop-leave-btn" style="flex:1;">Leave Site</button>
+      <a href="/about.html" class="btn btn-secondary" style="flex:1; display:inline-flex; align-items:center; justify-content:center;">Learn More</a>
+    </div>
+  </div>
+</div>
+
+<!-- Tablet Warning Modal -->
+<div class="modal-overlay hidden" id="tablet-warning-modal" role="dialog" aria-modal="true" aria-label="Keyboard warning">
+  <div class="modal text-center" style="max-width:480px; border-color:var(--warning);">
+    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto var(--sp-4); color: var(--text-3);"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
+    <h3 style="margin-bottom:var(--sp-4); font-size:1.5rem; font-family:var(--font-display); font-weight:700; color:var(--text-1);">
+      Optimized for Physical Keyboards
+    </h3>
+    <p style="font-size:14px; color:var(--text-2); line-height:var(--leading-loose); margin-bottom:var(--sp-6); text-align:left;">
+      TypeForge AI was designed around physical keyboard telemetry.<br><br>
+      Using a laptop or desktop provides significantly more accurate insights, better muscle memory development, and a more effective learning experience.
+    </p>
+    <div style="display:flex; flex-direction:column; gap:var(--sp-2);">
+      <button class="btn btn-primary" id="tablet-continue-btn" style="width:100%;">I'm using a physical keyboard</button>
+      <div style="display:flex; gap:var(--sp-3); margin-top:var(--sp-2);">
+        <button class="btn btn-outline" id="tablet-leave-btn" style="flex:1;">Leave Site</button>
+        <a href="/about.html" class="btn btn-secondary" style="flex:1; display:inline-flex; align-items:center; justify-content:center;">Learn More</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Keyboard Required Modal -->
+<div class="modal-overlay hidden" id="keyboard-required-modal" role="dialog" aria-modal="true" aria-label="Keyboard verification required">
+  <div class="modal text-center" style="max-width:440px;">
+    <svg class="animate-pulse" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto var(--sp-4); color: var(--text-3);"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
+    <h3 style="margin-bottom:var(--sp-4); font-size:1.4rem; font-family:var(--font-display); font-weight:700; color:var(--text-1);">
+      Keyboard Verification Required
+    </h3>
+    <p style="font-size:14px; color:var(--text-2); line-height:var(--leading-loose); margin-bottom:var(--sp-6);">
+      Please press any key on your physical keyboard to start the typing session.
+    </p>
+    <div style="padding:12px; background:var(--bg-card); border:1px solid var(--border-2); border-radius:var(--r-md); margin-bottom:var(--sp-6); font-family:var(--font-mono); font-size:12px; color:var(--brand-light);">
+      Waiting for physical keypress...
+    </div>
+    <button class="btn btn-outline btn-wide" id="keyboard-required-cancel-btn">Cancel</button>
+  </div>
+</div>
+
+
 <script type="module">
 import Auth from '../js/clerk.js?v=3';
 import API from '../js/api.js';
 import { initAccessibility } from '../js/accessibility.js';
 import { showToast } from '../js/common.js';
 import { startTourIfNew } from '../js/tour.js';
+
+// ── DEVICE & PHYSICAL KEYBOARD DETECTION ─────────────────────────────────────
+const userAgent = navigator.userAgent;
+const isIPad = (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) || /iPad/i.test(userAgent);
+const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+const isTablet = isIPad || (/Android/i.test(userAgent) && !/Mobile/i.test(userAgent));
+const isPhone = isMobileDevice && !isTablet;
+const hasTouch = navigator.maxTouchPoints > 0 || 'ontouchstart' in window;
+
+let physicalKeyboardDetected = false;
+// On standard desktop without touch, we can assume physical keyboard is present
+if (!hasTouch && !isMobileDevice) {
+  physicalKeyboardDetected = true;
+}
+
+// Global listener to detect physical keypresses
+window.addEventListener("keydown", (e) => {
+  // Check that it's a standard key and not a virtual keyboard process event (229)
+  if (e.keyCode !== 229 && e.key !== 'Process' && e.key !== 'Unidentified') {
+    physicalKeyboardDetected = true;
+    
+    // If the keyboard required modal is currently open, close it and start session!
+    const reqModal = document.getElementById('keyboard-required-modal');
+    if (reqModal && !reqModal.classList.contains('hidden')) {
+      reqModal.classList.add('hidden');
+      document.body.style.overflow = '';
+      startSession();
+    }
+  }
+}, { capture: true });
+
+function checkKeyboardAccess() {
+  if (isPhone) {
+    showDesktopOnlyModal();
+    return false;
+  }
+
+  if (isTablet || window.innerWidth < 1024) {
+    const acknowledged = localStorage.getItem('tf_keyboard_acknowledged') === 'true';
+    if (!acknowledged) {
+      showTabletWarningModal();
+      return false;
+    }
+  }
+
+  if (!physicalKeyboardDetected) {
+    showKeyboardRequiredModal();
+    return false;
+  }
+
+  return true;
+}
+
+function showDesktopOnlyModal() {
+  const modal = document.getElementById('desktop-only-modal');
+  if (modal) {
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function showTabletWarningModal() {
+  const modal = document.getElementById('tablet-warning-modal');
+  if (modal) {
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function showKeyboardRequiredModal() {
+  const modal = document.getElementById('keyboard-required-modal');
+  if (modal) {
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+const leaveSite = () => {
+  if (document.referrer && document.referrer.includes(window.location.host)) {
+    window.history.back();
+  } else {
+    window.location.href = "https://google.com";
+  }
+};
+
+const acknowledgeTablet = () => {
+  localStorage.setItem('tf_keyboard_acknowledged', 'true');
+  const modal = document.getElementById('tablet-warning-modal');
+  if (modal) modal.classList.add('hidden');
+  document.body.style.overflow = '';
+  // Focus the input to let the user type and start
+  const typingInput = document.getElementById('typing-input');
+  if (typingInput) typingInput.focus();
+};
+
+const cancelKeyboardRequired = () => {
+  const modal = document.getElementById('keyboard-required-modal');
+  if (modal) modal.classList.add('hidden');
+  document.body.style.overflow = '';
+  // Clear the input value to prevent virtual keyboard letter entries
+  const typingInput = document.getElementById('typing-input');
+  if (typingInput) typingInput.value = '';
+};
+
+// Bind action buttons on DOM ready or immediate check
+const initDeviceCheck = () => {
+  document.getElementById('desktop-leave-btn')?.addEventListener('click', leaveSite);
+  document.getElementById('tablet-leave-btn')?.addEventListener('click', leaveSite);
+  document.getElementById('tablet-continue-btn')?.addEventListener('click', acknowledgeTablet);
+  document.getElementById('keyboard-required-cancel-btn')?.addEventListener('click', cancelKeyboardRequired);
+
+  if (isPhone) {
+    showDesktopOnlyModal();
+  } else if ((isTablet || window.innerWidth < 1024) && localStorage.getItem('tf_keyboard_acknowledged') !== 'true') {
+    showTabletWarningModal();
+  }
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initDeviceCheck);
+} else {
+  initDeviceCheck();
+}
+
 
 // Init auth to protect page
 (async () => {
@@ -693,6 +891,7 @@ function initSession() {
 // ═══════════════════════════════════════════════════════
 function startSession() {
   if (state.started || state.finished) return;
+  if (!checkKeyboardAccess()) return;
   state.started = true;
   state.startTime = performance.now();
   state.lastKeystrokeTime = performance.now();
@@ -766,7 +965,9 @@ function focusInput() {
 }
 typingArea.addEventListener('click', () => {
   focusInput();
-  if (!state.started && !state.finished) startSession();
+  // We do NOT call startSession() here to allow touch/hybrid users to focus
+  // without triggering a false "keyboard required" block.
+  // The session will start automatically on the first keystroke (keydown or input event).
 });
 typingArea.addEventListener('keydown', (e) => {
   if (!state.started && !state.finished) startSession();
@@ -1135,11 +1336,11 @@ function getTopWeakKeys(n = 3) {
 
 function checkBadges(wpm, acc) {
   const badges = [];
-  if (wpm >= 100 && acc >= 98) badges.push({ icon:'👻', name:'Ghost Fingers' });
-  if (acc >= 99) badges.push({ icon:'🎯', name:'Perfect Aim' });
-  if (wpm >= 120) badges.push({ icon:'⚡', name:'Speed Demon' });
-  if (state.totalErrors === 0) badges.push({ icon:'💎', name:'Flawless' });
-  if (state.maxStreak >= 50) badges.push({ icon:'🔥', name:'On Fire' });
+  if (wpm >= 100 && acc >= 98) badges.push({ icon:'WPM.150', name:'Ghost Fingers' });
+  if (acc >= 99) badges.push({ icon:'ACC.99', name:'Perfect Aim' });
+  if (wpm >= 120) badges.push({ icon:'WPM.120', name:'Speed Demon' });
+  if (state.totalErrors === 0) badges.push({ icon:'ACC.100', name:'Flawless' });
+  if (state.maxStreak >= 50) badges.push({ icon:'STRK.50', name:'On Fire' });
   return badges;
 }
 

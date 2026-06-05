@@ -126,9 +126,9 @@ export function personalizeBadge(ach, name) {
 }
 
 export const NEXT_BADGE_HINTS = [
-  { id: 'first_session', icon: '🚀', name: 'First Flight', hint: 'Complete your first session' },
-  { id: 'wpm_50', icon: '🔥', name: 'Half Century', hint: 'Hit 50 WPM in one run' },
-  { id: 'acc_95', icon: '🎯', name: 'Sharp Eyes', hint: 'Reach 95% accuracy' },
-  { id: 'sessions_10', icon: '🌱', name: 'Getting Started', hint: 'Finish 10 sessions' },
-  { id: 'xp_500', icon: '✨', name: 'XP Spark', hint: 'Earn 500 total XP' },
+  { id: 'first_session', icon: 'RUN.1', name: 'First Flight', hint: 'Complete your first session' },
+  { id: 'wpm_50', icon: 'WPM.50', name: 'Half Century', hint: 'Hit 50 WPM in one run' },
+  { id: 'acc_95', icon: 'ACC.95', name: 'Sharp Eyes', hint: 'Reach 95% accuracy' },
+  { id: 'sessions_10', icon: 'RUN.10', name: 'Getting Started', hint: 'Finish 10 sessions' },
+  { id: 'xp_500', icon: 'XP.500', name: 'XP Spark', hint: 'Earn 500 total XP' },
 ];

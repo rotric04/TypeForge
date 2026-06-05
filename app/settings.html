@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="../css/global.css"/>
   <link rel="stylesheet" href="../css/animations.css"/>
   <link rel="stylesheet" href="../css/components.css"/>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23f4f4f5' stroke-width='8'><rect x='10' y='20' width='80' height='60' rx='8'/><path d='M25 40h10M45 40h10M65 40h10M25 60h50'/></svg>"/>
   <!-- Vercel Web Analytics -->
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -78,28 +78,40 @@
 <div class="app-layout">
   <!-- Sidebar -->
   <aside class="app-sidebar" role="navigation" aria-label="App navigation">
-    <a href="/" class="sidebar-logo" aria-label="TypeForge AI Home">⌨️</a>
+    <a href="/" class="sidebar-logo" aria-label="TypeForge AI Home">
+      <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
+    </a>
     <nav class="sidebar-nav">
       <div class="sidebar-item" onclick="location.href='typing.html'" title="Train" aria-label="Train">
-        <span class="sidebar-icon">⌨️</span>
+        <span class="sidebar-icon">
+          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
+        </span>
         <span class="sidebar-label">Train</span>
       </div>
       <div class="sidebar-item" onclick="location.href='dashboard.html'" title="Dashboard" aria-label="Dashboard">
-        <span class="sidebar-icon">📊</span>
+        <span class="sidebar-icon">
+          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </span>
         <span class="sidebar-label">Dashboard</span>
       </div>
       <div class="sidebar-item" onclick="location.href='achievements.html'" title="Achievements" aria-label="Achievements">
-        <span class="sidebar-icon">🏆</span>
+        <span class="sidebar-icon">
+          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34M12 2a5 5 0 0 0-5 5v3c0 2.76 2.24 5 5 5s5-2.24 5-5V7a5 5 0 0 0-5-5z"/></svg>
+        </span>
         <span class="sidebar-label">Achievements</span>
       </div>
       <div class="sidebar-item" onclick="location.href='history.html'" title="History" aria-label="History">
-        <span class="sidebar-icon">📜</span>
+        <span class="sidebar-icon">
+          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </span>
         <span class="sidebar-label">History</span>
       </div>
     </nav>
     <div class="sidebar-bottom">
       <div class="sidebar-item active" onclick="location.href='settings.html'" title="Settings" aria-label="Settings">
-        <span class="sidebar-icon">⚙️</span>
+        <span class="sidebar-icon">
+          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </span>
         <span class="sidebar-label">Settings</span>
       </div>
       <div class="sidebar-item" title="Profile" aria-label="Profile" id="sidebar-profile">
@@ -107,7 +119,9 @@
         <span class="sidebar-label" data-auth-name>Profile</span>
       </div>
       <div class="sidebar-item" title="Sign Out" aria-label="Sign Out" data-auth-signout>
-        <span class="sidebar-icon">🚪</span>
+        <span class="sidebar-icon">
+          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+        </span>
         <span class="sidebar-label">Sign Out</span>
       </div>
     </div>
@@ -161,13 +175,13 @@
       clerk.mountUserProfile(profileDiv, {
         appearance: {
           variables: {
-            colorPrimary: '#e8734a',
-            colorBackground: '#0d0d1a', // var(--bg-surface)
-            colorText: '#f2f2f8', // var(--text-1)
-            colorTextSecondary: '#a8a8c4', // var(--text-2)
-            colorInputBackground: '#111120', // var(--bg-elevated)
-            colorInputText: '#f2f2f8',
-            borderRadius: '12px',
+            colorPrimary: '#3b5c8f', // var(--brand)
+            colorBackground: '#121215', // var(--bg-surface)
+            colorText: '#f4f4f5', // var(--text-1)
+            colorTextSecondary: '#a1a1aa', // var(--text-2)
+            colorInputBackground: '#1c1c21', // var(--bg-elevated)
+            colorInputText: '#f4f4f5',
+            borderRadius: '4px',
           },
           elements: {
             card: {

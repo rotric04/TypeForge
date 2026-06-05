@@ -86,9 +86,9 @@ function buildPanel(settings) {
       <div class="a11y-section">
         <div class="a11y-section-label">Animations</div>
         <div class="a11y-btn-group" role="group" aria-label="Animation level">
-          <button class="a11y-btn ${settings.motion === 'full'    ? 'active' : ''}" data-motion="full"    title="Full animations">🎬 Full</button>
-          <button class="a11y-btn ${settings.motion === 'reduced' ? 'active' : ''}" data-motion="reduced" title="Reduced motion">🐢 Less</button>
-          <button class="a11y-btn ${settings.motion === 'none'    ? 'active' : ''}" data-motion="none"    title="No animations">⏸ None</button>
+          <button class="a11y-btn ${settings.motion === 'full'    ? 'active' : ''}" data-motion="full"    title="Full animations">Full</button>
+          <button class="a11y-btn ${settings.motion === 'reduced' ? 'active' : ''}" data-motion="reduced" title="Reduced motion">Reduced</button>
+          <button class="a11y-btn ${settings.motion === 'none'    ? 'active' : ''}" data-motion="none"    title="No animations">None</button>
         </div>
       </div>
 
@@ -203,7 +203,7 @@ function injectStyles() {
       padding: 6px 12px;
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 999px;
+      border-radius: var(--r-sm, 4px);
       color: var(--text-3, #686888);
       font-size: 12px; font-weight: 500; cursor: pointer;
       font-family: inherit;
@@ -239,7 +239,7 @@ function injectStyles() {
     .a11y-reset-btn {
       width: 100%; padding: 8px;
       background: none; border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 999px; color: var(--text-4, #3e3e60);
+      border-radius: var(--r-sm, 4px); color: var(--text-4, #3e3e60);
       font-size: 11px; cursor: pointer; font-family: inherit;
       transition: all 0.15s; margin-top: 4px;
     }

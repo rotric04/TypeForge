@@ -237,14 +237,14 @@ export function formatWPM(wpm) {
 // ── Typing DNA Archetype Generator ──────────────────────────────────────────
 export function getArchetype(stats) {
   const { wpm, accuracy, consistency, focusScore } = stats;
-  if (wpm >= 120 && accuracy >= 98) return { name: 'Ghost Fingers',    icon: '👻', desc: 'Speed and precision incarnate' };
-  if (accuracy >= 99)               return { name: 'Precision Builder', icon: '🎯', desc: 'Every keystroke intentional' };
-  if (wpm >= 100)                   return { name: 'Velocity Crafter',  icon: '⚡', desc: 'Built for pure speed' };
-  if (consistency >= 90)            return { name: 'Rhythm Seeker',     icon: '🎵', desc: 'Steady, flowing cadence' };
-  if (focusScore >= 85)             return { name: 'Code Monk',         icon: '🧘', desc: 'Deep focus, zero distraction' };
-  if (wpm >= 70)                    return { name: 'Typing Architect',  icon: '🏗️', desc: 'Building speed with care' };
-  if (accuracy >= 95)               return { name: 'Syntax Hunter',     icon: '🦅', desc: 'Hunting errors before they land' };
-  return { name: 'Keyboard Wanderer', icon: '🗺️', desc: 'Exploring the keys' };
+  if (wpm >= 120 && accuracy >= 98) return { name: 'Ghost Fingers',    icon: 'GHST.FING', desc: 'Speed and precision incarnate' };
+  if (accuracy >= 99)               return { name: 'Precision Builder', icon: 'PRC.BUILD', desc: 'Every keystroke intentional' };
+  if (wpm >= 100)                   return { name: 'Velocity Crafter',  icon: 'SPD.CRAFT', desc: 'Built for pure speed' };
+  if (consistency >= 90)            return { name: 'Rhythm Seeker',     icon: 'RHY.SEEK',  desc: 'Steady, flowing cadence' };
+  if (focusScore >= 85)             return { name: 'Code Monk',         icon: 'CODE.MONK', desc: 'Deep focus, zero distraction' };
+  if (wpm >= 70)                    return { name: 'Typing Architect',  icon: 'TYP.ARCH',  desc: 'Building speed with care' };
+  if (accuracy >= 95)               return { name: 'Syntax Hunter',     icon: 'SYNT.HNT',  desc: 'Hunting errors before they land' };
+  return { name: 'Keyboard Wanderer', icon: 'KBD.WNDR', desc: 'Exploring the keys' };
 }
 
 // ── Canvas Chart Helpers ─────────────────────────────────────────────────────
@@ -406,6 +406,15 @@ export function debounce(fn, ms = 300) {
 // ── Page Transition ──────────────────────────────────────────────────────────
 export function initPageTransition() {
   document.body.classList.add('animate-page-enter');
+  
+  // Clean up the animation class once done to remove transform rules.
+  // This fixes containing block bugs that offset position: fixed elements on scroll.
+  document.body.addEventListener('animationend', (e) => {
+    if (e.animationName === 'page-enter') {
+      document.body.classList.remove('animate-page-enter');
+    }
+  }, { once: true });
+
   document.querySelectorAll('a[href]').forEach(link => {
     const url = new URL(link.href, window.location.origin);
     if (url.origin !== window.location.origin) return;
@@ -478,12 +487,12 @@ export function initMotivationalPopup() {
   if (window.location.pathname.includes('/app/typing')) return;
 
   const tips = [
-    { title: "Wrist Position", desc: "Keep your wrists elevated! Resting them on the desk or a wrist rest can limit movement speed and cause fatigue.", icon: "⌨️" },
-    { title: "Did You Know?", desc: "The longest word typed using only the left hand on QWERTY is 'Stewardesses'. 'Skepticisms' is the longest for the right hand!", icon: "💡" },
-    { title: "Accuracy First", desc: "Speed is a byproduct of muscle memory and accuracy. Focus on slow, clean accuracy and speed will naturally follow.", icon: "🔥" },
-    { title: "Rhythm & Flow", desc: "Relax your shoulders and breathe. A steady rhythm is always faster and cleaner than bursts of fast typing followed by mistakes.", icon: "🧘" },
-    { title: "Layout History", desc: "The QWERTY layout was created in 1873 to prevent typewriter mechanical bars from jamming by separating common letter pairs.", icon: "📜" },
-    { title: "Typing Challenge", desc: "Try running a 1-minute test aiming for 100% accuracy. Go as slow as needed to build error-free memory paths!", icon: "🎯" }
+    { title: "Wrist Position", desc: "Keep your wrists elevated! Resting them on the desk or a wrist rest can limit movement speed and cause fatigue.", icon: "WRST" },
+    { title: "Did You Know?", desc: "The longest word typed using only the left hand on QWERTY is 'Stewardesses'. 'Skepticisms' is the longest for the right hand!", icon: "INFO" },
+    { title: "Accuracy First", desc: "Speed is a byproduct of muscle memory and accuracy. Focus on slow, clean accuracy and speed will naturally follow.", icon: "ACCR" },
+    { title: "Rhythm & Flow", desc: "Relax your shoulders and breathe. A steady rhythm is always faster and cleaner than bursts of fast typing followed by mistakes.", icon: "FLOW" },
+    { title: "Layout History", desc: "The QWERTY layout was created in 1873 to prevent typewriter mechanical bars from jamming by separating common letter pairs.", icon: "HIST" },
+    { title: "Typing Challenge", desc: "Try running a 1-minute test aiming for 100% accuracy. Go as slow as needed to build error-free memory paths!", icon: "GOAL" }
   ];
 
   setTimeout(() => {

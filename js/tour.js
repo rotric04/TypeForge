@@ -23,61 +23,58 @@ const TOUR_CSS = `
 #tf-tour-backdrop {
   position: absolute;
   inset: 0;
-  background: rgba(4, 4, 14, 0.82);
+  background: rgba(8, 8, 10, 0.85);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
   transition: opacity 0.35s ease;
 }
 #tf-tour-spotlight {
   position: absolute;
-  border-radius: 16px;
-  box-shadow: 0 0 0 4000px rgba(4, 4, 14, 0.82);
-  border: 2px solid rgba(232, 115, 74, 0.7);
-  box-shadow:
-    0 0 0 4000px rgba(4, 4, 14, 0.82),
-    0 0 0 4px rgba(232, 115, 74, 0.2),
-    0 0 30px rgba(232, 115, 74, 0.4);
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border-radius: var(--r-md);
+  box-shadow: 0 0 0 4000px rgba(8, 8, 10, 0.85);
+  border: 1px solid var(--accent);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
 }
 #tf-tour-tooltip {
   position: absolute;
-  background: linear-gradient(135deg, rgba(13,13,30,0.98), rgba(17,17,40,0.98));
-  border: 1px solid rgba(232, 115, 74, 0.35);
-  border-radius: 20px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-md);
   padding: 20px 24px;
   min-width: 260px;
   max-width: 320px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 40px rgba(232,115,74,0.15);
-  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-  font-family: 'Inter', system-ui, sans-serif;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: var(--font-body);
   z-index: 9001;
 }
 .tf-tour-step-badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background: rgba(232,115,74,0.15);
-  border: 1px solid rgba(232,115,74,0.3);
-  border-radius: 999px;
-  padding: 3px 10px;
-  font-size: 11px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-sm);
+  padding: 3px 8px;
+  font-size: 10px;
   font-weight: 600;
-  color: #f0956e;
+  color: var(--text-2);
+  font-family: var(--font-mono);
   letter-spacing: 0.05em;
   margin-bottom: 10px;
 }
 .tf-tour-title {
-  font-family: 'Satoshi', 'Inter', system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 16px;
   font-weight: 700;
-  color: #f2f2f8;
+  color: var(--text-1);
   margin-bottom: 6px;
   line-height: 1.3;
 }
 .tf-tour-desc {
   font-size: 13px;
-  color: #a8a8c4;
+  color: var(--text-2);
   line-height: 1.6;
   margin-bottom: 16px;
 }
@@ -89,14 +86,14 @@ const TOUR_CSS = `
 }
 .tf-tour-skip {
   font-size: 12px;
-  color: #686888;
+  color: var(--text-3);
   cursor: pointer;
   background: none;
   border: none;
   padding: 0;
   transition: color 0.15s;
 }
-.tf-tour-skip:hover { color: #a8a8c4; }
+.tf-tour-skip:hover { color: var(--text-2); }
 .tf-tour-btns {
   display: flex;
   gap: 8px;
@@ -104,29 +101,27 @@ const TOUR_CSS = `
 .tf-tour-btn {
   font-size: 13px;
   font-weight: 600;
-  padding: 8px 16px;
-  border-radius: 10px;
+  padding: 6px 14px;
+  border-radius: var(--r-sm);
   border: none;
   cursor: pointer;
   transition: all 0.15s;
 }
 .tf-tour-btn-next {
-  background: linear-gradient(135deg, #e8734a, #f05c6e);
+  background: var(--brand-light);
   color: #fff;
-  box-shadow: 0 4px 16px rgba(232,115,74,0.35);
 }
 .tf-tour-btn-next:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(232,115,74,0.5);
+  background: var(--brand);
 }
 .tf-tour-btn-prev {
   background: rgba(255,255,255,0.06);
-  color: #a8a8c4;
-  border: 1px solid rgba(255,255,255,0.09);
+  color: var(--text-2);
+  border: 1px solid var(--border-1);
 }
 .tf-tour-btn-prev:hover {
   background: rgba(255,255,255,0.10);
-  color: #f2f2f8;
+  color: var(--text-1);
 }
 .tf-tour-dots {
   display: flex;
@@ -140,9 +135,9 @@ const TOUR_CSS = `
   transition: all 0.2s;
 }
 .tf-tour-dot.active {
-  background: #e8734a;
-  width: 16px;
-  border-radius: 3px;
+  background: var(--brand-light);
+  width: 12px;
+  border-radius: var(--r-sm);
 }
 @media (max-width: 600px) {
   #tf-tour-tooltip {
@@ -160,37 +155,37 @@ const TOUR_CSS = `
 const DEFAULT_STEPS = [
   {
     target: null,
-    title: '👋 Welcome to TypeForge AI!',
+    title: 'Welcome to TypeForge AI',
     desc: "Let's take a 30-second tour to show you the key features. You can skip at any time.",
     wide: true,
   },
   {
     target: '#mode-selector, .mode-tabs, [data-mode], .mode-btn:first-child',
-    title: '⌨️ Choose Your Mode',
+    title: 'Choose Your Mode',
     desc: 'Switch between Classic typing, Developer code snippets, Speed sprints, and more. Each mode trains different skills.',
     position: 'bottom',
   },
   {
     target: '#timer-select, .duration-select, [id*="timer"], .timer-control',
-    title: '⏱️ Set Your Duration',
+    title: 'Set Your Duration',
     desc: 'Train in 15s, 30s, 60s, or custom sessions. Shorter sessions for warm-ups, longer for deep focus.',
     position: 'bottom',
   },
   {
     target: '#header-xp-fill, .xp-bar, #header-xp-text, [id*="xp"]',
-    title: '⭐ Your XP & Level',
+    title: 'Your XP & Level',
     desc: 'Every session earns XP. Level up to unlock achievements and track your long-term progress on the dashboard.',
     position: 'bottom',
   },
   {
     target: '#typing-area, #text-display, .typing-area, [id*="typing"]',
-    title: '🎯 The Typing Arena',
+    title: 'The Typing Arena',
     desc: 'Type the displayed text as fast and accurately as possible. Errors flash red — fix them or keep going.',
     position: 'top',
   },
   {
     target: null,
-    title: '🚀 You\'re Ready!',
+    title: 'You\'re Ready',
     desc: 'Your results are saved automatically after each session. Check your Dashboard for analytics and Achievements for badges. Happy typing!',
     wide: true,
     isLast: true,
@@ -294,7 +289,7 @@ class TypeForgeTour {
         <div class="tf-tour-btns">
           ${!isFirst ? `<button class="tf-tour-btn tf-tour-btn-prev" id="tf-prev-btn">← Back</button>` : ''}
           <button class="tf-tour-btn tf-tour-btn-next" id="tf-next-btn">
-            ${isLast ? '🎉 Let\'s go!' : 'Next →'}
+            ${isLast ? 'Let\'s go!' : 'Next →'}
           </button>
         </div>
       </div>

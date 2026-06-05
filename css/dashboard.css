@@ -37,19 +37,11 @@
 }
 .dna-main-card {
   padding: var(--sp-8);
-  background: linear-gradient(135deg, rgba(124,111,247,0.08), rgba(255,107,157,0.04));
-  border: 1px solid var(--border-brand);
-  border-radius: var(--r-2xl);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-1);
+  border-radius: var(--r-md);
   position: relative;
   overflow: hidden;
-}
-.dna-main-card::before {
-  content: '';
-  position: absolute;
-  top: -80px; right: -80px;
-  width: 300px; height: 300px;
-  background: radial-gradient(circle, rgba(124,111,247,0.15), transparent 70%);
-  pointer-events: none;
 }
 .dna-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: var(--sp-6); }
 .dna-title-row { display: flex; flex-direction: column; gap: var(--sp-2); }
@@ -59,23 +51,18 @@
 .dna-archetype-display {
   display: flex; align-items: center; gap: var(--sp-4);
   padding: var(--sp-4) var(--sp-5);
-  background: linear-gradient(135deg, var(--brand) 0%, var(--coral) 100%);
-  border-radius: var(--r-xl);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-sm);
   margin-bottom: var(--sp-6);
   position: relative;
   overflow: hidden;
 }
-.dna-archetype-display::after {
-  content: '';
-  position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-  animation: achievement-shine 3s ease-in-out infinite;
-}
 .dna-archetype-icon { font-size: 2rem; }
 .dna-archetype-info { flex: 1; }
-.dna-archetype-name { font-size: var(--text-xl); font-weight: 700; color: #fff; }
-.dna-archetype-desc { font-size: var(--text-xs); color: rgba(255,255,255,0.75); margin-top: 2px; }
-.dna-archetype-score { font-family: var(--font-display); font-size: var(--text-3xl); font-weight: 800; color: #fff; }
+.dna-archetype-name { font-size: var(--text-xl); font-weight: 700; color: var(--text-1); }
+.dna-archetype-desc { font-size: var(--text-xs); color: var(--text-2); margin-top: 2px; }
+.dna-archetype-score { font-family: var(--font-display); font-size: var(--text-3xl); font-weight: 800; color: var(--brand-light); }
 
 .dna-scores-grid {
   display: grid;
@@ -85,9 +72,9 @@
 .dna-score-item {
   display: flex; flex-direction: column; align-items: center; gap: var(--sp-2);
   padding: var(--sp-4);
-  background: var(--glass-bg-light);
+  background: var(--bg-surface);
   border: 1px solid var(--border-1);
-  border-radius: var(--r-xl);
+  border-radius: var(--r-sm);
   text-align: center;
 }
 .dna-score-ring { position: relative; width: 60px; height: 60px; }
@@ -107,7 +94,7 @@
   padding: var(--sp-6);
   background: var(--bg-card);
   border: 1px solid var(--border-1);
-  border-radius: var(--r-2xl);
+  border-radius: var(--r-md);
   display: flex; flex-direction: column; gap: var(--sp-5);
 }
 .goal-item {
@@ -130,12 +117,12 @@
   padding: var(--sp-6);
   background: var(--bg-card);
   border: 1px solid var(--border-1);
-  border-radius: var(--r-2xl);
+  border-radius: var(--r-md);
 }
 .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--sp-6); }
 .chart-title-row { display: flex; flex-direction: column; gap: var(--sp-1); }
 .chart-canvas-wrapper { position: relative; width: 100%; }
-.chart-canvas { width: 100% !important; border-radius: var(--r-lg); }
+.chart-canvas { width: 100% !important; border-radius: var(--r-sm); }
 .chart-legend { display: flex; gap: var(--sp-4); flex-wrap: wrap; margin-top: var(--sp-4); }
 .chart-legend-item { display: flex; align-items: center; gap: var(--sp-2); font-size: var(--text-xs); color: var(--text-3); }
 .chart-legend-dot { width: 8px; height: 8px; border-radius: 50%; }
@@ -151,10 +138,10 @@
   gap: var(--sp-3);
 }
 .finger-name { font-size: var(--text-xs); color: var(--text-3); }
-.finger-bar-track { height: 8px; background: var(--border-1); border-radius: var(--r-full); overflow: hidden; }
-.finger-bar-fill { height: 100%; border-radius: var(--r-full); transition: width 1s var(--ease-out); }
-.finger-bar-fill.left  { background: linear-gradient(90deg, var(--brand), var(--violet)); }
-.finger-bar-fill.right { background: linear-gradient(90deg, var(--coral), var(--gold)); }
+.finger-bar-track { height: 8px; background: var(--border-1); border-radius: var(--r-sm); overflow: hidden; }
+.finger-bar-fill { height: 100%; border-radius: var(--r-sm); transition: width 1s var(--ease-out); }
+.finger-bar-fill.left  { background: var(--brand-light); }
+.finger-bar-fill.right { background: var(--peach); }
 .finger-pct { font-size: var(--text-xs); color: var(--text-2); text-align: right; font-family: var(--font-mono); }
 
 /* ── Achievements ── */
@@ -178,14 +165,14 @@
   padding: var(--sp-6);
   background: var(--bg-card);
   border: 1px solid var(--border-1);
-  border-radius: var(--r-2xl);
+  border-radius: var(--r-md);
 }
 .training-item {
   display: flex; align-items: center; gap: var(--sp-4);
   padding: var(--sp-4);
   background: var(--bg-elevated);
   border: 1px solid var(--border-1);
-  border-radius: var(--r-xl);
+  border-radius: var(--r-sm);
   margin-bottom: var(--sp-3);
   cursor: pointer;
   transition: all var(--duration-base);
@@ -194,7 +181,7 @@
 .training-item:hover { border-color: var(--border-2); background: var(--bg-card-hover); }
 .training-item-icon {
   width: 40px; height: 40px;
-  border-radius: var(--r-md);
+  border-radius: var(--r-sm);
   display: flex; align-items: center; justify-content: center;
   font-size: 1.1rem; flex-shrink: 0;
 }
@@ -204,7 +191,7 @@
 .training-item-meta { display: flex; align-items: center; gap: var(--sp-2); flex-shrink: 0; }
 .difficulty-badge {
   font-size: 10px; font-weight: 700; padding: 2px 6px;
-  border-radius: var(--r-full);
+  border-radius: var(--r-sm);
 }
 .diff-easy   { background: var(--success-bg); color: var(--success); }
 .diff-medium { background: var(--warning-bg); color: var(--warning); }
@@ -219,7 +206,7 @@
   padding: var(--sp-2) var(--sp-3);
   background: var(--bg-elevated);
   border: 1px solid var(--border-2);
-  border-radius: var(--r-lg);
+  border-radius: var(--r-sm);
   cursor: pointer;
   transition: all var(--duration-fast);
 }
@@ -245,12 +232,12 @@
   border-bottom: 1px solid var(--border-1);
 }
 .history-table tr:last-child td { border-bottom: none; }
-.history-table tr:hover td { background: var(--glass-bg-light); }
+.history-table tr:hover td { background: var(--bg-surface); }
 .history-wpm-cell { font-family: var(--font-display); font-size: var(--text-base); font-weight: 700; color: var(--brand-light); }
 .history-acc-cell { color: var(--mint); font-weight: 600; }
 .history-mode-badge {
   padding: 2px 8px;
-  border-radius: var(--r-full);
+  border-radius: var(--r-sm);
   font-size: 11px; font-weight: 600;
 }
 

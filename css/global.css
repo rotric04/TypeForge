@@ -1,85 +1,84 @@
-@import url('https://fonts.googleapis.com/css2?family=Satoshi:wght@300;400;500;700;900&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
 /* ============================================================
-   TYPEFORGE AI — GLOBAL DESIGN SYSTEM v2
-   Warm Ember × Teal × Human
+   TYPEFORGE — GLOBAL DESIGN SYSTEM
+   Graphite × Technical Precision
    ============================================================ */
 
 :root {
   /* ── Backgrounds ── */
-  --bg-base:        #080810;
-  --bg-surface:     #0d0d1a;
-  --bg-elevated:    #111120;
-  --bg-card:        rgba(255, 255, 255, 0.032);
-  --bg-card-hover:  rgba(255, 255, 255, 0.058);
+  --bg-base:        #09090b;
+  --bg-surface:     #121215;
+  --bg-elevated:    #1c1c21;
+  --bg-card:        #121215;
+  --bg-card-hover:  #18181b;
 
-  /* ── Primary Brand: Warm Ember ── */
-  --brand:          #e8734a;
-  --brand-light:    #f0956e;
-  --brand-dark:     #c55a34;
-  --brand-glow:     rgba(232, 115, 74, 0.35);
-  --brand-glow-sm:  rgba(232, 115, 74, 0.15);
+  /* ── Primary Brand: Precision Steel Blue ── */
+  --brand:          #3b5c8f;
+  --brand-light:    #60a5fa;
+  --brand-dark:     #2563eb;
+  --brand-glow:     rgba(96, 165, 250, 0.08);
+  --brand-glow-sm:  rgba(96, 165, 250, 0.04);
 
-  /* ── Secondary: Teal-Mint ── */
-  --teal:           #00c9a7;
-  --teal-light:     #2de0bf;
-  --teal-dark:      #00a589;
-  --teal-glow:      rgba(0, 201, 167, 0.3);
-  --teal-glow-sm:   rgba(0, 201, 167, 0.15);
+  /* ── Secondary: Muted Slate ── */
+  --teal:           #27272a;
+  --teal-light:     #3f3f46;
+  --teal-dark:      #18181b;
+  --teal-glow:      rgba(255, 255, 255, 0.02);
+  --teal-glow-sm:   rgba(255, 255, 255, 0.01);
 
-  /* ── Accent: Soft Peach ── */
-  --peach:          #f7c59f;
-  --peach-glow:     rgba(247, 197, 159, 0.25);
+  /* ── Accent: Warm Terracotta Action ── */
+  --peach:          #c2583b;
+  --peach-glow:     rgba(194, 88, 59, 0.12);
 
   /* ── Supporting Colors ── */
-  --coral:          #f05c6e;
-  --coral-glow:     rgba(240, 92, 110, 0.3);
-  --mint:           #00e5c4;
-  --mint-glow:      rgba(0, 229, 196, 0.25);
-  --gold:           #f5c842;
-  --gold-glow:      rgba(245, 200, 66, 0.28);
-  --amber:          #f59e0b;
+  --coral:          #ef4444;
+  --coral-glow:     rgba(239, 68, 68, 0.05);
+  --mint:           #10b981;
+  --mint-glow:      rgba(16, 185, 129, 0.05);
+  --gold:           #f59e0b;
+  --gold-glow:      rgba(245, 158, 11, 0.05);
+  --amber:          #d97706;
   --sky:            #38bdf8;
-  --sky-glow:       rgba(56, 189, 248, 0.25);
-  /* Purple kept only as accent */
-  --accent:         #a78bfa;
-  --accent-glow:    rgba(167, 139, 250, 0.25);
-  --violet:         #8b5cf6;
+  --sky-glow:       rgba(56, 189, 248, 0.05);
+  --accent:         #6366f1;
+  --accent-glow:    rgba(99, 102, 241, 0.05);
+  --violet:         #4f46e5;
 
   /* ── Semantic Colors ── */
-  --success:        #10d9a0;
-  --success-bg:     rgba(16, 217, 160, 0.12);
-  --warning:        #f5c842;
-  --warning-bg:     rgba(245, 200, 66, 0.12);
-  --error:          #f05c6e;
-  --error-bg:       rgba(240, 92, 110, 0.12);
-  --info:           #38bdf8;
-  --info-bg:        rgba(56, 189, 248, 0.12);
+  --success:        #10b981;
+  --success-bg:     rgba(16, 185, 129, 0.08);
+  --warning:        #f59e0b;
+  --warning-bg:     rgba(245, 158, 11, 0.08);
+  --error:          #ef4444;
+  --error-bg:       rgba(239, 68, 68, 0.08);
+  --info:           #3b82f6;
+  --info-bg:        rgba(59, 130, 246, 0.08);
 
   /* ── Text ── */
-  --text-1:  #f2f2f8;
-  --text-2:  #a8a8c4;
-  --text-3:  #686888;
-  --text-4:  #3e3e60;
+  --text-1:  #f4f4f5;
+  --text-2:  #a1a1aa;
+  --text-3:  #5c5c63;
+  --text-4:  #3f3f46;
 
   /* ── Borders ── */
-  --border-1: rgba(255, 255, 255, 0.052);
-  --border-2: rgba(255, 255, 255, 0.09);
-  --border-3: rgba(255, 255, 255, 0.16);
-  --border-brand: rgba(232, 115, 74, 0.4);
-  --border-teal: rgba(0, 201, 167, 0.4);
+  --border-1: rgba(255, 255, 255, 0.06);
+  --border-2: rgba(255, 255, 255, 0.12);
+  --border-3: rgba(255, 255, 255, 0.2);
+  --border-brand: rgba(255, 255, 255, 0.1);
+  --border-teal: rgba(255, 255, 255, 0.08);
 
   /* ── Glassmorphism ── */
-  --glass-bg:        rgba(10, 10, 22, 0.65);
-  --glass-bg-light:  rgba(255, 255, 255, 0.038);
-  --glass-border:    rgba(255, 255, 255, 0.075);
-  --glass-blur:      blur(28px);
-  --glass-blur-sm:   blur(14px);
+  --glass-bg:        #121215;
+  --glass-bg-light:  #18181b;
+  --glass-border:    #27272a;
+  --glass-blur:      none;
+  --glass-blur-sm:   none;
 
   /* ── Typography ── */
-  --font-display: 'Satoshi', 'Inter', system-ui, sans-serif;
+  --font-display: 'Space Grotesk', 'IBM Plex Sans', system-ui, sans-serif;
   --font-body:    'Inter', system-ui, sans-serif;
-  --font-mono:    'JetBrains Mono', 'Fira Code', monospace;
+  --font-mono:    'IBM Plex Mono', 'JetBrains Mono', monospace;
 
   /* ── Font Sizes ── */
   --text-xs:   0.75rem;
@@ -102,11 +101,11 @@
   --leading-loose:  1.8;
 
   /* ── Letter Spacing ── */
-  --tracking-tight:  -0.03em;
-  --tracking-snug:   -0.015em;
+  --tracking-tight:  -0.02em;
+  --tracking-snug:   -0.01em;
   --tracking-normal: 0em;
-  --tracking-wide:   0.05em;
-  --tracking-wider:  0.1em;
+  --tracking-wide:   0.03em;
+  --tracking-wider:  0.06em;
 
   /* ── Spacing ── */
   --sp-1:  4px;
@@ -124,24 +123,24 @@
   --sp-32: 128px;
 
   /* ── Border Radius ── */
-  --r-sm:   6px;
-  --r-md:   10px;
-  --r-lg:   16px;
-  --r-xl:   20px;
-  --r-2xl:  28px;
-  --r-3xl:  40px;
-  --r-4xl:  56px;
+  --r-sm:   4px;
+  --r-md:   6px;
+  --r-lg:   8px;
+  --r-xl:   8px;
+  --r-2xl:  8px;
+  --r-3xl:  8px;
+  --r-4xl:  8px;
   --r-full: 9999px;
 
   /* ── Shadows ── */
-  --shadow-sm:       0 2px 8px rgba(0,0,0,0.4);
-  --shadow-md:       0 4px 24px rgba(0,0,0,0.5);
-  --shadow-lg:       0 8px 48px rgba(0,0,0,0.6);
-  --shadow-xl:       0 16px 80px rgba(0,0,0,0.7);
-  --shadow-brand:    0 0 40px rgba(232,115,74,0.22);
-  --shadow-brand-lg: 0 0 80px rgba(232,115,74,0.38);
-  --shadow-teal:     0 0 40px rgba(0,201,167,0.2);
-  --shadow-teal-lg:  0 0 80px rgba(0,201,167,0.35);
+  --shadow-sm:       none;
+  --shadow-md:       none;
+  --shadow-lg:       none;
+  --shadow-xl:       none;
+  --shadow-brand:    none;
+  --shadow-brand-lg: none;
+  --shadow-teal:     none;
+  --shadow-teal-lg:  none;
 
   /* ── Transitions ── */
   --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
@@ -152,10 +151,10 @@
   --ease-expo:   cubic-bezier(0.19, 1, 0.22, 1);
 
   --duration-fast:    100ms;
-  --duration-base:    200ms;
-  --duration-slow:    360ms;
-  --duration-slower:  560ms;
-  --duration-slowest: 900ms;
+  --duration-base:    150ms;
+  --duration-slow:    250ms;
+  --duration-slower:  350ms;
+  --duration-slowest: 600ms;
 
   /* ── Z-Index Scale ── */
   --z-0:        0;
@@ -177,7 +176,7 @@
 
   /* ── Accessibility overrides (set via JS) ── */
   --a11y-font-scale: 1;
-  --a11y-focus-ring-color: var(--teal);
+  --a11y-focus-ring-color: var(--brand-light);
 }
 
 /* ── Accessibility: High Contrast ── */
@@ -275,20 +274,20 @@ h1, h2, h3, h4, h5, h6 {
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 201, 167, 0.3);
-  border-radius: var(--r-full);
+  background: var(--border-2);
+  border-radius: var(--r-sm);
 }
-::-webkit-scrollbar-thumb:hover { background: rgba(0, 201, 167, 0.55); }
+::-webkit-scrollbar-thumb:hover { background: var(--text-3); }
 
 /* ── Text Selection ── */
 ::selection {
-  background: rgba(232, 115, 74, 0.3);
+  background: var(--brand-glow);
   color: var(--text-1);
 }
 
 /* ── Focus ── */
 :focus-visible {
-  outline: 2px solid var(--a11y-focus-ring-color, var(--teal));
+  outline: 2px solid var(--a11y-focus-ring-color, var(--brand-light));
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -346,30 +345,27 @@ html.a11y-fat-focus :focus-visible { outline-width: 4px; outline-offset: 5px; }
 .text-center { text-align: center; }
 .text-right  { text-align: right; }
 
-/* ── Gradient Texts ── */
+/* ── Refactored Text Styles (No Gradients) ── */
+.gradient-text,
+.gradient-text-warm,
+.gradient-text-teal,
+.gradient-text-mint {
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: initial !important;
+}
 .gradient-text {
-  background: linear-gradient(135deg, var(--brand) 0%, var(--coral) 45%, var(--gold) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--text-1);
 }
 .gradient-text-warm {
-  background: linear-gradient(135deg, var(--peach) 0%, var(--brand) 50%, var(--coral) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--peach);
 }
 .gradient-text-teal {
-  background: linear-gradient(135deg, var(--teal) 0%, var(--sky) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--brand-light);
 }
 .gradient-text-mint {
-  background: linear-gradient(135deg, var(--mint) 0%, var(--teal) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--mint);
 }
 
 /* ── Layout Utilities ── */
@@ -416,12 +412,12 @@ html.a11y-fat-focus :focus-visible { outline-width: 4px; outline-offset: 5px; }
 .glass-card:hover {
   background: var(--bg-card-hover);
   border-color: var(--border-2);
-  box-shadow: var(--shadow-brand);
+  box-shadow: none;
 }
 
-/* ── Glow Utilities ── */
-.glow-brand { box-shadow: var(--shadow-brand); }
-.glow-teal  { box-shadow: var(--shadow-teal); }
+/* ── Glow Utilities (Flattened) ── */
+.glow-brand { border-color: var(--border-2); }
+.glow-teal  { border-color: var(--border-2); }
 
 /* ── Sections ── */
 section { position: relative; }

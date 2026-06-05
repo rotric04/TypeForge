@@ -134,7 +134,7 @@ async def get_typing_dna(user: UserProfile = Depends(get_current_user)):
 
     return {
         "archetype": archetype["name"],
-        "archetype_icon": archetype.get("icon", "⌨️"),
+        "archetype_icon": archetype.get("icon", "TYP.ARCH"),
         "archetype_desc": archetype.get("desc", ""),
         "focus_score": user.focus_score or 0,
         "consistency_score": analyzer.consistency_score(),

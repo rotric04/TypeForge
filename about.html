@@ -26,7 +26,7 @@
   <link rel="stylesheet" href="css/animations.css" />
   <link rel="stylesheet" href="css/components.css" />
   <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⌨️</text></svg>" />
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23f4f4f5' stroke-width='8'><rect x='10' y='20' width='80' height='60' rx='8'/><path d='M25 40h10M45 40h10M65 40h10M25 60h50'/></svg>" />
   <!-- Vercel Web Analytics -->
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -651,18 +651,16 @@
 
 <body>
   <!-- Aurora -->
-  <div class="aurora-container" aria-hidden="true">
-    <div class="aurora-blob aurora-blob-1" style="opacity:0.12;"></div>
-    <div class="aurora-blob aurora-blob-2" style="opacity:0.08;top:60%;right:5%;"></div>
-    <div class="aurora-blob aurora-blob-3" style="opacity:0.08;"></div>
-  </div>
+  
   <div class="noise-overlay" aria-hidden="true"></div>
 
   <!-- Navbar -->
   <nav class="navbar" id="main-nav" role="navigation" aria-label="Main navigation">
     <div class="navbar-inner">
       <a href="/" class="navbar-logo" aria-label="TypeForge AI home">
-        <div class="navbar-logo-icon" aria-hidden="true">⌨️</div>
+        <div class="navbar-logo-icon" style="width:32px;height:32px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);border:1px solid var(--border-2);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-1);"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
+        </div>
         <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
       </a>
       <ul class="navbar-links" role="list">
@@ -695,7 +693,7 @@
     <a href="/blog">✦ Blog</a>
     <a href="/feedback">✦ Community</a>
     <div class="nav-drawer-divider"></div>
-    <a href="/app/typing.html">⌨️ Open App</a>
+    <a href="/app/typing.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;vertical-align:middle;"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg> Open App</a>
   </nav>
 
   <main class="page-content">
@@ -844,8 +842,8 @@
             </h2>
             <div style="margin-top:24px;">
               <div
-                style="display:flex;align-items:center;gap:12px;margin-bottom:16px;padding:16px;background:var(--bg-card);border:1px solid var(--border-1);border-radius:16px;">
-                <div style="font-size:2rem;">👤</div>
+                style="display:flex;align-items:center;gap:12px;margin-bottom:16px;padding:16px;background:var(--bg-card);border:1px solid var(--border-1);border-radius:var(--r-md);">
+                <div style="display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);border:1px solid var(--border-2);width:40px;height:40px;border-radius:50%;color:var(--text-1);font-weight:700;">AK</div>
                 <div>
                   <div style="font-size:14px;font-weight:600;">Assud K.</div>
                   <div style="font-size:12px;color:var(--text-4);">Founder & Developer</div>
@@ -900,37 +898,37 @@
         </div>
         <div class="values-grid" id="values-grid">
           <div class="value-card" data-anime="fade-up" data-delay="0">
-            <span class="value-icon">🎯</span>
+            <span style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--gold);margin-bottom:12px;display:block;">TRN.01</span>
             <div class="value-name">Training, not testing</div>
             <div class="value-desc">You should never feel judged. Every session is a workout, not an exam. We design
               every interaction to feel like a coach, not a stopwatch.</div>
           </div>
           <div class="value-card" data-anime="fade-up" data-delay="80">
-            <span class="value-icon">🔬</span>
+            <span style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--brand-light);margin-bottom:12px;display:block;">EVN.02</span>
             <div class="value-name">Evidence-based learning</div>
             <div class="value-desc">Everything we recommend is grounded in how motor learning actually works, utilizing
               spaced repetition, difficulty scaling, and deliberate practice with feedback.</div>
           </div>
           <div class="value-card" data-anime="fade-up" data-delay="160">
-            <span class="value-icon">🌱</span>
+            <span style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--mint);margin-bottom:12px;display:block;">OPN.03</span>
             <div class="value-name">Open by default</div>
             <div class="value-desc">The core platform is open source. We believe typing training should be accessible to
               everyone, rather than locked behind a subscription wall.</div>
           </div>
           <div class="value-card" data-anime="fade-up" data-delay="0">
-            <span class="value-icon">🛡️</span>
+            <span style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--sky);margin-bottom:12px;display:block;">PRV.04</span>
             <div class="value-name">Privacy first</div>
             <div class="value-desc">Your keystroke data belongs to you. We never sell it, never share it without
               consent, and let you export or delete it at any time, no questions asked.</div>
           </div>
           <div class="value-card" data-anime="fade-up" data-delay="80">
-            <span class="value-icon">⚡</span>
+            <span style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--peach);margin-bottom:12px;display:block;">CRF.05</span>
             <div class="value-name">Craft over features</div>
             <div class="value-desc">We'd rather one thing work beautifully than ten things work adequately. We obsess
               over every interaction, every animation, every moment of friction.</div>
           </div>
           <div class="value-card" data-anime="fade-up" data-delay="160">
-            <span class="value-icon">🤝</span>
+            <span style="font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--violet);margin-bottom:12px;display:block;">COM.06</span>
             <div class="value-name">Community-driven</div>
             <div class="value-desc">Our roadmap is shaped by the people using the platform. Bug reports, feature
               requests, and pull requests directly influence what we build next.</div>
@@ -954,14 +952,14 @@
         </div>
         <div class="team-grid">
           <div class="team-card" data-anime="scale-up" data-delay="0">
-            <div class="team-avatar" style="background:linear-gradient(135deg,var(--brand),var(--coral));">👤</div>
+            <div class="team-avatar" style="background:var(--bg-elevated);border:1px solid var(--border-2);color:var(--text-1);font-weight:700;">AK</div>
             <div class="team-name">Assud K.</div>
             <div class="team-role">Founder & Lead Dev</div>
             <div class="team-bio">Started TypeForge after getting fed up with every other typing website. Types at ~110
               WPM and still makes typos.</div>
           </div>
           <div class="team-card" data-anime="scale-up" data-delay="80">
-            <div class="team-avatar" style="background:linear-gradient(135deg,var(--gold),var(--amber));">🌍</div>
+            <div class="team-avatar" style="background:var(--bg-elevated);border:1px solid var(--border-2);color:var(--text-2);font-weight:700;">CM</div>
             <div class="team-name">The Community</div>
             <div class="team-role">Open Source Contributors</div>
             <div class="team-bio">Developers from around the world who file issues, submit PRs, and help make TypeForge
@@ -970,8 +968,7 @@
           <div class="team-card" data-anime="scale-up" data-delay="160"
             style="border-style:dashed;border-color:var(--border-2);background:transparent;cursor:pointer;"
             onclick="location.href='/feedback'">
-            <div class="team-avatar" style="background:rgba(255,255,255,0.04);border:2px dashed var(--border-2);">➕
-            </div>
+            <div class="team-avatar" style="background:rgba(255,255,255,0.04);border:2px dashed var(--border-2);color:var(--text-3);font-weight:700;">+</div>
             <div class="team-name" style="color:var(--text-3);">That Could Be You</div>
             <div class="team-role">Open Role</div>
             <div class="team-bio">We're always looking for contributors who care about this problem. Any skill level
@@ -1046,7 +1043,7 @@
     <section class="about-cta">
       <div class="container">
         <div data-anime="fade-up" style="max-width:600px;margin:0 auto;">
-          <div style="font-size:3rem;margin-bottom:16px;">⌨️</div>
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto 16px; color: var(--text-3);"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
           <h2 style="font-size:clamp(2rem,4vw,3.2rem);font-weight:800;letter-spacing:-0.025em;margin-bottom:16px;">
             Ready to actually <span class="gradient-text-warm">improve?</span>
           </h2>
@@ -1065,10 +1062,12 @@
     <footer class="footer" style="padding:40px 0;border-top:1px solid var(--border-1);">
       <div class="container">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;">
-          <a href="/" class="navbar-logo">
-            <div class="navbar-logo-icon">⌨️</div>
-            <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
-          </a>
+            <a href="/" class="navbar-logo" style="margin-bottom:16px;display:inline-flex;">
+              <div class="navbar-logo-icon" style="width:32px;height:32px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;background:var(--bg-elevated);border:1px solid var(--border-2);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-1);"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
+              </div>
+              <span class="navbar-logo-text">Type<span>Forge</span> AI</span>
+            </a>
           <nav style="display:flex;gap:20px;flex-wrap:wrap;" aria-label="Footer">
             <a href="/features" style="font-size:13px;color:var(--text-4);">Features</a>
             <a href="/blog" style="font-size:13px;color:var(--text-4);">Blog</a>

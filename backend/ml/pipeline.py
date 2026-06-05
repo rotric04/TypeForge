@@ -46,14 +46,14 @@ def extract_features(sessions: List[Dict]) -> np.ndarray:
 
 # ── Archetype Clustering (K-Means) ───────────────────────────────
 ARCHETYPE_PROFILES = {
-    0: {"name": "Ghost Fingers",    "icon": "👻", "desc": "Speed and precision incarnate"},
-    1: {"name": "Precision Builder", "icon": "🎯", "desc": "Every keystroke is intentional"},
-    2: {"name": "Velocity Crafter", "icon": "⚡", "desc": "Built for raw speed"},
-    3: {"name": "Rhythm Seeker",    "icon": "🎵", "desc": "Steady, flowing cadence"},
-    4: {"name": "Code Monk",        "icon": "🧘", "desc": "Deep focus, zero distraction"},
-    5: {"name": "Syntax Hunter",    "icon": "🦅", "desc": "Hunting errors before they land"},
-    6: {"name": "Typing Architect", "icon": "🏗️", "desc": "Building speed brick by brick"},
-    7: {"name": "Keyboard Wanderer","icon": "🗺️", "desc": "Exploring the keyboard"},
+    0: {"name": "Ghost Fingers",    "icon": "GHST.FING", "desc": "Speed and precision incarnate"},
+    1: {"name": "Precision Builder", "icon": "PRC.BUILD", "desc": "Every keystroke is intentional"},
+    2: {"name": "Velocity Crafter", "icon": "SPD.CRAFT", "desc": "Built for raw speed"},
+    3: {"name": "Rhythm Seeker",    "icon": "RHY.SEEK", "desc": "Steady, flowing cadence"},
+    4: {"name": "Code Monk",        "icon": "CODE.MONK", "desc": "Deep focus, zero distraction"},
+    5: {"name": "Syntax Hunter",    "icon": "SYNT.HNT", "desc": "Hunting errors before they land"},
+    6: {"name": "Typing Architect", "icon": "TYP.ARCH", "desc": "Building speed brick by brick"},
+    7: {"name": "Keyboard Wanderer","icon": "KBD.WNDR", "desc": "Exploring the keyboard"},
 }
 
 
