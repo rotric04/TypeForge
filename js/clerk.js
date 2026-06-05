@@ -12,6 +12,7 @@ let clerkInstance = null;
 let currentUser = null;
 let clerkLoadingPromise = null;
 let authInitPromise = null;
+let isAuthInitialized = false;
 
 // Parse Clerk Frontend API domain from publishable key to get matched SDK version CDN
 function getClerkScriptUrl() {
@@ -118,7 +119,7 @@ export const Auth = {
             if (session && user) {
               document.cookie = "tf_authenticated=true; path=/; max-age=31536000; SameSite=Lax; Secure";
             } else {
-              if (document.cookie.includes('tf_authenticated=true')) {
+              if (isAuthInitialized && document.cookie.includes('tf_authenticated=true')) {
                 Auth.triggerEmergencyLogout("Session expired. Redirecting to homepage...");
               } else {
                 document.cookie = "tf_authenticated=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=Lax; Secure";
@@ -156,6 +157,7 @@ export const Auth = {
           updateNavAuthState(null);
         }
 
+        isAuthInitialized = true;
         return currentUser;
       } catch (e) {
         console.error('TF Auth: Clerk Init Failed', e);
@@ -403,6 +405,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Global JS Error Handler
 window.addEventListener("error", (event) => {
+  if (!isAuthInitialized) return;
   if (event.filename && !event.filename.includes(window.location.hostname) && !event.filename.includes('clerk')) {
     return;
   }
@@ -410,6 +413,7 @@ window.addEventListener("error", (event) => {
 });
 
 window.addEventListener("unhandledrejection", (event) => {
+  if (!isAuthInitialized) return;
   const reason = event.reason?.stack || String(event.reason || '');
   if (reason.includes('clerk') || reason.includes('api.js') || reason.includes('app-data.js')) {
     Auth.triggerEmergencyLogout("A critical app request failed.");
