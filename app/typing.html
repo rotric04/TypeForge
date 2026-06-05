@@ -1310,8 +1310,8 @@ function endSession() {
       // Aggregate key stats locally
       aggregateLocalKeyStats(payload.key_stats);
 
-      // Overlay server values (like finalized XP or achievements)
-      showResults(data.wpm, data.accuracy, data.consistency, data.xp_earned);
+      // Overlay server values (like finalized XP or achievements) without triggering popup twice
+      showResults(data.wpm, data.accuracy, data.consistency, data.xp_earned, true);
       if (data.badges_earned?.length) {
         showBadgeUnlocks(data.badges_earned);
       }
@@ -1434,7 +1434,7 @@ function showLevelUp() {
   setTimeout(() => { el.style.animation = 'fade-out 0.5s ease both'; el.addEventListener('animationend', () => el.remove()); }, 3000);
 }
 
-function showResults(wpm, acc, consistency, xp) {
+function showResults(wpm, acc, consistency, xp, isUpdate = false) {
   document.getElementById('results-wpm').textContent = wpm;
   document.getElementById('res-accuracy').textContent = acc + '%';
   document.getElementById('res-errors').textContent   = state.totalErrors;
@@ -1455,22 +1455,24 @@ function showResults(wpm, acc, consistency, xp) {
   const insights = generateInsight(wpm, acc, consistency);
   document.getElementById('ai-insight-text').textContent = insights;
 
-  // Badges
-  const badgesEl = document.getElementById('results-badges');
-  badgesEl.innerHTML = '';
-  checkBadges(wpm, acc).forEach(b => {
-    const el = document.createElement('div');
-    el.className = 'badge badge-gold';
-    el.textContent = `${b.icon} ${b.name}`;
-    el.style.animation = 'bounce-in 0.5s var(--ease-spring) both';
-    badgesEl.appendChild(el);
-  });
+  if (!isUpdate) {
+    // Badges
+    const badgesEl = document.getElementById('results-badges');
+    badgesEl.innerHTML = '';
+    checkBadges(wpm, acc).forEach(b => {
+      const el = document.createElement('div');
+      el.className = 'badge badge-gold';
+      el.textContent = `${b.icon} ${b.name}`;
+      el.style.animation = 'bounce-in 0.5s var(--ease-spring) both';
+      badgesEl.appendChild(el);
+    });
 
-  document.getElementById('results-overlay').classList.remove('hidden');
-  document.body.style.overflow = 'hidden';
+    document.getElementById('results-overlay').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
 
-  // XP pop animation
-  showXPPop(xp);
+    // XP pop animation
+    showXPPop(xp);
+  }
 
   updateXPBar();
 }
