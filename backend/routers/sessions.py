@@ -166,7 +166,7 @@ async def get_session_history(
         query = """
             SELECT id, mode, language, duration_secs, wpm, raw_wpm, accuracy, correct_chars, error_chars, total_chars, errors, consistency, max_streak, xp_earned, created_at
             FROM sessions
-            WHERE user_id = $1 AND mode = $2
+            WHERE user_id = $1::uuid AND mode = $2
             ORDER BY created_at DESC
             LIMIT $3 OFFSET $4
         """
@@ -175,7 +175,7 @@ async def get_session_history(
         query = """
             SELECT id, mode, language, duration_secs, wpm, raw_wpm, accuracy, correct_chars, error_chars, total_chars, errors, consistency, max_streak, xp_earned, created_at
             FROM sessions
-            WHERE user_id = $1
+            WHERE user_id = $1::uuid
             ORDER BY created_at DESC
             LIMIT $2 OFFSET $3
         """

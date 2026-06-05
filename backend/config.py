@@ -65,9 +65,6 @@ class Settings(BaseSettings):
         "http://localhost:8080",
         "http://localhost:8001",
         "https://typeforge.fun",
-        "https://www.typeforge.fun",
-        "https://typeforge.vercel.app",
-        "https://typeforge2.vercel.app",
         "https://typeforge-tkw8.onrender.com",
     ]
     # TrustedHostMiddleware — MUST include every hostname the service is reached at.

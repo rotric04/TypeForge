@@ -15,7 +15,7 @@ router = APIRouter()
 async def get_current_user_profile(user: UserProfile = Depends(get_current_user)):
     """Get profile info of the currently logged-in user."""
     # Retrieve fresh details from the DB to reflect live XP/Level/sessions/best_wpm
-    record = await DB.fetchone("SELECT * FROM users WHERE id = $1", user.id)
+    record = await DB.fetchone("SELECT * FROM users WHERE id = $1::uuid", user.id)
     if not record:
         raise HTTPException(status_code=404, detail="User profile not found")
     
@@ -50,7 +50,7 @@ async def get_current_user_profile(user: UserProfile = Depends(get_current_user)
 async def get_user_achievements(user: UserProfile = Depends(get_current_user)):
     """Get all achievements for the user annotated with unlocked status."""
     user_id = str(user.id)
-    records = await DB.fetchall("SELECT badge_id FROM achievements WHERE user_id = $1", user.id)
+    records = await DB.fetchall("SELECT badge_id FROM achievements WHERE user_id = $1::uuid", user.id)
     unlocked_ids = [r["badge_id"] for r in records]
     
     engine = AchievementEngine(user_id)
@@ -71,7 +71,7 @@ async def update_user_profile(
         raise HTTPException(status_code=400, detail="Username too long (max 50 chars)")
     
     await DB.execute(
-        "UPDATE users SET username = $1, updated_at = NOW() WHERE id = $2",
+        "UPDATE users SET username = $1, updated_at = NOW() WHERE id = $2::uuid",
         username, user.id
     )
     return {"username": username, "message": "Profile updated successfully"}
@@ -90,7 +90,7 @@ async def sync_clerk_profile(
     username   = (body.get("username") or "").strip()
     
     # Fetch current username to check if it's currently a Clerk ID placeholder
-    record = await DB.fetchone("SELECT username FROM users WHERE id = $1", user.id)
+    record = await DB.fetchone("SELECT username FROM users WHERE id = $1::uuid", user.id)
     current_username = record["username"] if record else ""
     
     # Build display name: full name > username > keep existing
@@ -104,12 +104,12 @@ async def sync_clerk_profile(
             
     if new_username:
         await DB.execute(
-            "UPDATE users SET username = $1, updated_at = NOW() WHERE id = $2",
+            "UPDATE users SET username = $1, updated_at = NOW() WHERE id = $2::uuid",
             new_username, user.id
         )
     if email:
         await DB.execute(
-            "UPDATE users SET email = $1, updated_at = NOW() WHERE id = $2",
+            "UPDATE users SET email = $1, updated_at = NOW() WHERE id = $2::uuid",
             email, user.id
         )
     
