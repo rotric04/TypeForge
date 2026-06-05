@@ -36,3 +36,8 @@ async def clerk_webhook(request: dict):
         # Delete user data (GDPR)
         pass
     return {"received": True}
+
+@router.get("/last-error")
+async def get_last_auth_error():
+    from dependencies import last_auth_error
+    return {"last_error": last_auth_error}

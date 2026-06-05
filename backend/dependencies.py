@@ -20,6 +20,7 @@ security = HTTPBearer()
 
 # Cache for Clerk JWKS
 _jwks = None
+last_auth_error = "No authentication error recorded yet."
 
 async def get_clerk_jwks():
     global _jwks
@@ -48,6 +49,7 @@ async def get_clerk_jwks():
 
 async def verify_clerk_token(token: str) -> dict:
     """Verify the Clerk JWT."""
+    global last_auth_error
     # If no Clerk config, bypass for local dev (simulated auth)
     if not settings.CLERK_SECRET_KEY or settings.CLERK_SECRET_KEY == "":
         logger.warning("CLERK_SECRET_KEY not set. Bypassing auth validation (local dev mode).")
@@ -69,6 +71,7 @@ async def verify_clerk_token(token: str) -> dict:
         jwks = await get_clerk_jwks()
         if not jwks:
             logger.error("TF Auth: JWKS is empty or failed to load.")
+            last_auth_error = "JWKS is empty or failed to load."
             raise HTTPException(status_code=500, detail="Could not retrieve JWKS")
 
         unverified_header = jwt.get_unverified_header(token)
@@ -95,10 +98,12 @@ async def verify_clerk_token(token: str) -> dict:
             return payload
         else:
             logger.warning(f"TF Auth: No matching RSA key found in JWKS for kid: {unverified_header.get('kid')}")
+            last_auth_error = f"No matching RSA key found in JWKS for kid: {unverified_header.get('kid')}. Token header: {unverified_header}. JWKS keys: {[k.get('kid') for k in jwks.get('keys', [])]}"
             raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token signature")
             
     except JWTError as e:
         logger.error(f"TF Auth: JWT verification failed: {e}")
+        last_auth_error = f"JWTError: {str(e)}"
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail=f"Could not validate credentials: {str(e)}",
@@ -106,43 +111,49 @@ async def verify_clerk_token(token: str) -> dict:
         )
 
 async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)) -> UserProfile:
+    global last_auth_error
     token = credentials.credentials
-    payload = await verify_clerk_token(token)
-    
-    clerk_id = payload.get("sub")
-    if not clerk_id:
-        raise HTTPException(status_code=401, detail="Invalid token payload: no sub")
+    try:
+        payload = await verify_clerk_token(token)
         
-    # Check if user exists in our Supabase DB
-    # Using asyncpg via DB class
-    record = await DB.fetchone("SELECT * FROM users WHERE clerk_id = $1", clerk_id)
-    
-    if not record:
-        # If user does not exist, auto-create them (Just-in-Time provisioning).
-        email = payload.get("email", f"{clerk_id}@placeholder.com")
-        # Use a real name from Clerk JWT claims if available, otherwise use email prefix
-        # Clerk JWT can include 'first_name', 'last_name', 'username', 'email' if configured
-        first_name = payload.get("first_name") or payload.get("given_name") or ""
-        last_name  = payload.get("last_name")  or payload.get("family_name") or ""
-        full_name  = f"{first_name} {last_name}".strip()
-        clerk_username = payload.get("username") or ""
-        # Derive a clean display username: prefer Clerk username, then full name, then email prefix
-        email_prefix = email.split("@")[0] if "@" in email else ""
-        username = clerk_username or full_name or email_prefix or f"Typist_{clerk_id[5:11]}"
-        
-        if username.startswith("user_"):
-            username = f"Typist_{clerk_id[5:11]}"
-        
-        insert_query = """
-            INSERT INTO users (clerk_id, email, username)
-            VALUES ($1, $2, $3)
-            RETURNING *
-        """
-        record = await DB.fetchone(insert_query, clerk_id, email, username)
+        clerk_id = payload.get("sub")
+        if not clerk_id:
+            last_auth_error = "Invalid token payload: no sub claim"
+            raise HTTPException(status_code=401, detail="Invalid token payload: no sub")
+            
+        # Check if user exists in our Supabase DB
+        record = await DB.fetchone("SELECT * FROM users WHERE clerk_id = $1", clerk_id)
         
         if not record:
-            raise HTTPException(status_code=500, detail="Failed to create user record")
+            # If user does not exist, auto-create them (Just-in-Time provisioning).
+            email = payload.get("email", f"{clerk_id}@placeholder.com")
+            first_name = payload.get("first_name") or payload.get("given_name") or ""
+            last_name  = payload.get("last_name")  or payload.get("family_name") or ""
+            full_name  = f"{first_name} {last_name}".strip()
+            clerk_username = payload.get("username") or ""
+            email_prefix = email.split("@")[0] if "@" in email else ""
+            username = clerk_username or full_name or email_prefix or f"Typist_{clerk_id[5:11]}"
+            
+            if username.startswith("user_"):
+                username = f"Typist_{clerk_id[5:11]}"
+            
+            insert_query = """
+                INSERT INTO users (clerk_id, email, username)
+                VALUES ($1, $2, $3)
+                RETURNING *
+            """
+            record = await DB.fetchone(insert_query, clerk_id, email, username)
+            
+            if not record:
+                last_auth_error = "Failed to create user record in DB: INSERT returned None"
+                raise HTTPException(status_code=500, detail="Failed to create user record")
 
-    # Map the asyncpg record to Pydantic model
-    user_dict = dict(record)
-    return UserProfile(**user_dict)
+        # Map the asyncpg record to Pydantic model
+        user_dict = dict(record)
+        return UserProfile(**user_dict)
+    except HTTPException as he:
+        raise he
+    except Exception as ex:
+        last_auth_error = f"Unexpected Exception in get_current_user: {str(ex)}"
+        logger.error(f"TF Auth: Unexpected exception in get_current_user: {ex}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Internal Server Error during authentication: {str(ex)}")
