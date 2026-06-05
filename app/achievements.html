@@ -198,6 +198,25 @@
   let userDisplayName = 'Typist';
 
   async function init() {
+    // Instant Cached UI Render (avoiding flash of "Typist" or Clerk ID)
+    try {
+      const cached = localStorage.getItem('tf_cached_profile');
+      if (cached) {
+        const cachedUser = JSON.parse(cached);
+        const name = displayName(cachedUser, null);
+        document.querySelectorAll('[data-auth-name]').forEach((el) => { el.textContent = name; });
+        document.getElementById('xp-name').textContent = name;
+        document.getElementById('xp-avatar').textContent = name.charAt(0).toUpperCase();
+        const avatar = document.getElementById('nav-avatar');
+        if (avatar) {
+          avatar.textContent = name.charAt(0).toUpperCase();
+          if (cachedUser.avatarUrl) {
+            avatar.innerHTML = `<img src="${cachedUser.avatarUrl}" alt="${name}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"/>`;
+          }
+        }
+      }
+    } catch (e) {}
+
     // Instant Cookie-based Auth Guard
     const getCookie = (name) => {
       const value = `; ${document.cookie}`;
@@ -216,6 +235,7 @@
     }
 
     if (user) {
+      localStorage.setItem('tf_cached_profile', JSON.stringify(user));
       userDisplayName = displayName(user, null);
       document.querySelectorAll('[data-auth-name]').forEach(el => el.textContent = userDisplayName);
       document.getElementById('xp-name').textContent = userDisplayName;

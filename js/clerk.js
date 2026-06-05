@@ -5,7 +5,7 @@
 
 'use strict';
 
-const CLERK_PUBLISHABLE_KEY = 'pk_test_c3dlZXBpbmctaGVuLTEyLmNsZXJrLmFjY291bnRzLmRldiQ';
+const CLERK_PUBLISHABLE_KEY = 'pk_live_Y2xlcmsudHlwZWZvcmdlLmZ1biQ';
 
 // State
 let clerkInstance = null;
@@ -88,7 +88,7 @@ export const Auth = {
     authInitPromise = (async () => {
       try {
         const Clerk = await loadClerkScript();
-        
+
         // In the script-tag loading mode, Clerk is instantiated on window.Clerk.
         // It requires a .load() call, but only call if not already loaded.
         if (Clerk && !Clerk.loaded) {
@@ -113,6 +113,8 @@ export const Auth = {
           // Set cookie for instant client-side route guards
           document.cookie = "tf_authenticated=true; path=/; max-age=31536000; SameSite=Lax; Secure";
           updateNavAuthState(currentUser);
+          // Save in localStorage for instant UI rendering on load
+          localStorage.setItem('tf_cached_profile', JSON.stringify(currentUser));
           // Sync Clerk profile (name/email) into Supabase so display name is always correct
           syncProfileToDatabase(Clerk.user);
           // Sync any local offline sessions to the database
@@ -121,6 +123,7 @@ export const Auth = {
           currentUser = null;
           // Clear cookie
           document.cookie = "tf_authenticated=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=Lax; Secure";
+          localStorage.removeItem('tf_cached_profile');
           updateNavAuthState(null);
         }
 
@@ -176,6 +179,7 @@ export const Auth = {
       localStorage.removeItem('tf_sessions');
       localStorage.removeItem('tf_session_history');
       localStorage.removeItem('tf_key_stats');
+      localStorage.removeItem('tf_cached_profile');
 
       await clerkInstance.signOut();
       currentUser = null;
@@ -190,9 +194,9 @@ async function syncProfileToDatabase(clerkUser) {
   try {
     if (!clerkUser) return;
     const firstName = clerkUser.firstName || '';
-    const lastName  = clerkUser.lastName  || '';
-    const email     = clerkUser.primaryEmailAddress?.emailAddress || '';
-    const username  = clerkUser.username || '';
+    const lastName = clerkUser.lastName || '';
+    const email = clerkUser.primaryEmailAddress?.emailAddress || '';
+    const username = clerkUser.username || '';
     // Only sync if we have something meaningful to save
     if (!firstName && !lastName && !username && !email) return;
     const { API } = await import('./api.js');
@@ -218,13 +222,13 @@ async function syncLocalSessions() {
     // Only sync sessions with a local_ prefix (truly offline sessions, not DB-cached ones)
     const offlineSessions = sessions.filter(s => String(s.id || '').startsWith('local_'));
     const alreadySynced = sessions.filter(s => !String(s.id || '').startsWith('local_'));
-    
+
     if (offlineSessions.length === 0) {
       // All sessions are already in DB — clear the local cache, DB is source of truth
       localStorage.removeItem('tf_session_history');
       return;
     }
-    
+
     console.log(`TF Auth: Found ${offlineSessions.length} offline session(s) to sync to the server.`);
 
     // Import API dynamically to avoid circular dependency
@@ -282,13 +286,14 @@ function updateNavAuthState(user) {
   if (user) {
     document.body.classList.add('tf-authenticated');
     // Update avatar initials
-    document.querySelectorAll('.nav-user-avatar').forEach(el => {
-      el.textContent = (user.name || user.email || 'U').charAt(0).toUpperCase();
+    const initials = (user.name || user.email || 'U').charAt(0).toUpperCase();
+    document.querySelectorAll('.nav-user-avatar, #nav-avatar').forEach(el => {
+      el.textContent = initials;
       el.title = user.name || user.email;
     });
     // Update avatar images if available
     if (user.avatarUrl) {
-      document.querySelectorAll('.nav-user-avatar').forEach(el => {
+      document.querySelectorAll('.nav-user-avatar, #nav-avatar').forEach(el => {
         const img = document.createElement('img');
         img.src = user.avatarUrl;
         img.alt = user.name;

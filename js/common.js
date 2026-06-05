@@ -2,14 +2,11 @@
  * TypeForge AI — Common Utilities & Shared Logic
  * Upgraded with GSAP, ScrollTrigger, and Lenis for cinematic experience.
  */
-import Lenis from 'https://esm.sh/@studio-freight/lenis@1.0.29';
-import gsap from 'https://esm.sh/gsap@3.12.2';
-import ScrollTrigger from 'https://esm.sh/gsap@3.12.2/ScrollTrigger.js';
-
-gsap.registerPlugin(ScrollTrigger);
 
 // ── Smooth Scrolling (Lenis) ─────────────────────────────────────────────────
-export function initLenis() {
+export async function initLenis() {
+  const { default: Lenis } = await import('https://esm.sh/@studio-freight/lenis@1.0.29');
+
   const lenis = new Lenis({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -29,17 +26,28 @@ export function initLenis() {
   requestAnimationFrame(raf);
 
   // Sync Lenis with GSAP ScrollTrigger
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add((time) => {
-    lenis.raf(time * 1000);
-  });
-  gsap.ticker.lagSmoothing(0, 0);
+  try {
+    const { default: ScrollTrigger } = await import('https://esm.sh/gsap@3.12.2/ScrollTrigger.js');
+    const { default: gsap } = await import('https://esm.sh/gsap@3.12.2');
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0, 0);
+  } catch (e) {
+    console.warn("Lenis-GSAP sync failed:", e);
+  }
 }
 
 // ── GSAP Scroll-based Reveal ────────────────────────────────────────────────
-export function initReveal() {
+export async function initReveal() {
   const elements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
   if (!elements.length) return;
+  
+  const { default: gsap } = await import('https://esm.sh/gsap@3.12.2');
+  const { default: ScrollTrigger } = await import('https://esm.sh/gsap@3.12.2/ScrollTrigger.js');
+  
+  gsap.registerPlugin(ScrollTrigger);
   
   elements.forEach((el) => {
     // Disable CSS transitions so GSAP can take full control without lag

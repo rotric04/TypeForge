@@ -339,10 +339,27 @@
 <script type="module">
 import Auth from '../js/clerk.js?v=2';
 import API from '../js/api.js';
-import { loadProfileAndHistory, loadDashboardAnalytics, displayName, xpToNextLevel, NEXT_BADGE_HINTS } from '../js/app-data.js';
+import { loadProfileAndHistory, loadDashboardAnalytics, displayName, xpToNextLevel, NEXT_BADGE_HINTS, calculateInterSessionConsistency } from '../js/app-data.js';
 import { initScrollReveal, animateCounters, animateChartLine, staggerHeatmap } from '../js/motion.js';
 
 (async () => {
+  // 1. Instant Cached UI Render (avoiding flash of "Typist" or Clerk ID)
+  try {
+    const cached = localStorage.getItem('tf_cached_profile');
+    if (cached) {
+      const cachedUser = JSON.parse(cached);
+      const name = displayName(cachedUser, null);
+      document.querySelectorAll('[data-auth-name]').forEach((el) => { el.textContent = name; });
+      const avatar = document.getElementById('nav-avatar');
+      if (avatar) {
+        avatar.textContent = name.charAt(0).toUpperCase();
+        if (cachedUser.avatarUrl) {
+          avatar.innerHTML = `<img src="${cachedUser.avatarUrl}" alt="${name}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"/>`;
+        }
+      }
+    }
+  } catch (e) {}
+
   // Instant Cookie-based Auth Guard
   const getCookie = (name) => {
     const value = `; ${document.cookie}`;
@@ -360,13 +377,35 @@ import { initScrollReveal, animateCounters, animateChartLine, staggerHeatmap } f
     return;
   }
 
-  const name = displayName(user, null);
-  document.querySelectorAll('[data-auth-name]').forEach((el) => { el.textContent = name; });
+  // Update cached profile values if clerk returns something fresh
+  localStorage.setItem('tf_cached_profile', JSON.stringify(user));
+  const cachedName = displayName(user, null);
+  document.querySelectorAll('[data-auth-name]').forEach((el) => { el.textContent = cachedName; });
 
   try {
-    const { profile, history } = await loadProfileAndHistory();
-    const analytics = await loadDashboardAnalytics();
+    // 2. Fetch all dashboard data concurrently
+    const [profileRes, historyRes, analyticsRes] = await Promise.allSettled([
+      API.getUserProfile(),
+      API.getHistory(60, 0),
+      API.getDashboardAnalytics()
+    ]);
+
+    const profile = profileRes.status === 'fulfilled' ? profileRes.value : {
+      xp: 0,
+      level: 1,
+      total_sessions: 0,
+      best_wpm: 0,
+      weak_keys: [],
+    };
+    const history = historyRes.status === 'fulfilled' && historyRes.value ? historyRes.value : [];
+    const analytics = analyticsRes.status === 'fulfilled' ? analyticsRes.value : null;
+
+    if (!profile.best_wpm && history.length) {
+      profile.best_wpm = Math.max(...history.map((s) => s.wpm || 0));
+    }
+
     const display = displayName(user, profile);
+    document.querySelectorAll('[data-auth-name]').forEach((el) => { el.textContent = display; });
 
     renderWelcome(display, profile, history);
     renderXpStrip(profile, history);
@@ -380,9 +419,12 @@ import { initScrollReveal, animateCounters, animateChartLine, staggerHeatmap } f
     if (history.length > 0) {
       latestWpm = history[0].wpm || 0;
       avgAccuracy = Math.round(history.reduce((s, x) => s + (x.accuracy || 0), 0) / history.length);
+      
+      // Calculate inter-session consistency fallback if not returned by analytics
       if (!avgConsistency) {
-        avgConsistency = Math.round(history.reduce((s, x) => s + (x.consistency || 0), 0) / history.length);
+        avgConsistency = calculateInterSessionConsistency(history);
       }
+      
       if (analytics?.average_wpm) latestWpm = Math.round(analytics.average_wpm) || latestWpm;
       if (analytics?.average_accuracy) avgAccuracy = Math.round(analytics.average_accuracy) || avgAccuracy;
 

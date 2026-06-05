@@ -28,7 +28,10 @@
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
   <style>
-    body { background-color: var(--bg-base); }
+    body {
+      background-color: var(--bg-base);
+      --brand-gradient: linear-gradient(135deg, var(--brand) 0%, var(--coral) 100%);
+    }
     .app-layout { display: flex; min-height: 100vh; padding-top: 20px; }
     .app-main {
       flex: 1;
@@ -306,6 +309,8 @@
       <div class="skeleton-card"></div>
       <div class="skeleton-card"></div>
       <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
+      <div class="skeleton-card"></div>
     </div>
 
     <!-- Filter Tabs -->
@@ -345,6 +350,23 @@
   let currentMode = 'all';
 
   async function init() {
+    // Instant Cached UI Render (avoiding flash of "Typist" or Clerk ID)
+    try {
+      const cached = localStorage.getItem('tf_cached_profile');
+      if (cached) {
+        const cachedUser = JSON.parse(cached);
+        const name = displayName(cachedUser, null);
+        document.querySelectorAll('[data-auth-name]').forEach((el) => { el.textContent = name; });
+        const avatar = document.getElementById('nav-avatar');
+        if (avatar) {
+          avatar.textContent = name.charAt(0).toUpperCase();
+          if (cachedUser.avatarUrl) {
+            avatar.innerHTML = `<img src="${cachedUser.avatarUrl}" alt="${name}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"/>`;
+          }
+        }
+      }
+    } catch (e) {}
+
     // Instant Cookie-based Auth Guard
     const getCookie = (name) => {
       const value = `; ${document.cookie}`;
@@ -362,7 +384,24 @@
       return;
     }
 
-    const { profile, history: data } = await loadProfileAndHistory();
+    // Cache latest Clerk user details
+    localStorage.setItem('tf_cached_profile', JSON.stringify(user));
+
+    // Fetch profile and history in parallel
+    const [profileRes, historyRes] = await Promise.allSettled([
+      API.getUserProfile(),
+      API.getHistory(60, 0)
+    ]);
+
+    const profile = profileRes.status === 'fulfilled' ? profileRes.value : {
+      xp: 0,
+      level: 1,
+      total_sessions: 0,
+      best_wpm: 0,
+      weak_keys: [],
+    };
+    const data = historyRes.status === 'fulfilled' && historyRes.value ? historyRes.value : [];
+    
     const name = displayName(user, profile);
     document.querySelectorAll('[data-auth-name]').forEach((el) => { el.textContent = name; });
 
@@ -378,7 +417,7 @@
         ? 'No sessions yet. Your first run takes one minute.'
         : `${allSessions.length} session${allSessions.length !== 1 ? 's' : ''} found`;
 
-    if (allSessions.length === BATCH) {
+    if (allSessions.length >= BATCH) {
       document.getElementById('load-more-btn').style.display = 'block';
     }
 
@@ -424,6 +463,7 @@
     const avgWpm    = Math.round(list.reduce((s, r) => s + (r.wpm || 0), 0) / totalSess);
     const bestWpm   = Math.max(...list.map(r => r.wpm || 0));
     const avgAcc    = (list.reduce((s, r) => s + (r.accuracy || 0), 0) / totalSess).toFixed(1);
+    const avgCons   = (list.reduce((s, r) => s + (r.consistency || 0), 0) / totalSess).toFixed(1);
     const totalXp   = list.reduce((s, r) => s + (r.xp_earned || 0), 0);
     const totalMins = Math.round(list.reduce((s, r) => s + (r.duration_secs || 0), 0) / 60);
 
@@ -432,6 +472,7 @@
       <div class="stat-chip"><div class="stat-chip-value">${bestWpm}</div><div class="stat-chip-label">Best WPM</div></div>
       <div class="stat-chip"><div class="stat-chip-value">${avgWpm}</div><div class="stat-chip-label">Avg WPM</div></div>
       <div class="stat-chip"><div class="stat-chip-value">${avgAcc}%</div><div class="stat-chip-label">Avg Accuracy</div></div>
+      <div class="stat-chip"><div class="stat-chip-value">${avgCons}%</div><div class="stat-chip-label">Avg Consistency</div></div>
       <div class="stat-chip"><div class="stat-chip-value">+${totalXp.toLocaleString()}</div><div class="stat-chip-label">Total XP</div></div>
       <div class="stat-chip"><div class="stat-chip-value">${totalMins}</div><div class="stat-chip-label">Mins Typed</div></div>
     `;

@@ -4,7 +4,7 @@
 
 /* ── Hero ── */
 .hero {
-  min-height: 80vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,6 +13,11 @@
   padding-top: 100px;
   padding-bottom: var(--sp-16);
   position: relative;
+}
+.hero > .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .hero-eyebrow {
   display: inline-flex;
@@ -61,6 +66,7 @@
 .hero-social-proof {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: var(--sp-4);
   margin-top: var(--sp-8);
   animation: fade-up 0.7s var(--ease-out) 0.4s both;

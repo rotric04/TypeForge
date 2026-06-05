@@ -89,10 +89,19 @@ async def sync_clerk_profile(
     email      = (body.get("email") or "").strip()
     username   = (body.get("username") or "").strip()
     
+    # Fetch current username to check if it's currently a Clerk ID placeholder
+    record = await DB.fetchone("SELECT username FROM users WHERE id = $1", user.id)
+    current_username = record["username"] if record else ""
+    
     # Build display name: full name > username > keep existing
     full_name = f"{first_name} {last_name}".strip()
     new_username = username or full_name or None
     
+    # Fallback to email prefix if current DB username is a Clerk ID or empty, and no names are set
+    if not new_username and (not current_username or current_username.startswith("user_")):
+        if email and not email.startswith("user_"):
+            new_username = email.split("@")[0]
+            
     if new_username:
         await DB.execute(
             "UPDATE users SET username = $1, updated_at = NOW() WHERE id = $2",
@@ -104,7 +113,7 @@ async def sync_clerk_profile(
             email, user.id
         )
     
-    return {"message": "Profile synced", "username": new_username}
+    return {"message": "Profile synced", "username": new_username or current_username}
 
 @router.delete("/me")
 async def delete_account(user: UserProfile = Depends(get_current_user)):

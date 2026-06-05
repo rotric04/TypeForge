@@ -42,6 +42,8 @@ app = FastAPI(
 )
 
 # ── Middleware ────────────────────────────────────────────────────
+from fastapi.middleware.gzip import GZipMiddleware
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.ALLOWED_ORIGINS,
@@ -50,6 +52,8 @@ app.add_middleware(
     allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
+
+app.add_middleware(GZipMiddleware, minimum_size=1000)
 
 if not settings.DEBUG:
     app.add_middleware(

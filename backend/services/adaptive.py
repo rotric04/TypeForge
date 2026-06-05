@@ -203,14 +203,14 @@ class PerformanceAnalyzer:
             return None
         return max(hourly, key=lambda h: sum(hourly[h]) / len(hourly[h]))
 
-    def average_wpm(self, n: int = 10) -> float:
-        recent = self.sessions[-n:]
+    def average_wpm(self, n: Optional[int] = None) -> float:
+        recent = self.sessions[-n:] if n is not None else self.sessions
         if not recent:
             return 0.0
         return sum(s.get("wpm", 0) for s in recent) / len(recent)
 
-    def average_accuracy(self, n: int = 10) -> float:
-        recent = self.sessions[-n:]
+    def average_accuracy(self, n: Optional[int] = None) -> float:
+        recent = self.sessions[-n:] if n is not None else self.sessions
         if not recent:
             return 0.0
         return sum(s.get("accuracy", 0) for s in recent) / len(recent)

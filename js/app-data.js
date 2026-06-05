@@ -17,16 +17,36 @@ export function displayName(user, profile) {
   if (profile?.username && !isClerkId(profile.username)) return profile.username;
 
   // 4. Email prefix from DB
-  if (profile?.email) return profile.email.split('@')[0];
+  if (profile?.email) {
+    const prefix = profile.email.split('@')[0];
+    if (!isClerkId(prefix)) return prefix;
+  }
 
   // 5. Clerk username
   if (user?.username && !isClerkId(user.username)) return user.username;
 
   // 6. Email prefix from Clerk
-  if (user?.email) return user.email.split('@')[0];
+  if (user?.email) {
+    const prefix = user.email.split('@')[0];
+    if (!isClerkId(prefix)) return prefix;
+  }
 
   return 'Typist';
 }
+
+export function calculateInterSessionConsistency(sessions) {
+  if (!Array.isArray(sessions) || sessions.length < 3) return 0;
+  // Get last 10 sessions (since history is desc, first 10 are the latest)
+  const recent = sessions.slice(0, 10);
+  const wpms = recent.map(s => s.wpm || 0);
+  const avg = wpms.reduce((a, b) => a + b, 0) / wpms.length;
+  if (avg <= 0) return 0;
+  const variance = wpms.reduce((sum, v) => sum + Math.pow(v - avg, 2), 0) / wpms.length;
+  const stdDev = Math.sqrt(variance);
+  const cv = (stdDev / avg) * 100;
+  return Math.max(0, Math.min(100, Math.round(100 - cv)));
+}
+
 
 export async function loadProfileAndHistory() {
   let profile = {

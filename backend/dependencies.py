@@ -125,7 +125,10 @@ async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(s
         clerk_username = payload.get("username") or ""
         # Derive a clean display username: prefer Clerk username, then full name, then email prefix
         email_prefix = email.split("@")[0] if "@" in email else ""
-        username = clerk_username or full_name or email_prefix or clerk_id[:8]
+        username = clerk_username or full_name or email_prefix or f"Typist_{clerk_id[5:11]}"
+        
+        if username.startswith("user_"):
+            username = f"Typist_{clerk_id[5:11]}"
         
         insert_query = """
             INSERT INTO users (clerk_id, email, username)
