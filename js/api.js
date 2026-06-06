@@ -8,7 +8,7 @@ import DOMPurify from 'https://esm.sh/dompurify@3.0.6';
 
 const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
   ? 'http://localhost:8001/api/v1'
-  : 'https://typeforge-tkw8.onrender.com/api/v1';
+  : '/api/v1';
 
 // Create Axios Instance
 const apiClient = axios.create({

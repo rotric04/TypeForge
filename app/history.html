@@ -420,7 +420,7 @@
     const isHistoryFailed = historyRes.status === 'rejected';
     if ((isProfileFailed || isHistoryFailed) && window.location.hostname !== 'localhost') {
       const reasonMsg = (profileRes.reason?.message || historyRes.reason?.message || '');
-      const isNetworkError = reasonMsg.includes('Network Error') || reasonMsg.includes('timeout') || reasonMsg.includes('HTTP 5') || reasonMsg.includes('Failed to fetch');
+      const isNetworkError = reasonMsg.includes('Network Error') || reasonMsg.includes('timeout') || reasonMsg.includes('HTTP 5') || reasonMsg.includes('Failed to fetch') || reasonMsg.includes('Database') || reasonMsg.includes('503') || reasonMsg.includes('500') || reasonMsg.includes('Internal Server Error');
       if (isNetworkError) {
         console.warn("TF: History/Profile requests failed due to network/timeout. Keeping user session.");
         const { showToast } = await import('../js/common.js');
@@ -627,13 +627,11 @@
     .catch(err => {
       console.error("TF Init: Critical error during history init:", err);
       const errMsg = err?.message || '';
-      const isNetworkError = errMsg.includes('Network Error') || errMsg.includes('timeout') || errMsg.includes('HTTP 5') || errMsg.includes('Failed to fetch');
+      const isNetworkError = errMsg.includes('Network Error') || errMsg.includes('timeout') || errMsg.includes('HTTP 5') || errMsg.includes('Failed to fetch') || errMsg.includes('Database') || errMsg.includes('503') || errMsg.includes('500') || errMsg.includes('Internal Server Error');
       if (!isNetworkError && typeof Auth !== 'undefined' && Auth.triggerEmergencyLogout) {
         Auth.triggerEmergencyLogout("Critical app initialization crash.");
       } else {
-        if (window.location.hostname !== 'localhost') {
-          window.location.replace("/");
-        }
+        console.warn("TF: History page initialized in offline mode due to connection issue.");
       }
     });
 </script>
