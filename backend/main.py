@@ -143,14 +143,25 @@ async def root():
 @app.get("/.well-known/security.txt", response_class=PlainTextResponse, tags=["System"])
 @app.get("/security.txt", response_class=PlainTextResponse, tags=["System"])
 async def security_txt():
-    content = (
-        "Contact: mailto:security@typeforge.fun\n"
-        "Expires: 2027-06-04T17:00:00.000Z\n"
-        "Preferred-Languages: en\n"
-        "Canonical: https://typeforge.fun/.well-known/security.txt\n"
-        "Acknowledgement: https://typeforge.fun/security\n"
-        "Policy: https://typeforge.fun/security\n"
-    )
+    content = """-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Contact: mailto:security@typeforge.fun
+Expires: 2027-06-04T17:00:00.000Z
+Preferred-Languages: en
+Canonical: https://typeforge.fun/.well-known/security.txt
+Encryption: https://typeforge.fun/.well-known/pgp-key.txt
+Acknowledgement: https://typeforge.fun/security
+Policy: https://typeforge.fun/security
+
+-----BEGIN PGP SIGNATURE-----
+
+wnUEARYKACcFgmokDAoJkFkWEg/ihQT0FiEEbD7s2oFBo3WDDcT7WRYSD+KF
+BPQAACHoAP9yL+buf33VZ7Otne76QkaAgGVSmvSo4GsBn+pCrMLdGQEAkEmU
+RdsN7BY/xTT8Mv6Ta2QBqnl91pKA/qup11cgXQg=
+=jRli
+-----END PGP SIGNATURE-----
+"""
     return PlainTextResponse(content=content)
 
 # ── Global Exception Handler ──────────────────────────────────────
