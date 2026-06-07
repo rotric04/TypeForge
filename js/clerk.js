@@ -34,7 +34,7 @@ function getClerkScriptUrl() {
   return 'https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js';
 }
 
-// Ensure Clerk script is loaded
+// Ensure Clerk script is loaded (with automatic CDN fallback)
 function loadClerkScript() {
   if (clerkLoadingPromise) return clerkLoadingPromise;
 
@@ -44,20 +44,35 @@ function loadClerkScript() {
       return resolve(window.Clerk);
     }
 
-    const script = document.createElement('script');
-    script.setAttribute('data-clerk-publishable-key', CLERK_PUBLISHABLE_KEY);
-    script.async = true;
-    script.src = getClerkScriptUrl();
+    const primaryUrl = getClerkScriptUrl();
+    const fallbackUrl = 'https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js';
 
-    script.onload = () => {
-      clerkInstance = window.Clerk;
-      resolve(window.Clerk);
-    };
-    script.onerror = (e) => {
-      clerkLoadingPromise = null; // allow retry
-      reject(new Error('Failed to load Clerk script'));
-    };
-    document.head.appendChild(script);
+    function loadScript(url, isFallback = false) {
+      const script = document.createElement('script');
+      script.setAttribute('data-clerk-publishable-key', CLERK_PUBLISHABLE_KEY);
+      script.async = true;
+      script.src = url;
+
+      script.onload = () => {
+        clerkInstance = window.Clerk;
+        resolve(window.Clerk);
+      };
+
+      script.onerror = (e) => {
+        script.remove();
+        if (!isFallback) {
+          console.warn(`TF Auth: Failed to load Clerk script from primary URL (${url}). Retrying with fallback CDN...`);
+          loadScript(fallbackUrl, true);
+        } else {
+          clerkLoadingPromise = null; // allow retry
+          reject(new Error('Failed to load Clerk script from primary and fallback URLs'));
+        }
+      };
+
+      document.head.appendChild(script);
+    }
+
+    loadScript(primaryUrl);
   });
 
   return clerkLoadingPromise;
@@ -108,7 +123,9 @@ export const Auth = {
         // In the script-tag loading mode, Clerk is instantiated on window.Clerk.
         // It requires a .load() call, but only call if not already loaded.
         if (Clerk && !Clerk.loaded) {
-          await Clerk.load();
+          await Clerk.load({
+            publishableKey: CLERK_PUBLISHABLE_KEY
+          });
         }
 
         if (Clerk) {

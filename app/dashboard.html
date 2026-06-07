@@ -358,6 +358,19 @@
       }
     }
   </style>
+  <!-- Route Guard Fast Path -->
+  <script>
+    (() => {
+      const getCookie = (name) => {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+      };
+      if (getCookie('tf_authenticated') !== 'true' && window.location.hostname !== 'localhost') {
+        document.documentElement.style.visibility = 'hidden';
+      }
+    })();
+  </script>
 </head>
 
 <body class="tf-authenticated">
@@ -603,28 +616,19 @@
         }
       } catch (e) { }
 
-      // Instant Cookie-based Auth Guard
-      const getCookie = (name) => {
-        const value = `; ${document.cookie}`;
-        const parts = value.split(`; ${name}=`);
-        if (parts.length === 2) return parts.pop().split(';').shift();
-      };
-      if (getCookie('tf_authenticated') !== 'true' && window.location.hostname !== 'localhost') {
-        window.location.href = '/login';
-        return;
-      }
-
       let user;
       try {
         user = await Auth.init();
-        if (!user && window.location.hostname !== 'localhost') {
-          window.location.href = '/login';
+        if (user) {
+          document.documentElement.style.visibility = '';
+        } else if (window.location.hostname !== 'localhost') {
+          window.location.replace('/login');
           return;
         }
       } catch (err) {
-        console.error("TF Auth: Failed to initialize Auth in dashboard:", err);
+        console.error("TF Auth Guard: Failed to initialize Auth in dashboard:", err);
         if (window.location.hostname !== 'localhost') {
-          window.location.href = '/login';
+          window.location.replace('/login');
           return;
         }
       }

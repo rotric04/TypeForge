@@ -140,6 +140,19 @@
         display: none;
       }
     }
+
+    @keyframes login-spin {
+      100% { transform: rotate(360deg); }
+    }
+    
+    .login-spinner {
+      width: 28px;
+      height: 28px;
+      border: 2px solid var(--border-2);
+      border-top-color: var(--brand);
+      border-radius: 50%;
+      animation: login-spin 0.8s linear infinite;
+    }
   </style>
 </head>
 <body>
@@ -159,7 +172,30 @@
         <span>Type<span>Forge</span> AI</span>
       </a>
 
-      <div id="clerk-sign-in"></div>
+      <div id="clerk-sign-in">
+        <div id="clerk-loading-state" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 40px 20px; color: var(--text-2); text-align: center;">
+          <div class="login-spinner"></div>
+          <span style="font-size: 14px; font-family: var(--font-body); letter-spacing: 0.02em;">Connecting to secure login...</span>
+        </div>
+      </div>
+
+      <div id="clerk-error-fallback" style="display: none; max-width: 400px; margin: 0 auto; padding: 24px; background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: var(--r-md); box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+        <div style="display: flex; align-items: center; gap: 12px; color: #ef4444; margin-bottom: 14px;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <h3 style="margin: 0; font-size: 16px; font-weight: 700; font-family: var(--font-display);">Login Connection Failed</h3>
+        </div>
+        <p style="color: var(--text-2); font-size: 13.5px; line-height: 1.6; margin: 0 0 16px 0;">
+          We were unable to reach the secure authentication servers. This usually happens because:
+        </p>
+        <ul style="color: var(--text-3); font-size: 13px; line-height: 1.6; padding-left: 20px; margin: 0 0 20px 0;">
+          <li style="margin-bottom: 6px;">Strict <strong>third-party cookie blocking</strong> in Incognito mode.</li>
+          <li style="margin-bottom: 6px;">Ad-blockers or privacy extensions blocking Clerk auth endpoints.</li>
+          <li>Temporary network drop or firewalls.</li>
+        </ul>
+        <button class="btn btn-secondary" onclick="window.location.reload()" style="width: 100%; display: inline-flex; align-items: center; justify-content: center; font-size: 13.5px; font-weight: 600; padding: 10px 16px; height: 38px;">
+          Retry Connection
+        </button>
+      </div>
     </div>
 
     <!-- Branding Side -->
@@ -173,16 +209,26 @@
     import Auth from './js/clerk.js?v=3';
     
     async function initLogin() {
-      const user = await Auth.init();
-      if (user) {
-        window.location.href = '/app/dashboard';
-        return;
-      }
-      
-      const clerk = Auth.getInstance();
-      const signInDiv = document.getElementById('clerk-sign-in');
-      
-      if (clerk && signInDiv) {
+      try {
+        const user = await Auth.init();
+        if (user) {
+          window.location.href = '/app/dashboard';
+          return;
+        }
+        
+        const clerk = Auth.getInstance();
+        const signInDiv = document.getElementById('clerk-sign-in');
+        
+        if (!clerk) {
+          throw new Error('Clerk instance is unavailable');
+        }
+
+        // Remove loading state wrapper before mounting Clerk
+        const loadingState = document.getElementById('clerk-loading-state');
+        if (loadingState) {
+          loadingState.remove();
+        }
+        
         clerk.mountSignIn(signInDiv, {
           redirectUrl: window.location.origin + '/app/dashboard',
           afterSignInUrl: window.location.origin + '/app/dashboard',
@@ -223,6 +269,16 @@
             socialButtonsPlacement: 'top',
           }
         });
+      } catch (err) {
+        console.error('TF Auth: Failed to load login interface:', err);
+        const signInDiv = document.getElementById('clerk-sign-in');
+        const errorFallback = document.getElementById('clerk-error-fallback');
+        if (signInDiv) {
+          signInDiv.style.display = 'none';
+        }
+        if (errorFallback) {
+          errorFallback.style.display = 'block';
+        }
       }
     }
 
