@@ -1,7 +1,7 @@
 """
 TypeForge AI — Pydantic Models
 """
-from pydantic import BaseModel, UUID4, Field, EmailStr, validator
+from pydantic import BaseModel, UUID4, Field, validator
 from typing import Optional, List, Dict, Any
 from datetime import datetime
 from enum import Enum
@@ -52,7 +52,7 @@ class UserProfile(BaseModel):
     id:              UUID4
     clerk_id:        str
     username:        Optional[str]     = None
-    email:           EmailStr
+    email:           str
     avatar_url:      Optional[str]     = None
     typing_type:     Optional[str]     = "mixed"
     goal:            Optional[TypingGoal] = TypingGoal.SPEED
@@ -75,7 +75,7 @@ class UserProfile(BaseModel):
 
 class UserCreate(BaseModel):
     clerk_id:    str
-    email:       EmailStr
+    email:       str
     username:    Optional[str] = None
     avatar_url:  Optional[str] = None
 
