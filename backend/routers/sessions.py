@@ -77,6 +77,13 @@ async def create_session(
     # Calculate XP
     xp_earned = calc_xp(session.wpm, session.accuracy, session.consistency, session.errors)
 
+    # Pre-calculate updated user profile metrics in memory to optimize SQL roundtrips
+    import math
+    new_xp = (user.xp or 0) + xp_earned
+    new_level = max(1, int(math.floor(math.sqrt(new_xp / 250.0)) + 1))
+    new_sessions = (user.total_sessions or 0) + 1
+    new_best_wpm = max(user.best_wpm or 0, session.wpm)
+
     # Generate AI insight
     ai_insight = generate_ai_insight(session.wpm, session.accuracy, session.consistency, weak_keys)
 
@@ -131,6 +138,8 @@ async def create_session(
     badges_earned = await check_achievements_sync(
         user_id, session.wpm, session.accuracy, session.errors,
         session.max_streak, session.mode.value,
+        user_xp=new_xp, user_level=new_level,
+        total_sessions=new_sessions, best_wpm=new_best_wpm,
     )
 
     return SessionResponse(
@@ -198,7 +207,15 @@ async def check_achievements_sync(
     errors: int,
     max_streak: int,
     mode: str,
+    user_xp: int,
+    user_level: int,
+    total_sessions: int,
+    best_wpm: int,
 ) -> list:
     """Check and award achievements; return newly earned badge metadata."""
     engine = AchievementEngine(user_id)
-    return await engine.check_session_achievements(wpm, accuracy, errors, max_streak, mode)
+    return await engine.check_session_achievements(
+        wpm, accuracy, errors, max_streak, mode,
+        user_xp=user_xp, user_level=user_level,
+        total_sessions=total_sessions, best_wpm=best_wpm
+    )

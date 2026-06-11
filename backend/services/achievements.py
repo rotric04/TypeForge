@@ -77,6 +77,10 @@ class AchievementEngine:
         errors: int,
         max_streak: int = 0,
         mode: str = "classic",
+        user_xp: int = 0,
+        user_level: int = 1,
+        total_sessions: int = 0,
+        best_wpm: int = 0,
     ) -> List[Dict]:
         """Check and persist achievements earned this session. Returns new badge dicts."""
         from database import DB
@@ -113,35 +117,26 @@ class AchievementEngine:
         if hour >= 5 and hour < 7:
             earned_ids.append("early_bird")
 
-        user_row = await DB.fetchone(
-            "SELECT xp, level, total_sessions, best_wpm FROM users WHERE id = $1::uuid",
-            self.user_id,
-        )
-        if user_row:
-            total_sessions = int(user_row["total_sessions"] or 0)
-            xp = int(user_row["xp"] or 0)
-            level = int(user_row["level"] or 1)
-            best_wpm = int(user_row["best_wpm"] or 0)
+        if total_sessions >= 500: earned_ids.append("sessions_500")
+        elif total_sessions >= 100: earned_ids.append("sessions_100")
+        elif total_sessions >= 50: earned_ids.append("sessions_50")
+        elif total_sessions >= 10: earned_ids.append("sessions_10")
+        elif total_sessions >= 5: earned_ids.append("sessions_5")
 
-            if total_sessions >= 500: earned_ids.append("sessions_500")
-            elif total_sessions >= 100: earned_ids.append("sessions_100")
-            elif total_sessions >= 50: earned_ids.append("sessions_50")
-            elif total_sessions >= 10: earned_ids.append("sessions_10")
-            elif total_sessions >= 5: earned_ids.append("sessions_5")
+        if user_xp >= 10000: earned_ids.append("xp_10000")
+        elif user_xp >= 2000: earned_ids.append("xp_2000")
+        elif user_xp >= 500: earned_ids.append("xp_500")
+        elif user_xp >= 200: earned_ids.append("xp_200")
 
-            if xp >= 10000: earned_ids.append("xp_10000")
-            elif xp >= 2000: earned_ids.append("xp_2000")
-            elif xp >= 500: earned_ids.append("xp_500")
-            elif xp >= 200: earned_ids.append("xp_200")
+        if user_level >= 10: earned_ids.append("level_10")
+        elif user_level >= 5: earned_ids.append("level_5")
+        elif user_level >= 3: earned_ids.append("level_3")
 
-            if level >= 10: earned_ids.append("level_10")
-            elif level >= 5: earned_ids.append("level_5")
-            elif level >= 3: earned_ids.append("level_3")
+        if best_wpm >= 120: earned_ids.append("best_120")
+        elif best_wpm >= 100: earned_ids.append("best_100")
+        elif best_wpm >= 80: earned_ids.append("best_80")
 
-            if best_wpm >= 120: earned_ids.append("best_120")
-            elif best_wpm >= 100: earned_ids.append("best_100")
-            elif best_wpm >= 80: earned_ids.append("best_80")
-
+        try:
             prev = await DB.fetchone(
                 """
                 SELECT wpm FROM sessions
@@ -153,7 +148,10 @@ class AchievementEngine:
             )
             if prev and prev["wpm"] and wpm - int(prev["wpm"]) >= 15:
                 earned_ids.append("comeback")
+        except Exception as e:
+            logger.warning("Could not fetch previous session for comeback badge: %s", e)
 
+        try:
             dev_count_rec = await DB.fetchone(
                 "SELECT COUNT(*)::int AS c FROM sessions WHERE user_id = $1::uuid AND mode = 'dev'",
                 self.user_id,
@@ -161,24 +159,40 @@ class AchievementEngine:
             dev_count = int(dev_count_rec["c"]) if dev_count_rec else 0
             if dev_count >= 100: earned_ids.append("dev_100")
             elif dev_count >= 10: earned_ids.append("dev_10")
+        except Exception as e:
+            logger.warning("Could not fetch dev session count: %s", e)
 
         new_badges: List[Dict] = []
-        for aid in set(earned_ids):
-            if aid not in ACHIEVEMENT_MAP:
-                continue
-            existing = await DB.fetchone(
-                "SELECT badge_id FROM achievements WHERE user_id = $1::uuid AND badge_id = $2",
-                self.user_id,
-                aid,
-            )
-            if existing:
-                continue
-            await DB.execute(
-                "INSERT INTO achievements (user_id, badge_id) VALUES ($1::uuid, $2)",
-                self.user_id,
-                aid,
-            )
-            new_badges.append(ACHIEVEMENT_MAP[aid])
+        earned_set = set(earned_ids)
+        if earned_set:
+            try:
+                # Check existing badges in a single query
+                existing_records = await DB.fetchall(
+                    "SELECT badge_id FROM achievements WHERE user_id = $1::uuid AND badge_id = ANY($2::text[])",
+                    self.user_id,
+                    list(earned_set),
+                )
+                existing_ids = {r["badge_id"] for r in existing_records}
+                
+                insert_data = []
+                for aid in earned_set:
+                    if aid not in ACHIEVEMENT_MAP or aid in existing_ids:
+                        continue
+                    insert_data.append((self.user_id, aid))
+                    new_badges.append(ACHIEVEMENT_MAP[aid])
+                    
+                if insert_data:
+                    await DB.executemany(
+                        "INSERT INTO achievements (user_id, badge_id) VALUES ($1::uuid, $2) ON CONFLICT (user_id, badge_id) DO NOTHING",
+                        insert_data
+                    )
+            except Exception as e:
+                logger.error("Failed to query or bulk insert achievements: %s", e)
+
+        if new_badges:
+            logger.info("User %s earned badges: %s", self.user_id, [b["name"] for b in new_badges])
+
+        return new_badges
 
         if new_badges:
             logger.info("User %s earned badges: %s", self.user_id, [b["name"] for b in new_badges])
