@@ -108,7 +108,7 @@ export const API = {
    * Save a typing session to Supabase via FastAPI
    */
   async saveSession(sessionData) {
-    return apiClient.post('/sessions/', sessionData);
+    return apiClient.post('/sessions', sessionData);
   },
 
   /**

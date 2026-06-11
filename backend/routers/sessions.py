@@ -53,7 +53,7 @@ def generate_ai_insight(wpm: int, accuracy: float, consistency: float, weak_keys
     return f"Good session! Target {int(wpm * 1.12)} WPM next time. Keep your fingers on home row between words."
 
 
-@router.post("/", response_model=SessionResponse, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=SessionResponse, status_code=status.HTTP_201_CREATED)
 async def create_session(
     session: SessionCreate,
     user: UserProfile = Depends(get_current_user),
