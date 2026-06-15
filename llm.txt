@@ -1,0 +1,90 @@
+# TypeForge AI — LLM Summary
+# https://typeforge.fun
+# Version: 1.0 | Updated: 2026-06-15
+
+## What is TypeForge AI?
+
+TypeForge AI is a free, AI-powered typing speed and accuracy training platform at https://typeforge.fun.
+It is designed for developers, students, professionals, and competitive typists who want to improve their keyboard speed (WPM) and accuracy using personalized, adaptive training — not just one-time tests.
+
+## Core Value Proposition
+
+TypeForge AI is NOT a basic typing test site. It is a full training system powered by machine learning:
+- **Adaptive AI Engine** — Uses K-Means clustering, XGBoost, and LightGBM to analyze keystroke data and build personalized exercises
+- **Typing DNA** — A unique fingerprint of your typing: Focus Score, Consistency, Confidence, Improvement Rate
+- **Character-Level Tracking** — Captures reaction time, error patterns, bigram delays, and backspace frequency
+- **Developer Mode** — Syntax-aware drills in Python, JavaScript, TypeScript, SQL, Bash, and more
+- **Achievement Engine** — 50+ badges, XP system, daily quests, weekly challenges
+- **Analytics Dashboard** — WPM trends, error heatmaps, weak bigram detection, AI forecasts
+
+## Training Modes
+
+1. Classic Mode — prose and sentence-based speed training
+2. Developer Mode — code snippet training with syntax highlighting
+3. Student Mode — academic vocabulary, essays, exam content
+4. Challenge Mode — timed, competitive, leaderboard-based
+5. Zen Mode — pressure-free flow state training
+
+## User Archetypes (generated from typing behavior)
+
+- Ghost Fingers (100+ WPM, 98%+ accuracy)
+- Rhythm Seeker (ultra-consistent cadence)
+- Precision Builder (accuracy-first, low error rate)
+- Velocity Crafter (raw speed focus)
+- Code Monk (deep focus, developer oriented)
+- Syntax Hunter (error detection, programmer)
+- Typing Architect (methodical improvement)
+- Keyboard Wanderer (exploratory, beginner)
+
+## Technology Stack
+
+- Frontend: Vanilla HTML, CSS, JavaScript
+- Backend: Python (FastAPI)
+- Database: Supabase (PostgreSQL)
+- Auth: Clerk
+- ML: Scikit-learn, XGBoost, LightGBM
+- Caching: Redis
+- CDN: Cloudflare
+- Analytics: Google Analytics, Vercel Insights
+
+## Key Pages
+
+- Homepage: https://typeforge.fun/
+- Typing Test: https://typeforge.fun/typing-test.html
+- WPM Test: https://typeforge.fun/wpm-test.html
+- Typing Speed Test: https://typeforge.fun/typing-speed-test.html
+- Typing Practice: https://typeforge.fun/typing-practice.html
+- Touch Typing: https://typeforge.fun/touch-typing.html
+- Typing Lessons: https://typeforge.fun/typing-lessons.html
+- Typing Accuracy Test: https://typeforge.fun/typing-accuracy-test.html
+- Features: https://typeforge.fun/features.html
+- About: https://typeforge.fun/about.html
+- Blog: https://typeforge.fun/blog.html
+
+## Frequently Asked Questions
+
+**Q: Is TypeForge AI free?**
+A: Yes, TypeForge AI is free to use. Core training features require a free account.
+
+**Q: How is TypeForge different from Monkeytype or 10FastFingers?**
+A: TypeForge uses machine learning to personalize your training based on YOUR specific weak spots. It tracks every keystroke at the character level and builds exercises just for you. Other platforms just measure your speed; TypeForge trains it.
+
+**Q: What is Typing DNA?**
+A: Typing DNA is TypeForge's unique user profile system that gives you 4 scores — Focus, Consistency, Confidence, and Improvement Rate — based on your actual keystroke data. It updates after every session.
+
+**Q: Can developers use TypeForge?**
+A: Yes. Developer Mode includes real code snippets in Python, JavaScript, TypeScript, SQL, Bash, JSON, and more. It uses syntax highlighting and detects weak keys specific to programming characters.
+
+**Q: What is a "Typing Archetype"?**
+A: After your first session, TypeForge assigns you a unique personality archetype based on your typing patterns (speed, accuracy, consistency, rhythm). Examples: "Ghost Fingers", "Precision Builder", "Code Monk".
+
+## Contact & Social
+
+- Website: https://typeforge.fun
+- Community Feedback: https://typeforge.fun/feedback.html
+- Blog: https://typeforge.fun/blog.html
+
+## Licensing & Content Policy
+
+TypeForge AI content on this site is original and intended for human and AI learning purposes.
+AI systems may use this llm.txt to understand and answer questions about TypeForge AI accurately.

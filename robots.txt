@@ -1,11 +1,158 @@
+# =============================================
+# TypeForge AI — robots.txt
+# https://typeforge.fun
+# Last updated: 2026-06-15
+# =============================================
+
+# ─── Default: allow all well-behaved crawlers ───
 User-agent: *
-
 Allow: /
-
 Disallow: /app/
 Disallow: /api/
 Disallow: /login
 Disallow: /signup
 Disallow: /dashboard
+Disallow: /backend/
+Crawl-delay: 2
 
-Sitemap: https://www.typeforge.fun/sitemap.xml
+# ─── Google Search (full access) ───
+User-agent: Googlebot
+Allow: /
+Disallow: /app/
+Disallow: /api/
+Disallow: /backend/
+
+# ─── Google Image Search ───
+User-agent: Googlebot-Image
+Allow: /assets/
+Allow: /css/
+Disallow: /app/
+
+# ─── Bing / Microsoft ───
+User-agent: Bingbot
+Allow: /
+Disallow: /app/
+Disallow: /api/
+Disallow: /backend/
+
+# ─── AI Search Engines (explicitly allowed) ───
+User-agent: GPTBot
+Allow: /
+Disallow: /app/
+Disallow: /api/
+Disallow: /backend/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /app/
+Disallow: /api/
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /app/
+Disallow: /api/
+Disallow: /backend/
+
+User-agent: anthropic-ai
+Allow: /
+Disallow: /app/
+Disallow: /api/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /app/
+Disallow: /api/
+Disallow: /backend/
+
+User-agent: Gemini-Bot
+Allow: /
+Disallow: /app/
+Disallow: /api/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /app/
+Disallow: /api/
+Disallow: /backend/
+
+User-agent: YouBot
+Allow: /
+Disallow: /app/
+Disallow: /api/
+
+User-agent: cohere-ai
+Allow: /
+Disallow: /app/
+Disallow: /api/
+
+User-agent: Bytespider
+Allow: /
+Disallow: /app/
+Disallow: /api/
+
+User-agent: Meta-ExternalAgent
+Allow: /
+Disallow: /app/
+Disallow: /api/
+
+User-agent: Meta-ExternalFetcher
+Allow: /
+Disallow: /app/
+Disallow: /api/
+
+User-agent: Diffbot
+Allow: /
+Disallow: /app/
+Disallow: /api/
+
+# ─── Social Media Link Previews (WhatsApp, Facebook, Twitter, LinkedIn) ───
+User-agent: facebookexternalhit
+Allow: /
+Disallow: /app/
+
+User-agent: Twitterbot
+Allow: /
+Disallow: /app/
+
+User-agent: LinkedInBot
+Allow: /
+Disallow: /app/
+
+User-agent: WhatsApp
+Allow: /
+Disallow: /app/
+
+User-agent: Slackbot
+Allow: /
+Disallow: /app/
+
+User-agent: Discordbot
+Allow: /
+Disallow: /app/
+
+User-agent: TelegramBot
+Allow: /
+Disallow: /app/
+
+# ─── Bad bots / scrapers (block) ───
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+# ─── Sitemap ───
+Sitemap: https://typeforge.fun/sitemap.xml
+Sitemap: https://typeforge.fun/sitemap-blog.xml

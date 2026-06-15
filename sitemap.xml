@@ -1,183 +1,186 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-  <!-- Core Pages -->
+  <!-- ═══ Core Pages ═══ -->
   <url>
-    <loc>https://www.typeforge.fun/</loc>
-    <lastmod>2026-06-05</lastmod>
+    <loc>https://typeforge.fun/</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://www.typeforge.fun/features</loc>
-    <lastmod>2026-06-05</lastmod>
+    <loc>https://typeforge.fun/features.html</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://www.typeforge.fun/about</loc>
-    <lastmod>2026-06-05</lastmod>
+    <loc>https://typeforge.fun/about.html</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://www.typeforge.fun/blog</loc>
-    <lastmod>2026-06-05</lastmod>
+    <loc>https://typeforge.fun/blog.html</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://www.typeforge.fun/feedback</loc>
-    <lastmod>2026-06-05</lastmod>
+    <loc>https://typeforge.fun/feedback.html</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- Keyword Landing Pages -->
+  <!-- ═══ Keyword Landing Pages ═══ -->
   <url>
-    <loc>https://www.typeforge.fun/typing-test</loc>
-    <lastmod>2026-06-05</lastmod>
+    <loc>https://typeforge.fun/typing-test.html</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc>https://typeforge.fun/typing-speed-test.html</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc>https://typeforge.fun/wpm-test.html</loc>
+    <lastmod>2026-06-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc>https://typeforge.fun/typing-practice.html</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://www.typeforge.fun/typing-speed-test</loc>
-    <lastmod>2026-06-05</lastmod>
+    <loc>https://typeforge.fun/typing-lessons.html</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://www.typeforge.fun/wpm-test</loc>
-    <lastmod>2026-06-05</lastmod>
+    <loc>https://typeforge.fun/touch-typing.html</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://www.typeforge.fun/typing-practice</loc>
-    <lastmod>2026-06-05</lastmod>
+    <loc>https://typeforge.fun/typing-accuracy-test.html</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
+  <!-- ═══ Blog Articles ═══ -->
   <url>
-    <loc>https://www.typeforge.fun/typing-lessons</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://www.typeforge.fun/touch-typing</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://www.typeforge.fun/typing-accuracy-test</loc>
-    <lastmod>2026-06-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Blog Articles -->
-  <url>
-    <loc>https://www.typeforge.fun/blog/how-to-increase-typing-speed</loc>
-    <lastmod>2026-06-05</lastmod>
+    <loc>https://typeforge.fun/blog/how-to-increase-typing-speed</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://www.typeforge.fun/blog/best-touch-typing-techniques</loc>
-    <lastmod>2026-06-05</lastmod>
+    <loc>https://typeforge.fun/blog/best-touch-typing-techniques</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://www.typeforge.fun/blog/typing-test-vs-practice</loc>
-    <lastmod>2026-06-05</lastmod>
+    <loc>https://typeforge.fun/blog/typing-test-vs-practice</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://www.typeforge.fun/blog/improve-typing-accuracy</loc>
-    <lastmod>2026-06-05</lastmod>
+    <loc>https://typeforge.fun/blog/improve-typing-accuracy</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://www.typeforge.fun/blog/typing-test-for-programmers</loc>
-    <lastmod>2026-06-05</lastmod>
+    <loc>https://typeforge.fun/blog/typing-test-for-programmers</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://www.typeforge.fun/blog/average-typing-speed-by-age</loc>
-    <lastmod>2026-06-05</lastmod>
+    <loc>https://typeforge.fun/blog/average-typing-speed-by-age</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://www.typeforge.fun/blog/how-many-wpm-is-good</loc>
-    <lastmod>2026-06-05</lastmod>
+    <loc>https://typeforge.fun/blog/how-many-wpm-is-good</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://www.typeforge.fun/blog/accuracy-vs-speed</loc>
-    <lastmod>2026-06-05</lastmod>
+    <loc>https://typeforge.fun/blog/accuracy-vs-speed</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://www.typeforge.fun/blog/ai-typing-feedback-explained</loc>
-    <lastmod>2026-06-05</lastmod>
+    <loc>https://typeforge.fun/blog/ai-typing-feedback-explained</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://www.typeforge.fun/blog/common-typing-mistakes</loc>
-    <lastmod>2026-06-05</lastmod>
+    <loc>https://typeforge.fun/blog/common-typing-mistakes</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- Legal & Static Pages -->
+  <!-- ═══ Legal & Static Pages ═══ -->
   <url>
-    <loc>https://www.typeforge.fun/privacy</loc>
-    <lastmod>2026-06-05</lastmod>
+    <loc>https://typeforge.fun/privacy.html</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.4</priority>
   </url>
 
   <url>
-    <loc>https://www.typeforge.fun/security</loc>
-    <lastmod>2026-06-05</lastmod>
+    <loc>https://typeforge.fun/security.html</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.4</priority>
   </url>
 
   <url>
-    <loc>https://www.typeforge.fun/terms</loc>
-    <lastmod>2026-06-05</lastmod>
+    <loc>https://typeforge.fun/terms.html</loc>
+    <lastmod>2026-06-15</lastmod>
     <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.4</priority>
   </url>
 
 </urlset>

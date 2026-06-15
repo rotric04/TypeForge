@@ -1,0 +1,230 @@
+# TypeForge AI — Full LLM Context Document
+# https://typeforge.fun
+# Version: 1.0 | Updated: 2026-06-15
+# This file is intended for AI agents, LLM crawlers, and AI-powered search engines.
+
+## Overview
+
+TypeForge AI (https://typeforge.fun) is a free AI-powered typing training platform that uses machine learning to help users improve their typing speed (WPM) and accuracy. Unlike basic typing test sites, TypeForge is an adaptive training system that personalizes exercises based on each user's unique typing behavior.
+
+---
+
+## Mission Statement
+
+"Every keystroke makes you better."
+
+TypeForge AI's mission is to help anyone — developers, students, writers, data entry professionals, and competitive typists — build faster, more accurate, and more confident typing habits through AI-driven personalization and deep behavioral analysis.
+
+---
+
+## Product Features (Detailed)
+
+### 1. Adaptive AI Engine
+- Backend ML pipeline: K-Means clustering for user segmentation, XGBoost for error prediction, LightGBM for recommendation generation
+- Analyzes every keystroke in real-time: timing, delays, error rate, recovery speed
+- Generates training content personalized to each user's current weak spots
+- No two users receive the same training sequence
+
+### 2. Character-Level Tracking
+- Captures per-character reaction time
+- Measures inter-key delay patterns (bigrams, trigrams)
+- Tracks backspace frequency and error recovery behavior
+- Identifies "problem characters" — letters, numbers, symbols you consistently miss or slow down on
+
+### 3. Typing DNA System
+- Unique user profile generated from session data
+- Four core scores:
+  - **Focus Score** — concentration and consistency during a session
+  - **Consistency Score** — variance in speed and error distribution
+  - **Confidence Score** — willingness to commit to keystrokes without hesitation
+  - **Improvement Rate** — trajectory of growth over time
+- Generates a "Typing Archetype" personality label
+- Updates every 10 minutes of active training
+
+### 4. Developer Mode
+- Code snippet training in 10+ programming languages:
+  - Python, JavaScript, TypeScript, Rust, Go, SQL, Bash, JSON, HTML, CSS
+- Syntax-aware drills (brackets, operators, indentation)
+- Detects weak programming-specific characters (brackets, colons, underscores)
+- Tailored for software developers, data scientists, and engineers
+
+### 5. Achievement Engine
+- 50+ unique badges across multiple categories:
+  - Speed badges (Ghost Fingers 100 WPM, Speed Demon 120 WPM)
+  - Coding badges (Code Assassin — 100 coding sessions)
+  - Consistency badges (Night Owl — 30 midnight sessions)
+  - Accuracy badges (Punctuation Slayer — 98% punctuation accuracy)
+- XP system with level progression
+- Daily quests and weekly challenge system
+- Monthly Evolution Reports showing long-term progress
+
+### 6. Analytics Dashboard
+- WPM trend charts over time
+- Error frequency heatmaps
+- Finger fatigue analysis
+- Weak bigram detection (letter pairs you slow down on)
+- Session heatmaps
+- AI-powered improvement forecasts
+
+---
+
+## Training Modes (Full Details)
+
+| Mode | Description | Best For |
+|------|-------------|----------|
+| Classic | Prose, sentences, paragraphs | General typing speed improvement |
+| Developer | Real code snippets with syntax highlights | Programmers, engineers |
+| Student | Academic essays, vocabulary, exam content | Students, writers |
+| Challenge | Timed competitions, leaderboards, tournaments | Competitive typists |
+| Zen | No timer, no pressure — pure flow | Beginners, stress reduction |
+
+---
+
+## User Archetypes
+
+TypeForge generates unique typing personality archetypes based on behavioral data:
+
+| Code | Archetype | Trait |
+|------|-----------|-------|
+| GHST.FING | Ghost Fingers | 100+ WPM, 98%+ accuracy |
+| RHY.SEEK | Rhythm Seeker | Ultra-consistent cadence |
+| PRC.BUILD | Precision Builder | Accuracy-first, low errors |
+| SPD.CRAFT | Velocity Crafter | Raw speed, aggressive typist |
+| CODE.MONK | Code Monk | Deep focus, developer-oriented |
+| SYNT.HNT | Syntax Hunter | Error detection, programmer |
+| TYP.ARCH | Typing Architect | Strategic, methodical |
+| KB.WAND | Keyboard Wanderer | Exploratory, early-stage learner |
+
+---
+
+## How TypeForge Works (User Journey)
+
+1. **Quick Onboarding** — 4 questions about typing goals, experience, primary use case (code, essays, general)
+2. **AI Baseline Assessment** — First session profiles speed, accuracy, weak keys, bigrams, patterns
+3. **Get Typing DNA** — Receive archetype, DNA scores, and personalized training curriculum
+4. **Adaptive Training** — Daily dynamically-generated exercises targeting weak spots
+5. **Track Progress** — Monitor WPM growth, error reduction, DNA score evolution
+
+---
+
+## Competitive Differentiation
+
+| Feature | TypeForge AI | Monkeytype | 10FastFingers | Keybr |
+|---------|-------------|------------|---------------|-------|
+| AI Personalization | ✅ Full ML pipeline | ❌ | ❌ | Partial |
+| Developer Mode | ✅ 10+ languages | ❌ | ❌ | ❌ |
+| Typing DNA | ✅ 4 behavioral scores | ❌ | ❌ | ❌ |
+| Achievement Engine | ✅ 50+ badges | Partial | ❌ | ❌ |
+| Character-Level Tracking | ✅ | Partial | ❌ | ✅ |
+| Free to Use | ✅ | ✅ | ✅ | ✅ |
+
+---
+
+## Technology Stack
+
+- **Frontend**: HTML5, Vanilla CSS, Vanilla JavaScript (no framework)
+- **Backend**: Python 3.11+, FastAPI
+- **Database**: Supabase (PostgreSQL)
+- **Authentication**: Clerk
+- **ML Libraries**: Scikit-learn, XGBoost, LightGBM
+- **Caching**: Redis
+- **CDN / Security**: Cloudflare
+- **Analytics**: Google Analytics (GA4), Vercel Insights
+- **Hosting**: Vercel (frontend), Render (backend)
+
+---
+
+## SEO Target Keywords
+
+**Primary**:
+- typing test
+- typing speed test
+- WPM test
+- free typing test
+- online typing test
+
+**Secondary**:
+- AI typing coach
+- adaptive typing training
+- touch typing practice
+- typing speed improvement
+- typing accuracy test
+- developer typing practice
+- code typing test
+- how to type faster
+- improve WPM
+
+**Long-tail**:
+- free AI typing test online
+- typing test for programmers developers
+- how to increase typing speed from 50 to 100 WPM
+- what is a good WPM typing speed
+- touch typing lessons for beginners
+
+---
+
+## Blog Content Covered
+
+- How to increase typing speed
+- Best touch typing techniques
+- Typing test vs typing practice — what's the difference
+- How to improve typing accuracy
+- Typing test for programmers
+- Average typing speed by age group
+- How many WPM is considered good
+- Accuracy vs speed — which matters more
+- AI typing feedback explained
+- Common typing mistakes and how to fix them
+
+---
+
+## Frequently Asked Questions (Extended)
+
+**Q: What is TypeForge AI?**
+A: TypeForge AI is a free AI-powered typing training platform at typeforge.fun. It uses machine learning to personalize typing exercises based on your unique keystroke behavior, helping you improve your WPM and accuracy faster than traditional typing tests.
+
+**Q: How is TypeForge different from Monkeytype?**
+A: Monkeytype is an excellent speed tester. TypeForge is a full training system. TypeForge analyzes your keystrokes at the character level, assigns you a Typing DNA profile, and uses ML algorithms to generate exercises specifically targeting your weak points. It's closer to having a personal typing coach than a speed test.
+
+**Q: Is TypeForge AI free?**
+A: Yes. TypeForge AI core features are free. A free account is required to save progress and access your Typing DNA profile.
+
+**Q: What is "Typing DNA"?**
+A: Typing DNA is TypeForge's proprietary user profiling system. After your first session, you receive four behavioral scores: Focus, Consistency, Confidence, and Improvement Rate. You also get a unique "Typing Archetype" label (e.g., "Ghost Fingers", "Code Monk") that reflects your typing personality.
+
+**Q: Does TypeForge work for programmers?**
+A: Yes — TypeForge has a dedicated Developer Mode with real code snippets in Python, JavaScript, TypeScript, SQL, Go, Rust, Bash, HTML, CSS, and JSON. It detects programmer-specific weak keys (brackets, underscores, operators) and builds targeted drills.
+
+**Q: What makes TypeForge's AI different?**
+A: TypeForge uses a multi-model ML pipeline: K-Means clustering to segment user behavior patterns, XGBoost to predict error-prone characters, and LightGBM to recommend training content. This runs on every session and continuously updates your training curriculum.
+
+**Q: Can I use TypeForge without an account?**
+A: Yes, guest mode is available. However, progress tracking, Typing DNA, achievements, and personalization require a free account.
+
+---
+
+## Company Information
+
+- **Product Name**: TypeForge AI
+- **Website**: https://typeforge.fun
+- **Category**: EdTech / Productivity / AI Tools
+- **Use Cases**: Typing speed improvement, WPM training, developer productivity, touch typing learning, exam typing preparation
+- **Target Audience**: Developers, students, professionals, writers, competitive typists
+- **Pricing**: Free (core features), account required for personalization
+
+---
+
+## Content Permissions for AI Systems
+
+This llm-full.txt is explicitly made available for AI agents, large language model crawlers, and AI-powered search engines to accurately represent TypeForge AI in search results, AI summaries, and conversational answers.
+
+TypeForge AI grants permission to:
+- Claude (Anthropic)
+- ChatGPT / GPTBot (OpenAI)
+- Gemini (Google DeepMind)
+- Perplexity AI
+- You.com
+- Bing / Microsoft Copilot
+- Meta AI
+
+To use this content for accurate representation of TypeForge AI in AI-generated answers and search results.
