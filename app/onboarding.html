@@ -265,14 +265,14 @@
     <!-- Step 2: How fast? -->
     <div class="ob-step" id="step-2">
       <div class="ob-question">How fast do you type?</div>
-      <div class="ob-sub">Be honest — TypeForge will figure it out anyway after your first session.</div>
+      <div class="ob-sub">Be honest - TypeForge will figure it out anyway after your first session.</div>
       <div class="wpm-slider-wrapper">
         <div class="wpm-display" id="wpm-display">60</div>
         <div class="wpm-display-label">WPM (Words Per Minute)</div>
         <input type="range" class="slider" id="wpm-slider" min="10" max="150" value="60" step="5"/>
         <div class="wpm-range-labels"><span>10 WPM</span><span>80 WPM</span><span>150 WPM</span></div>
         <div class="wpm-zone" id="wpm-zone">
-          <span id="wpm-zone-label">Beginner — Great starting point!</span>
+          <span id="wpm-zone-label">Beginner - Great starting point!</span>
         </div>
       </div>
       <div class="ob-nav">
@@ -479,7 +479,7 @@ function goBack(n) {
   document.getElementById('ob-step-counter').textContent = `Step ${n+1} of 4`;
 }
 
-// Step 1 — Option selection
+// Step 1 - Option selection
 document.querySelectorAll('#step1-options .ob-option').forEach(opt => {
   opt.addEventListener('click', () => {
     document.querySelectorAll('#step1-options .ob-option').forEach(o => o.classList.remove('selected'));
@@ -490,16 +490,16 @@ document.querySelectorAll('#step1-options .ob-option').forEach(opt => {
 });
 document.getElementById('step1-next').addEventListener('click', () => goToStep(1));
 
-// Step 2 — WPM Slider
+// Step 2 - WPM Slider
 const slider = document.getElementById('wpm-slider');
 const wpmDisplay = document.getElementById('wpm-display');
 const zones = [
-  { max:30,  label:'Beginner — Great starting point!' },
-  { max:50,  label:'Learning — Building the foundation' },
-  { max:70,  label:'Intermediate — Steady progress!' },
-  { max:90,  label:'Advanced — Really impressive!' },
-  { max:120, label:'Expert — You\'re flying!' },
-  { max:999, label:'Ghost — Absolute legend!' },
+  { max:30,  label:'Beginner - Great starting point!' },
+  { max:50,  label:'Learning - Building the foundation' },
+  { max:70,  label:'Intermediate - Steady progress!' },
+  { max:90,  label:'Advanced - Really impressive!' },
+  { max:120, label:'Expert - You\'re flying!' },
+  { max:999, label:'Ghost - Absolute legend!' },
 ];
 slider.addEventListener('input', () => {
   const v = parseInt(slider.value);
@@ -511,7 +511,7 @@ slider.addEventListener('input', () => {
 document.getElementById('step2-next').addEventListener('click', () => goToStep(2));
 document.getElementById('step2-back').addEventListener('click', () => goBack(0));
 
-// Step 3 — Goals
+// Step 3 - Goals
 document.querySelectorAll('#step3-goals .ob-goal').forEach(goal => {
   goal.addEventListener('click', () => {
     document.querySelectorAll('#step3-goals .ob-goal').forEach(g => g.classList.remove('selected'));
@@ -523,7 +523,7 @@ document.querySelectorAll('#step3-goals .ob-goal').forEach(goal => {
 document.getElementById('step3-next').addEventListener('click', () => goToStep(3));
 document.getElementById('step3-back').addEventListener('click', () => goBack(1));
 
-// Step 4 — Experience
+// Step 4 - Experience
 document.querySelectorAll('#step4-options .ob-option').forEach(opt => {
   opt.addEventListener('click', () => {
     document.querySelectorAll('#step4-options .ob-option').forEach(o => o.classList.remove('selected'));

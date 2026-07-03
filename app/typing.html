@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <!-- TypeForge Device Guard: runs synchronously before page renders -->
   <script src="../js/device-guard.js?v=1.0.3"></script>
@@ -7,24 +8,26 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y8JE6RY1D"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     gtag('config', 'G-0Y8JE6RY1D');
   </script>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Train | TypeForge AI</title>
-  <meta name="description" content="Adaptive typing training powered by AI. Improve speed, accuracy, and coding proficiency with personalized sessions."/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link rel="preconnect" href="https://esm.sh" crossorigin/>
-  <link rel="stylesheet" href="../css/global.css?v=1.0.3"/>
-  <link rel="stylesheet" href="../css/animations.css?v=1.0.3"/>
-  <link rel="stylesheet" href="../css/components.css?v=1.0.3"/>
-  <link rel="stylesheet" href="../css/app-pages.css?v=1.0.3"/>
-  <link rel="stylesheet" href="../css/typing.css?v=1.0.3"/>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23f4f4f5' stroke-width='8'><rect x='10' y='20' width='80' height='60' rx='8'/><path d='M25 40h10M45 40h10M65 40h10M25 60h50'/></svg>"/>
+  <meta name="description"
+    content="Adaptive typing training powered by AI. Improve speed, accuracy, and coding proficiency with personalized sessions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://esm.sh" crossorigin />
+  <link rel="stylesheet" href="../css/global.css?v=1.0.3" />
+  <link rel="stylesheet" href="../css/animations.css?v=1.0.3" />
+  <link rel="stylesheet" href="../css/components.css?v=1.0.3" />
+  <link rel="stylesheet" href="../css/app-pages.css?v=1.0.3" />
+  <link rel="stylesheet" href="../css/typing.css?v=1.0.3" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23f4f4f5' stroke-width='8'><rect x='10' y='20' width='80' height='60' rx='8'/><path d='M25 40h10M45 40h10M65 40h10M25 60h50'/></svg>" />
   <!-- Vercel Web Analytics -->
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -44,1283 +47,643 @@
     })();
   </script>
 </head>
+
 <body>
 
-<div class="noise-overlay" aria-hidden="true"></div>
-<div id="toast-container" class="toast-container" role="alert" aria-live="polite"></div>
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <div id="toast-container" class="toast-container" role="alert" aria-live="polite"></div>
 
-<!-- XP Container -->
-<div id="xp-container" style="position:fixed;inset:0;pointer-events:none;z-index:9998;"></div>
+  <!-- XP Container -->
+  <div id="xp-container" style="position:fixed;inset:0;pointer-events:none;z-index:9998;"></div>
 
-<div class="app-layout page-content">
-  <!-- Sidebar -->
-  <aside class="app-sidebar" role="navigation" aria-label="App navigation">
-    <a href="/" class="sidebar-logo" aria-label="TypeForge AI Home">
-      <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
-    </a>
-    <nav class="sidebar-nav">
-      <div class="sidebar-item active" onclick="location.href='typing.html'" title="Train" aria-label="Train">
-        <span class="sidebar-icon">
-          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
-        </span>
-        <span class="sidebar-label">Train</span>
-      </div>
-      <div class="sidebar-item" onclick="location.href='dashboard.html'" title="Dashboard" aria-label="Dashboard">
-        <span class="sidebar-icon">
-          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-        </span>
-        <span class="sidebar-label">Dashboard</span>
-      </div>
-      <div class="sidebar-item" onclick="location.href='achievements.html'" title="Achievements" aria-label="Achievements">
-        <span class="sidebar-icon">
-          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34M12 2a5 5 0 0 0-5 5v3c0 2.76 2.24 5 5 5s5-2.24 5-5V7a5 5 0 0 0-5-5z"/></svg>
-        </span>
-        <span class="sidebar-label">Achievements</span>
-      </div>
-      <div class="sidebar-item" onclick="location.href='history.html'" title="History" aria-label="History">
-        <span class="sidebar-icon">
-          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </span>
-        <span class="sidebar-label">History</span>
-      </div>
-    </nav>
-    <div class="sidebar-bottom">
-      <div class="sidebar-item" onclick="location.href='settings.html'" title="Settings" aria-label="Settings">
-        <span class="sidebar-icon">
-          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-        </span>
-        <span class="sidebar-label">Settings</span>
-      </div>
-      <div class="sidebar-item" title="Profile" aria-label="Profile" id="sidebar-profile">
-        <span class="sidebar-icon" id="nav-avatar">U</span>
-        <span class="sidebar-label" data-auth-name>Profile</span>
-      </div>
-      <div class="sidebar-item" title="Sign Out" aria-label="Sign Out" data-auth-signout>
-        <span class="sidebar-icon">
-          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
-        </span>
-        <span class="sidebar-label">Sign Out</span>
-      </div>
-    </div>
-  </aside>
-
-  <!-- Main -->
-  <main class="app-main">
-    <header class="app-header">
-      <div>
-        <div class="app-header-title" id="header-mode-label">Classic Mode</div>
-      </div>
-      <div class="app-header-actions">
-        <!-- XP Bar -->
-        <div class="xp-bar-container" style="min-width:200px;" id="header-xp-bar">
-          <div class="xp-bar-header">
-            <span class="xp-level-badge" id="header-level">Lv.1</span>
-            <span class="xp-text" id="header-xp-text">0 / 500 XP</span>
-          </div>
-          <div class="progress-bar">
-            <div class="progress-fill" id="header-xp-fill" style="width:0%"></div>
-          </div>
+  <div class="app-layout page-content">
+    <!-- Sidebar -->
+    <aside class="app-sidebar" role="navigation" aria-label="App navigation">
+      <a href="/" class="sidebar-logo" aria-label="TypeForge AI Home">
+        <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="2" />
+          <path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10" />
+        </svg>
+      </a>
+      <nav class="sidebar-nav">
+        <div class="sidebar-item active" onclick="location.href='typing.html'" title="Train" aria-label="Train">
+          <span class="sidebar-icon">
+            <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10" />
+            </svg>
+          </span>
+          <span class="sidebar-label">Train</span>
         </div>
-        <button class="btn btn-ghost btn-icon btn-sm" id="focus-mode-btn" title="Focus Mode" aria-label="Toggle Focus Mode">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-        </button>
-        <a href="dashboard.html" class="btn btn-secondary btn-sm">Dashboard</a>
-      </div>
-    </header>
-
-    <div class="typing-page" id="typing-page-root">
-
-      <!-- Config Bar -->
-      <div class="typing-config" id="typing-config">
-        <!-- Mode Tabs -->
-        <div class="mode-tabs" role="tablist" aria-label="Typing modes">
-          <button class="mode-tab active" data-mode="classic" role="tab" aria-selected="true">
-            Classic
-          </button>
-          <button class="mode-tab" data-mode="dev" role="tab" aria-selected="false">
-            Developer
-          </button>
-          <button class="mode-tab" data-mode="student" role="tab" aria-selected="false">
-            Student
-          </button>
-          <button class="mode-tab" data-mode="personalized" role="tab" aria-selected="false">
-            Targeted (AI)
-          </button>
-          <button class="mode-tab" data-mode="custom" role="tab" aria-selected="false">
-            Custom
-          </button>
-          <button class="mode-tab" data-mode="zen" role="tab" aria-selected="false">
-            Zen
-          </button>
+        <div class="sidebar-item" onclick="location.href='dashboard.html'" title="Dashboard" aria-label="Dashboard">
+          <span class="sidebar-icon">
+            <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10" />
+              <line x1="12" y1="20" x2="12" y2="4" />
+              <line x1="6" y1="20" x2="6" y2="14" />
+            </svg>
+          </span>
+          <span class="sidebar-label">Dashboard</span>
         </div>
-
-        <!-- Settings -->
-        <div class="typing-settings">
-          <!-- Lang select (dev mode only) -->
-          <select class="lang-select" id="lang-select" aria-label="Programming language" style="display:none;">
-            <option value="python">Python</option>
-            <option value="javascript">JavaScript</option>
-            <option value="typescript">TypeScript</option>
-            <option value="sql">SQL</option>
-            <option value="bash">Bash</option>
-            <option value="json">JSON</option>
-            <option value="html">HTML</option>
-            <option value="css">CSS</option>
-            <option value="markdown">Markdown</option>
-            <option value="yaml">YAML</option>
-          </select>
-          <!-- Timer -->
-          <div class="timer-selector" role="group" aria-label="Session duration">
-            <button class="timer-btn" data-time="30">30s</button>
-            <button class="timer-btn active" data-time="60">60s</button>
-            <button class="timer-btn" data-time="90">90s</button>
-            <button class="timer-btn" data-time="120">120s</button>
-            <button class="timer-btn" data-time="180">3m</button>
-          </div>
-          <!-- Options -->
-          <button class="btn btn-ghost btn-icon btn-sm" id="punctuation-toggle" title="Toggle punctuation" aria-label="Toggle punctuation" aria-pressed="true">
-            <span id="punct-icon">?!</span>
-          </button>
-          <button class="btn btn-ghost btn-icon btn-sm" id="numbers-toggle" title="Toggle numbers" aria-label="Toggle numbers" aria-pressed="false">
-            <span>123</span>
-          </button>
+        <div class="sidebar-item" onclick="location.href='achievements.html'" title="Achievements"
+          aria-label="Achievements">
+          <span class="sidebar-icon">
+            <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34M12 2a5 5 0 0 0-5 5v3c0 2.76 2.24 5 5 5s5-2.24 5-5V7a5 5 0 0 0-5-5z" />
+            </svg>
+          </span>
+          <span class="sidebar-label">Achievements</span>
+        </div>
+        <div class="sidebar-item" onclick="location.href='history.html'" title="History" aria-label="History">
+          <span class="sidebar-icon">
+            <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+          </span>
+          <span class="sidebar-label">History</span>
+        </div>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-item" onclick="location.href='settings.html'" title="Settings" aria-label="Settings">
+          <span class="sidebar-icon">
+            <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+            </svg>
+          </span>
+          <span class="sidebar-label">Settings</span>
+        </div>
+        <div class="sidebar-item" title="Profile" aria-label="Profile" id="sidebar-profile">
+          <span class="sidebar-icon" id="nav-avatar">U</span>
+          <span class="sidebar-label" data-auth-name>Profile</span>
+        </div>
+        <div class="sidebar-item" title="Sign Out" aria-label="Sign Out" data-auth-signout>
+          <span class="sidebar-icon">
+            <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
+            </svg>
+          </span>
+          <span class="sidebar-label">Sign Out</span>
         </div>
       </div>
+    </aside>
 
-      <!-- Weak Keys Alert -->
-      <div class="weak-keys-bar" id="weak-keys-bar" style="display:none;">
-        <span class="label">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:middle;margin-right:4px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          Target keys:
-        </span>
-        <div id="weak-keys-chips"></div>
-        <span style="margin-left:auto;font-size:11px;color:var(--text-4);">Telemetry-optimized targets</span>
-      </div>
-
-      <!-- Live Stats -->
-      <div class="typing-stats" id="typing-stats">
-        <div class="typing-stat">
-          <div class="typing-stat-val" id="stat-wpm">0</div>
-          <div class="typing-stat-label">WPM</div>
+    <!-- Main -->
+    <main class="app-main">
+      <header class="app-header">
+        <div>
+          <div class="app-header-title" id="header-mode-label">Classic Mode</div>
         </div>
-        <div style="width:1px;height:60px;background:var(--border-1);"></div>
-        <div class="typing-stat">
-          <div class="typing-stat-val" id="stat-accuracy">100</div>
-          <div class="typing-stat-label">Accuracy %</div>
-        </div>
-        <div style="width:1px;height:60px;background:var(--border-1);"></div>
-
-        <!-- Timer Ring -->
-        <div class="timer-ring-wrapper" aria-live="polite" aria-label="Timer">
-          <svg class="timer-ring-svg" viewBox="0 0 90 90" width="90" height="90" aria-hidden="true">
-            <circle class="timer-ring-bg" cx="45" cy="45" r="38" stroke-width="5"/>
-            <circle class="timer-ring-fill" id="timer-ring" cx="45" cy="45" r="38" stroke-width="5"
-              stroke-dasharray="238.76" stroke-dashoffset="0"/>
-          </svg>
-          <div class="timer-ring-text" id="timer-display">60</div>
-        </div>
-
-        <div style="width:1px;height:60px;background:var(--border-1);"></div>
-        <div class="typing-stat">
-          <div class="typing-stat-val" id="stat-errors">0</div>
-          <div class="typing-stat-label">Errors</div>
-        </div>
-        <div style="width:1px;height:60px;background:var(--border-1);"></div>
-        <div class="typing-stat">
-          <div class="typing-stat-val" id="stat-streak">0</div>
-          <div class="typing-stat-label">Streak</div>
-        </div>
-      </div>
-
-      <!-- Typing Area -->
-      <div class="typing-area-wrapper">
-        <div class="typing-area" id="typing-area" role="textbox" aria-label="Typing practice area" aria-readonly="false" tabindex="0">
-          <!-- Overlay when not started -->
-          <div class="typing-area-overlay" id="typing-overlay">
-            <div class="typing-area-overlay-icon" style="color:var(--brand-light);margin-bottom:8px;">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
+        <div class="app-header-actions">
+          <!-- XP Bar -->
+          <div class="xp-bar-container" style="min-width:200px;" id="header-xp-bar">
+            <div class="xp-bar-header">
+              <span class="xp-level-badge" id="header-level">Lv.1</span>
+              <span class="xp-text" id="header-xp-text">0 / 500 XP</span>
             </div>
-            <div class="typing-area-overlay-text">Click here or press any key to start</div>
-            <div style="font-size:11px;color:var(--text-4);margin-top:4px;">Timer starts on first keystroke</div>
+            <div class="progress-bar">
+              <div class="progress-fill" id="header-xp-fill" style="width:0%"></div>
+            </div>
           </div>
-          <!-- Text Display -->
-          <div class="typing-text" id="typing-display" aria-live="off"></div>
-          <!-- Hidden input -->
-          <input type="text" id="typing-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-hidden="true" tabindex="-1"/>
+          <button class="btn btn-ghost btn-icon btn-sm" id="focus-mode-btn" title="Focus Mode"
+            aria-label="Toggle Focus Mode">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <circle cx="12" cy="12" r="6" />
+              <circle cx="12" cy="12" r="2" />
+            </svg>
+          </button>
+          <a href="dashboard.html" class="btn btn-secondary btn-sm">Dashboard</a>
         </div>
-      </div>
+      </header>
 
-      <!-- Controls -->
-      <div class="typing-controls">
-        <div class="typing-hint">
-          <kbd>Tab</kbd> + <kbd>Enter</kbd> to restart
-          &nbsp;·&nbsp;
-          <kbd>Esc</kbd> to reset
-          &nbsp;·&nbsp;
-          <kbd>F1</kbd> for focus mode
-        </div>
-        <div class="typing-controls-right">
-          <button class="btn btn-ghost btn-sm" id="restart-btn" aria-label="Restart session">↺ Restart</button>
-          <button class="btn btn-secondary btn-sm" id="new-text-btn" aria-label="Load new text">New Text →</button>
-        </div>
-      </div>
+      <div class="typing-page" id="typing-page-root">
 
-      <!-- Keyboard Heatmap (optional) -->
-      <div class="keyboard-display" id="keyboard-display" style="margin-top:32px;">
-        <div class="keyboard-title">
-          <span>Keystroke Heatmap <span style="color:var(--text-4);font-size:11px;font-weight:400;">(this session)</span></span>
-          <div class="keyboard-legend">
-            <div class="legend-item"><div class="legend-dot" style="background:var(--bg-elevated);border:1px solid var(--border-2);"></div> Not typed</div>
-            <div class="legend-item"><div class="legend-dot" style="background:rgba(124,111,247,0.4);"></div> Typed</div>
-            <div class="legend-item"><div class="legend-dot" style="background:rgba(255,94,122,0.6);"></div> Errors</div>
+        <!-- Config Bar -->
+        <div class="typing-config" id="typing-config">
+          <!-- Mode Tabs -->
+          <div class="mode-tabs" role="tablist" aria-label="Typing modes">
+            <button class="mode-tab active" data-mode="classic" role="tab" aria-selected="true">
+              Classic
+            </button>
+            <button class="mode-tab" data-mode="dev" role="tab" aria-selected="false">
+              Developer
+            </button>
+            <button class="mode-tab" data-mode="student" role="tab" aria-selected="false">
+              Student
+            </button>
+            <button class="mode-tab" data-mode="personalized" role="tab" aria-selected="false">
+              Targeted (AI)
+            </button>
+            <button class="mode-tab" data-mode="custom" role="tab" aria-selected="false">
+              Custom
+            </button>
+            <button class="mode-tab" data-mode="zen" role="tab" aria-selected="false">
+              Zen
+            </button>
+          </div>
+
+          <!-- Settings -->
+          <div class="typing-settings">
+            <!-- Lang select (dev mode only) -->
+            <select class="lang-select" id="lang-select" aria-label="Programming language" style="display:none;">
+              <option value="python">Python</option>
+              <option value="javascript">JavaScript</option>
+              <option value="typescript">TypeScript</option>
+              <option value="sql">SQL</option>
+              <option value="bash">Bash</option>
+              <option value="json">JSON</option>
+              <option value="html">HTML</option>
+              <option value="css">CSS</option>
+              <option value="markdown">Markdown</option>
+              <option value="yaml">YAML</option>
+            </select>
+            <!-- Timer -->
+            <div class="timer-selector" role="group" aria-label="Session duration">
+              <button class="timer-btn" data-time="30">30s</button>
+              <button class="timer-btn active" data-time="60">60s</button>
+              <button class="timer-btn" data-time="90">90s</button>
+              <button class="timer-btn" data-time="120">120s</button>
+              <button class="timer-btn" data-time="180">3m</button>
+            </div>
+            <!-- Options -->
+            <button class="btn btn-ghost btn-icon btn-sm" id="punctuation-toggle" title="Toggle punctuation"
+              aria-label="Toggle punctuation" aria-pressed="true">
+              <span id="punct-icon">?!</span>
+            </button>
+            <button class="btn btn-ghost btn-icon btn-sm" id="numbers-toggle" title="Toggle numbers"
+              aria-label="Toggle numbers" aria-pressed="false">
+              <span>123</span>
+            </button>
           </div>
         </div>
-        <div id="keyboard-viz"></div>
+
+        <!-- Weak Keys Alert -->
+        <div class="weak-keys-bar" id="weak-keys-bar" style="display:none;">
+          <span class="label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+              style="vertical-align:middle;margin-right:4px;">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+              <line x1="12" y1="9" x2="12" y2="13" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+            Target keys:
+          </span>
+          <div id="weak-keys-chips"></div>
+          <span style="margin-left:auto;font-size:11px;color:var(--text-4);">Telemetry-optimized targets</span>
+        </div>
+
+        <!-- Live Stats -->
+        <div class="typing-stats" id="typing-stats">
+          <div class="typing-stat">
+            <div class="typing-stat-val" id="stat-wpm">0</div>
+            <div class="typing-stat-label">WPM</div>
+          </div>
+          <div style="width:1px;height:60px;background:var(--border-1);"></div>
+          <div class="typing-stat">
+            <div class="typing-stat-val" id="stat-accuracy">100</div>
+            <div class="typing-stat-label">Accuracy %</div>
+          </div>
+          <div style="width:1px;height:60px;background:var(--border-1);"></div>
+
+          <!-- Timer Ring -->
+          <div class="timer-ring-wrapper" aria-live="polite" aria-label="Timer">
+            <svg class="timer-ring-svg" viewBox="0 0 90 90" width="90" height="90" aria-hidden="true">
+              <circle class="timer-ring-bg" cx="45" cy="45" r="38" stroke-width="5" />
+              <circle class="timer-ring-fill" id="timer-ring" cx="45" cy="45" r="38" stroke-width="5"
+                stroke-dasharray="238.76" stroke-dashoffset="0" />
+            </svg>
+            <div class="timer-ring-text" id="timer-display">60</div>
+          </div>
+
+          <div style="width:1px;height:60px;background:var(--border-1);"></div>
+          <div class="typing-stat">
+            <div class="typing-stat-val" id="stat-errors">0</div>
+            <div class="typing-stat-label">Errors</div>
+          </div>
+          <div style="width:1px;height:60px;background:var(--border-1);"></div>
+          <div class="typing-stat">
+            <div class="typing-stat-val" id="stat-streak">0</div>
+            <div class="typing-stat-label">Streak</div>
+          </div>
+        </div>
+
+        <!-- Typing Area -->
+        <div class="typing-area-wrapper">
+          <div class="typing-area" id="typing-area" role="textbox" aria-label="Typing practice area"
+            aria-readonly="false" tabindex="0">
+            <!-- Overlay when not started -->
+            <div class="typing-area-overlay" id="typing-overlay">
+              <div class="typing-area-overlay-icon" style="color:var(--brand-light);margin-bottom:8px;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10" />
+                </svg>
+              </div>
+              <div class="typing-area-overlay-text">Click here or press any key to start</div>
+              <div style="font-size:11px;color:var(--text-4);margin-top:4px;">Timer starts on first keystroke</div>
+            </div>
+            <!-- Text Display -->
+            <div class="typing-text" id="typing-display" aria-live="off"></div>
+            <!-- Hidden input -->
+            <input type="text" id="typing-input" autocomplete="off" autocorrect="off" autocapitalize="off"
+              spellcheck="false" aria-hidden="true" tabindex="-1" />
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="typing-controls">
+          <div class="typing-hint">
+            <kbd>Tab</kbd> + <kbd>Enter</kbd> to restart
+            &nbsp;·&nbsp;
+            <kbd>Esc</kbd> to reset
+            &nbsp;·&nbsp;
+            <kbd>F1</kbd> for focus mode
+          </div>
+          <div class="typing-controls-right">
+            <button class="btn btn-ghost btn-sm" id="restart-btn" aria-label="Restart session">↺ Restart</button>
+            <button class="btn btn-secondary btn-sm" id="new-text-btn" aria-label="Load new text">New Text →</button>
+          </div>
+        </div>
+
+        <!-- Keyboard Heatmap (optional) -->
+        <div class="keyboard-display" id="keyboard-display" style="margin-top:32px;">
+          <div class="keyboard-title">
+            <span>Keystroke Heatmap <span style="color:var(--text-4);font-size:11px;font-weight:400;">(this
+                session)</span></span>
+            <div class="keyboard-legend">
+              <div class="legend-item">
+                <div class="legend-dot" style="background:var(--bg-elevated);border:1px solid var(--border-2);"></div>
+                Not typed
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot" style="background:rgba(124,111,247,0.4);"></div> Typed
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot" style="background:rgba(255,94,122,0.6);"></div> Errors
+              </div>
+            </div>
+          </div>
+          <div id="keyboard-viz"></div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Results Modal -->
+  <div class="modal-overlay hidden" id="results-overlay" role="dialog" aria-modal="true" aria-label="Session results">
+    <div class="modal results-modal">
+      <div style="margin-bottom:8px;">
+        <div class="section-eyebrow" style="justify-content:center;" id="results-eyebrow">Session Complete 🎉</div>
+      </div>
+      <div class="results-wpm" id="results-wpm">0</div>
+      <div style="font-size:14px;color:var(--text-3);margin-bottom:8px;">words per minute</div>
+
+      <!-- Badges Earned -->
+      <div id="results-badges"
+        style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:16px 0;min-height:0;"></div>
+
+      <div class="results-stats-grid">
+        <div class="results-stat">
+          <div class="results-stat-val" id="res-accuracy">0%</div>
+          <div class="results-stat-label">Accuracy</div>
+        </div>
+        <div class="results-stat">
+          <div class="results-stat-val" id="res-errors">0</div>
+          <div class="results-stat-label">Errors</div>
+        </div>
+        <div class="results-stat">
+          <div class="results-stat-val" id="res-chars">0</div>
+          <div class="results-stat-label">Characters</div>
+        </div>
+        <div class="results-stat">
+          <div class="results-stat-val" id="res-consistency">0%</div>
+          <div class="results-stat-label">Consistency</div>
+        </div>
       </div>
 
-    </div>
-  </main>
-</div>
-
-<!-- Results Modal -->
-<div class="modal-overlay hidden" id="results-overlay" role="dialog" aria-modal="true" aria-label="Session results">
-  <div class="modal results-modal">
-    <div style="margin-bottom:8px;">
-      <div class="section-eyebrow" style="justify-content:center;" id="results-eyebrow">Session Complete 🎉</div>
-    </div>
-    <div class="results-wpm" id="results-wpm">0</div>
-    <div style="font-size:14px;color:var(--text-3);margin-bottom:8px;">words per minute</div>
-
-    <!-- Badges Earned -->
-    <div id="results-badges" style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:16px 0;min-height:0;"></div>
-
-    <div class="results-stats-grid">
-      <div class="results-stat">
-        <div class="results-stat-val" id="res-accuracy">0%</div>
-        <div class="results-stat-label">Accuracy</div>
+      <!-- WPM Breakdown bars -->
+      <div class="results-breakdown" id="results-breakdown">
+        <div
+          style="font-size:12px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">
+          Performance Breakdown</div>
+        <div class="results-bar-item">
+          <div class="results-bar-key">Speed</div>
+          <div class="results-bar-track">
+            <div class="results-bar-fill" id="rb-speed" style="background:var(--brand-light)"></div>
+          </div>
+          <div class="results-bar-val" id="rb-speed-val"></div>
+        </div>
+        <div class="results-bar-item">
+          <div class="results-bar-key">Accuracy</div>
+          <div class="results-bar-track">
+            <div class="results-bar-fill" id="rb-accuracy" style="background:var(--mint)"></div>
+          </div>
+          <div class="results-bar-val" id="rb-accuracy-val"></div>
+        </div>
+        <div class="results-bar-item">
+          <div class="results-bar-key">Consistency</div>
+          <div class="results-bar-track">
+            <div class="results-bar-fill" id="rb-consistency" style="background:var(--gold)"></div>
+          </div>
+          <div class="results-bar-val" id="rb-consistency-val"></div>
+        </div>
       </div>
-      <div class="results-stat">
-        <div class="results-stat-val" id="res-errors">0</div>
-        <div class="results-stat-label">Errors</div>
-      </div>
-      <div class="results-stat">
-        <div class="results-stat-val" id="res-chars">0</div>
-        <div class="results-stat-label">Characters</div>
-      </div>
-      <div class="results-stat">
-        <div class="results-stat-val" id="res-consistency">0%</div>
-        <div class="results-stat-label">Consistency</div>
-      </div>
-    </div>
 
-    <!-- WPM Breakdown bars -->
-    <div class="results-breakdown" id="results-breakdown">
-      <div style="font-size:12px;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Performance Breakdown</div>
-      <div class="results-bar-item">
-        <div class="results-bar-key">Speed</div>
-        <div class="results-bar-track"><div class="results-bar-fill" id="rb-speed" style="background:var(--brand-light)"></div></div>
-        <div class="results-bar-val" id="rb-speed-val"></div>
+      <!-- XP Earned -->
+      <div
+        style="display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 20px;background:var(--gold-glow);border:1px solid rgba(255,214,102,0.25);border-radius:999px;margin:16px 0;"
+        id="results-xp-row">
+        <span style="font-size:1.5rem;">⭐</span>
+        <span style="font-family:var(--font-display);font-size:1.4rem;font-weight:800;color:var(--gold);"
+          id="results-xp">+0 XP</span>
+        <span style="font-size:13px;color:var(--text-3);">earned this session</span>
       </div>
-      <div class="results-bar-item">
-        <div class="results-bar-key">Accuracy</div>
-        <div class="results-bar-track"><div class="results-bar-fill" id="rb-accuracy" style="background:var(--mint)"></div></div>
-        <div class="results-bar-val" id="rb-accuracy-val"></div>
+
+      <!-- AI Insight -->
+      <div
+        style="padding:12px 16px;background:var(--brand-glow-sm);border:1px solid rgba(124,111,247,0.2);border-radius:12px;margin-bottom:20px;font-size:13px;color:var(--text-2);text-align:left;"
+        id="ai-insight">
+        <span style="color:var(--brand-light);font-weight:600;">🧠 AI Insight: </span>
+        <span id="ai-insight-text">Analyzing your session…</span>
       </div>
-      <div class="results-bar-item">
-        <div class="results-bar-key">Consistency</div>
-        <div class="results-bar-track"><div class="results-bar-fill" id="rb-consistency" style="background:var(--gold)"></div></div>
-        <div class="results-bar-val" id="rb-consistency-val"></div>
+
+      <div style="display:flex;gap:12px;">
+        <button class="btn btn-secondary btn-wide" id="results-again-btn">↺ Again</button>
+        <button class="btn btn-gradient btn-wide" id="results-next-btn">Next →</button>
       </div>
-    </div>
-
-    <!-- XP Earned -->
-    <div style="display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 20px;background:var(--gold-glow);border:1px solid rgba(255,214,102,0.25);border-radius:999px;margin:16px 0;" id="results-xp-row">
-      <span style="font-size:1.5rem;">⭐</span>
-      <span style="font-family:var(--font-display);font-size:1.4rem;font-weight:800;color:var(--gold);" id="results-xp">+0 XP</span>
-      <span style="font-size:13px;color:var(--text-3);">earned this session</span>
-    </div>
-
-    <!-- AI Insight -->
-    <div style="padding:12px 16px;background:var(--brand-glow-sm);border:1px solid rgba(124,111,247,0.2);border-radius:12px;margin-bottom:20px;font-size:13px;color:var(--text-2);text-align:left;" id="ai-insight">
-      <span style="color:var(--brand-light);font-weight:600;">🧠 AI Insight: </span>
-      <span id="ai-insight-text">Analyzing your session…</span>
-    </div>
-
-    <div style="display:flex;gap:12px;">
-      <button class="btn btn-secondary btn-wide" id="results-again-btn">↺ Again</button>
-      <button class="btn btn-gradient btn-wide" id="results-next-btn">Next →</button>
-    </div>
-    <div style="margin-top:12px;text-align:center;">
-      <a href="dashboard.html" style="font-size:12px;color:var(--text-4);">View full analysis →</a>
+      <div style="margin-top:12px;text-align:center;">
+        <a href="dashboard.html" style="font-size:12px;color:var(--text-4);">View full analysis →</a>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Custom Text Modal -->
-<div class="modal-overlay hidden" id="custom-modal" role="dialog" aria-modal="true" aria-label="Custom text input">
-  <div class="modal">
-    <button class="modal-close" id="custom-modal-close" aria-label="Close">✕</button>
-    <h3 style="margin-bottom:8px;">Custom Text</h3>
-    <p style="font-size:13px;color:var(--text-3);margin-bottom:16px;">Paste any text you want to practice with. Max 500 characters recommended.</p>
-    <textarea class="textarea" id="custom-text-input" rows="6" placeholder="Paste your text here…" style="min-height:120px;font-family:var(--font-mono);font-size:14px;"></textarea>
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;font-size:12px;color:var(--text-4);">
-      <span id="custom-char-count">0 characters</span>
-      <span>Suggested: 200–500 chars</span>
-    </div>
-    <button class="btn btn-primary btn-wide" style="margin-top:16px;" id="custom-submit-btn">Use This Text</button>
-  </div>
-</div>
-
-<!-- Desktop Only Modal (Phones Blocked Completely) -->
-<div class="modal-overlay hidden" id="desktop-only-modal" role="dialog" aria-modal="true" aria-label="Desktop required">
-  <div class="modal text-center" style="max-width:460px; border-color:var(--border-2);">
-    <svg class="animate-pulse" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto var(--sp-4); color: var(--text-3);"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-    <h3 style="margin-bottom:var(--sp-4); font-size:1.5rem; font-family:var(--font-display); font-weight:700; color:var(--text-1);">
-      Physical Keyboard Required
-    </h3>
-    <p style="font-size:14px; color:var(--text-2); line-height:var(--leading-loose); margin-bottom:var(--sp-6); text-align:left;">
-      TypeForge AI is optimized for laptops and desktop computers.<br><br>
-      The platform analyzes typing patterns, key transitions, rhythm, and consistency. These insights require a physical keyboard for accurate results.<br><br>
-      Connect with the creator on LinkedIn or leave your feedback below:
-    </p>
-    <div style="display:flex; flex-direction:column; gap:12px; justify-content:center;">
-      <a href="https://www.linkedin.com/in/mohit-assudani-" target="_blank" class="btn btn-primary" style="width:100%; display:inline-flex; align-items:center; justify-content:center; text-decoration:none; padding:12px 16px; font-weight:700;">LinkedIn Profile</a>
-      <a href="../feedback.html" class="btn btn-secondary" style="width:100%; display:inline-flex; align-items:center; justify-content:center; text-decoration:none; padding:12px 16px; font-weight:700;">Leave Feedback</a>
+  <!-- Custom Text Modal -->
+  <div class="modal-overlay hidden" id="custom-modal" role="dialog" aria-modal="true" aria-label="Custom text input">
+    <div class="modal">
+      <button class="modal-close" id="custom-modal-close" aria-label="Close">✕</button>
+      <h3 style="margin-bottom:8px;">Custom Text</h3>
+      <p style="font-size:13px;color:var(--text-3);margin-bottom:16px;">Paste any text you want to practice with. Max
+        500 characters recommended.</p>
+      <textarea class="textarea" id="custom-text-input" rows="6" placeholder="Paste your text here…"
+        style="min-height:120px;font-family:var(--font-mono);font-size:14px;"></textarea>
+      <div
+        style="display:flex;align-items:center;justify-content:space-between;margin-top:8px;font-size:12px;color:var(--text-4);">
+        <span id="custom-char-count">0 characters</span>
+        <span>Suggested: 200–500 chars</span>
+      </div>
+      <button class="btn btn-primary btn-wide" style="margin-top:16px;" id="custom-submit-btn">Use This Text</button>
     </div>
   </div>
-</div>
 
-<!-- Tablet Warning Modal -->
-<div class="modal-overlay hidden" id="tablet-warning-modal" role="dialog" aria-modal="true" aria-label="Keyboard warning">
-  <div class="modal text-center" style="max-width:480px; border-color:var(--border-2);">
-    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto var(--sp-4); color: var(--text-3);"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
-    <h3 style="margin-bottom:var(--sp-4); font-size:1.5rem; font-family:var(--font-display); font-weight:700; color:var(--text-1);">
-      Optimized for Physical Keyboards
-    </h3>
-    <p style="font-size:14px; color:var(--text-2); line-height:var(--leading-loose); margin-bottom:var(--sp-6); text-align:left;">
-      TypeForge AI was designed around physical keyboard telemetry.<br><br>
-      Using a laptop or desktop provides significantly more accurate insights, better muscle memory development, and a more effective learning experience.
-    </p>
-    <div style="display:flex; flex-direction:column; gap:12px;">
-      <button class="btn btn-primary" id="tablet-continue-btn" style="width:100%; padding:12px 16px; font-weight:700;">I'm using a physical keyboard</button>
-      <div style="display:flex; gap:12px; margin-top:4px; width:100%;">
-        <a href="https://www.linkedin.com/in/mohit-assudani-" target="_blank" class="btn btn-secondary" style="flex:1; display:inline-flex; align-items:center; justify-content:center; text-decoration:none; font-size:12px; padding:10px 8px; font-weight:700;">LinkedIn Profile</a>
-        <a href="../feedback.html" class="btn btn-secondary" style="flex:1; display:inline-flex; align-items:center; justify-content:center; text-decoration:none; font-size:12px; padding:10px 8px; font-weight:700;">Leave Feedback</a>
+  <!-- Desktop Only Modal (Phones Blocked Completely) -->
+  <div class="modal-overlay hidden" id="desktop-only-modal" role="dialog" aria-modal="true"
+    aria-label="Desktop required">
+    <div class="modal text-center" style="max-width:460px; border-color:var(--border-2);">
+      <svg class="animate-pulse" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+        style="margin: 0 auto var(--sp-4); color: var(--text-3);">
+        <rect x="5" y="2" width="14" height="20" rx="2" ry="2" />
+        <line x1="12" y1="18" x2="12.01" y2="18" />
+      </svg>
+      <h3
+        style="margin-bottom:var(--sp-4); font-size:1.5rem; font-family:var(--font-display); font-weight:700; color:var(--text-1);">
+        Physical Keyboard Required
+      </h3>
+      <p
+        style="font-size:14px; color:var(--text-2); line-height:var(--leading-loose); margin-bottom:var(--sp-6); text-align:left;">
+        TypeForge AI is optimized for laptops and desktop computers.<br><br>
+        The platform analyzes typing patterns, key transitions, rhythm, and consistency. These insights require a
+        physical keyboard for accurate results.<br><br>
+        Connect with the creator on LinkedIn or leave your feedback below:
+      </p>
+      <div style="display:flex; flex-direction:column; gap:12px; justify-content:center;">
+        <a href="https://www.linkedin.com/in/mohit-assudani-" target="_blank" class="btn btn-primary"
+          style="width:100%; display:inline-flex; align-items:center; justify-content:center; text-decoration:none; padding:12px 16px; font-weight:700;">LinkedIn
+          Profile</a>
+        <a href="../feedback.html" class="btn btn-secondary"
+          style="width:100%; display:inline-flex; align-items:center; justify-content:center; text-decoration:none; padding:12px 16px; font-weight:700;">Leave
+          Feedback</a>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Keyboard Required Modal -->
-<div class="modal-overlay hidden" id="keyboard-required-modal" role="dialog" aria-modal="true" aria-label="Keyboard verification required">
-  <div class="modal text-center" style="max-width:440px;">
-    <svg class="animate-pulse" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto var(--sp-4); color: var(--text-3);"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
-    <h3 style="margin-bottom:var(--sp-4); font-size:1.4rem; font-family:var(--font-display); font-weight:700; color:var(--text-1);">
-      Keyboard Verification Required
-    </h3>
-    <p style="font-size:14px; color:var(--text-2); line-height:var(--leading-loose); margin-bottom:var(--sp-6);">
-      Please press any key on your physical keyboard to start the typing session.
-    </p>
-    <div style="padding:12px; background:var(--bg-card); border:1px solid var(--border-2); border-radius:var(--r-md); margin-bottom:var(--sp-6); font-family:var(--font-mono); font-size:12px; color:var(--brand-light);">
-      Waiting for physical keypress...
+  <!-- Tablet Warning Modal -->
+  <div class="modal-overlay hidden" id="tablet-warning-modal" role="dialog" aria-modal="true"
+    aria-label="Keyboard warning">
+    <div class="modal text-center" style="max-width:480px; border-color:var(--border-2);">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+        stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto var(--sp-4); color: var(--text-3);">
+        <rect x="2" y="4" width="20" height="16" rx="2" />
+        <path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10" />
+      </svg>
+      <h3
+        style="margin-bottom:var(--sp-4); font-size:1.5rem; font-family:var(--font-display); font-weight:700; color:var(--text-1);">
+        Optimized for Physical Keyboards
+      </h3>
+      <p
+        style="font-size:14px; color:var(--text-2); line-height:var(--leading-loose); margin-bottom:var(--sp-6); text-align:left;">
+        TypeForge AI was designed around physical keyboard telemetry.<br><br>
+        Using a laptop or desktop provides significantly more accurate insights, better muscle memory development, and a
+        more effective learning experience.
+      </p>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        <button class="btn btn-primary" id="tablet-continue-btn"
+          style="width:100%; padding:12px 16px; font-weight:700;">I'm using a physical keyboard</button>
+        <div style="display:flex; gap:12px; margin-top:4px; width:100%;">
+          <a href="https://www.linkedin.com/in/mohit-assudani-" target="_blank" class="btn btn-secondary"
+            style="flex:1; display:inline-flex; align-items:center; justify-content:center; text-decoration:none; font-size:12px; padding:10px 8px; font-weight:700;">LinkedIn
+            Profile</a>
+          <a href="../feedback.html" class="btn btn-secondary"
+            style="flex:1; display:inline-flex; align-items:center; justify-content:center; text-decoration:none; font-size:12px; padding:10px 8px; font-weight:700;">Leave
+            Feedback</a>
+        </div>
+      </div>
     </div>
-    <button class="btn btn-outline btn-wide" id="keyboard-required-cancel-btn">Cancel</button>
   </div>
-</div>
+
+  <!-- Keyboard Required Modal -->
+  <div class="modal-overlay hidden" id="keyboard-required-modal" role="dialog" aria-modal="true"
+    aria-label="Keyboard verification required">
+    <div class="modal text-center" style="max-width:440px;">
+      <svg class="animate-pulse" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+        style="margin: 0 auto var(--sp-4); color: var(--text-3);">
+        <rect x="2" y="4" width="20" height="16" rx="2" />
+        <path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10" />
+      </svg>
+      <h3
+        style="margin-bottom:var(--sp-4); font-size:1.4rem; font-family:var(--font-display); font-weight:700; color:var(--text-1);">
+        Keyboard Verification Required
+      </h3>
+      <p style="font-size:14px; color:var(--text-2); line-height:var(--leading-loose); margin-bottom:var(--sp-6);">
+        Please press any key on your physical keyboard to start the typing session.
+      </p>
+      <div
+        style="padding:12px; background:var(--bg-card); border:1px solid var(--border-2); border-radius:var(--r-md); margin-bottom:var(--sp-6); font-family:var(--font-mono); font-size:12px; color:var(--brand-light);">
+        Waiting for physical keypress...
+      </div>
+      <button class="btn btn-outline btn-wide" id="keyboard-required-cancel-btn">Cancel</button>
+    </div>
+  </div>
 
 
-<script type="module">
-import Auth from '../js/clerk.js?v=3';
-import API from '../js/api.js';
-import { initAccessibility } from '../js/accessibility.js';
-import { showToast } from '../js/common.js';
-import { startTourIfNew } from '../js/tour.js';
+  <script type="module">
+    import Auth from '../js/clerk.js?v=3';
+    import API from '../js/api.js';
+    import { initAccessibility } from '../js/accessibility.js';
+    import { showToast } from '../js/common.js';
+    import { startTourIfNew } from '../js/tour.js';
 
-// ── DEVICE & PHYSICAL KEYBOARD DETECTION ─────────────────────────────────────
-const userAgent = navigator.userAgent;
-const isIPad = (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) || /iPad/i.test(userAgent);
-const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
-const isTablet = isIPad || (/Android/i.test(userAgent) && !/Mobile/i.test(userAgent));
-const isPhone = isMobileDevice && !isTablet;
-const hasTouch = navigator.maxTouchPoints > 0 || 'ontouchstart' in window;
+    // ── DEVICE & PHYSICAL KEYBOARD DETECTION ─────────────────────────────────────
+    const userAgent = navigator.userAgent;
+    const isIPad = (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) || /iPad/i.test(userAgent);
+    const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+    const isTablet = isIPad || (/Android/i.test(userAgent) && !/Mobile/i.test(userAgent));
+    const isPhone = isMobileDevice && !isTablet;
+    const hasTouch = navigator.maxTouchPoints > 0 || 'ontouchstart' in window;
 
-let physicalKeyboardDetected = false;
-// On standard desktop without touch, we can assume physical keyboard is present
-if (!hasTouch && !isMobileDevice) {
-  physicalKeyboardDetected = true;
-}
+    let physicalKeyboardDetected = false;
+    // On standard desktop without touch, we can assume physical keyboard is present
+    if (!hasTouch && !isMobileDevice) {
+      physicalKeyboardDetected = true;
+    }
 
-// Global listener to detect physical keypresses
-window.addEventListener("keydown", (e) => {
-  // Check that it's a standard key and not a virtual keyboard process event (229)
-  if (e.keyCode !== 229 && e.key !== 'Process' && e.key !== 'Unidentified') {
-    physicalKeyboardDetected = true;
-    
-    // If the keyboard required modal is currently open, close it and start session!
-    const reqModal = document.getElementById('keyboard-required-modal');
-    if (reqModal && !reqModal.classList.contains('hidden')) {
-      reqModal.classList.add('hidden');
+    // Global listener to detect physical keypresses
+    window.addEventListener("keydown", (e) => {
+      // Check that it's a standard key and not a virtual keyboard process event (229)
+      if (e.keyCode !== 229 && e.key !== 'Process' && e.key !== 'Unidentified') {
+        physicalKeyboardDetected = true;
+
+        // If the keyboard required modal is currently open, close it and start session!
+        const reqModal = document.getElementById('keyboard-required-modal');
+        if (reqModal && !reqModal.classList.contains('hidden')) {
+          reqModal.classList.add('hidden');
+          document.body.style.overflow = '';
+          startSession();
+        }
+      }
+    }, { capture: true });
+
+    function checkKeyboardAccess() {
+      if (isPhone) {
+        showDesktopOnlyModal();
+        return false;
+      }
+
+      if (isTablet || window.innerWidth < 1024) {
+        const acknowledged = localStorage.getItem('tf_keyboard_acknowledged') === 'true';
+        if (!acknowledged) {
+          showTabletWarningModal();
+          return false;
+        }
+      }
+
+      if (!physicalKeyboardDetected) {
+        showKeyboardRequiredModal();
+        return false;
+      }
+
+      return true;
+    }
+
+    function showDesktopOnlyModal() {
+      const modal = document.getElementById('desktop-only-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function showTabletWarningModal() {
+      const modal = document.getElementById('tablet-warning-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    function showKeyboardRequiredModal() {
+      const modal = document.getElementById('keyboard-required-modal');
+      if (modal) {
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      }
+    }
+
+    const acknowledgeTablet = () => {
+      localStorage.setItem('tf_keyboard_acknowledged', 'true');
+      const modal = document.getElementById('tablet-warning-modal');
+      if (modal) modal.classList.add('hidden');
       document.body.style.overflow = '';
-      startSession();
-    }
-  }
-}, { capture: true });
+      // Focus the input to let the user type and start
+      const typingInput = document.getElementById('typing-input');
+      if (typingInput) typingInput.focus();
+    };
 
-function checkKeyboardAccess() {
-  if (isPhone) {
-    showDesktopOnlyModal();
-    return false;
-  }
+    const cancelKeyboardRequired = () => {
+      const modal = document.getElementById('keyboard-required-modal');
+      if (modal) modal.classList.add('hidden');
+      document.body.style.overflow = '';
+      // Clear the input value to prevent virtual keyboard letter entries
+      const typingInput = document.getElementById('typing-input');
+      if (typingInput) typingInput.value = '';
+    };
 
-  if (isTablet || window.innerWidth < 1024) {
-    const acknowledged = localStorage.getItem('tf_keyboard_acknowledged') === 'true';
-    if (!acknowledged) {
-      showTabletWarningModal();
-      return false;
-    }
-  }
+    // Bind action buttons on DOM ready or immediate check
+    const initDeviceCheck = () => {
+      document.getElementById('tablet-continue-btn')?.addEventListener('click', acknowledgeTablet);
+      document.getElementById('keyboard-required-cancel-btn')?.addEventListener('click', cancelKeyboardRequired);
 
-  if (!physicalKeyboardDetected) {
-    showKeyboardRequiredModal();
-    return false;
-  }
-
-  return true;
-}
-
-function showDesktopOnlyModal() {
-  const modal = document.getElementById('desktop-only-modal');
-  if (modal) {
-    modal.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-  }
-}
-
-function showTabletWarningModal() {
-  const modal = document.getElementById('tablet-warning-modal');
-  if (modal) {
-    modal.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-  }
-}
-
-function showKeyboardRequiredModal() {
-  const modal = document.getElementById('keyboard-required-modal');
-  if (modal) {
-    modal.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-  }
-}
-
-const acknowledgeTablet = () => {
-  localStorage.setItem('tf_keyboard_acknowledged', 'true');
-  const modal = document.getElementById('tablet-warning-modal');
-  if (modal) modal.classList.add('hidden');
-  document.body.style.overflow = '';
-  // Focus the input to let the user type and start
-  const typingInput = document.getElementById('typing-input');
-  if (typingInput) typingInput.focus();
-};
-
-const cancelKeyboardRequired = () => {
-  const modal = document.getElementById('keyboard-required-modal');
-  if (modal) modal.classList.add('hidden');
-  document.body.style.overflow = '';
-  // Clear the input value to prevent virtual keyboard letter entries
-  const typingInput = document.getElementById('typing-input');
-  if (typingInput) typingInput.value = '';
-};
-
-// Bind action buttons on DOM ready or immediate check
-const initDeviceCheck = () => {
-  document.getElementById('tablet-continue-btn')?.addEventListener('click', acknowledgeTablet);
-  document.getElementById('keyboard-required-cancel-btn')?.addEventListener('click', cancelKeyboardRequired);
-
-  if (isPhone) {
-    showDesktopOnlyModal();
-  } else if ((isTablet || window.innerWidth < 1024) && localStorage.getItem('tf_keyboard_acknowledged') !== 'true') {
-    showTabletWarningModal();
-  }
-};
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initDeviceCheck);
-} else {
-  initDeviceCheck();
-}
-
-
-// Init auth to protect page
-(async () => {
-  let user;
-  try {
-    user = await Auth.init();
-    if (user) {
-      document.documentElement.style.visibility = '';
-    } else if (window.location.hostname !== 'localhost') {
-      window.location.replace('/login');
-      return;
-    }
-  } catch (err) {
-    console.error("TF Auth: Failed to initialize Auth in typing page:", err);
-    if (window.location.hostname !== 'localhost') {
-      window.location.replace('/login');
-      return;
-    }
-  }
-
-  try {
-    try {
-      const profile = await API.getUserProfile();
-      if (profile) {
-        state.xp = profile.xp || 0;
-        state.level = profile.level || 1;
-        state.sessionCount = profile.total_sessions || 0;
-        updateXPBar();
-        loadWeakKeys(profile.weak_keys);
+      if (isPhone) {
+        showDesktopOnlyModal();
+      } else if ((isTablet || window.innerWidth < 1024) && localStorage.getItem('tf_keyboard_acknowledged') !== 'true') {
+        showTabletWarningModal();
       }
-    } catch (apiErr) {
-      console.warn("TF: Failed to load profile in typing page, using offline defaults:", apiErr);
-      const { showToast } = await import('../js/common.js');
-      showToast({
-        title: "Connection Issue",
-        desc: "Could not sync stats with the server, but you can still type!",
-        type: "warning",
-        duration: 5000
-      });
-    }
-  } catch (err) {
-    console.error('Critical failure in typing page initialization:', err);
-    const errMsg = err?.message || '';
-    const isNetworkError = errMsg.includes('Network Error') || errMsg.includes('timeout') || errMsg.includes('HTTP 5') || errMsg.includes('Failed to fetch') || errMsg.includes('Database') || errMsg.includes('503') || errMsg.includes('500') || errMsg.includes('Internal Server Error');
-    if (!isNetworkError && typeof Auth !== 'undefined' && Auth.triggerEmergencyLogout) {
-      Auth.triggerEmergencyLogout("Failed to initialize training session.");
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initDeviceCheck);
     } else {
-      console.warn("TF: Typing page initialized in offline mode due to connection issue.");
+      initDeviceCheck();
     }
-  }
-  // Start guided tour on first visit (shows once, stored in localStorage)
-  startTourIfNew();
-})();
 
-// Init accessibility
-initAccessibility();
 
-// ═══════════════════════════════════════════════════════
-// TYPING SOUND ENGINE (Web Audio API — no files needed)
-// ═══════════════════════════════════════════════════════
-let audioCtx = null;
-let soundEnabled = localStorage.getItem('tf_sound') !== 'off'; // default: on
-
-function getAudioCtx() {
-  if (!audioCtx) {
-    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-  }
-  // Resume if suspended (browser policy)
-  if (audioCtx.state === 'suspended') audioCtx.resume();
-  return audioCtx;
-}
-
-function playKeyClick(isError = false) {
-  if (!soundEnabled) return;
-  try {
-    const ctx = getAudioCtx();
-    const now = ctx.currentTime;
-
-    // Oscillator for the key thump
-    const osc = ctx.createOscillator();
-    const gainNode = ctx.createGain();
-    const filter = ctx.createBiquadFilter();
-
-    filter.type = 'bandpass';
-    filter.frequency.value = isError ? 220 : 800;
-    filter.Q.value = 0.8;
-
-    osc.type = 'square';
-    osc.frequency.setValueAtTime(isError ? 180 : 600, now);
-    osc.frequency.exponentialRampToValueAtTime(isError ? 100 : 200, now + 0.06);
-
-    gainNode.gain.setValueAtTime(isError ? 0.18 : 0.12, now);
-    gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.07);
-
-    osc.connect(filter);
-    filter.connect(gainNode);
-    gainNode.connect(ctx.destination);
-
-    osc.start(now);
-    osc.stop(now + 0.08);
-  } catch (e) { /* audio not supported */ }
-}
-
-function playSessionEnd() {
-  if (!soundEnabled) return;
-  try {
-    const ctx = getAudioCtx();
-    const now = ctx.currentTime;
-    [0, 0.1, 0.2, 0.35].forEach((delay, i) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      const freqs = [523, 659, 784, 1047]; // C5 E5 G5 C6
-      osc.type = 'sine';
-      osc.frequency.value = freqs[i];
-      gain.gain.setValueAtTime(0.15, now + delay);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + delay + 0.3);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(now + delay);
-      osc.stop(now + delay + 0.35);
-    });
-  } catch (e) {}
-}
-
-// Sound toggle button (injected into header actions)
-(function() {
-  const actionsEl = document.querySelector('.app-header-actions');
-  if (!actionsEl) return;
-  const btn = document.createElement('button');
-  btn.id = 'sound-toggle-btn';
-  btn.className = 'btn btn-ghost btn-icon btn-sm';
-  btn.setAttribute('aria-label', 'Toggle typing sounds');
-  btn.title = soundEnabled ? 'Sounds On' : 'Sounds Off';
-  btn.textContent = soundEnabled ? '🔊' : '🔇';
-  btn.style.cssText = 'font-size:16px;min-width:36px;';
-  btn.addEventListener('click', () => {
-    soundEnabled = !soundEnabled;
-    localStorage.setItem('tf_sound', soundEnabled ? 'on' : 'off');
-    btn.textContent = soundEnabled ? '🔊' : '🔇';
-    btn.title = soundEnabled ? 'Sounds On' : 'Sounds Off';
-    // Resume AudioContext on first user gesture
-    if (soundEnabled) getAudioCtx();
-  });
-  // Insert before focus-mode-btn
-  const focusBtn = document.getElementById('focus-mode-btn');
-  actionsEl.insertBefore(btn, focusBtn);
-})();
-
-// ═══════════════════════════════════════════════════════
-// TEXT POOLS
-// ═══════════════════════════════════════════════════════
-const TEXT_POOLS = {
-  classic: [
-    "the quick brown fox jumps over the lazy dog and the cat sat on the mat watching the birds fly across the bright blue sky",
-    "typing is a skill that improves with deliberate practice and consistent effort over time and every session brings you closer to your goal",
-    "the best way to learn something new is to practice it every day with full attention and to track your progress carefully",
-    "software engineers spend a large portion of their day typing code emails and messages making typing speed and accuracy incredibly valuable",
-    "consistency is the key to mastery whether you are learning to type play an instrument or build a startup the principle remains the same",
-    "the brain is remarkably adaptive and with the right training it can build the neural pathways needed for fast accurate typing",
-    "great typists do not think about where the keys are they simply think about what they want to say and their fingers follow automatically",
-    "every master was once a beginner and every expert was once a novice the journey of a thousand miles begins with a single keystroke",
-    "artificial intelligence is transforming how we work learn and communicate and the ability to type quickly becomes ever more important",
-    "the difference between ordinary and extraordinary is that little extra and in typing that extra comes from thousands of focused repetitions",
-    "wisdom is not a product of schooling but of the lifelong attempt to acquire it and apply it to make the world a slightly better place for everyone",
-    "the only way to do great work is to love what you do if you have not found it yet keep looking and do not settle for anything less",
-    "success is not final failure is not fatal it is the courage to continue that counts and the willingness to learn from every setback",
-    "it is during our darkest moments that we must focus to see the light and find the inner strength to overcome the challenges in front of us",
-    "do not go where the path may lead go instead where there is no path and leave a trail for others to follow on their own journeys",
-    "be yourself everyone else is already taken and trying to live someone else's life is a waste of the unique person you are meant to be",
-    "you must be the change you wish to see in the world starting with small daily actions that align with your deepest values and beliefs",
-    "life is what happens when you are busy making other plans and finding the balance between future goals and present moments is the ultimate challenge",
-    "spread love everywhere you go let no one ever come to you without leaving happier and carrying a small spark of warmth in their heart",
-    "the future belongs to those who believe in the beauty of their dreams and have the courage to take the first steps toward making them real",
-    "tell me and i forget teach me and i may remember involve me and i learn because true understanding comes from active participation and practice",
-    "learn from yesterday live for today hope for tomorrow the important thing is not to stop questioning and to maintain a sense of wonder",
-    "the only limit to our realization of tomorrow will be our doubts of today so let us move forward with strong and active faith in our potential",
-    "what you get by achieving your goals is not as important as what you become by achieving your goals and the character you build along the way",
-    "we are what we repeatedly do excellence then is not an act but a habit that is cultivated through daily discipline and focused repetition"
-  ],
-  student: [
-    "photosynthesis is the process by which plants use sunlight water and carbon dioxide to produce oxygen and energy in the form of glucose",
-    "the mitochondria is the powerhouse of the cell and it generates most of the chemical energy needed to power the biochemical reactions of a cell",
-    "democracy is a system of government by the whole population or all the eligible members of a state typically through elected representatives",
-    "the french revolution began in seventeen eighty nine and fundamentally transformed french society by abolishing the feudal system and the monarchy",
-    "gravity is the force of attraction between any two objects with mass and it was first mathematically described by isaac newton in sixteen eighty seven",
-    "the scientific method is an empirical method of acquiring knowledge that has characterized the development of science since at least the seventeenth century",
-    "global warming is the long term heating of earths climate system observed since the pre industrial period due to human activities",
-    "the universal declaration of human rights is a historic document that was adopted by the united nations general assembly in nineteen forty eight",
-    "economics is the social science that studies the production distribution and consumption of goods and services in an economy",
-    "calculus is the mathematical study of continuous change in the same way that geometry is the study of shape and algebra is the study of operations",
-    "the industrial revolution was the transition to new manufacturing processes in Great Britain continental Europe and the United States",
-    "quantum mechanics is a fundamental theory in physics that provides a description of the physical properties of nature at the atomic scale",
-    "cell division is the process by which a parent cell divides into two or more daughter cells reproducing genetic material",
-    "a neural network is a network or circuit of biological neurons or in a modern sense an artificial neural network composed of nodes",
-    "the theory of relativity usually encompasses two interrelated theories by Albert Einstein special relativity and general relativity"
-  ],
-  dev: {
-    python: [
-      "def fibonacci(n): return n if n <= 1 else fibonacci(n-1) + fibonacci(n-2)",
-      "class DataProcessor: def __init__(self, data): self.data = data; self.results = []",
-      "import pandas as pd; df = pd.read_csv('data.csv'); df.dropna(inplace=True); print(df.head())",
-      "with open('config.json', 'r') as f: config = json.load(f); return config.get('api_key', '')",
-      "model = XGBClassifier(n_estimators=100, max_depth=6, learning_rate=0.1); model.fit(X_train, y_train)",
-      "sorted_data = sorted(raw_data, key=lambda x: x.get('score', 0), reverse=True)",
-      "import asyncio; async def main(): tasks = [fetch_url(url) for url in urls]; return await asyncio.gather(*tasks)",
-      "try: response = requests.get(url, timeout=5); response.raise_for_status() except requests.RequestException as e: log.error(e)",
-      "class CustomDataset(Dataset): def __init__(self, x, y): self.x = x; self.y = y; def __len__(self): return len(self.x)",
-      "decorators allow you to wrap another function in order to extend the behavior of the wrapped function without permanently modifying it"
-    ],
-    javascript: [
-      "const fetchUser = async (id) => { const res = await fetch(`/api/users/${id}`); return res.json(); };",
-      "const debounce = (fn, ms) => { let timer; return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), ms); }; };",
-      "document.querySelectorAll('.btn').forEach(btn => btn.addEventListener('click', (e) => e.target.classList.toggle('active')));",
-      "const { data, error } = await supabase.from('sessions').select('*').order('created_at', { ascending: false }).limit(10);",
-      "const memoize = (fn) => { const cache = new Map(); return (...args) => { const key = JSON.stringify(args); return cache.has(key) ? cache.get(key) : cache.set(key, fn(...args)).get(key); }; };",
-      "const pipeline = (...fns) => (x) => fns.reduce((v, f) => f(v), x);",
-      "const uniqueArray = [...new Set(arr.filter(Boolean))];",
-      "const proxy = new Proxy(target, { get: (obj, prop) => prop in obj ? obj[prop] : 'default' });",
-      "const eventEmitter = { events: {}, on(event, listener) { (this.events[event] || (this.events[event] = [])).push(listener); } };"
-    ],
-    typescript: [
-      "interface TypingSession { id: string; wpm: number; accuracy: number; duration: number; userId: string; createdAt: Date; }",
-      "type Theme = 'dark' | 'light'; const useTheme = (): [Theme, () => void] => { const [theme, setTheme] = useState<Theme>('dark'); return [theme, () => setTheme(t => t === 'dark' ? 'light' : 'dark')]; };",
-      "const analyzeSession = async (session: TypingSession): Promise<Analysis> => { const weakKeys = findWeakKeys(session); return { weakKeys, recommendations: generateRec(weakKeys) }; };",
-      "type DeepPartial<T> = { [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P] };",
-      "export class Singleton { private static instance: Singleton; private constructor() {} static getInstance(): Singleton { return this.instance || (this.instance = new Singleton()); } }",
-      "type Exclude<T, U> = T extends U ? never : T; type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;"
-    ],
-    sql: [
-      "SELECT u.username, AVG(s.wpm) as avg_wpm, COUNT(s.id) as sessions FROM users u JOIN sessions s ON u.id = s.user_id GROUP BY u.id ORDER BY avg_wpm DESC LIMIT 10;",
-      "CREATE TABLE typing_sessions (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), user_id UUID REFERENCES users(id), wpm INTEGER, accuracy DECIMAL(5,2), duration INTEGER, created_at TIMESTAMPTZ DEFAULT NOW());",
-      "WITH ranked_users AS (SELECT user_id, wpm, ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY created_at DESC) as rn FROM sessions) SELECT * FROM ranked_users WHERE rn <= 10;",
-      "SELECT category, SUM(revenue) OVER(PARTITION BY category ORDER BY sale_date) FROM sales_data;",
-      "INSERT INTO audit_log (user_id, action, performed_at) VALUES (CURRENT_USER, 'DELETE_RECORD', NOW());",
-      "UPDATE users SET status = 'inactive' WHERE last_login < NOW() - INTERVAL '90 days' AND status = 'active';"
-    ],
-    bash: [
-      "#!/bin/bash; set -euo pipefail; echo 'Starting deployment...'; docker build -t typeforge:latest . && docker push typeforge:latest",
-      "for file in *.py; do echo \"Processing $file\"; python -m py_compile \"$file\" && echo \"$file OK\" || echo \"$file FAILED\"; done",
-      "git log --oneline --graph --decorate --all | head -20; git status --short; git diff --stat HEAD~1",
-      'find . -name "*.log" -type f -mtime +7 -exec rm -f {} \\;',
-      'curl -s -I "https://api.github.com" | grep -i "status" || echo "API is offline"',
-      'tar -czf backup_$(date +%F).tar.gz /var/www/html/ && echo "Backup completed!"'
-    ]
-  }
-};
-
-// ═══════════════════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════════════════
-const state = {
-  mode: 'classic',
-  lang: 'python',
-  timerDuration: 60,
-  timeLeft: 60,
-  timerInterval: null,
-  started: false,
-  finished: false,
-  usePunctuation: true,
-  useNumbers: false,
-  currentText: '',
-  typedChars: 0,
-  correctChars: 0,
-  errorChars: 0,
-  totalErrors: 0,
-  currentIndex: 0,
-  streak: 0,
-  maxStreak: 0,
-  keystrokeLog: [],  // {char, time, correct, delay}
-  lastKeystrokeTime: 0,
-  startTime: 0,
-  wpmHistory: [],   // WPM samples over time
-  xp: 0,
-  level: 1,
-  keyStats: {},     // {key: {hits, misses, totalDelay}}
-  sessionCount: 0,
-};
-
-// ═══════════════════════════════════════════════════════
-// DYNAMIC PRACTICE WORD DICTIONARY & CACHES
-// ═══════════════════════════════════════════════════════
-const keyElements = new Map();
-let charSpans = [];
-
-const usedTextCache = {
-  classic: [],
-  student: [],
-  dev_python: [],
-  dev_javascript: [],
-  dev_typescript: [],
-  dev_sql: [],
-  dev_bash: []
-};
-
-const COMMON_WORDS = [
-  "the", "name", "of", "to", "and", "a", "in", "is", "it", "you", "that", "he", "was", "for", "on", "are", "as", "with", "his", "they",
-  "i", "at", "be", "this", "have", "from", "or", "one", "had", "by", "word", "but", "not", "what", "all", "were", "we", "when", "your",
-  "can", "said", "there", "use", "an", "each", "which", "she", "do", "how", "their", "if", "will", "up", "other", "about", "out", "many",
-  "then", "them", "these", "so", "some", "her", "would", "make", "like", "him", "into", "time", "has", "look", "two", "more", "write",
-  "go", "see", "number", "no", "way", "could", "people", "my", "than", "first", "water", "been", "call", "who", "oil", "its", "now",
-  "find", "long", "down", "day", "did", "get", "come", "made", "may", "part", "python", "javascript", "code", "programming", "typing",
-  "keyboard", "accuracy", "speed", "rhythm", "practice", "engine", "system", "learning", "adapt", "personalize", "insights", "telemetry",
-  "performance", "efficiency", "focus", "discipline", "consistency", "repetition", "mastery", "beginner", "expert", "progress",
-  "challenge", "feedback", "telemetry", "developer", "student", "classic", "custom", "session", "victory", "champion"
-];
-
-function getWeakKeysForPersonalization(n = 5) {
-  try {
-    const saved = JSON.parse(localStorage.getItem('tf_key_stats') || '{}');
-    const weak = Object.entries(saved)
-      .filter(([k, v]) => (v.misses || 0) > 0 && String(k).trim().length === 1)
-      .sort((a, b) => {
-        const rateA = (a[1].misses || 0) / ((a[1].hits || 0) + (a[1].misses || 0) + 0.01);
-        const rateB = (b[1].misses || 0) / ((b[1].hits || 0) + (b[1].misses || 0) + 0.01);
-        return rateB - rateA;
-      })
-      .slice(0, n)
-      .map(([k]) => k);
-    return weak;
-  } catch (e) {
-    return [];
-  }
-}
-
-function generatePersonalizedText(weakKeys) {
-  if (!weakKeys || weakKeys.length === 0) {
-    return "practice makes perfect focus on accuracy and speed will naturally follow with consistent repetition";
-  }
-
-  // Filter words that contain at least one of the weak keys
-  const targetWords = COMMON_WORDS.filter(word => 
-    weakKeys.some(key => word.toLowerCase().includes(key.toLowerCase()))
-  );
-
-  // Use the target words pool if we have enough, otherwise fall back to common words
-  const pool = targetWords.length >= 8 ? targetWords : COMMON_WORDS;
-
-  // Build a randomized list of 15 words heavily weighted toward words containing the weak keys
-  const sentenceWords = [];
-  const targetLength = 15;
-  for (let i = 0; i < targetLength; i++) {
-    let chosenWord;
-    if (Math.random() < 0.75 && targetWords.length > 0) {
-      chosenWord = targetWords[Math.floor(Math.random() * targetWords.length)];
-    } else {
-      chosenWord = pool[Math.floor(Math.random() * pool.length)];
-    }
-    sentenceWords.push(chosenWord);
-  }
-
-  return sentenceWords.join(' ');
-}
-
-// ═══════════════════════════════════════════════════════
-// TEXT GENERATION
-// ═══════════════════════════════════════════════════════
-function getRandomText() {
-  if (state.mode === 'personalized') {
-    const weakKeys = getWeakKeysForPersonalization(5);
-    return generatePersonalizedText(weakKeys.length > 0 ? weakKeys : ['q', 'z', 'x', 'p', 'b']);
-  }
-  
-  let pool = [];
-  let cacheKey = state.mode;
-  if (state.mode === 'dev') {
-    pool = TEXT_POOLS.dev[state.lang] || TEXT_POOLS.dev.python;
-    cacheKey = `dev_${state.lang}`;
-  } else if (state.mode === 'student') {
-    pool = TEXT_POOLS.student;
-    cacheKey = 'student';
-  } else {
-    pool = TEXT_POOLS.classic;
-    cacheKey = 'classic';
-  }
-  
-  if (!usedTextCache[cacheKey]) {
-    usedTextCache[cacheKey] = [];
-  }
-  
-  let availableIndices = pool.map((_, idx) => idx).filter(idx => !usedTextCache[cacheKey].includes(idx));
-  
-  if (availableIndices.length === 0) {
-    usedTextCache[cacheKey] = [];
-    availableIndices = pool.map((_, idx) => idx);
-  }
-  
-  const chosenIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
-  usedTextCache[cacheKey].push(chosenIndex);
-  
-  return pool[chosenIndex];
-}
-
-function adaptText(text) {
-  return text;
-}
-
-// ═══════════════════════════════════════════════════════
-// RENDER TYPING TEXT (Optimized O(1) Updates)
-// ═══════════════════════════════════════════════════════
-const display = document.getElementById('typing-display');
-
-function renderText(text) {
-  display.innerHTML = '';
-  charSpans = [];
-  const fragment = document.createDocumentFragment();
-  for (let i = 0; i < text.length; i++) {
-    const span = document.createElement('span');
-    span.className = 'typing-char' + (i === 0 ? ' current' : '');
-    span.textContent = text[i];
-    span.dataset.idx = i;
-    fragment.appendChild(span);
-    charSpans.push(span);
-  }
-  display.appendChild(fragment);
-  if (charSpans[0]) {
-    charSpans[0].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-  }
-}
-
-function updateTextDisplay(prevIndex, currentIndex, errorSet) {
-  if (charSpans[prevIndex]) {
-    charSpans[prevIndex].className = 'typing-char ' + (errorSet.has(prevIndex) ? 'wrong' : 'done');
-  }
-  if (charSpans[currentIndex]) {
-    charSpans[currentIndex].className = 'typing-char current';
-    charSpans[currentIndex].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-  }
-}
-
-// ═══════════════════════════════════════════════════════
-// INIT SESSION
-// ═══════════════════════════════════════════════════════
-const errorSet = new Set();
-
-function initSession() {
-  clearInterval(state.timerInterval);
-  state.started = false;
-  state.finished = false;
-  state.typedChars = 0;
-  state.correctChars = 0;
-  state.errorChars = 0;
-  state.totalErrors = 0;
-  state.currentIndex = 0;
-  state.streak = 0;
-  state.maxStreak = 0;
-  state.keystrokeLog = [];
-  state.lastKeystrokeTime = 0;
-  state.startTime = 0;
-  state.wpmHistory = [];
-  errorSet.clear();
-  resetKeyboardHeatmap();
-
-  state.timeLeft = state.timerDuration;
-  state.currentText = adaptText(getRandomText());
-
-  updateTimerDisplay();
-  resetRing();
-  renderText(state.currentText);
-  updateStats();
-
-  // Show overlay
-  document.getElementById('typing-overlay').classList.remove('hidden');
-  document.getElementById('typing-input').value = '';
-
-  // Close results
-  document.getElementById('results-overlay').classList.add('hidden');
-  document.body.style.overflow = '';
-
-  // Update header mode label
-  const modeLabels = { classic:'Classic Mode', dev:'Developer Mode', student:'Student Mode', custom:'Custom Mode', zen:'Zen Mode', personalized:'Targeted (AI) Mode' };
-  document.getElementById('header-mode-label').textContent = modeLabels[state.mode] || 'Classic Mode';
-
-  // Show lang select for dev mode
-  document.getElementById('lang-select').style.display = state.mode === 'dev' ? 'block' : 'none';
-
-  // Show weak keys
-  loadWeakKeys();
-  updateXPBar();
-}
-
-// ═══════════════════════════════════════════════════════
-// START TYPING
-// ═══════════════════════════════════════════════════════
-function startSession() {
-  if (state.started || state.finished) return;
-  if (!checkKeyboardAccess()) return;
-  state.started = true;
-  state.startTime = performance.now();
-  state.lastKeystrokeTime = performance.now();
-  document.getElementById('typing-overlay').classList.add('hidden');
-  document.getElementById('typing-input').focus();
-
-  if (state.mode !== 'zen') {
-    state.timerInterval = setInterval(tickTimer, 1000);
-  }
-}
-
-// ═══════════════════════════════════════════════════════
-// TIMER
-// ═══════════════════════════════════════════════════════
-function tickTimer() {
-  state.timeLeft--;
-  updateTimerDisplay();
-  updateRing();
-
-  // WPM sample every 5s
-  if (state.timeLeft % 5 === 0 || state.timeLeft <= 5) {
-    const elapsed = state.timerDuration - state.timeLeft;
-    if (elapsed > 0) {
-      const wpm = calcWPM(elapsed);
-      state.wpmHistory.push(wpm);
-    }
-  }
-
-  const ring = document.getElementById('timer-ring');
-  if (state.timeLeft <= 10) {
-    ring.classList.add('danger');
-    ring.classList.remove('warning');
-  } else if (state.timeLeft <= 20) {
-    ring.classList.add('warning');
-    ring.classList.remove('danger');
-  }
-
-  if (state.timeLeft <= 0) {
-    endSession();
-  }
-}
-
-function updateTimerDisplay() {
-  const el = document.getElementById('timer-display');
-  if (state.mode === 'zen') { el.textContent = '∞'; return; }
-  el.textContent = state.timeLeft >= 60
-    ? `${Math.floor(state.timeLeft/60)}:${String(state.timeLeft%60).padStart(2,'0')}`
-    : state.timeLeft;
-}
-
-const RING_CIRCUMFERENCE = 238.76;
-function updateRing() {
-  const ring = document.getElementById('timer-ring');
-  const progress = state.timeLeft / state.timerDuration;
-  ring.style.strokeDashoffset = (1 - progress) * RING_CIRCUMFERENCE;
-}
-function resetRing() {
-  const ring = document.getElementById('timer-ring');
-  ring.style.strokeDashoffset = '0';
-  ring.classList.remove('danger','warning');
-}
-
-// ═══════════════════════════════════════════════════════
-// KEYPRESS HANDLER
-// ═══════════════════════════════════════════════════════
-const typingInput = document.getElementById('typing-input');
-const typingArea  = document.getElementById('typing-area');
-
-function focusInput() {
-  typingInput.focus();
-}
-typingArea.addEventListener('click', () => {
-  focusInput();
-});
-// Keydown event on typingArea is handled by the document level keydown event listener below.
-
-typingInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    if (focusMode) {
-      toggleFocusMode();
-      e.preventDefault();
-      return;
-    }
-    resetSession();
-    return;
-  }
-  if (e.key === 'Tab') { e.preventDefault(); return; }
-});
-
-typingInput.addEventListener('input', (e) => {
-  if (state.finished) return;
-  if (!state.started) startSession();
-
-  const inputVal = typingInput.value;
-  if (!inputVal) return;
-
-  const now = performance.now();
-  const delay = state.lastKeystrokeTime ? now - state.lastKeystrokeTime : 0;
-  state.lastKeystrokeTime = now;
-
-  // Process each new character
-  const newChar = inputVal[inputVal.length - 1];
-  const expectedChar = state.currentText[state.currentIndex];
-
-  if (newChar === undefined) return;
-
-  const isCorrect = newChar === expectedChar;
-  state.keystrokeLog.push({
-    char: expectedChar,
-    typed: newChar,
-    correct: isCorrect,
-    delay: delay,
-    timestamp: now,
-    index: state.currentIndex,
-  });
-
-  // Update key stats
-  const key = expectedChar?.toLowerCase() || '';
-  if (!state.keyStats[key]) state.keyStats[key] = { hits: 0, misses: 0, totalDelay: 0 };
-  if (isCorrect) {
-    state.keyStats[key].hits++;
-    state.keyStats[key].totalDelay += delay;
-    state.correctChars++;
-    state.streak++;
-    if (state.streak > state.maxStreak) state.maxStreak = state.streak;
-    errorSet.delete(state.currentIndex);
-  } else {
-    state.keyStats[key].misses++;
-    state.errorChars++;
-    state.totalErrors++;
-    state.streak = 0;
-    errorSet.add(state.currentIndex);
-  }
-
-  state.typedChars++;
-  state.currentIndex++;
-  typingInput.value = '';
-
-  updateTextDisplay(state.currentIndex - 1, state.currentIndex, errorSet);
-  updateStats();
-  updateKeyboardHeatmap(expectedChar, isCorrect);
-
-  // Sound feedback
-  playKeyClick(!isCorrect);
-
-  // Brief shake on error
-  if (!isCorrect) {
-    typingArea.classList.add('error');
-    setTimeout(() => typingArea.classList.remove('error'), 400);
-  }
-
-  // Text complete
-  if (state.currentIndex >= state.currentText.length) {
-    if (state.mode === 'zen') {
-      // Load next text without stopping
-      state.currentIndex = 0;
-      errorSet.clear();
-      state.currentText = adaptText(getRandomText());
-      renderText(state.currentText);
-    } else {
-      endSession();
-    }
-  }
-});
-
-// ═══════════════════════════════════════════════════════
-// STATS UPDATE
-// ═══════════════════════════════════════════════════════
-function calcWPM(elapsed) {
-  if (!elapsed || elapsed < 0.5) return 0;
-  return Math.round((state.correctChars / 5) / (elapsed / 60));
-}
-
-function calcRawWPM(elapsed) {
-  if (!elapsed || elapsed < 0.5) return 0;
-  return Math.round((state.typedChars / 5) / (elapsed / 60));
-}
-
-function calcAccuracy() {
-  if (!state.typedChars) return 100;
-  return Math.round((state.correctChars / state.typedChars) * 100);
-}
-
-function calcConsistency() {
-  if (state.wpmHistory.length < 2) return 100;
-  const avg = state.wpmHistory.reduce((a,b)=>a+b,0) / state.wpmHistory.length;
-  const variance = state.wpmHistory.reduce((sum,v) => sum + Math.pow(v - avg, 2), 0) / state.wpmHistory.length;
-  const stdDev = Math.sqrt(variance);
-  const cv = avg > 0 ? (stdDev / avg) * 100 : 0;
-  return Math.max(0, Math.round(100 - cv));
-}
-
-function updateStats() {
-  const elapsed = state.startTime ? (performance.now() - state.startTime) / 1000 : 0;
-  const wpm = calcWPM(elapsed);
-  const acc = calcAccuracy();
-
-  const wpmEl  = document.getElementById('stat-wpm');
-  const accEl  = document.getElementById('stat-accuracy');
-  const errEl  = document.getElementById('stat-errors');
-  const strEl  = document.getElementById('stat-streak');
-
-  if (wpmEl)  wpmEl.textContent  = wpm;
-  if (accEl)  accEl.textContent  = acc;
-  if (errEl)  errEl.textContent  = state.totalErrors;
-  if (strEl)  strEl.textContent  = state.streak;
-
-  // Color the WPM
-  if (wpmEl) {
-    wpmEl.classList.remove('good','medium','bad');
-    if (wpm >= 80) wpmEl.classList.add('good');
-    else if (wpm >= 50) wpmEl.classList.add('medium');
-    else if (state.started && wpm < 30) wpmEl.classList.add('bad');
-  }
-
-  // Color accuracy
-  if (accEl) {
-    accEl.classList.remove('good','medium','bad');
-    if (acc >= 97) accEl.classList.add('good');
-    else if (acc >= 90) accEl.classList.add('medium');
-    else if (state.started) accEl.classList.add('bad');
-  }
-}
-
-// ═══════════════════════════════════════════════════════
-// END SESSION
-// ═══════════════════════════════════════════════════════
-function endSession() {
-  if (state.finished) return;
-  clearInterval(state.timerInterval);
-  state.finished = true;
-
-  // Play session-complete arpeggio
-  playSessionEnd();
-
-  const elapsed = state.startTime ? (performance.now() - state.startTime) / 1000 : (state.timerDuration - state.timeLeft);
-  const elapsedSecs = Math.max(0.5, state.mode === 'zen' ? elapsed : Math.min(state.timerDuration, elapsed));
-  const finalWPM  = calcWPM(elapsedSecs);
-  const finalRawWPM = calcRawWPM(elapsedSecs);
-  const finalAcc  = calcAccuracy();
-  const consistency = calcConsistency();
-  const xpEarned  = calcXP(finalWPM, finalAcc, consistency);
-
-  // Save session via authenticated API instead of localStorage
-  const payload = {
-    mode: state.mode,
-    language: state.mode === 'dev' ? state.lang : null,
-    duration_secs: Math.round(elapsedSecs) || 60,
-    text_used: state.currentText || "",
-    wpm: Math.round(finalWPM),
-    raw_wpm: Math.round(finalRawWPM),
-    accuracy: parseFloat(finalAcc),
-    correct_chars: parseInt(state.correctChars),
-    error_chars: parseInt(state.errorChars),
-    total_chars: parseInt(state.typedChars),
-    errors: parseInt(state.totalErrors),
-    consistency: parseFloat(consistency),
-    max_streak: parseInt(state.maxStreak),
-    key_stats: state.keyStats,
-    wpm_history: state.wpmHistory
-  };
-
-  // Render local results immediately to prevent perceived lag/buffering
-  showResults(finalWPM, finalAcc, consistency, xpEarned);
-
-  API.saveSession(payload)
-    .then(data => {
-      // Save locally as cache/history backup
+    // Init auth to protect page
+    (async () => {
+      let user;
       try {
-        const sessions = JSON.parse(localStorage.getItem('tf_session_history') || '[]');
-        sessions.unshift({ ...payload, id: data.id, xp_earned: data.xp_earned, created_at: data.created_at || new Date().toISOString(), timestamp: Date.now() });
-        localStorage.setItem('tf_session_history', JSON.stringify(sessions.slice(0, 100)));
-      } catch (e) {}
-
-      // Aggregate key stats locally
-      aggregateLocalKeyStats(payload.key_stats);
-
-      // Overlay server values (like finalized XP or achievements) without triggering popup twice
-      showResults(data.wpm, data.accuracy, data.consistency, data.xp_earned, true);
-      if (data.badges_earned?.length) {
-        showBadgeUnlocks(data.badges_earned);
+        user = await Auth.init();
+        if (user) {
+          document.documentElement.style.visibility = '';
+        } else if (window.location.hostname !== 'localhost') {
+          window.location.replace('/login');
+          return;
+        }
+      } catch (err) {
+        console.error("TF Auth: Failed to initialize Auth in typing page:", err);
+        if (window.location.hostname !== 'localhost') {
+          window.location.replace('/login');
+          return;
+        }
       }
 
-      // Fetch fresh details from database to update XP bar and sync state
-      API.getUserProfile()
-        .then(profile => {
+      try {
+        try {
+          const profile = await API.getUserProfile();
           if (profile) {
             state.xp = profile.xp || 0;
             state.level = profile.level || 1;
@@ -1328,102 +691,851 @@ function endSession() {
             updateXPBar();
             loadWeakKeys(profile.weak_keys);
           }
+        } catch (apiErr) {
+          console.warn("TF: Failed to load profile in typing page, using offline defaults:", apiErr);
+          const { showToast } = await import('../js/common.js');
+          showToast({
+            title: "Connection Issue",
+            desc: "Could not sync stats with the server, but you can still type!",
+            type: "warning",
+            duration: 5000
+          });
+        }
+      } catch (err) {
+        console.error('Critical failure in typing page initialization:', err);
+        const errMsg = err?.message || '';
+        const isNetworkError = errMsg.includes('Network Error') || errMsg.includes('timeout') || errMsg.includes('HTTP 5') || errMsg.includes('Failed to fetch') || errMsg.includes('Database') || errMsg.includes('503') || errMsg.includes('500') || errMsg.includes('Internal Server Error');
+        if (!isNetworkError && typeof Auth !== 'undefined' && Auth.triggerEmergencyLogout) {
+          Auth.triggerEmergencyLogout("Failed to initialize training session.");
+        } else {
+          console.warn("TF: Typing page initialized in offline mode due to connection issue.");
+        }
+      }
+      // Start guided tour on first visit (shows once, stored in localStorage)
+      startTourIfNew();
+    })();
+
+    // Init accessibility
+    initAccessibility();
+
+    // ═══════════════════════════════════════════════════════
+    // TYPING SOUND ENGINE (Web Audio API - no files needed)
+    // ═══════════════════════════════════════════════════════
+    let audioCtx = null;
+    let soundEnabled = localStorage.getItem('tf_sound') !== 'off'; // default: on
+
+    function getAudioCtx() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      // Resume if suspended (browser policy)
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      return audioCtx;
+    }
+
+    function playKeyClick(isError = false) {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioCtx();
+        const now = ctx.currentTime;
+
+        // Oscillator for the key thump
+        const osc = ctx.createOscillator();
+        const gainNode = ctx.createGain();
+        const filter = ctx.createBiquadFilter();
+
+        filter.type = 'bandpass';
+        filter.frequency.value = isError ? 220 : 800;
+        filter.Q.value = 0.8;
+
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(isError ? 180 : 600, now);
+        osc.frequency.exponentialRampToValueAtTime(isError ? 100 : 200, now + 0.06);
+
+        gainNode.gain.setValueAtTime(isError ? 0.18 : 0.12, now);
+        gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.07);
+
+        osc.connect(filter);
+        filter.connect(gainNode);
+        gainNode.connect(ctx.destination);
+
+        osc.start(now);
+        osc.stop(now + 0.08);
+      } catch (e) { /* audio not supported */ }
+    }
+
+    function playSessionEnd() {
+      if (!soundEnabled) return;
+      try {
+        const ctx = getAudioCtx();
+        const now = ctx.currentTime;
+        [0, 0.1, 0.2, 0.35].forEach((delay, i) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          const freqs = [523, 659, 784, 1047]; // C5 E5 G5 C6
+          osc.type = 'sine';
+          osc.frequency.value = freqs[i];
+          gain.gain.setValueAtTime(0.15, now + delay);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + delay + 0.3);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + delay);
+          osc.stop(now + delay + 0.35);
+        });
+      } catch (e) { }
+    }
+
+    // Sound toggle button (injected into header actions)
+    (function () {
+      const actionsEl = document.querySelector('.app-header-actions');
+      if (!actionsEl) return;
+      const btn = document.createElement('button');
+      btn.id = 'sound-toggle-btn';
+      btn.className = 'btn btn-ghost btn-icon btn-sm';
+      btn.setAttribute('aria-label', 'Toggle typing sounds');
+      btn.title = soundEnabled ? 'Sounds On' : 'Sounds Off';
+      btn.textContent = soundEnabled ? '🔊' : '🔇';
+      btn.style.cssText = 'font-size:16px;min-width:36px;';
+      btn.addEventListener('click', () => {
+        soundEnabled = !soundEnabled;
+        localStorage.setItem('tf_sound', soundEnabled ? 'on' : 'off');
+        btn.textContent = soundEnabled ? '🔊' : '🔇';
+        btn.title = soundEnabled ? 'Sounds On' : 'Sounds Off';
+        // Resume AudioContext on first user gesture
+        if (soundEnabled) getAudioCtx();
+      });
+      // Insert before focus-mode-btn
+      const focusBtn = document.getElementById('focus-mode-btn');
+      actionsEl.insertBefore(btn, focusBtn);
+    })();
+
+    // ═══════════════════════════════════════════════════════
+    // TEXT POOLS
+    // ═══════════════════════════════════════════════════════
+    const TEXT_POOLS = {
+      classic: [
+        "the quick brown fox jumps over the lazy dog and the cat sat on the mat watching the birds fly across the bright blue sky",
+        "typing is a skill that improves with deliberate practice and consistent effort over time and every session brings you closer to your goal",
+        "the best way to learn something new is to practice it every day with full attention and to track your progress carefully",
+        "software engineers spend a large portion of their day typing code emails and messages making typing speed and accuracy incredibly valuable",
+        "consistency is the key to mastery whether you are learning to type play an instrument or build a startup the principle remains the same",
+        "the brain is remarkably adaptive and with the right training it can build the neural pathways needed for fast accurate typing",
+        "great typists do not think about where the keys are they simply think about what they want to say and their fingers follow automatically",
+        "every master was once a beginner and every expert was once a novice the journey of a thousand miles begins with a single keystroke",
+        "artificial intelligence is transforming how we work learn and communicate and the ability to type quickly becomes ever more important",
+        "the difference between ordinary and extraordinary is that little extra and in typing that extra comes from thousands of focused repetitions",
+        "wisdom is not a product of schooling but of the lifelong attempt to acquire it and apply it to make the world a slightly better place for everyone",
+        "the only way to do great work is to love what you do if you have not found it yet keep looking and do not settle for anything less",
+        "success is not final failure is not fatal it is the courage to continue that counts and the willingness to learn from every setback",
+        "it is during our darkest moments that we must focus to see the light and find the inner strength to overcome the challenges in front of us",
+        "do not go where the path may lead go instead where there is no path and leave a trail for others to follow on their own journeys",
+        "be yourself everyone else is already taken and trying to live someone else's life is a waste of the unique person you are meant to be",
+        "you must be the change you wish to see in the world starting with small daily actions that align with your deepest values and beliefs",
+        "life is what happens when you are busy making other plans and finding the balance between future goals and present moments is the ultimate challenge",
+        "spread love everywhere you go let no one ever come to you without leaving happier and carrying a small spark of warmth in their heart",
+        "the future belongs to those who believe in the beauty of their dreams and have the courage to take the first steps toward making them real",
+        "tell me and i forget teach me and i may remember involve me and i learn because true understanding comes from active participation and practice",
+        "learn from yesterday live for today hope for tomorrow the important thing is not to stop questioning and to maintain a sense of wonder",
+        "the only limit to our realization of tomorrow will be our doubts of today so let us move forward with strong and active faith in our potential",
+        "what you get by achieving your goals is not as important as what you become by achieving your goals and the character you build along the way",
+        "we are what we repeatedly do excellence then is not an act but a habit that is cultivated through daily discipline and focused repetition"
+      ],
+      student: [
+        "photosynthesis is the process by which plants use sunlight water and carbon dioxide to produce oxygen and energy in the form of glucose",
+        "the mitochondria is the powerhouse of the cell and it generates most of the chemical energy needed to power the biochemical reactions of a cell",
+        "democracy is a system of government by the whole population or all the eligible members of a state typically through elected representatives",
+        "the french revolution began in seventeen eighty nine and fundamentally transformed french society by abolishing the feudal system and the monarchy",
+        "gravity is the force of attraction between any two objects with mass and it was first mathematically described by isaac newton in sixteen eighty seven",
+        "the scientific method is an empirical method of acquiring knowledge that has characterized the development of science since at least the seventeenth century",
+        "global warming is the long term heating of earths climate system observed since the pre industrial period due to human activities",
+        "the universal declaration of human rights is a historic document that was adopted by the united nations general assembly in nineteen forty eight",
+        "economics is the social science that studies the production distribution and consumption of goods and services in an economy",
+        "calculus is the mathematical study of continuous change in the same way that geometry is the study of shape and algebra is the study of operations",
+        "the industrial revolution was the transition to new manufacturing processes in Great Britain continental Europe and the United States",
+        "quantum mechanics is a fundamental theory in physics that provides a description of the physical properties of nature at the atomic scale",
+        "cell division is the process by which a parent cell divides into two or more daughter cells reproducing genetic material",
+        "a neural network is a network or circuit of biological neurons or in a modern sense an artificial neural network composed of nodes",
+        "the theory of relativity usually encompasses two interrelated theories by Albert Einstein special relativity and general relativity"
+      ],
+      dev: {
+        python: [
+          "def fibonacci(n): return n if n <= 1 else fibonacci(n-1) + fibonacci(n-2)",
+          "class DataProcessor: def __init__(self, data): self.data = data; self.results = []",
+          "import pandas as pd; df = pd.read_csv('data.csv'); df.dropna(inplace=True); print(df.head())",
+          "with open('config.json', 'r') as f: config = json.load(f); return config.get('api_key', '')",
+          "model = XGBClassifier(n_estimators=100, max_depth=6, learning_rate=0.1); model.fit(X_train, y_train)",
+          "sorted_data = sorted(raw_data, key=lambda x: x.get('score', 0), reverse=True)",
+          "import asyncio; async def main(): tasks = [fetch_url(url) for url in urls]; return await asyncio.gather(*tasks)",
+          "try: response = requests.get(url, timeout=5); response.raise_for_status() except requests.RequestException as e: log.error(e)",
+          "class CustomDataset(Dataset): def __init__(self, x, y): self.x = x; self.y = y; def __len__(self): return len(self.x)",
+          "decorators allow you to wrap another function in order to extend the behavior of the wrapped function without permanently modifying it"
+        ],
+        javascript: [
+          "const fetchUser = async (id) => { const res = await fetch(`/api/users/${id}`); return res.json(); };",
+          "const debounce = (fn, ms) => { let timer; return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), ms); }; };",
+          "document.querySelectorAll('.btn').forEach(btn => btn.addEventListener('click', (e) => e.target.classList.toggle('active')));",
+          "const { data, error } = await supabase.from('sessions').select('*').order('created_at', { ascending: false }).limit(10);",
+          "const memoize = (fn) => { const cache = new Map(); return (...args) => { const key = JSON.stringify(args); return cache.has(key) ? cache.get(key) : cache.set(key, fn(...args)).get(key); }; };",
+          "const pipeline = (...fns) => (x) => fns.reduce((v, f) => f(v), x);",
+          "const uniqueArray = [...new Set(arr.filter(Boolean))];",
+          "const proxy = new Proxy(target, { get: (obj, prop) => prop in obj ? obj[prop] : 'default' });",
+          "const eventEmitter = { events: {}, on(event, listener) { (this.events[event] || (this.events[event] = [])).push(listener); } };"
+        ],
+        typescript: [
+          "interface TypingSession { id: string; wpm: number; accuracy: number; duration: number; userId: string; createdAt: Date; }",
+          "type Theme = 'dark' | 'light'; const useTheme = (): [Theme, () => void] => { const [theme, setTheme] = useState<Theme>('dark'); return [theme, () => setTheme(t => t === 'dark' ? 'light' : 'dark')]; };",
+          "const analyzeSession = async (session: TypingSession): Promise<Analysis> => { const weakKeys = findWeakKeys(session); return { weakKeys, recommendations: generateRec(weakKeys) }; };",
+          "type DeepPartial<T> = { [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P] };",
+          "export class Singleton { private static instance: Singleton; private constructor() {} static getInstance(): Singleton { return this.instance || (this.instance = new Singleton()); } }",
+          "type Exclude<T, U> = T extends U ? never : T; type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;"
+        ],
+        sql: [
+          "SELECT u.username, AVG(s.wpm) as avg_wpm, COUNT(s.id) as sessions FROM users u JOIN sessions s ON u.id = s.user_id GROUP BY u.id ORDER BY avg_wpm DESC LIMIT 10;",
+          "CREATE TABLE typing_sessions (id UUID PRIMARY KEY DEFAULT gen_random_uuid(), user_id UUID REFERENCES users(id), wpm INTEGER, accuracy DECIMAL(5,2), duration INTEGER, created_at TIMESTAMPTZ DEFAULT NOW());",
+          "WITH ranked_users AS (SELECT user_id, wpm, ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY created_at DESC) as rn FROM sessions) SELECT * FROM ranked_users WHERE rn <= 10;",
+          "SELECT category, SUM(revenue) OVER(PARTITION BY category ORDER BY sale_date) FROM sales_data;",
+          "INSERT INTO audit_log (user_id, action, performed_at) VALUES (CURRENT_USER, 'DELETE_RECORD', NOW());",
+          "UPDATE users SET status = 'inactive' WHERE last_login < NOW() - INTERVAL '90 days' AND status = 'active';"
+        ],
+        bash: [
+          "#!/bin/bash; set -euo pipefail; echo 'Starting deployment...'; docker build -t typeforge:latest . && docker push typeforge:latest",
+          "for file in *.py; do echo \"Processing $file\"; python -m py_compile \"$file\" && echo \"$file OK\" || echo \"$file FAILED\"; done",
+          "git log --oneline --graph --decorate --all | head -20; git status --short; git diff --stat HEAD~1",
+          'find . -name "*.log" -type f -mtime +7 -exec rm -f {} \\;',
+          'curl -s -I "https://api.github.com" | grep -i "status" || echo "API is offline"',
+          'tar -czf backup_$(date +%F).tar.gz /var/www/html/ && echo "Backup completed!"'
+        ]
+      }
+    };
+
+    // ═══════════════════════════════════════════════════════
+    // STATE
+    // ═══════════════════════════════════════════════════════
+    const state = {
+      mode: 'classic',
+      lang: 'python',
+      timerDuration: 60,
+      timeLeft: 60,
+      timerInterval: null,
+      started: false,
+      finished: false,
+      usePunctuation: true,
+      useNumbers: false,
+      currentText: '',
+      typedChars: 0,
+      correctChars: 0,
+      errorChars: 0,
+      totalErrors: 0,
+      currentIndex: 0,
+      streak: 0,
+      maxStreak: 0,
+      keystrokeLog: [],  // {char, time, correct, delay}
+      lastKeystrokeTime: 0,
+      startTime: 0,
+      wpmHistory: [],   // WPM samples over time
+      xp: 0,
+      level: 1,
+      keyStats: {},     // {key: {hits, misses, totalDelay}}
+      sessionCount: 0,
+    };
+
+    // ═══════════════════════════════════════════════════════
+    // DYNAMIC PRACTICE WORD DICTIONARY & CACHES
+    // ═══════════════════════════════════════════════════════
+    const keyElements = new Map();
+    let charSpans = [];
+
+    const usedTextCache = {
+      classic: [],
+      student: [],
+      dev_python: [],
+      dev_javascript: [],
+      dev_typescript: [],
+      dev_sql: [],
+      dev_bash: []
+    };
+
+    const COMMON_WORDS = [
+      "the", "name", "of", "to", "and", "a", "in", "is", "it", "you", "that", "he", "was", "for", "on", "are", "as", "with", "his", "they",
+      "i", "at", "be", "this", "have", "from", "or", "one", "had", "by", "word", "but", "not", "what", "all", "were", "we", "when", "your",
+      "can", "said", "there", "use", "an", "each", "which", "she", "do", "how", "their", "if", "will", "up", "other", "about", "out", "many",
+      "then", "them", "these", "so", "some", "her", "would", "make", "like", "him", "into", "time", "has", "look", "two", "more", "write",
+      "go", "see", "number", "no", "way", "could", "people", "my", "than", "first", "water", "been", "call", "who", "oil", "its", "now",
+      "find", "long", "down", "day", "did", "get", "come", "made", "may", "part", "python", "javascript", "code", "programming", "typing",
+      "keyboard", "accuracy", "speed", "rhythm", "practice", "engine", "system", "learning", "adapt", "personalize", "insights", "telemetry",
+      "performance", "efficiency", "focus", "discipline", "consistency", "repetition", "mastery", "beginner", "expert", "progress",
+      "challenge", "feedback", "telemetry", "developer", "student", "classic", "custom", "session", "victory", "champion"
+    ];
+
+    function getWeakKeysForPersonalization(n = 5) {
+      try {
+        const saved = JSON.parse(localStorage.getItem('tf_key_stats') || '{}');
+        const weak = Object.entries(saved)
+          .filter(([k, v]) => (v.misses || 0) > 0 && String(k).trim().length === 1)
+          .sort((a, b) => {
+            const rateA = (a[1].misses || 0) / ((a[1].hits || 0) + (a[1].misses || 0) + 0.01);
+            const rateB = (b[1].misses || 0) / ((b[1].hits || 0) + (b[1].misses || 0) + 0.01);
+            return rateB - rateA;
+          })
+          .slice(0, n)
+          .map(([k]) => k);
+        return weak;
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function generatePersonalizedText(weakKeys) {
+      if (!weakKeys || weakKeys.length === 0) {
+        return "practice makes perfect focus on accuracy and speed will naturally follow with consistent repetition";
+      }
+
+      // Filter words that contain at least one of the weak keys
+      const targetWords = COMMON_WORDS.filter(word =>
+        weakKeys.some(key => word.toLowerCase().includes(key.toLowerCase()))
+      );
+
+      // Use the target words pool if we have enough, otherwise fall back to common words
+      const pool = targetWords.length >= 8 ? targetWords : COMMON_WORDS;
+
+      // Build a randomized list of 15 words heavily weighted toward words containing the weak keys
+      const sentenceWords = [];
+      const targetLength = 15;
+      for (let i = 0; i < targetLength; i++) {
+        let chosenWord;
+        if (Math.random() < 0.75 && targetWords.length > 0) {
+          chosenWord = targetWords[Math.floor(Math.random() * targetWords.length)];
+        } else {
+          chosenWord = pool[Math.floor(Math.random() * pool.length)];
+        }
+        sentenceWords.push(chosenWord);
+      }
+
+      return sentenceWords.join(' ');
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // TEXT GENERATION
+    // ═══════════════════════════════════════════════════════
+    function getRandomText() {
+      if (state.mode === 'personalized') {
+        const weakKeys = getWeakKeysForPersonalization(5);
+        return generatePersonalizedText(weakKeys.length > 0 ? weakKeys : ['q', 'z', 'x', 'p', 'b']);
+      }
+
+      let pool = [];
+      let cacheKey = state.mode;
+      if (state.mode === 'dev') {
+        pool = TEXT_POOLS.dev[state.lang] || TEXT_POOLS.dev.python;
+        cacheKey = `dev_${state.lang}`;
+      } else if (state.mode === 'student') {
+        pool = TEXT_POOLS.student;
+        cacheKey = 'student';
+      } else {
+        pool = TEXT_POOLS.classic;
+        cacheKey = 'classic';
+      }
+
+      if (!usedTextCache[cacheKey]) {
+        usedTextCache[cacheKey] = [];
+      }
+
+      let availableIndices = pool.map((_, idx) => idx).filter(idx => !usedTextCache[cacheKey].includes(idx));
+
+      if (availableIndices.length === 0) {
+        usedTextCache[cacheKey] = [];
+        availableIndices = pool.map((_, idx) => idx);
+      }
+
+      const chosenIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+      usedTextCache[cacheKey].push(chosenIndex);
+
+      return pool[chosenIndex];
+    }
+
+    function adaptText(text) {
+      return text;
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // RENDER TYPING TEXT (Optimized O(1) Updates)
+    // ═══════════════════════════════════════════════════════
+    const display = document.getElementById('typing-display');
+
+    function renderText(text) {
+      display.innerHTML = '';
+      charSpans = [];
+      const fragment = document.createDocumentFragment();
+      for (let i = 0; i < text.length; i++) {
+        const span = document.createElement('span');
+        span.className = 'typing-char' + (i === 0 ? ' current' : '');
+        span.textContent = text[i];
+        span.dataset.idx = i;
+        fragment.appendChild(span);
+        charSpans.push(span);
+      }
+      display.appendChild(fragment);
+      if (charSpans[0]) {
+        charSpans[0].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+
+    function updateTextDisplay(prevIndex, currentIndex, errorSet) {
+      if (charSpans[prevIndex]) {
+        charSpans[prevIndex].className = 'typing-char ' + (errorSet.has(prevIndex) ? 'wrong' : 'done');
+      }
+      if (charSpans[currentIndex]) {
+        charSpans[currentIndex].className = 'typing-char current';
+        charSpans[currentIndex].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      }
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // INIT SESSION
+    // ═══════════════════════════════════════════════════════
+    const errorSet = new Set();
+
+    function initSession() {
+      clearInterval(state.timerInterval);
+      state.started = false;
+      state.finished = false;
+      state.typedChars = 0;
+      state.correctChars = 0;
+      state.errorChars = 0;
+      state.totalErrors = 0;
+      state.currentIndex = 0;
+      state.streak = 0;
+      state.maxStreak = 0;
+      state.keystrokeLog = [];
+      state.lastKeystrokeTime = 0;
+      state.startTime = 0;
+      state.wpmHistory = [];
+      errorSet.clear();
+      resetKeyboardHeatmap();
+
+      state.timeLeft = state.timerDuration;
+      state.currentText = adaptText(getRandomText());
+
+      updateTimerDisplay();
+      resetRing();
+      renderText(state.currentText);
+      updateStats();
+
+      // Show overlay
+      document.getElementById('typing-overlay').classList.remove('hidden');
+      document.getElementById('typing-input').value = '';
+
+      // Close results
+      document.getElementById('results-overlay').classList.add('hidden');
+      document.body.style.overflow = '';
+
+      // Update header mode label
+      const modeLabels = { classic: 'Classic Mode', dev: 'Developer Mode', student: 'Student Mode', custom: 'Custom Mode', zen: 'Zen Mode', personalized: 'Targeted (AI) Mode' };
+      document.getElementById('header-mode-label').textContent = modeLabels[state.mode] || 'Classic Mode';
+
+      // Show lang select for dev mode
+      document.getElementById('lang-select').style.display = state.mode === 'dev' ? 'block' : 'none';
+
+      // Show weak keys
+      loadWeakKeys();
+      updateXPBar();
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // START TYPING
+    // ═══════════════════════════════════════════════════════
+    function startSession() {
+      if (state.started || state.finished) return;
+      if (!checkKeyboardAccess()) return;
+      state.started = true;
+      state.startTime = performance.now();
+      state.lastKeystrokeTime = performance.now();
+      document.getElementById('typing-overlay').classList.add('hidden');
+      document.getElementById('typing-input').focus();
+
+      if (state.mode !== 'zen') {
+        state.timerInterval = setInterval(tickTimer, 1000);
+      }
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // TIMER
+    // ═══════════════════════════════════════════════════════
+    function tickTimer() {
+      state.timeLeft--;
+      updateTimerDisplay();
+      updateRing();
+
+      // WPM sample every 5s
+      if (state.timeLeft % 5 === 0 || state.timeLeft <= 5) {
+        const elapsed = state.timerDuration - state.timeLeft;
+        if (elapsed > 0) {
+          const wpm = calcWPM(elapsed);
+          state.wpmHistory.push(wpm);
+        }
+      }
+
+      const ring = document.getElementById('timer-ring');
+      if (state.timeLeft <= 10) {
+        ring.classList.add('danger');
+        ring.classList.remove('warning');
+      } else if (state.timeLeft <= 20) {
+        ring.classList.add('warning');
+        ring.classList.remove('danger');
+      }
+
+      if (state.timeLeft <= 0) {
+        endSession();
+      }
+    }
+
+    function updateTimerDisplay() {
+      const el = document.getElementById('timer-display');
+      if (state.mode === 'zen') { el.textContent = '∞'; return; }
+      el.textContent = state.timeLeft >= 60
+        ? `${Math.floor(state.timeLeft / 60)}:${String(state.timeLeft % 60).padStart(2, '0')}`
+        : state.timeLeft;
+    }
+
+    const RING_CIRCUMFERENCE = 238.76;
+    function updateRing() {
+      const ring = document.getElementById('timer-ring');
+      const progress = state.timeLeft / state.timerDuration;
+      ring.style.strokeDashoffset = (1 - progress) * RING_CIRCUMFERENCE;
+    }
+    function resetRing() {
+      const ring = document.getElementById('timer-ring');
+      ring.style.strokeDashoffset = '0';
+      ring.classList.remove('danger', 'warning');
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // KEYPRESS HANDLER
+    // ═══════════════════════════════════════════════════════
+    const typingInput = document.getElementById('typing-input');
+    const typingArea = document.getElementById('typing-area');
+
+    function focusInput() {
+      typingInput.focus();
+    }
+    typingArea.addEventListener('click', () => {
+      focusInput();
+    });
+    // Keydown event on typingArea is handled by the document level keydown event listener below.
+
+    typingInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (focusMode) {
+          toggleFocusMode();
+          e.preventDefault();
+          return;
+        }
+        resetSession();
+        return;
+      }
+      if (e.key === 'Tab') { e.preventDefault(); return; }
+    });
+
+    typingInput.addEventListener('input', (e) => {
+      if (state.finished) return;
+      if (!state.started) startSession();
+
+      const inputVal = typingInput.value;
+      if (!inputVal) return;
+
+      const now = performance.now();
+      const delay = state.lastKeystrokeTime ? now - state.lastKeystrokeTime : 0;
+      state.lastKeystrokeTime = now;
+
+      // Process each new character
+      const newChar = inputVal[inputVal.length - 1];
+      const expectedChar = state.currentText[state.currentIndex];
+
+      if (newChar === undefined) return;
+
+      const isCorrect = newChar === expectedChar;
+      state.keystrokeLog.push({
+        char: expectedChar,
+        typed: newChar,
+        correct: isCorrect,
+        delay: delay,
+        timestamp: now,
+        index: state.currentIndex,
+      });
+
+      // Update key stats
+      const key = expectedChar?.toLowerCase() || '';
+      if (!state.keyStats[key]) state.keyStats[key] = { hits: 0, misses: 0, totalDelay: 0 };
+      if (isCorrect) {
+        state.keyStats[key].hits++;
+        state.keyStats[key].totalDelay += delay;
+        state.correctChars++;
+        state.streak++;
+        if (state.streak > state.maxStreak) state.maxStreak = state.streak;
+        errorSet.delete(state.currentIndex);
+      } else {
+        state.keyStats[key].misses++;
+        state.errorChars++;
+        state.totalErrors++;
+        state.streak = 0;
+        errorSet.add(state.currentIndex);
+      }
+
+      state.typedChars++;
+      state.currentIndex++;
+      typingInput.value = '';
+
+      updateTextDisplay(state.currentIndex - 1, state.currentIndex, errorSet);
+      updateStats();
+      updateKeyboardHeatmap(expectedChar, isCorrect);
+
+      // Sound feedback
+      playKeyClick(!isCorrect);
+
+      // Brief shake on error
+      if (!isCorrect) {
+        typingArea.classList.add('error');
+        setTimeout(() => typingArea.classList.remove('error'), 400);
+      }
+
+      // Text complete
+      if (state.currentIndex >= state.currentText.length) {
+        if (state.mode === 'zen') {
+          // Load next text without stopping
+          state.currentIndex = 0;
+          errorSet.clear();
+          state.currentText = adaptText(getRandomText());
+          renderText(state.currentText);
+        } else {
+          endSession();
+        }
+      }
+    });
+
+    // ═══════════════════════════════════════════════════════
+    // STATS UPDATE
+    // ═══════════════════════════════════════════════════════
+    function calcWPM(elapsed) {
+      if (!elapsed || elapsed < 0.5) return 0;
+      return Math.round((state.correctChars / 5) / (elapsed / 60));
+    }
+
+    function calcRawWPM(elapsed) {
+      if (!elapsed || elapsed < 0.5) return 0;
+      return Math.round((state.typedChars / 5) / (elapsed / 60));
+    }
+
+    function calcAccuracy() {
+      if (!state.typedChars) return 100;
+      return Math.round((state.correctChars / state.typedChars) * 100);
+    }
+
+    function calcConsistency() {
+      if (state.wpmHistory.length < 2) return 100;
+      const avg = state.wpmHistory.reduce((a, b) => a + b, 0) / state.wpmHistory.length;
+      const variance = state.wpmHistory.reduce((sum, v) => sum + Math.pow(v - avg, 2), 0) / state.wpmHistory.length;
+      const stdDev = Math.sqrt(variance);
+      const cv = avg > 0 ? (stdDev / avg) * 100 : 0;
+      return Math.max(0, Math.round(100 - cv));
+    }
+
+    function updateStats() {
+      const elapsed = state.startTime ? (performance.now() - state.startTime) / 1000 : 0;
+      const wpm = calcWPM(elapsed);
+      const acc = calcAccuracy();
+
+      const wpmEl = document.getElementById('stat-wpm');
+      const accEl = document.getElementById('stat-accuracy');
+      const errEl = document.getElementById('stat-errors');
+      const strEl = document.getElementById('stat-streak');
+
+      if (wpmEl) wpmEl.textContent = wpm;
+      if (accEl) accEl.textContent = acc;
+      if (errEl) errEl.textContent = state.totalErrors;
+      if (strEl) strEl.textContent = state.streak;
+
+      // Color the WPM
+      if (wpmEl) {
+        wpmEl.classList.remove('good', 'medium', 'bad');
+        if (wpm >= 80) wpmEl.classList.add('good');
+        else if (wpm >= 50) wpmEl.classList.add('medium');
+        else if (state.started && wpm < 30) wpmEl.classList.add('bad');
+      }
+
+      // Color accuracy
+      if (accEl) {
+        accEl.classList.remove('good', 'medium', 'bad');
+        if (acc >= 97) accEl.classList.add('good');
+        else if (acc >= 90) accEl.classList.add('medium');
+        else if (state.started) accEl.classList.add('bad');
+      }
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // END SESSION
+    // ═══════════════════════════════════════════════════════
+    function endSession() {
+      if (state.finished) return;
+      clearInterval(state.timerInterval);
+      state.finished = true;
+
+      // Play session-complete arpeggio
+      playSessionEnd();
+
+      const elapsed = state.startTime ? (performance.now() - state.startTime) / 1000 : (state.timerDuration - state.timeLeft);
+      const elapsedSecs = Math.max(0.5, state.mode === 'zen' ? elapsed : Math.min(state.timerDuration, elapsed));
+      const finalWPM = calcWPM(elapsedSecs);
+      const finalRawWPM = calcRawWPM(elapsedSecs);
+      const finalAcc = calcAccuracy();
+      const consistency = calcConsistency();
+      const xpEarned = calcXP(finalWPM, finalAcc, consistency);
+
+      // Save session via authenticated API instead of localStorage
+      const payload = {
+        mode: state.mode,
+        language: state.mode === 'dev' ? state.lang : null,
+        duration_secs: Math.round(elapsedSecs) || 60,
+        text_used: state.currentText || "",
+        wpm: Math.round(finalWPM),
+        raw_wpm: Math.round(finalRawWPM),
+        accuracy: parseFloat(finalAcc),
+        correct_chars: parseInt(state.correctChars),
+        error_chars: parseInt(state.errorChars),
+        total_chars: parseInt(state.typedChars),
+        errors: parseInt(state.totalErrors),
+        consistency: parseFloat(consistency),
+        max_streak: parseInt(state.maxStreak),
+        key_stats: state.keyStats,
+        wpm_history: state.wpmHistory
+      };
+
+      // Render local results immediately to prevent perceived lag/buffering
+      showResults(finalWPM, finalAcc, consistency, xpEarned);
+
+      API.saveSession(payload)
+        .then(data => {
+          // Save locally as cache/history backup
+          try {
+            const sessions = JSON.parse(localStorage.getItem('tf_session_history') || '[]');
+            sessions.unshift({ ...payload, id: data.id, xp_earned: data.xp_earned, created_at: data.created_at || new Date().toISOString(), timestamp: Date.now() });
+            localStorage.setItem('tf_session_history', JSON.stringify(sessions.slice(0, 100)));
+          } catch (e) { }
+
+          // Aggregate key stats locally
+          aggregateLocalKeyStats(payload.key_stats);
+
+          // Overlay server values (like finalized XP or achievements) without triggering popup twice
+          showResults(data.wpm, data.accuracy, data.consistency, data.xp_earned, true);
+          if (data.badges_earned?.length) {
+            showBadgeUnlocks(data.badges_earned);
+          }
+
+          // Fetch fresh details from database to update XP bar and sync state
+          API.getUserProfile()
+            .then(profile => {
+              if (profile) {
+                state.xp = profile.xp || 0;
+                state.level = profile.level || 1;
+                state.sessionCount = profile.total_sessions || 0;
+                updateXPBar();
+                loadWeakKeys(profile.weak_keys);
+              }
+            })
+            .catch(err => {
+              console.error('Failed to refresh profile after save:', err);
+            });
         })
         .catch(err => {
-          console.error('Failed to refresh profile after save:', err);
+          console.error('Failed to save session:', err);
+
+          const localSession = {
+            ...payload,
+            id: 'local_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
+            xp_earned: xpEarned,
+            created_at: new Date().toISOString(),
+            timestamp: Date.now()
+          };
+
+          // Fallback: save entirely to localStorage
+          saveSession(localSession);
+
+          if (typeof showToast === 'function') {
+            showToast({
+              title: "Offline Mode",
+              desc: "Failed to sync session with database. Saved progress locally.",
+              type: "warning"
+            });
+          }
         });
-    })
-    .catch(err => {
-      console.error('Failed to save session:', err);
-      
-      const localSession = {
-        ...payload,
-        id: 'local_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
-        xp_earned: xpEarned,
-        created_at: new Date().toISOString(),
-        timestamp: Date.now()
-      };
-      
-      // Fallback: save entirely to localStorage
-      saveSession(localSession);
-      
-      if (typeof showToast === 'function') {
-        showToast({
-          title: "Offline Mode",
-          desc: "Failed to sync session with database. Saved progress locally.",
-          type: "warning"
-        });
-      }
-    });
-}
-
-function calcXP(wpm, acc, consistency) {
-  let xp = 0;
-  xp += Math.round(wpm * 0.5);
-  xp += Math.round(acc * 0.3);
-  xp += Math.round(consistency * 0.2);
-  if (acc >= 98) xp += 50;
-  if (acc >= 99) xp += 100;
-  if (wpm >= 80) xp += 30;
-  if (wpm >= 100) xp += 80;
-  return Math.max(10, Math.round(xp));
-}
-
-function aggregateLocalKeyStats(sessionKeyStats) {
-  if (!sessionKeyStats) return;
-  try {
-    const aggregatedStats = JSON.parse(localStorage.getItem('tf_key_stats') || '{}');
-    Object.entries(sessionKeyStats).forEach(([key, stats]) => {
-      if (!aggregatedStats[key]) {
-        aggregatedStats[key] = { hits: 0, misses: 0, totalDelay: 0 };
-      }
-      aggregatedStats[key].hits += stats.hits || 0;
-      aggregatedStats[key].misses += stats.misses || 0;
-      aggregatedStats[key].totalDelay += stats.totalDelay || 0;
-    });
-    localStorage.setItem('tf_key_stats', JSON.stringify(aggregatedStats));
-  } catch (e) {}
-}
-
-function saveSession(localSession) {
-  try {
-    // Append session strictly to offline unsynced sessions queue
-    const sessions = JSON.parse(localStorage.getItem('tf_session_history') || '[]');
-    sessions.unshift(localSession);
-    localStorage.setItem('tf_session_history', JSON.stringify(sessions.slice(0, 100)));
-    
-    // Aggregate key stats locally
-    aggregateLocalKeyStats(localSession.key_stats);
-
-    // Update in-memory state so UI reflects it immediately
-    state.sessionCount++;
-    state.xp += localSession.xp_earned;
-    // Match backend progressive formula: level = FLOOR(SQRT(totalXP / 250)) + 1
-    const newLevel = Math.max(1, Math.floor(Math.sqrt(state.xp / 250)) + 1);
-    if (newLevel > state.level) {
-      state.level = newLevel;
-      showLevelUp();
     }
-    updateXPBar();
-  } catch(e) {}
-}
 
-function showBadgeUnlocks(badgeIds) {
-  badgeIds.slice(0, 3).forEach((id, i) => {
-    setTimeout(() => {
-      showToast({
-        title: 'Badge unlocked!',
-        desc: id.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
-        type: 'success',
-        duration: 5000,
+    function calcXP(wpm, acc, consistency) {
+      let xp = 0;
+      xp += Math.round(wpm * 0.5);
+      xp += Math.round(acc * 0.3);
+      xp += Math.round(consistency * 0.2);
+      if (acc >= 98) xp += 50;
+      if (acc >= 99) xp += 100;
+      if (wpm >= 80) xp += 30;
+      if (wpm >= 100) xp += 80;
+      return Math.max(10, Math.round(xp));
+    }
+
+    function aggregateLocalKeyStats(sessionKeyStats) {
+      if (!sessionKeyStats) return;
+      try {
+        const aggregatedStats = JSON.parse(localStorage.getItem('tf_key_stats') || '{}');
+        Object.entries(sessionKeyStats).forEach(([key, stats]) => {
+          if (!aggregatedStats[key]) {
+            aggregatedStats[key] = { hits: 0, misses: 0, totalDelay: 0 };
+          }
+          aggregatedStats[key].hits += stats.hits || 0;
+          aggregatedStats[key].misses += stats.misses || 0;
+          aggregatedStats[key].totalDelay += stats.totalDelay || 0;
+        });
+        localStorage.setItem('tf_key_stats', JSON.stringify(aggregatedStats));
+      } catch (e) { }
+    }
+
+    function saveSession(localSession) {
+      try {
+        // Append session strictly to offline unsynced sessions queue
+        const sessions = JSON.parse(localStorage.getItem('tf_session_history') || '[]');
+        sessions.unshift(localSession);
+        localStorage.setItem('tf_session_history', JSON.stringify(sessions.slice(0, 100)));
+
+        // Aggregate key stats locally
+        aggregateLocalKeyStats(localSession.key_stats);
+
+        // Update in-memory state so UI reflects it immediately
+        state.sessionCount++;
+        state.xp += localSession.xp_earned;
+        // Match backend progressive formula: level = FLOOR(SQRT(totalXP / 250)) + 1
+        const newLevel = Math.max(1, Math.floor(Math.sqrt(state.xp / 250)) + 1);
+        if (newLevel > state.level) {
+          state.level = newLevel;
+          showLevelUp();
+        }
+        updateXPBar();
+      } catch (e) { }
+    }
+
+    function showBadgeUnlocks(badgeIds) {
+      badgeIds.slice(0, 3).forEach((id, i) => {
+        setTimeout(() => {
+          showToast({
+            title: 'Badge unlocked!',
+            desc: id.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
+            type: 'success',
+            duration: 5000,
+          });
+        }, i * 600);
       });
-    }, i * 600);
-  });
-}
+    }
 
-function showLevelUp() {
-  const el = document.createElement('div');
-  el.style.cssText = `
+    function showLevelUp() {
+      const el = document.createElement('div');
+      el.style.cssText = `
     position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
     padding:24px 40px;background:var(--bg-elevated);
     border:1px solid var(--border-2);
@@ -1431,373 +1543,374 @@ function showLevelUp() {
     color:var(--text-1);z-index:9999;pointer-events:none;
     animation:scale-up 0.4s var(--ease-out) both;text-align:center;
   `;
-  el.innerHTML = `Level Up!<br/><span style="font-size:1rem;color:var(--text-2);font-weight:500">You reached Level ${state.level}</span>`;
-  document.body.appendChild(el);
-  setTimeout(() => { el.style.animation = 'fade-out 0.5s ease both'; el.addEventListener('animationend', () => el.remove()); }, 3000);
-}
+      el.innerHTML = `Level Up!<br/><span style="font-size:1rem;color:var(--text-2);font-weight:500">You reached Level ${state.level}</span>`;
+      document.body.appendChild(el);
+      setTimeout(() => { el.style.animation = 'fade-out 0.5s ease both'; el.addEventListener('animationend', () => el.remove()); }, 3000);
+    }
 
-function showResults(wpm, acc, consistency, xp, isUpdate = false) {
-  document.getElementById('results-wpm').textContent = wpm;
-  document.getElementById('res-accuracy').textContent = acc + '%';
-  document.getElementById('res-errors').textContent   = state.totalErrors;
-  document.getElementById('res-chars').textContent    = state.correctChars;
-  document.getElementById('res-consistency').textContent = consistency + '%';
-  document.getElementById('results-xp').textContent  = `+${xp} XP`;
+    function showResults(wpm, acc, consistency, xp, isUpdate = false) {
+      document.getElementById('results-wpm').textContent = wpm;
+      document.getElementById('res-accuracy').textContent = acc + '%';
+      document.getElementById('res-errors').textContent = state.totalErrors;
+      document.getElementById('res-chars').textContent = state.correctChars;
+      document.getElementById('res-consistency').textContent = consistency + '%';
+      document.getElementById('results-xp').textContent = `+${xp} XP`;
 
-  // Breakdown bars
-  const maxWPM = 200;
-  document.getElementById('rb-speed').style.width      = `${Math.min(100, (wpm/maxWPM)*100)}%`;
-  document.getElementById('rb-accuracy').style.width   = `${acc}%`;
-  document.getElementById('rb-consistency').style.width = `${consistency}%`;
-  document.getElementById('rb-speed-val').textContent   = `${wpm} WPM`;
-  document.getElementById('rb-accuracy-val').textContent = `${acc}%`;
-  document.getElementById('rb-consistency-val').textContent = `${consistency}%`;
+      // Breakdown bars
+      const maxWPM = 200;
+      document.getElementById('rb-speed').style.width = `${Math.min(100, (wpm / maxWPM) * 100)}%`;
+      document.getElementById('rb-accuracy').style.width = `${acc}%`;
+      document.getElementById('rb-consistency').style.width = `${consistency}%`;
+      document.getElementById('rb-speed-val').textContent = `${wpm} WPM`;
+      document.getElementById('rb-accuracy-val').textContent = `${acc}%`;
+      document.getElementById('rb-consistency-val').textContent = `${consistency}%`;
 
-  // AI Insight
-  const insights = generateInsight(wpm, acc, consistency);
-  document.getElementById('ai-insight-text').textContent = insights;
+      // AI Insight
+      const insights = generateInsight(wpm, acc, consistency);
+      document.getElementById('ai-insight-text').textContent = insights;
 
-  if (!isUpdate) {
-    // Badges
-    const badgesEl = document.getElementById('results-badges');
-    badgesEl.innerHTML = '';
-    checkBadges(wpm, acc).forEach(b => {
+      if (!isUpdate) {
+        // Badges
+        const badgesEl = document.getElementById('results-badges');
+        badgesEl.innerHTML = '';
+        checkBadges(wpm, acc).forEach(b => {
+          const el = document.createElement('div');
+          el.className = 'badge badge-gold';
+          el.textContent = `${b.icon} ${b.name}`;
+          el.style.animation = 'bounce-in 0.5s var(--ease-spring) both';
+          badgesEl.appendChild(el);
+        });
+
+        document.getElementById('results-overlay').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+
+        // XP pop animation
+        showXPPop(xp);
+      }
+
+      updateXPBar();
+    }
+
+    function generateInsight(wpm, acc, consistency) {
+      const weakKeys = getTopWeakKeys(3);
+      if (acc < 90) return `Your accuracy (${acc}%) is the priority right now. Slow down and focus on hitting the right key before speed.`;
+      if (weakKeys.length > 0) return `Your slowest keys this session: ${weakKeys.join(', ')}. Next session will target these specifically.`;
+      if (consistency < 75) return `Your WPM varied a lot this session. Focus on maintaining a steady rhythm rather than bursting.`;
+      if (wpm >= 100) return `Incredible - ${wpm} WPM with ${acc}% accuracy! You're in the top 5% of TypeForge users.`;
+      if (wpm >= 80) return `Strong performance at ${wpm} WPM! Work on punctuation speed to break 100 WPM.`;
+      return `Good session! Your next target is ${Math.round(wpm * 1.15)} WPM. Keep your fingers on the home row between words.`;
+    }
+
+    function getTopWeakKeys(n = 3) {
+      return Object.entries(state.keyStats)
+        .filter(([k, v]) => v.misses > 0 && k.trim())
+        .sort((a, b) => (b[1].misses / (b[1].hits + b[1].misses)) - (a[1].misses / (a[1].hits + a[1].misses)))
+        .slice(0, n)
+        .map(([k]) => `'${k}'`);
+    }
+
+    function checkBadges(wpm, acc) {
+      const badges = [];
+      if (wpm >= 100 && acc >= 98) badges.push({ icon: 'WPM.150', name: 'Ghost Fingers' });
+      if (acc >= 99) badges.push({ icon: 'ACC.99', name: 'Perfect Aim' });
+      if (wpm >= 120) badges.push({ icon: 'WPM.120', name: 'Speed Demon' });
+      if (state.totalErrors === 0) badges.push({ icon: 'ACC.100', name: 'Flawless' });
+      if (state.maxStreak >= 50) badges.push({ icon: 'STRK.50', name: 'On Fire' });
+      return badges;
+    }
+
+    function showXPPop(amount) {
       const el = document.createElement('div');
-      el.className = 'badge badge-gold';
-      el.textContent = `${b.icon} ${b.name}`;
-      el.style.animation = 'bounce-in 0.5s var(--ease-spring) both';
-      badgesEl.appendChild(el);
-    });
-
-    document.getElementById('results-overlay').classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-
-    // XP pop animation
-    showXPPop(xp);
-  }
-
-  updateXPBar();
-}
-
-function generateInsight(wpm, acc, consistency) {
-  const weakKeys = getTopWeakKeys(3);
-  if (acc < 90) return `Your accuracy (${acc}%) is the priority right now. Slow down and focus on hitting the right key before speed.`;
-  if (weakKeys.length > 0) return `Your slowest keys this session: ${weakKeys.join(', ')}. Next session will target these specifically.`;
-  if (consistency < 75) return `Your WPM varied a lot this session. Focus on maintaining a steady rhythm rather than bursting.`;
-  if (wpm >= 100) return `Incredible — ${wpm} WPM with ${acc}% accuracy! You're in the top 5% of TypeForge users.`;
-  if (wpm >= 80) return `Strong performance at ${wpm} WPM! Work on punctuation speed to break 100 WPM.`;
-  return `Good session! Your next target is ${Math.round(wpm * 1.15)} WPM. Keep your fingers on the home row between words.`;
-}
-
-function getTopWeakKeys(n = 3) {
-  return Object.entries(state.keyStats)
-    .filter(([k, v]) => v.misses > 0 && k.trim())
-    .sort((a, b) => (b[1].misses / (b[1].hits + b[1].misses)) - (a[1].misses / (a[1].hits + a[1].misses)))
-    .slice(0, n)
-    .map(([k]) => `'${k}'`);
-}
-
-function checkBadges(wpm, acc) {
-  const badges = [];
-  if (wpm >= 100 && acc >= 98) badges.push({ icon:'WPM.150', name:'Ghost Fingers' });
-  if (acc >= 99) badges.push({ icon:'ACC.99', name:'Perfect Aim' });
-  if (wpm >= 120) badges.push({ icon:'WPM.120', name:'Speed Demon' });
-  if (state.totalErrors === 0) badges.push({ icon:'ACC.100', name:'Flawless' });
-  if (state.maxStreak >= 50) badges.push({ icon:'STRK.50', name:'On Fire' });
-  return badges;
-}
-
-function showXPPop(amount) {
-  const el = document.createElement('div');
-  el.style.cssText = `
+      el.style.cssText = `
     position:fixed;top:50%;right:30%;
     font-family:var(--font-display);font-size:2rem;font-weight:800;
     color:var(--gold);text-shadow:0 0 20px var(--gold-glow);
     pointer-events:none;z-index:9999;
     animation:xp-burst 1.2s var(--ease-out) both;
   `;
-  el.textContent = `+${amount} XP`;
-  document.body.appendChild(el);
-  setTimeout(() => el.remove(), 1400);
-}
+      el.textContent = `+${amount} XP`;
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 1400);
+    }
 
-// ═══════════════════════════════════════════════════════
-// RESET / RESTART
-// ═══════════════════════════════════════════════════════
-function resetSession() {
-  clearInterval(state.timerInterval);
-  state.started = false;
-  state.finished = false;
-  initSession();
-}
+    // ═══════════════════════════════════════════════════════
+    // RESET / RESTART
+    // ═══════════════════════════════════════════════════════
+    function resetSession() {
+      clearInterval(state.timerInterval);
+      state.started = false;
+      state.finished = false;
+      initSession();
+    }
 
-document.getElementById('restart-btn').addEventListener('click', resetSession);
-document.getElementById('new-text-btn').addEventListener('click', () => {
-  clearInterval(state.timerInterval);
-  state.started = false;
-  state.finished = false;
-  state.currentText = adaptText(getRandomText());
-  initSession();
-});
+    document.getElementById('restart-btn').addEventListener('click', resetSession);
+    document.getElementById('new-text-btn').addEventListener('click', () => {
+      clearInterval(state.timerInterval);
+      state.started = false;
+      state.finished = false;
+      state.currentText = adaptText(getRandomText());
+      initSession();
+    });
 
-// Tab + Enter to restart
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'F1') { e.preventDefault(); toggleFocusMode(); }
-  if (e.key === 'Tab' && !e.shiftKey) { e.preventDefault(); }
-  if (e.key === 'Escape') {
-    if (focusMode) {
-      toggleFocusMode();
-    } else {
+    // Tab + Enter to restart
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'F1') { e.preventDefault(); toggleFocusMode(); }
+      if (e.key === 'Tab' && !e.shiftKey) { e.preventDefault(); }
+      if (e.key === 'Escape') {
+        if (focusMode) {
+          toggleFocusMode();
+        } else {
+          document.getElementById('results-overlay').classList.add('hidden');
+          document.body.style.overflow = '';
+        }
+      }
+    });
+
+    document.getElementById('results-again-btn').addEventListener('click', () => {
       document.getElementById('results-overlay').classList.add('hidden');
       document.body.style.overflow = '';
-    }
-  }
-});
-
-document.getElementById('results-again-btn').addEventListener('click', () => {
-  document.getElementById('results-overlay').classList.add('hidden');
-  document.body.style.overflow = '';
-  initSession();
-});
-document.getElementById('results-next-btn').addEventListener('click', () => {
-  document.getElementById('results-overlay').classList.add('hidden');
-  document.body.style.overflow = '';
-  state.currentText = adaptText(getRandomText());
-  initSession();
-});
-
-// ═══════════════════════════════════════════════════════
-// MODE TABS
-// ═══════════════════════════════════════════════════════
-document.querySelectorAll('.mode-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.mode-tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
-    tab.classList.add('active');
-    tab.setAttribute('aria-selected','true');
-    state.mode = tab.dataset.mode;
-    if (state.mode === 'custom') {
-      document.getElementById('custom-modal').classList.remove('hidden');
-    } else {
-      resetSession();
-    }
-  });
-});
-
-// ═══════════════════════════════════════════════════════
-// TIMER BUTTONS
-// ═══════════════════════════════════════════════════════
-document.querySelectorAll('.timer-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.timer-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    state.timerDuration = parseInt(btn.dataset.time);
-    resetSession();
-  });
-});
-
-// ═══════════════════════════════════════════════════════
-// LANG SELECT
-// ═══════════════════════════════════════════════════════
-document.getElementById('lang-select').addEventListener('change', (e) => {
-  state.lang = e.target.value;
-  resetSession();
-});
-
-// ═══════════════════════════════════════════════════════
-// PUNCTUATION / NUMBERS TOGGLE
-// ═══════════════════════════════════════════════════════
-document.getElementById('punctuation-toggle').addEventListener('click', function() {
-  state.usePunctuation = !state.usePunctuation;
-  this.setAttribute('aria-pressed', state.usePunctuation);
-  this.style.opacity = state.usePunctuation ? '1' : '0.4';
-  resetSession();
-});
-document.getElementById('numbers-toggle').addEventListener('click', function() {
-  state.useNumbers = !state.useNumbers;
-  this.setAttribute('aria-pressed', state.useNumbers);
-  this.style.opacity = state.useNumbers ? '1' : '0.4';
-  resetSession();
-});
-
-// ═══════════════════════════════════════════════════════
-// FOCUS MODE
-// ═══════════════════════════════════════════════════════
-let focusMode = false;
-function toggleFocusMode() {
-  focusMode = !focusMode;
-  document.body.classList.toggle('focus-mode', focusMode);
-  document.getElementById('focus-mode-btn').title = focusMode ? 'Exit Focus Mode' : 'Focus Mode';
-}
-document.getElementById('focus-mode-btn').addEventListener('click', toggleFocusMode);
-
-// ═══════════════════════════════════════════════════════
-// XP BAR
-// ═══════════════════════════════════════════════════════
-function updateXPBar() {
-  // Backend level formula: level = FLOOR(SQRT(totalXP / 250)) + 1
-  // XP needed to START level N  = (N-1)^2 * 250
-  // XP needed to START level N+1 = N^2 * 250
-  const totalXp = state.xp || 0;
-  const lvl = state.level || 1;
-  const xpForCurrentLevel = (lvl - 1) * (lvl - 1) * 250;
-  const xpForNextLevel    = lvl * lvl * 250;
-  const cap     = Math.max(1, xpForNextLevel - xpForCurrentLevel);
-  const inLevel = Math.max(0, totalXp - xpForCurrentLevel);
-  const pct     = Math.min(100, (inLevel / cap) * 100);
-  document.getElementById('header-xp-fill').style.width = pct + '%';
-  document.getElementById('header-xp-text').textContent = `${inLevel} / ${cap} XP`;
-  document.getElementById('header-level').textContent = `Lv.${lvl}`;
-}
-
-// ═══════════════════════════════════════════════════════
-// WEAK KEYS
-// ═══════════════════════════════════════════════════════
-function loadWeakKeys(profileWeakKeys) {
-  try {
-    let weak = Array.isArray(profileWeakKeys) ? profileWeakKeys.filter(k => k && String(k).trim()) : [];
-    if (!weak.length) {
-      const saved = JSON.parse(localStorage.getItem('tf_key_stats') || '{}');
-      weak = Object.entries(saved)
-        .filter(([k, v]) => (v.misses || 0) > 0 && String(k).trim().length >= 1)
-        .sort((a, b) => {
-          const rateA = (a[1].misses || 0) / ((a[1].hits || 0) + (a[1].misses || 0) + 0.01);
-          const rateB = (b[1].misses || 0) / ((b[1].hits || 0) + (b[1].misses || 0) + 0.01);
-          return rateB - rateA;
-        })
-        .slice(0, 6)
-        .map(([k]) => k);
-    }
-
-    const bar = document.getElementById('weak-keys-bar');
-    const chips = document.getElementById('weak-keys-chips');
-    if (weak.length > 0) {
-      bar.style.display = 'flex';
-      chips.innerHTML = weak.map(k => `<span class="weak-key-chip">${k === ' ' ? 'space' : k}</span>`).join('');
-    } else {
-      bar.style.display = 'none';
-    }
-  } catch(e) {}
-}
-
-// ═══════════════════════════════════════════════════════
-// KEYBOARD HEATMAP
-// ═══════════════════════════════════════════════════════
-const KEYBOARD_LAYOUT = [
-  ['`','1','2','3','4','5','6','7','8','9','0','-','='],
-  ['q','w','e','r','t','y','u','i','o','p','[',']','\\'],
-  ['a','s','d','f','g','h','j','k','l',';',"'"],
-  ['z','x','c','v','b','n','m',',','.','/', 'shift'],
-];
-
-const sessionKeyHits  = {};
-const sessionKeyErrors = {};
-
-function buildKeyboard() {
-  const container = document.getElementById('keyboard-viz');
-  if (!container) return;
-  container.innerHTML = '';
-  keyElements.clear();
-  KEYBOARD_LAYOUT.forEach((row, ri) => {
-    const rowEl = document.createElement('div');
-    rowEl.className = 'keyboard-row';
-    if (ri === 1) rowEl.style.marginLeft = '20px';
-    if (ri === 2) rowEl.style.marginLeft = '30px';
-    if (ri === 3) rowEl.style.marginLeft = '10px';
-    row.forEach(key => {
-      const keyEl = document.createElement('div');
-      keyEl.className = 'key';
-      if (['shift','backspace','tab','caps','enter','space'].includes(key)) keyEl.classList.add('key-wide');
-      keyEl.dataset.key = key;
-      keyEl.dataset.heat = '0';
-      keyEl.textContent = key.length === 1 ? key.toUpperCase() : key;
-      rowEl.appendChild(keyEl);
-      keyElements.set(key, keyEl);
+      initSession();
     });
-    container.appendChild(rowEl);
-  });
-  // Space bar row
-  const spaceRow = document.createElement('div');
-  spaceRow.className = 'keyboard-row';
-  spaceRow.style.marginLeft = '60px';
-  const spaceKey = document.createElement('div');
-  spaceKey.className = 'key key-space';
-  spaceKey.dataset.key = ' ';
-  spaceKey.dataset.heat = '0';
-  spaceKey.textContent = 'SPACE';
-  spaceRow.appendChild(spaceKey);
-  container.appendChild(spaceRow);
-  keyElements.set(' ', spaceKey);
-}
+    document.getElementById('results-next-btn').addEventListener('click', () => {
+      document.getElementById('results-overlay').classList.add('hidden');
+      document.body.style.overflow = '';
+      state.currentText = adaptText(getRandomText());
+      initSession();
+    });
 
-function resetKeyboardHeatmap() {
-  Object.keys(sessionKeyHits).forEach(k => delete sessionKeyHits[k]);
-  Object.keys(sessionKeyErrors).forEach(k => delete sessionKeyErrors[k]);
-  keyElements.forEach(el => { el.dataset.heat = '0'; });
-}
+    // ═══════════════════════════════════════════════════════
+    // MODE TABS
+    // ═══════════════════════════════════════════════════════
+    document.querySelectorAll('.mode-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.mode-tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        state.mode = tab.dataset.mode;
+        if (state.mode === 'custom') {
+          document.getElementById('custom-modal').classList.remove('hidden');
+        } else {
+          resetSession();
+        }
+      });
+    });
 
-function updateKeyboardHeatmap(char, correct) {
-  if (!char) return;
-  const key = char === ' ' ? ' ' : char.toLowerCase();
-  if (correct) {
-    sessionKeyHits[key] = (sessionKeyHits[key] || 0) + 1;
-  } else {
-    sessionKeyErrors[key] = (sessionKeyErrors[key] || 0) + 1;
-  }
-  const keyEl = keyElements.get(key);
-  if (!keyEl) return;
-  const hits   = sessionKeyHits[key] || 0;
-  const errors = sessionKeyErrors[key] || 0;
-  const errorRate = errors / (hits + errors + 0.01);
-  let heat = 0;
-  if (errors > 0 && errorRate > 0.3) heat = 5;
-  else if (errors > 0) heat = 4;
-  else if (hits > 10) heat = 3;
-  else if (hits > 5) heat = 2;
-  else if (hits > 0) heat = 1;
-  keyEl.dataset.heat = heat;
-}
+    // ═══════════════════════════════════════════════════════
+    // TIMER BUTTONS
+    // ═══════════════════════════════════════════════════════
+    document.querySelectorAll('.timer-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.timer-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        state.timerDuration = parseInt(btn.dataset.time);
+        resetSession();
+      });
+    });
 
-// ═══════════════════════════════════════════════════════
-// CUSTOM TEXT MODAL
-// ═══════════════════════════════════════════════════════
-const customInput = document.getElementById('custom-text-input');
-customInput.addEventListener('input', () => {
-  document.getElementById('custom-char-count').textContent = `${customInput.value.length} characters`;
-});
-document.getElementById('custom-submit-btn').addEventListener('click', () => {
-  const text = customInput.value.trim();
-  if (!text) return;
-  state.currentText = text;
-  document.getElementById('custom-modal').classList.add('hidden');
-  initSession();
-});
-document.getElementById('custom-modal-close').addEventListener('click', () => {
-  document.getElementById('custom-modal').classList.add('hidden');
-  // Revert mode tab
-  document.querySelectorAll('.mode-tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
-  const classicTab = document.querySelector('.mode-tab[data-mode="classic"]');
-  if (classicTab) { classicTab.classList.add('active'); classicTab.setAttribute('aria-selected','true'); state.mode = 'classic'; }
-});
+    // ═══════════════════════════════════════════════════════
+    // LANG SELECT
+    // ═══════════════════════════════════════════════════════
+    document.getElementById('lang-select').addEventListener('change', (e) => {
+      state.lang = e.target.value;
+      resetSession();
+    });
 
-// ═══════════════════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════════════════
-buildKeyboard();
-initSession();
-updateXPBar();
+    // ═══════════════════════════════════════════════════════
+    // PUNCTUATION / NUMBERS TOGGLE
+    // ═══════════════════════════════════════════════════════
+    document.getElementById('punctuation-toggle').addEventListener('click', function () {
+      state.usePunctuation = !state.usePunctuation;
+      this.setAttribute('aria-pressed', state.usePunctuation);
+      this.style.opacity = state.usePunctuation ? '1' : '0.4';
+      resetSession();
+    });
+    document.getElementById('numbers-toggle').addEventListener('click', function () {
+      state.useNumbers = !state.useNumbers;
+      this.setAttribute('aria-pressed', state.useNumbers);
+      this.style.opacity = state.useNumbers ? '1' : '0.4';
+      resetSession();
+    });
 
-// Focus input on keyboard shortcut and start session
-document.addEventListener('keydown', (e) => {
-  if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
-    if (!state.started && !state.finished && document.activeElement !== typingInput) {
-      startSession();
-      if (state.started) {
-        typingInput.value = e.key;
-        typingInput.dispatchEvent(new Event('input'));
-      }
+    // ═══════════════════════════════════════════════════════
+    // FOCUS MODE
+    // ═══════════════════════════════════════════════════════
+    let focusMode = false;
+    function toggleFocusMode() {
+      focusMode = !focusMode;
+      document.body.classList.toggle('focus-mode', focusMode);
+      document.getElementById('focus-mode-btn').title = focusMode ? 'Exit Focus Mode' : 'Focus Mode';
     }
-  }
-});
-</script>
+    document.getElementById('focus-mode-btn').addEventListener('click', toggleFocusMode);
+
+    // ═══════════════════════════════════════════════════════
+    // XP BAR
+    // ═══════════════════════════════════════════════════════
+    function updateXPBar() {
+      // Backend level formula: level = FLOOR(SQRT(totalXP / 250)) + 1
+      // XP needed to START level N  = (N-1)^2 * 250
+      // XP needed to START level N+1 = N^2 * 250
+      const totalXp = state.xp || 0;
+      const lvl = state.level || 1;
+      const xpForCurrentLevel = (lvl - 1) * (lvl - 1) * 250;
+      const xpForNextLevel = lvl * lvl * 250;
+      const cap = Math.max(1, xpForNextLevel - xpForCurrentLevel);
+      const inLevel = Math.max(0, totalXp - xpForCurrentLevel);
+      const pct = Math.min(100, (inLevel / cap) * 100);
+      document.getElementById('header-xp-fill').style.width = pct + '%';
+      document.getElementById('header-xp-text').textContent = `${inLevel} / ${cap} XP`;
+      document.getElementById('header-level').textContent = `Lv.${lvl}`;
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // WEAK KEYS
+    // ═══════════════════════════════════════════════════════
+    function loadWeakKeys(profileWeakKeys) {
+      try {
+        let weak = Array.isArray(profileWeakKeys) ? profileWeakKeys.filter(k => k && String(k).trim()) : [];
+        if (!weak.length) {
+          const saved = JSON.parse(localStorage.getItem('tf_key_stats') || '{}');
+          weak = Object.entries(saved)
+            .filter(([k, v]) => (v.misses || 0) > 0 && String(k).trim().length >= 1)
+            .sort((a, b) => {
+              const rateA = (a[1].misses || 0) / ((a[1].hits || 0) + (a[1].misses || 0) + 0.01);
+              const rateB = (b[1].misses || 0) / ((b[1].hits || 0) + (b[1].misses || 0) + 0.01);
+              return rateB - rateA;
+            })
+            .slice(0, 6)
+            .map(([k]) => k);
+        }
+
+        const bar = document.getElementById('weak-keys-bar');
+        const chips = document.getElementById('weak-keys-chips');
+        if (weak.length > 0) {
+          bar.style.display = 'flex';
+          chips.innerHTML = weak.map(k => `<span class="weak-key-chip">${k === ' ' ? 'space' : k}</span>`).join('');
+        } else {
+          bar.style.display = 'none';
+        }
+      } catch (e) { }
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // KEYBOARD HEATMAP
+    // ═══════════════════════════════════════════════════════
+    const KEYBOARD_LAYOUT = [
+      ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '='],
+      ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\'],
+      ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'"],
+      ['z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 'shift'],
+    ];
+
+    const sessionKeyHits = {};
+    const sessionKeyErrors = {};
+
+    function buildKeyboard() {
+      const container = document.getElementById('keyboard-viz');
+      if (!container) return;
+      container.innerHTML = '';
+      keyElements.clear();
+      KEYBOARD_LAYOUT.forEach((row, ri) => {
+        const rowEl = document.createElement('div');
+        rowEl.className = 'keyboard-row';
+        if (ri === 1) rowEl.style.marginLeft = '20px';
+        if (ri === 2) rowEl.style.marginLeft = '30px';
+        if (ri === 3) rowEl.style.marginLeft = '10px';
+        row.forEach(key => {
+          const keyEl = document.createElement('div');
+          keyEl.className = 'key';
+          if (['shift', 'backspace', 'tab', 'caps', 'enter', 'space'].includes(key)) keyEl.classList.add('key-wide');
+          keyEl.dataset.key = key;
+          keyEl.dataset.heat = '0';
+          keyEl.textContent = key.length === 1 ? key.toUpperCase() : key;
+          rowEl.appendChild(keyEl);
+          keyElements.set(key, keyEl);
+        });
+        container.appendChild(rowEl);
+      });
+      // Space bar row
+      const spaceRow = document.createElement('div');
+      spaceRow.className = 'keyboard-row';
+      spaceRow.style.marginLeft = '60px';
+      const spaceKey = document.createElement('div');
+      spaceKey.className = 'key key-space';
+      spaceKey.dataset.key = ' ';
+      spaceKey.dataset.heat = '0';
+      spaceKey.textContent = 'SPACE';
+      spaceRow.appendChild(spaceKey);
+      container.appendChild(spaceRow);
+      keyElements.set(' ', spaceKey);
+    }
+
+    function resetKeyboardHeatmap() {
+      Object.keys(sessionKeyHits).forEach(k => delete sessionKeyHits[k]);
+      Object.keys(sessionKeyErrors).forEach(k => delete sessionKeyErrors[k]);
+      keyElements.forEach(el => { el.dataset.heat = '0'; });
+    }
+
+    function updateKeyboardHeatmap(char, correct) {
+      if (!char) return;
+      const key = char === ' ' ? ' ' : char.toLowerCase();
+      if (correct) {
+        sessionKeyHits[key] = (sessionKeyHits[key] || 0) + 1;
+      } else {
+        sessionKeyErrors[key] = (sessionKeyErrors[key] || 0) + 1;
+      }
+      const keyEl = keyElements.get(key);
+      if (!keyEl) return;
+      const hits = sessionKeyHits[key] || 0;
+      const errors = sessionKeyErrors[key] || 0;
+      const errorRate = errors / (hits + errors + 0.01);
+      let heat = 0;
+      if (errors > 0 && errorRate > 0.3) heat = 5;
+      else if (errors > 0) heat = 4;
+      else if (hits > 10) heat = 3;
+      else if (hits > 5) heat = 2;
+      else if (hits > 0) heat = 1;
+      keyEl.dataset.heat = heat;
+    }
+
+    // ═══════════════════════════════════════════════════════
+    // CUSTOM TEXT MODAL
+    // ═══════════════════════════════════════════════════════
+    const customInput = document.getElementById('custom-text-input');
+    customInput.addEventListener('input', () => {
+      document.getElementById('custom-char-count').textContent = `${customInput.value.length} characters`;
+    });
+    document.getElementById('custom-submit-btn').addEventListener('click', () => {
+      const text = customInput.value.trim();
+      if (!text) return;
+      state.currentText = text;
+      document.getElementById('custom-modal').classList.add('hidden');
+      initSession();
+    });
+    document.getElementById('custom-modal-close').addEventListener('click', () => {
+      document.getElementById('custom-modal').classList.add('hidden');
+      // Revert mode tab
+      document.querySelectorAll('.mode-tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+      const classicTab = document.querySelector('.mode-tab[data-mode="classic"]');
+      if (classicTab) { classicTab.classList.add('active'); classicTab.setAttribute('aria-selected', 'true'); state.mode = 'classic'; }
+    });
+
+    // ═══════════════════════════════════════════════════════
+    // INIT
+    // ═══════════════════════════════════════════════════════
+    buildKeyboard();
+    initSession();
+    updateXPBar();
+
+    // Focus input on keyboard shortcut and start session
+    document.addEventListener('keydown', (e) => {
+      if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+        if (!state.started && !state.finished && document.activeElement !== typingInput) {
+          startSession();
+          if (state.started) {
+            typingInput.value = e.key;
+            typingInput.dispatchEvent(new Event('input'));
+          }
+        }
+      }
+    });
+  </script>
 </body>
+
 </html>

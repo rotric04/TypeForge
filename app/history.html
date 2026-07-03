@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <!-- TypeForge Device Guard: runs synchronously before page renders -->
   <script src="../js/device-guard.js?v=1.0.3"></script>
@@ -7,23 +8,24 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y8JE6RY1D"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     gtag('config', 'G-0Y8JE6RY1D');
   </script>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Session History | TypeForge AI</title>
-  <meta name="description" content="Review your complete typing session history with detailed stats and trends."/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link rel="preconnect" href="https://esm.sh" crossorigin/>
-  <link rel="stylesheet" href="../css/global.css?v=1.0.3"/>
-  <link rel="stylesheet" href="../css/animations.css?v=1.0.3"/>
-  <link rel="stylesheet" href="../css/components.css?v=1.0.3"/>
-  <link rel="stylesheet" href="../css/app-pages.css?v=1.0.3"/>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23f4f4f5' stroke-width='8'><rect x='10' y='20' width='80' height='60' rx='8'/><path d='M25 40h10M45 40h10M65 40h10M25 60h50'/></svg>"/>
+  <meta name="description" content="Review your complete typing session history with detailed stats and trends." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://esm.sh" crossorigin />
+  <link rel="stylesheet" href="../css/global.css?v=1.0.3" />
+  <link rel="stylesheet" href="../css/animations.css?v=1.0.3" />
+  <link rel="stylesheet" href="../css/components.css?v=1.0.3" />
+  <link rel="stylesheet" href="../css/app-pages.css?v=1.0.3" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23f4f4f5' stroke-width='8'><rect x='10' y='20' width='80' height='60' rx='8'/><path d='M25 40h10M45 40h10M65 40h10M25 60h50'/></svg>" />
   <!-- Vercel Web Analytics -->
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -33,7 +35,13 @@
     body {
       background-color: var(--bg-base);
     }
-    .app-layout { display: flex; min-height: 100vh; padding-top: 20px; }
+
+    .app-layout {
+      display: flex;
+      min-height: 100vh;
+      padding-top: 20px;
+    }
+
     .app-main {
       flex: 1;
       margin-left: 68px;
@@ -50,8 +58,17 @@
       flex-wrap: wrap;
       gap: 20px;
     }
-    .page-title { font-size: 28px; font-weight: 800; margin-bottom: 6px; }
-    .page-subtitle { color: var(--text-3); font-size: 14px; }
+
+    .page-title {
+      font-size: 28px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .page-subtitle {
+      color: var(--text-3);
+      font-size: 14px;
+    }
 
     /* ── Summary Stats Bar ── */
     .stats-bar {
@@ -60,6 +77,7 @@
       gap: 12px;
       margin-bottom: 28px;
     }
+
     .stat-chip {
       background: var(--bg-surface);
       border: 1px solid var(--border-1);
@@ -68,14 +86,25 @@
       text-align: center;
       transition: border-color 0.2s;
     }
-    .stat-chip:hover { border-color: var(--border-brand); }
+
+    .stat-chip:hover {
+      border-color: var(--border-brand);
+    }
+
     .stat-chip-value {
       font-family: var(--font-display);
       font-size: 24px;
       font-weight: 800;
       color: var(--text-1);
     }
-    .stat-chip-label { font-size: 11px; color: var(--text-4); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 4px; }
+
+    .stat-chip-label {
+      font-size: 11px;
+      color: var(--text-4);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 4px;
+    }
 
     /* ── Filter Bar ── */
     .filter-bar {
@@ -85,6 +114,7 @@
       flex-wrap: wrap;
       align-items: center;
     }
+
     .filter-pill {
       padding: 6px 14px;
       font-size: 12px;
@@ -96,13 +126,22 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-    .filter-pill:hover { color: var(--text-1); border-color: var(--border-2); }
+
+    .filter-pill:hover {
+      color: var(--text-1);
+      border-color: var(--border-2);
+    }
+
     .filter-pill.active {
       background: var(--bg-elevated);
       border-color: var(--brand-light);
       color: var(--text-1);
     }
-    .filter-spacer { flex: 1; }
+
+    .filter-spacer {
+      flex: 1;
+    }
+
     .load-more-btn {
       display: block;
       margin: 32px auto 0;
@@ -116,10 +155,20 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-    .load-more-btn:hover { border-color: var(--border-brand); color: var(--text-1); background: var(--bg-elevated); }
+
+    .load-more-btn:hover {
+      border-color: var(--border-brand);
+      color: var(--text-1);
+      background: var(--bg-elevated);
+    }
 
     /* ── Session Cards ── */
-    .sessions-list { display: flex; flex-direction: column; gap: 12px; }
+    .sessions-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
     .session-card {
       background: var(--bg-surface);
       border: 1px solid var(--border-1);
@@ -134,20 +183,42 @@
       position: relative;
       overflow: hidden;
     }
+
     .session-card::before {
       content: '';
       position: absolute;
-      left: 0; top: 0; bottom: 0;
+      left: 0;
+      top: 0;
+      bottom: 0;
       width: 3px;
       background: var(--brand-light);
       opacity: 0;
       transition: opacity 0.2s;
     }
-    .session-card:hover { transform: translateX(4px); border-color: var(--border-brand); box-shadow: none; }
-    .session-card:hover::before { opacity: 1; }
 
-    .sess-date { font-size: 12px; color: var(--text-3); line-height: 1.5; }
-    .sess-date strong { display: block; font-size: 13px; color: var(--text-2); font-weight: 600; }
+    .session-card:hover {
+      transform: translateX(4px);
+      border-color: var(--border-brand);
+      box-shadow: none;
+    }
+
+    .session-card:hover::before {
+      opacity: 1;
+    }
+
+    .sess-date {
+      font-size: 12px;
+      color: var(--text-3);
+      line-height: 1.5;
+    }
+
+    .sess-date strong {
+      display: block;
+      font-size: 13px;
+      color: var(--text-2);
+      font-weight: 600;
+    }
+
     .sess-mode .mode-pill {
       padding: 4px 12px;
       border-radius: var(--r-sm);
@@ -156,46 +227,111 @@
       text-transform: capitalize;
       letter-spacing: 0.05em;
     }
-    .mode-classic { background: rgba(99,102,241,0.15); color: var(--violet); }
-    .mode-dev { background: rgba(16,185,129,0.15); color: var(--mint); }
-    .mode-zen { background: rgba(245,158,11,0.15); color: var(--gold); }
-    .mode-challenge { background: rgba(240,92,110,0.15); color: var(--error); }
-    .mode-student { background: rgba(14,165,233,0.15); color: var(--sky); }
-    .mode-focus { background: rgba(139,92,246,0.12); color: #a78bfa; }
-    .mode-default { background: var(--bg-elevated); color: var(--text-3); }
+
+    .mode-classic {
+      background: rgba(99, 102, 241, 0.15);
+      color: var(--violet);
+    }
+
+    .mode-dev {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--mint);
+    }
+
+    .mode-zen {
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--gold);
+    }
+
+    .mode-challenge {
+      background: rgba(240, 92, 110, 0.15);
+      color: var(--error);
+    }
+
+    .mode-student {
+      background: rgba(14, 165, 233, 0.15);
+      color: var(--sky);
+    }
+
+    .mode-focus {
+      background: rgba(139, 92, 246, 0.12);
+      color: #a78bfa;
+    }
+
+    .mode-default {
+      background: var(--bg-elevated);
+      color: var(--text-3);
+    }
 
     .sess-wpm {
       text-align: center;
     }
+
     .sess-wpm .val {
       font-family: var(--font-display);
       font-size: 22px;
       font-weight: 800;
       color: var(--text-1);
     }
-    .sess-wpm .lbl { font-size: 10px; color: var(--text-4); text-transform: uppercase; }
 
-    .sess-acc { text-align: center; }
-    .sess-acc .val { font-size: 16px; font-weight: 700; }
-    .acc-perfect { color: var(--teal); }
-    .acc-great { color: var(--gold); }
-    .acc-ok { color: var(--text-2); }
-    .acc-poor { color: var(--error); }
+    .sess-wpm .lbl {
+      font-size: 10px;
+      color: var(--text-4);
+      text-transform: uppercase;
+    }
 
-    .sess-cons { text-align: center; font-size: 14px; font-weight: 600; color: var(--text-2); }
+    .sess-acc {
+      text-align: center;
+    }
+
+    .sess-acc .val {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .acc-perfect {
+      color: var(--teal);
+    }
+
+    .acc-great {
+      color: var(--gold);
+    }
+
+    .acc-ok {
+      color: var(--text-2);
+    }
+
+    .acc-poor {
+      color: var(--error);
+    }
+
+    .sess-cons {
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-2);
+    }
 
     .sess-xp {
       text-align: right;
     }
+
     .sess-xp .xp-val {
       font-family: var(--font-display);
       font-size: 16px;
       font-weight: 800;
       color: var(--gold);
     }
-    .sess-xp .dur { font-size: 11px; color: var(--text-4); }
 
-    .sess-spark { width: 120px; height: 36px; }
+    .sess-xp .dur {
+      font-size: 11px;
+      color: var(--text-4);
+    }
+
+    .sess-spark {
+      width: 120px;
+      height: 36px;
+    }
 
     /* ── Empty / Error States ── */
     .state-box {
@@ -203,11 +339,35 @@
       padding: 80px 24px;
       color: var(--text-3);
     }
-    .state-box .state-icon { font-size: 48px; margin-bottom: 16px; }
-    .state-box .state-title { font-size: 20px; font-weight: 700; color: var(--text-1); margin-bottom: 8px; }
-    .state-box .state-msg { font-size: 14px; line-height: 1.6; max-width: 360px; margin: 0 auto 24px; }
-    .state-box a { color: var(--brand); font-weight: 600; text-decoration: none; }
-    .state-box a:hover { text-decoration: underline; }
+
+    .state-box .state-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    .state-box .state-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text-1);
+      margin-bottom: 8px;
+    }
+
+    .state-box .state-msg {
+      font-size: 14px;
+      line-height: 1.6;
+      max-width: 360px;
+      margin: 0 auto 24px;
+    }
+
+    .state-box a {
+      color: var(--brand);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .state-box a:hover {
+      text-decoration: underline;
+    }
 
     /* ── Skeleton loader ── */
     .skeleton-card {
@@ -218,35 +378,65 @@
       overflow: hidden;
       position: relative;
     }
+
     .skeleton-card::after {
       content: '';
       position: absolute;
-      top: 0; left: -100%; right: 0; bottom: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%);
+      top: 0;
+      left: -100%;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.04) 50%, transparent 100%);
       animation: shimmer 1.5s infinite;
     }
-    @keyframes shimmer { to { left: 100%; } }
+
+    @keyframes shimmer {
+      to {
+        left: 100%;
+      }
+    }
 
     /* Responsive */
     @media (max-width: 768px) {
-      .app-main { margin-left: 0; padding: 20px 16px calc(80px + env(safe-area-inset-bottom)); }
-      .page-title { font-size: 22px; }
+      .app-main {
+        margin-left: 0;
+        padding: 20px 16px calc(80px + env(safe-area-inset-bottom));
+      }
+
+      .page-title {
+        font-size: 22px;
+      }
+
       .session-card {
         grid-template-columns: 1fr 1fr;
         grid-template-rows: auto auto auto;
         gap: 12px;
         padding: 16px;
       }
-      .sess-spark { display: none; }
-      .sess-cons { display: none; }
+
+      .sess-spark {
+        display: none;
+      }
+
+      .sess-cons {
+        display: none;
+      }
     }
+
     @media (max-width: 480px) {
       .session-card {
         grid-template-columns: 1fr;
         gap: 8px;
       }
-      .stats-bar { grid-template-columns: repeat(2, 1fr); }
-      .page-header { flex-direction: column; gap: 12px; }
+
+      .stats-bar {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .page-header {
+        flex-direction: column;
+        gap: 12px;
+      }
     }
   </style>
   <!-- Route Guard Fast Path -->
@@ -263,255 +453,286 @@
     })();
   </script>
 </head>
+
 <body class="tf-authenticated">
 
-<div class="app-layout">
-  <!-- Sidebar -->
-  <aside class="app-sidebar" role="navigation" aria-label="App navigation">
-    <a href="/" class="sidebar-logo" aria-label="TypeForge AI Home">
-      <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
-    </a>
-    <nav class="sidebar-nav">
-      <div class="sidebar-item" onclick="location.href='typing.html'" title="Train" aria-label="Train">
-        <span class="sidebar-icon">
-          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10"/></svg>
-        </span>
-        <span class="sidebar-label">Train</span>
+  <div class="app-layout">
+    <!-- Sidebar -->
+    <aside class="app-sidebar" role="navigation" aria-label="App navigation">
+      <a href="/" class="sidebar-logo" aria-label="TypeForge AI Home">
+        <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="2" />
+          <path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10" />
+        </svg>
+      </a>
+      <nav class="sidebar-nav">
+        <div class="sidebar-item" onclick="location.href='typing.html'" title="Train" aria-label="Train">
+          <span class="sidebar-icon">
+            <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M7 16h10" />
+            </svg>
+          </span>
+          <span class="sidebar-label">Train</span>
+        </div>
+        <div class="sidebar-item" onclick="location.href='dashboard.html'" title="Dashboard" aria-label="Dashboard">
+          <span class="sidebar-icon">
+            <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10" />
+              <line x1="12" y1="20" x2="12" y2="4" />
+              <line x1="6" y1="20" x2="6" y2="14" />
+            </svg>
+          </span>
+          <span class="sidebar-label">Dashboard</span>
+        </div>
+        <div class="sidebar-item" onclick="location.href='achievements.html'" title="Achievements"
+          aria-label="Achievements">
+          <span class="sidebar-icon">
+            <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34M12 2a5 5 0 0 0-5 5v3c0 2.76 2.24 5 5 5s5-2.24 5-5V7a5 5 0 0 0-5-5z" />
+            </svg>
+          </span>
+          <span class="sidebar-label">Achievements</span>
+        </div>
+        <div class="sidebar-item active" onclick="location.href='history.html'" title="History" aria-label="History">
+          <span class="sidebar-icon">
+            <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <polyline points="12 6 12 12 16 14" />
+            </svg>
+          </span>
+          <span class="sidebar-label">History</span>
+        </div>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-item" onclick="location.href='settings.html'" title="Settings" aria-label="Settings">
+          <span class="sidebar-icon">
+            <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3" />
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+            </svg>
+          </span>
+          <span class="sidebar-label">Settings</span>
+        </div>
+        <div class="sidebar-item" title="Profile" aria-label="Profile" id="sidebar-profile">
+          <span class="sidebar-icon" id="nav-avatar">U</span>
+          <span class="sidebar-label" data-auth-name>Profile</span>
+        </div>
+        <div class="sidebar-item" title="Sign Out" aria-label="Sign Out" data-auth-signout>
+          <span class="sidebar-icon">
+            <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
+            </svg>
+          </span>
+          <span class="sidebar-label">Sign Out</span>
+        </div>
       </div>
-      <div class="sidebar-item" onclick="location.href='dashboard.html'" title="Dashboard" aria-label="Dashboard">
-        <span class="sidebar-icon">
-          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-        </span>
-        <span class="sidebar-label">Dashboard</span>
+    </aside>
+
+    <main class="app-main">
+      <!-- Page Header -->
+      <div class="page-header">
+        <div>
+          <h1 class="page-title">Session History</h1>
+          <p class="page-subtitle" id="history-subtitle">Loading your records…</p>
+        </div>
+        <a href="typing.html" class="btn btn-primary btn-lg">+ New Session</a>
       </div>
-      <div class="sidebar-item" onclick="location.href='achievements.html'" title="Achievements" aria-label="Achievements">
-        <span class="sidebar-icon">
-          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6M18 9h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34M12 2a5 5 0 0 0-5 5v3c0 2.76 2.24 5 5 5s5-2.24 5-5V7a5 5 0 0 0-5-5z"/></svg>
-        </span>
-        <span class="sidebar-label">Achievements</span>
+
+      <!-- Summary Stats -->
+      <div class="stats-bar" id="stats-bar">
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
       </div>
-      <div class="sidebar-item active" onclick="location.href='history.html'" title="History" aria-label="History">
-        <span class="sidebar-icon">
-          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </span>
-        <span class="sidebar-label">History</span>
+
+      <!-- Filter Tabs -->
+      <div class="filter-bar" id="filter-bar" style="display:none">
+        <button class="filter-pill active" data-mode="all">All Modes</button>
+        <button class="filter-pill" data-mode="classic">Classic</button>
+        <button class="filter-pill" data-mode="dev">Dev</button>
+        <button class="filter-pill" data-mode="zen">Zen</button>
+        <button class="filter-pill" data-mode="challenge">Challenge</button>
+        <button class="filter-pill" data-mode="student">Student</button>
       </div>
-    </nav>
-    <div class="sidebar-bottom">
-      <div class="sidebar-item" onclick="location.href='settings.html'" title="Settings" aria-label="Settings">
-        <span class="sidebar-icon">
-          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-        </span>
-        <span class="sidebar-label">Settings</span>
+
+      <!-- Session List -->
+      <div class="sessions-list" id="sessions-list">
+        <!-- Skeleton cards -->
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
       </div>
-      <div class="sidebar-item" title="Profile" aria-label="Profile" id="sidebar-profile">
-        <span class="sidebar-icon" id="nav-avatar">U</span>
-        <span class="sidebar-label" data-auth-name>Profile</span>
-      </div>
-      <div class="sidebar-item" title="Sign Out" aria-label="Sign Out" data-auth-signout>
-        <span class="sidebar-icon">
-          <svg class="sidebar-svg-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
-        </span>
-        <span class="sidebar-label">Sign Out</span>
-      </div>
-    </div>
-  </aside>
 
-  <main class="app-main">
-    <!-- Page Header -->
-    <div class="page-header">
-      <div>
-        <h1 class="page-title">Session History</h1>
-        <p class="page-subtitle" id="history-subtitle">Loading your records…</p>
-      </div>
-      <a href="typing.html" class="btn btn-primary btn-lg">+ New Session</a>
-    </div>
+      <button class="load-more-btn" id="load-more-btn" style="display:none">Load More Sessions</button>
+    </main>
+  </div>
 
-    <!-- Summary Stats -->
-    <div class="stats-bar" id="stats-bar">
-      <div class="skeleton-card"></div>
-      <div class="skeleton-card"></div>
-      <div class="skeleton-card"></div>
-      <div class="skeleton-card"></div>
-      <div class="skeleton-card"></div>
-      <div class="skeleton-card"></div>
-      <div class="skeleton-card"></div>
-    </div>
+  <script type="module">
+    import Auth from '../js/clerk.js?v=3';
+    import API from '../js/api.js';
+    import { loadProfileAndHistory, displayName } from '../js/app-data.js';
+    import { initScrollReveal } from '../js/motion.js';
 
-    <!-- Filter Tabs -->
-    <div class="filter-bar" id="filter-bar" style="display:none">
-      <button class="filter-pill active" data-mode="all">All Modes</button>
-      <button class="filter-pill" data-mode="classic">Classic</button>
-      <button class="filter-pill" data-mode="dev">Dev</button>
-      <button class="filter-pill" data-mode="zen">Zen</button>
-      <button class="filter-pill" data-mode="challenge">Challenge</button>
-      <button class="filter-pill" data-mode="student">Student</button>
-    </div>
+    const BATCH = 30;
+    let offset = 0;
+    let allSessions = [];
+    let filteredSessions = [];
+    let currentMode = 'all';
 
-    <!-- Session List -->
-    <div class="sessions-list" id="sessions-list">
-      <!-- Skeleton cards -->
-      <div class="skeleton-card"></div>
-      <div class="skeleton-card"></div>
-      <div class="skeleton-card"></div>
-      <div class="skeleton-card"></div>
-      <div class="skeleton-card"></div>
-    </div>
-
-    <button class="load-more-btn" id="load-more-btn" style="display:none">Load More Sessions</button>
-  </main>
-</div>
-
-<script type="module">
-  import Auth from '../js/clerk.js?v=3';
-  import API from '../js/api.js';
-  import { loadProfileAndHistory, displayName } from '../js/app-data.js';
-  import { initScrollReveal } from '../js/motion.js';
-
-  const BATCH = 30;
-  let offset = 0;
-  let allSessions = [];
-  let filteredSessions = [];
-  let currentMode = 'all';
-
-  async function init() {
-    // Instant Cached UI Render (avoiding flash of "Typist" or Clerk ID)
-    try {
-      const cached = localStorage.getItem('tf_cached_profile');
-      if (cached) {
-        const cachedUser = JSON.parse(cached);
-        const name = displayName(cachedUser, null);
-        document.querySelectorAll('[data-auth-name]').forEach((el) => { el.textContent = name; });
-        const avatar = document.getElementById('nav-avatar');
-        if (avatar) {
-          avatar.textContent = name.charAt(0).toUpperCase();
-          if (cachedUser.avatarUrl) {
-            avatar.innerHTML = `<img src="${cachedUser.avatarUrl}" alt="${name}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"/>`;
+    async function init() {
+      // Instant Cached UI Render (avoiding flash of "Typist" or Clerk ID)
+      try {
+        const cached = localStorage.getItem('tf_cached_profile');
+        if (cached) {
+          const cachedUser = JSON.parse(cached);
+          const name = displayName(cachedUser, null);
+          document.querySelectorAll('[data-auth-name]').forEach((el) => { el.textContent = name; });
+          const avatar = document.getElementById('nav-avatar');
+          if (avatar) {
+            avatar.textContent = name.charAt(0).toUpperCase();
+            if (cachedUser.avatarUrl) {
+              avatar.innerHTML = `<img src="${cachedUser.avatarUrl}" alt="${name}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;"/>`;
+            }
           }
         }
-      }
-    } catch (e) {}
+      } catch (e) { }
 
-    let user;
-    try {
-      user = await Auth.init();
-      if (user) {
-        document.documentElement.style.visibility = '';
-      } else if (window.location.hostname !== 'localhost') {
-        window.location.replace('/login');
-        return;
-      }
-    } catch (err) {
-      console.error("TF Auth: Failed to initialize Auth in history:", err);
-      if (window.location.hostname !== 'localhost') {
-        window.location.replace('/login');
-        return;
-      }
-    }
-
-    // Cache latest Clerk user details
-    if (user) {
-      localStorage.setItem('tf_cached_profile', JSON.stringify(user));
-    }
-
-    // Fetch profile and history in parallel
-    const [profileRes, historyRes] = await Promise.allSettled([
-      API.getUserProfile(),
-      API.getHistory(60, 0)
-    ]);
-
-    const isProfileFailed = profileRes.status === 'rejected';
-    const isHistoryFailed = historyRes.status === 'rejected';
-    if ((isProfileFailed || isHistoryFailed) && window.location.hostname !== 'localhost') {
-      const reasonMsg = (profileRes.reason?.message || historyRes.reason?.message || '');
-      const isNetworkError = reasonMsg.includes('Network Error') || reasonMsg.includes('timeout') || reasonMsg.includes('HTTP 5') || reasonMsg.includes('Failed to fetch') || reasonMsg.includes('Database') || reasonMsg.includes('503') || reasonMsg.includes('500') || reasonMsg.includes('Internal Server Error');
-      if (isNetworkError) {
-        console.warn("TF: History/Profile requests failed due to network/timeout. Keeping user session.");
-        const { showToast } = await import('../js/common.js');
-        showToast({
-          title: "Connection Issue",
-          desc: "The servers are taking longer to respond. Showing cached data.",
-          type: "warning",
-          duration: 5000
-        });
-      }
-    }
-
-    const profile = profileRes.status === 'fulfilled' ? profileRes.value : {
-      xp: 0,
-      level: 1,
-      total_sessions: 0,
-      best_wpm: 0,
-      weak_keys: [],
-    };
-    const data = historyRes.status === 'fulfilled' && historyRes.value ? historyRes.value : [];
-    
-    const name = displayName(user, profile);
-    document.querySelectorAll('[data-auth-name]').forEach((el) => { el.textContent = name; });
-
-    allSessions = data || [];
-    offset = allSessions.length;
-
-    renderSummaryStats(allSessions);
-    applyFilter('all');
-
-    document.getElementById('filter-bar').style.display = 'flex';
-    document.getElementById('history-subtitle').textContent =
-      allSessions.length === 0
-        ? 'No sessions yet. Your first run takes one minute.'
-        : `${allSessions.length} session${allSessions.length !== 1 ? 's' : ''} found`;
-
-    if (allSessions.length >= BATCH) {
-      document.getElementById('load-more-btn').style.display = 'block';
-    }
-
-
-    // Filter pills
-    document.querySelectorAll('.filter-pill').forEach(pill => {
-      pill.addEventListener('click', () => {
-        document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
-        currentMode = pill.dataset.mode;
-        applyFilter(currentMode);
-      });
-    });
-
-    // Load more
-    document.getElementById('load-more-btn').addEventListener('click', async () => {
-      const btn = document.getElementById('load-more-btn');
-      btn.textContent = 'Loading…';
-      btn.disabled = true;
+      let user;
       try {
-        const more = await API.getHistory(BATCH, offset);
-        allSessions = [...allSessions, ...(more || [])];
-        offset = allSessions.length;
-        applyFilter(currentMode);
-        if (more.length < BATCH) btn.style.display = 'none';
-        else { btn.textContent = 'Load More Sessions'; btn.disabled = false; }
-      } catch { btn.textContent = 'Load More Sessions'; btn.disabled = false; }
-    });
-  }
+        user = await Auth.init();
+        if (user) {
+          document.documentElement.style.visibility = '';
+        } else if (window.location.hostname !== 'localhost') {
+          window.location.replace('/login');
+          return;
+        }
+      } catch (err) {
+        console.error("TF Auth: Failed to initialize Auth in history:", err);
+        if (window.location.hostname !== 'localhost') {
+          window.location.replace('/login');
+          return;
+        }
+      }
 
-  function applyFilter(mode) {
-    filteredSessions = mode === 'all'
-      ? allSessions
-      : allSessions.filter(s => s.mode === mode);
-    renderSessions(filteredSessions);
-  }
+      // Cache latest Clerk user details
+      if (user) {
+        localStorage.setItem('tf_cached_profile', JSON.stringify(user));
+      }
 
-  function renderSummaryStats(list) {
-    const el = document.getElementById('stats-bar');
-    if (!list.length) { el.innerHTML = ''; return; }
+      // Fetch profile and history in parallel
+      const [profileRes, historyRes] = await Promise.allSettled([
+        API.getUserProfile(),
+        API.getHistory(60, 0)
+      ]);
 
-    const totalSess = list.length;
-    const avgWpm    = Math.round(list.reduce((s, r) => s + (r.wpm || 0), 0) / totalSess);
-    const bestWpm   = Math.max(...list.map(r => r.wpm || 0));
-    const avgAcc    = (list.reduce((s, r) => s + (typeof r.accuracy === 'number' ? r.accuracy : parseFloat(r.accuracy || 0)), 0) / totalSess).toFixed(1);
-    const avgCons   = (list.reduce((s, r) => s + (typeof r.consistency === 'number' ? r.consistency : parseFloat(r.consistency || 0)), 0) / totalSess).toFixed(1);
-    const totalXp   = list.reduce((s, r) => s + (r.xp_earned || 0), 0);
-    const totalMins = Math.round(list.reduce((s, r) => s + (r.duration_secs || 0), 0) / 60);
+      const isProfileFailed = profileRes.status === 'rejected';
+      const isHistoryFailed = historyRes.status === 'rejected';
+      if ((isProfileFailed || isHistoryFailed) && window.location.hostname !== 'localhost') {
+        const reasonMsg = (profileRes.reason?.message || historyRes.reason?.message || '');
+        const isNetworkError = reasonMsg.includes('Network Error') || reasonMsg.includes('timeout') || reasonMsg.includes('HTTP 5') || reasonMsg.includes('Failed to fetch') || reasonMsg.includes('Database') || reasonMsg.includes('503') || reasonMsg.includes('500') || reasonMsg.includes('Internal Server Error');
+        if (isNetworkError) {
+          console.warn("TF: History/Profile requests failed due to network/timeout. Keeping user session.");
+          const { showToast } = await import('../js/common.js');
+          showToast({
+            title: "Connection Issue",
+            desc: "The servers are taking longer to respond. Showing cached data.",
+            type: "warning",
+            duration: 5000
+          });
+        }
+      }
 
-    el.innerHTML = `
+      const profile = profileRes.status === 'fulfilled' ? profileRes.value : {
+        xp: 0,
+        level: 1,
+        total_sessions: 0,
+        best_wpm: 0,
+        weak_keys: [],
+      };
+      const data = historyRes.status === 'fulfilled' && historyRes.value ? historyRes.value : [];
+
+      const name = displayName(user, profile);
+      document.querySelectorAll('[data-auth-name]').forEach((el) => { el.textContent = name; });
+
+      allSessions = data || [];
+      offset = allSessions.length;
+
+      renderSummaryStats(allSessions);
+      applyFilter('all');
+
+      document.getElementById('filter-bar').style.display = 'flex';
+      document.getElementById('history-subtitle').textContent =
+        allSessions.length === 0
+          ? 'No sessions yet. Your first run takes one minute.'
+          : `${allSessions.length} session${allSessions.length !== 1 ? 's' : ''} found`;
+
+      if (allSessions.length >= BATCH) {
+        document.getElementById('load-more-btn').style.display = 'block';
+      }
+
+
+      // Filter pills
+      document.querySelectorAll('.filter-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          currentMode = pill.dataset.mode;
+          applyFilter(currentMode);
+        });
+      });
+
+      // Load more
+      document.getElementById('load-more-btn').addEventListener('click', async () => {
+        const btn = document.getElementById('load-more-btn');
+        btn.textContent = 'Loading…';
+        btn.disabled = true;
+        try {
+          const more = await API.getHistory(BATCH, offset);
+          allSessions = [...allSessions, ...(more || [])];
+          offset = allSessions.length;
+          applyFilter(currentMode);
+          if (more.length < BATCH) btn.style.display = 'none';
+          else { btn.textContent = 'Load More Sessions'; btn.disabled = false; }
+        } catch { btn.textContent = 'Load More Sessions'; btn.disabled = false; }
+      });
+    }
+
+    function applyFilter(mode) {
+      filteredSessions = mode === 'all'
+        ? allSessions
+        : allSessions.filter(s => s.mode === mode);
+      renderSessions(filteredSessions);
+    }
+
+    function renderSummaryStats(list) {
+      const el = document.getElementById('stats-bar');
+      if (!list.length) { el.innerHTML = ''; return; }
+
+      const totalSess = list.length;
+      const avgWpm = Math.round(list.reduce((s, r) => s + (r.wpm || 0), 0) / totalSess);
+      const bestWpm = Math.max(...list.map(r => r.wpm || 0));
+      const avgAcc = (list.reduce((s, r) => s + (typeof r.accuracy === 'number' ? r.accuracy : parseFloat(r.accuracy || 0)), 0) / totalSess).toFixed(1);
+      const avgCons = (list.reduce((s, r) => s + (typeof r.consistency === 'number' ? r.consistency : parseFloat(r.consistency || 0)), 0) / totalSess).toFixed(1);
+      const totalXp = list.reduce((s, r) => s + (r.xp_earned || 0), 0);
+      const totalMins = Math.round(list.reduce((s, r) => s + (r.duration_secs || 0), 0) / 60);
+
+      el.innerHTML = `
       <div class="stat-chip"><div class="stat-chip-value">${totalSess}</div><div class="stat-chip-label">Sessions</div></div>
       <div class="stat-chip"><div class="stat-chip-value">${bestWpm}</div><div class="stat-chip-label">Best WPM</div></div>
       <div class="stat-chip"><div class="stat-chip-value">${avgWpm}</div><div class="stat-chip-label">Avg WPM</div></div>
@@ -520,14 +741,14 @@
       <div class="stat-chip"><div class="stat-chip-value">+${totalXp.toLocaleString()}</div><div class="stat-chip-label">Total XP</div></div>
       <div class="stat-chip"><div class="stat-chip-value">${totalMins}</div><div class="stat-chip-label">Mins Typed</div></div>
     `;
-  }
+    }
 
-  function renderSessions(list) {
-    const container = document.getElementById('sessions-list');
-    container.innerHTML = '';
+    function renderSessions(list) {
+      const container = document.getElementById('sessions-list');
+      container.innerHTML = '';
 
-    if (!list.length) {
-      container.innerHTML = `
+      if (!list.length) {
+        container.innerHTML = `
         <div class="state-box">
           <div class="state-icon" style="display:flex; justify-content:center; margin-bottom:16px;">
             <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-3);"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
@@ -535,33 +756,33 @@
           <div class="state-title">${currentMode === 'all' ? "No sessions yet" : `No "${currentMode}" sessions`}</div>
           <div class="state-msg">
             ${currentMode === 'all'
-              ? 'Complete your first typing session to see your stats here.'
-              : 'Try this mode to see data here.'}
+            ? 'Complete your first typing session to see your stats here.'
+            : 'Try this mode to see data here.'}
           </div>
           <a href="typing.html" class="btn btn-primary btn-lg">Start Typing</a>
         </div>`;
-      return;
-    }
+        return;
+      }
 
-    list.forEach((sess, idx) => {
-      const d = new Date(sess.created_at || sess.timestamp);
-      const dateStr  = d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
-      const timeStr  = d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
-      const mode     = sess.mode || 'classic';
-      const wpm      = sess.wpm || 0;
-      const acc      = typeof sess.accuracy === 'number' ? sess.accuracy : parseFloat(sess.accuracy || 0);
-      const cons     = typeof sess.consistency === 'number' ? Math.round(sess.consistency) : Math.round(parseFloat(sess.consistency || 0));
-      const xpEarned = sess.xp_earned || 0;
-      const dur      = sess.duration_secs || 0;
+      list.forEach((sess, idx) => {
+        const d = new Date(sess.created_at || sess.timestamp);
+        const dateStr = d.toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+        const timeStr = d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+        const mode = sess.mode || 'classic';
+        const wpm = sess.wpm || 0;
+        const acc = typeof sess.accuracy === 'number' ? sess.accuracy : parseFloat(sess.accuracy || 0);
+        const cons = typeof sess.consistency === 'number' ? Math.round(sess.consistency) : Math.round(parseFloat(sess.consistency || 0));
+        const xpEarned = sess.xp_earned || 0;
+        const dur = sess.duration_secs || 0;
 
-      const accClass = acc >= 99 ? 'acc-perfect' : acc >= 95 ? 'acc-great' : acc >= 90 ? 'acc-ok' : 'acc-poor';
-      const modeClass = `mode-${['classic','dev','zen','challenge','student','focus'].includes(mode) ? mode : 'default'}`;
+        const accClass = acc >= 99 ? 'acc-perfect' : acc >= 95 ? 'acc-great' : acc >= 90 ? 'acc-ok' : 'acc-poor';
+        const modeClass = `mode-${['classic', 'dev', 'zen', 'challenge', 'student', 'focus'].includes(mode) ? mode : 'default'}`;
 
-      const card = document.createElement('div');
-      card.className = 'session-card';
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(8px)';
-      card.innerHTML = `
+        const card = document.createElement('div');
+        card.className = 'session-card';
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(8px)';
+        card.innerHTML = `
         <div class="sess-date"><strong>${dateStr}</strong>${timeStr}</div>
         <div class="sess-mode"><span class="mode-pill ${modeClass}">${mode}</span></div>
         <div class="sess-wpm"><div class="val">${wpm}</div><div class="lbl">WPM</div></div>
@@ -570,74 +791,75 @@
         <div class="sess-xp"><div class="xp-val">+${xpEarned} XP</div><div class="dur">${dur}s</div></div>
         <svg class="sess-spark" viewBox="0 0 120 36" preserveAspectRatio="none"></svg>
       `;
-      container.appendChild(card);
+        container.appendChild(card);
 
-      // Animate in
-      requestAnimationFrame(() => {
-        card.style.transition = `opacity 0.35s ease ${idx * 0.04}s, transform 0.35s ease ${idx * 0.04}s`;
-        card.style.opacity = '1';
-        card.style.transform = 'translateY(0)';
+        // Animate in
+        requestAnimationFrame(() => {
+          card.style.transition = `opacity 0.35s ease ${idx * 0.04}s, transform 0.35s ease ${idx * 0.04}s`;
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        });
+
+        // Mini sparkline - use local WPM snapshot if available
+        const rawWpm = sess.raw_wpm || wpm;
+        drawSparkline(card.querySelector('.sess-spark'), wpm, rawWpm, acc);
+      });
+    }
+
+    function drawSparkline(svg, wpm, rawWpm, acc) {
+      // Synthesize 8 pseudo points based on wpm/acc for visual richness
+      const pts = [];
+      const variance = wpm * 0.12;
+      for (let i = 0; i < 8; i++) {
+        const t = i / 7;
+        // Ramp up slightly toward end to show improvement feel
+        const noise = (Math.random() - 0.5) * variance;
+        pts.push(Math.max(1, wpm * (0.85 + t * 0.15) + noise));
+      }
+      const max = Math.max(...pts);
+      const min = Math.min(...pts);
+      const range = max - min || 1;
+      const W = 120, H = 36, pad = 4;
+      const coords = pts.map((v, i) => {
+        const x = pad + (i / (pts.length - 1)) * (W - pad * 2);
+        const y = H - pad - ((v - min) / range) * (H - pad * 2);
+        return `${x.toFixed(1)},${y.toFixed(1)}`;
       });
 
-      // Mini sparkline — use local WPM snapshot if available
-      const rawWpm = sess.raw_wpm || wpm;
-      drawSparkline(card.querySelector('.sess-spark'), wpm, rawWpm, acc);
-    });
-  }
+      const color = acc >= 97 ? '#10b981' : acc >= 93 ? '#f59e0b' : '#6366f1';
+      const polyline = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+      polyline.setAttribute('points', coords.join(' '));
+      polyline.setAttribute('fill', 'none');
+      polyline.setAttribute('stroke', color);
+      polyline.setAttribute('stroke-width', '2');
+      polyline.setAttribute('stroke-linecap', 'round');
+      polyline.setAttribute('stroke-linejoin', 'round');
+      polyline.setAttribute('opacity', '0.8');
+      svg.appendChild(polyline);
 
-  function drawSparkline(svg, wpm, rawWpm, acc) {
-    // Synthesize 8 pseudo points based on wpm/acc for visual richness
-    const pts = [];
-    const variance = wpm * 0.12;
-    for (let i = 0; i < 8; i++) {
-      const t = i / 7;
-      // Ramp up slightly toward end to show improvement feel
-      const noise = (Math.random() - 0.5) * variance;
-      pts.push(Math.max(1, wpm * (0.85 + t * 0.15) + noise));
+      // Dot at end
+      const last = coords[coords.length - 1].split(',');
+      const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      dot.setAttribute('cx', last[0]);
+      dot.setAttribute('cy', last[1]);
+      dot.setAttribute('r', '3');
+      dot.setAttribute('fill', color);
+      svg.appendChild(dot);
     }
-    const max = Math.max(...pts);
-    const min = Math.min(...pts);
-    const range = max - min || 1;
-    const W = 120, H = 36, pad = 4;
-    const coords = pts.map((v, i) => {
-      const x = pad + (i / (pts.length - 1)) * (W - pad * 2);
-      const y = H - pad - ((v - min) / range) * (H - pad * 2);
-      return `${x.toFixed(1)},${y.toFixed(1)}`;
-    });
 
-    const color = acc >= 97 ? '#10b981' : acc >= 93 ? '#f59e0b' : '#6366f1';
-    const polyline = document.createElementNS('http://www.w3.org/2000/svg','polyline');
-    polyline.setAttribute('points', coords.join(' '));
-    polyline.setAttribute('fill', 'none');
-    polyline.setAttribute('stroke', color);
-    polyline.setAttribute('stroke-width', '2');
-    polyline.setAttribute('stroke-linecap', 'round');
-    polyline.setAttribute('stroke-linejoin', 'round');
-    polyline.setAttribute('opacity', '0.8');
-    svg.appendChild(polyline);
-
-    // Dot at end
-    const last = coords[coords.length - 1].split(',');
-    const dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
-    dot.setAttribute('cx', last[0]);
-    dot.setAttribute('cy', last[1]);
-    dot.setAttribute('r', '3');
-    dot.setAttribute('fill', color);
-    svg.appendChild(dot);
-  }
-
-  init()
-    .then(() => initScrollReveal(document.getElementById('sessions-list')))
-    .catch(err => {
-      console.error("TF Init: Critical error during history init:", err);
-      const errMsg = err?.message || '';
-      const isNetworkError = errMsg.includes('Network Error') || errMsg.includes('timeout') || errMsg.includes('HTTP 5') || errMsg.includes('Failed to fetch') || errMsg.includes('Database') || errMsg.includes('503') || errMsg.includes('500') || errMsg.includes('Internal Server Error');
-      if (!isNetworkError && typeof Auth !== 'undefined' && Auth.triggerEmergencyLogout) {
-        Auth.triggerEmergencyLogout("Critical app initialization crash.");
-      } else {
-        console.warn("TF: History page initialized in offline mode due to connection issue.");
-      }
-    });
-</script>
+    init()
+      .then(() => initScrollReveal(document.getElementById('sessions-list')))
+      .catch(err => {
+        console.error("TF Init: Critical error during history init:", err);
+        const errMsg = err?.message || '';
+        const isNetworkError = errMsg.includes('Network Error') || errMsg.includes('timeout') || errMsg.includes('HTTP 5') || errMsg.includes('Failed to fetch') || errMsg.includes('Database') || errMsg.includes('503') || errMsg.includes('500') || errMsg.includes('Internal Server Error');
+        if (!isNetworkError && typeof Auth !== 'undefined' && Auth.triggerEmergencyLogout) {
+          Auth.triggerEmergencyLogout("Critical app initialization crash.");
+        } else {
+          console.warn("TF: History page initialized in offline mode due to connection issue.");
+        }
+      });
+  </script>
 </body>
+
 </html>
